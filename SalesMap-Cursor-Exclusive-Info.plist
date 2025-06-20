@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>SalesMapper needs your location to accurately place sales markers on the map and track your sales territory coverage in real-time.</string>
+	
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>SalesMapper uses your location to provide real-time sales territory tracking and ensure accurate marker placement. This enables team coordination and territory management features.</string>
+	
+	<!-- Network and App Transport Security Settings -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<false/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>supabase.co</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<false/>
+				<key>NSExceptionMinimumTLSVersion</key>
+				<string>TLSv1.2</string>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+	
+	<!-- Suppress warnings for missing files that aren't needed -->
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	
+	<!-- Network usage description for better error handling -->
+	<key>NSNetworkUsageDescription</key>
+	<string>This app requires network access to sync sales markers with the server.</string>
+	
+	<!-- Required device capabilities -->
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	
+	<!-- Supported interface orientations -->
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	
+	<!-- Background modes for network operations -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>background-processing</string>
+	</array>
+</dict>
+</plist>
