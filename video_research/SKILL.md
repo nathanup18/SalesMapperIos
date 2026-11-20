@@ -5,7 +5,7 @@ description: "Edit Nathan's raw short-form footage (SalesMapper / D2D sales Reel
 
 # Short-form video edit playbook (v2)
 
-Targets and the first-3-seconds checklist were updated 2026-11-20 from a scrape of 190 short-form videos posted in the previous 6 months (98 D2D-niche TikToks and Reels, 92 general TikToks), ranked by views divided by followers. No single editing choice separated the top quartile from the bottom quartile with statistical confidence, so these numbers describe what working videos in this niche do, not guaranteed causes. Details: video_research/summary.md in the SalesMapperIos repo.
+Targets and the first-3-seconds checklist were updated 2026-11-20 from a scrape of 216 short-form videos posted in the previous 6 months (122 D2D-niche TikToks and Reels, 94 general TikToks), ranked by views divided by followers. Only one difference between the top and bottom quartiles was statistically significant (pause length, p = 0.02). The rest describe what working videos in this niche do, not proven causes. Details: video_research/summary.md in the SalesMapperIos repo.
 
 ## Inputs
 - Raw clip(s) and, if possible, a transcript with word timestamps (run Whisper if none).
@@ -14,22 +14,22 @@ Targets and the first-3-seconds checklist were updated 2026-11-20 from a scrape 
 ## Targets (scrape-based, 2026-11-20)
 | Element | Target |
 |---|---|
-| Length | 15-30 s for broad reach (general top quartile median 18 s vs 29 s bottom). D2D tips/stories can run 45-60 s (niche median 50 s in both quartiles). Avoid drifting past 90 s. |
-| Hook | Spoken from 0.0 s (median first word at 0.0 s). 8-10 spoken words in the first 3 s, about 3 words per second. |
-| First visual change | First cut or visual change by 2-4 s (general top quartile 2.2 s vs 6.0 s bottom; niche 4.4 s vs 7.7 s). |
-| Visual change after that | Shots in this niche average 8-12 s (0.06 cuts per second). Don't force a cut every 2-4 s. Keep the shot moving instead: handheld walk-up, gestures, punch-ins. |
-| Dead air | Remove filler words and pauses over ~0.7 s. Top niche videos kept short natural pauses (longest pause in first 10 s: median 0.7 s). |
-| Captions | Optional. Only ~30% of niche videos had them. When used: 1-3 words per chunk (median 2), one line. |
-| Caption position | 65-70% of the way down the screen (lower-middle), clear of the bottom UI and right-side buttons. Never over the face. |
-| Banner bar | Rare (4-8% of videos). Use only for list/explainer formats, not as a default. |
+| Length | D2D: 40-50 s (niche top quartile median 47 s vs 57 s bottom, p = 0.08). Broad-reach: 15-25 s (general top 21 s vs 29 s). Avoid going past 60 s. |
+| Hook | Spoken from 0.0 s. About 9 spoken words in the first 3 s, roughly 3 words per second. Don't rush: top videos spoke slightly slower (3.0 vs 3.4 words/s). |
+| First visual change | First cut or visual change by 3-5 s (general top 3.0 s vs 6.5 s bottom; niche 5.0 s vs 8.3 s). |
+| Visual change after that | Niche shots average about 12 s (0.04-0.06 cuts per second) in both quartiles. Cut rate doesn't separate winners, so don't force a cut every 2-4 s. Keep the shot moving instead: walk-ups, gestures, punch-ins. |
+| Dead air | Remove filler words, but leave natural beats of up to ~0.6 s. Top niche videos had a longer longest pause than bottom ones (0.57 s vs 0.28 s, p = 0.02). Over-tightened, breathless audio did worse. |
+| Captions | Optional. About half of niche videos use them, with no difference between top and bottom. When used: word-by-word, 2 words per chunk, one line. |
+| Caption position | About 70% of the way down the screen (lower-middle), clear of the bottom UI and right-side buttons. Never over the face. |
+| Banner bar | Rare (3-10% of videos). Use only for list/explainer formats, not as a default. |
 
 ## First 3 seconds checklist (scrape-based, 2026-11-20)
-1. Frame 1 has motion or a cut (87-92% of videos do). A face is not required: top niche videos showed a face at 0 s less often than bottom ones (36% vs 56%).
-2. Hook text on screen from frame 0 (83-88% of videos). 8-10 words. Top-of-screen in niche winners; lower-middle is common in general. Keep it clear of the caption line.
-3. Talking starts at 0.0 s, with 8-10 words in the first 3 s. No intro, no breath.
-4. Hook is specific: a number, a result, or a contrarian claim aimed at D2D owners/reps (e.g. "My reps log a door in 1 tap from the lock screen").
-5. First cut or visual change lands by 2-4 s.
-6. If the strongest visual is the app (map full of pins, lock screen pin drop), show it in second 0-2 instead of the talking head.
+1. Open on motion or the scene, not a talking head. Top niche videos showed a face at 0 s in 29% of cases vs 55% for bottom ones (p = 0.07), and at 1 s in 23% vs 48% (p = 0.06). Bring the face in after the first second.
+2. Frame 1 has motion or a cut (86-94% of videos do).
+3. Hook text on screen from frame 0 (82-88% of videos), 8 words or fewer, at the top of the screen (the most common spot in niche winners). Keep it clear of the caption line.
+4. Talking starts at 0.0 s, about 9 words in the first 3 s.
+5. Hook is specific: a number, a result, or a contrarian claim aimed at D2D owners/reps (e.g. "My reps log a door in 1 tap from the lock screen").
+6. If the strongest visual is the app (map full of pins, lock screen pin drop), show it in second 0-2. This fits point 1.
 
 ## Pop-ups and overlays
 - When a number, tool name or result is spoken, show it on screen within the same beat (text pop, screenshot, or screen recording).

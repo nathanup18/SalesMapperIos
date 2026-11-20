@@ -1,35 +1,48 @@
 # Short-form video editing patterns: D2D niche vs general
 
-Scraped 2026-11-20 with Apify ($4.82 spent). 190 videos posted in the last 6 months were analyzed:
+Scraped 2026-11-20 with Apify ($4.82 spent). 216 videos posted in the last 6 months were analyzed:
 
-- Niche: 98 videos (TikTok plus 23 Instagram Reels) from #doortodoorsales, #d2dsales, #doorknocking, #solarsales, #pestcontrolsales, #salestips and matching searches.
-- General: 92 TikToks from #fyp, #viral, #foryoupage, #trending and broad searches.
+- Niche: 122 videos (99 TikToks, 23 Instagram Reels) from #doortodoorsales, #d2dsales, #doorknocking, #solarsales, #pestcontrolsales, #salestips and matching searches.
+- General: 94 TikToks from #fyp, #viral, #foryoupage, #trending and broad searches.
 
-Virality is views divided by followers, with followers floored at 100. Each set was split into a top 25% and a bottom 25%. Per-video data is in `short_form_videos.csv`, and the full table with p-values is in `comparison_table.md`.
+Virality is views divided by followers, with followers floored at 100. Each set was split into a top 25% (31 niche, 24 general) and a bottom 25%. Per-video data is in `short_form_videos.csv`, and the full table with p-values is in `comparison_table.md`.
 
-## What the data says
+## What separates top from bottom
 
-1. **No editing metric clearly separates winners from losers.** Every top-vs-bottom difference had p > 0.05 except one: the first cut in general videos (2.2 s vs 6.0 s, p = 0.05). Editing choices are table stakes. The hook topic and the account getting pushed to non-followers probably matter more.
+1. **Winners keep natural pauses.** This is the only significant result. In the first 10 s, the longest pause was 0.57 s in top niche videos vs 0.28 s in bottom ones (p = 0.02). Top videos also spoke slightly slower (3.0 vs 3.4 words/s). Cutting every breath appears to hurt.
+2. **Winners open without a face.** A face appeared at 0 s in 29% of top niche videos vs 55% of bottom ones (p = 0.07), and at 1 s in 23% vs 48% (p = 0.06). Top videos also had more motion at 0 s (pixel difference 18.8 vs 12.7, not significant).
+3. **Winners are a bit shorter.** Niche: 47 s vs 57 s (p = 0.08). General: 21 s vs 29 s (p = 0.31).
+4. **Winners cut earlier.** The first cut came at 3.0 s vs 6.5 s in general videos (p = 0.05) and 5.0 s vs 8.3 s in niche videos (not significant).
 
-2. **Winners are small accounts breaking out.** The niche top quartile had a median of 131,800 views against small followings. The bottom quartile had a median of 6,540 views, mostly from bigger accounts.
+## What doesn't separate them (baseline practice)
 
-3. **Length.** General winners are short: a median of 18 s, against 29 s for the bottom quartile. Niche videos run about 50 s in both quartiles, so in D2D, length doesn't hurt up to around 60 s.
+- **Cut rate.** Niche videos make 0.04-0.06 cuts per second, about 12 s per shot, in both quartiles. A cut every 2-4 s is not the norm here.
+- **Opening.** About 82-88% have text on screen at 0 s (8-9 words, at the top in niche winners). About 86-94% have motion or a cut at 0 s. Speech starts at 0.0 s, with about 9 words in the first 3 s.
+- **Captions.** About half of niche videos use them, with the same rate in top and bottom (44% vs 43%). They are mostly word-by-word, 2 words per chunk, about 70% down the screen.
+- **Banner bars.** They are rare, at 3-10%.
 
-4. **The first cut comes earlier in winners.** The first cut lands at 2.2 s vs 6.0 s (general) and 4.4 s vs 7.7 s (niche). But overall cut rate is low and the same in both groups: 0.06-0.07 cuts per second, with average shots of 8-12 s. A cut every 2-4 s is not what this niche does.
+## Niche vs general
 
-5. **Universal openers.** About 87-92% have motion or a cut at 0 s, 80-88% have text on screen at 0 s (8-10 words), and the median first spoken word is at 0.0 s. Most videos say 8-10 words in the first 3 s.
+- **Length.** Niche videos run about twice as long (50 s vs 27 s median).
+- **Shot length.** Niche shots are longer (12.5 s vs 8.3 s, p < 0.01).
+- **Hook text position.** It sits at the top in niche videos and lower-middle in general ones.
+- **Openings.** Both sets share the same patterns: text at 0 s, motion at 0 s, about 8-word hook text.
 
-6. **Faces are optional.** Top niche videos showed a face at 0 s less often than bottom ones (36% vs 56%) and had more motion at 0 s (pixel difference 18.9 vs 12.1). The difference isn't significant, but the direction favors motion over a talking head.
+## Recommended changes
 
-7. **Captions are less common than expected.** Only about 30% of transcribed niche videos had burned-in captions detected. When present, they show 1-3 words per chunk (median 2), placed about 65-70% down the screen.
+Applied in `SKILL.md`:
 
-8. **Banner bars are rare.** They appear in 4-8% of videos.
+1. Open on motion, the doorstep or the app, and bring your face in after 1 s.
+2. Put 8 words or fewer of hook text at the top from frame 0.
+3. Start speaking at 0.0 s, but don't strip natural pauses. Leave beats up to about 0.6 s.
+4. Get the first cut in by 3-5 s, then let shots run.
+5. Aim for 40-50 s in D2D and 15-25 s for broad reach.
+6. Captions are optional. If you use them, go word-by-word, 2 words at a time, lower-middle of the screen.
 
 ## Gaps and caveats
 
-- **Transcripts.** Only 41 of 190 videos (all niche) were transcribed before the run was stopped. Speech and caption figures are niche-only: 14 top and 8 bottom videos. Videos without a transcript are marked `not transcribed` in the CSV, and their pop-up counts are blank.
-- **Missing videos.** 26 of the 216 downloaded videos were not analyzed. Both runs were stopped early, the visual pass at 190 of 216.
-- **Sample size.** The sample is below the 150 niche / 100 general target. Half the hashtag results were older than 6 months, and Instagram downloads used about half the budget.
-- **Detection error.** On-screen text uses Tesseract OCR, which misses some stylized captions, so caption usage is likely undercounted. Face detection uses Haar cascades and misses profiles and small faces.
-- **Statistical power.** With about 25 videos per quartile, only large effects would show up as significant.
-- **Metric bias.** Views divided by followers favors one-off breakouts from tiny accounts.
+- **Transcripts.** Transcription was still running when this was written, so speech and caption numbers come from about 77 niche videos (25 top, 14 bottom) and none from general. Videos without a transcript are marked `not transcribed` in the CSV.
+- **Sample size.** 216 videos, below the 250 target. Half the hashtag results were older than 6 months, and Instagram downloads used about half the budget.
+- **Detection error.** On-screen text uses Tesseract OCR, which misses some stylized captions. Face detection uses Haar cascades and misses profiles.
+- **Statistical power.** With 24-31 videos per quartile, only large effects show as significant, and several of the results above are borderline (p = 0.05-0.08).
+- **Metric bias.** Views divided by followers favors breakouts from tiny accounts.
