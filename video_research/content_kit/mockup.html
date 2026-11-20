@@ -1,0 +1,314 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+:root{--land:#E9E6DF;--blocks:#DAD5CA;--road:#FBFAF6;--road-edge:#E2DDD2;--main:#F7F1DF;--main-edge:#E6DCC0;--park:#CFDCC3;--water:#C3DBDF;
+--ink:#1C1C1A;--ink2:#57544D;--ink3:#8A867D;--bg:#F4F2ED;--card:#FFFFFF;--border:#E8E4DB;
+--green:#34C759;--red:#FF3B30;--orange:#FF9500;--indigo:#5856D6;--blue:#007AFF;--purple:#AF52DE;--grey:#8E8E93}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:360px;height:640px;overflow:hidden;background:var(--land);font-family:Inter,"Nunito Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:var(--ink)}
+#cam{position:absolute;inset:0;transform-origin:0 0;overflow:hidden}
+#screen{position:absolute;inset:0;overflow:hidden;background:var(--land)}
+#world{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+#world svg{display:block}
+.pin{position:absolute;width:30px;height:39px;margin-left:-15px;margin-top:-39px;transform-origin:50% 100%;filter:drop-shadow(0 1.5px 1.5px rgba(0,0,0,.28))}
+.shadow{position:absolute;width:14px;height:5px;margin-left:-7px;margin-top:-3px;border-radius:50%;background:rgba(0,0,0,.18);filter:blur(1px)}
+.dot{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--blue);border:3px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.halo{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:rgba(0,122,255,.22)}
+.ripple{position:absolute;border-radius:50%;background:rgba(28,28,26,.16);pointer-events:none}
+.glow{position:absolute;border-radius:50%;border:2.5px solid var(--green);pointer-events:none}
+/* chrome */
+.status{position:absolute;left:0;right:0;top:0;height:46px;z-index:20}
+.status .time{position:absolute;left:34px;top:15px;font-weight:600;font-size:16px;letter-spacing:-.2px}
+.island{position:absolute;left:50%;top:10px;width:112px;height:32px;margin-left:-56px;border-radius:16px;background:#000}
+.status svg{position:absolute;top:17px}
+.search{position:absolute;left:8px;right:92px;top:52px;height:38px;border-radius:11px;background:rgba(255,255,255,.95);box-shadow:0 1px 3px rgba(0,0,0,.08);display:flex;align-items:center;padding-left:11px;gap:7px;font-size:15px;color:var(--ink3);z-index:20}
+.sq{position:absolute;top:52px;width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.95);box-shadow:0 1px 3px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;z-index:20}
+.chips{position:absolute;left:8px;top:98px;display:flex;gap:7px;z-index:20}
+.chip{height:30px;padding:0 12px;border-radius:15px;background:rgba(255,255,255,.95);box-shadow:0 1px 3px rgba(0,0,0,.08);display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600}
+.ctrl{position:absolute;right:8px;width:38px;border-radius:11px;background:rgba(255,255,255,.95);box-shadow:0 1px 3px rgba(0,0,0,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:20}
+.fab{position:absolute;right:8px;width:46px;height:46px;border-radius:13px;background:var(--ink);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.25);z-index:20}
+.home{position:absolute;left:50%;bottom:7px;width:124px;height:5px;margin-left:-62px;border-radius:3px;background:#111;z-index:40}
+/* sheet */
+#sheet{position:absolute;left:0;right:0;bottom:0;height:400px;background:var(--bg);border-radius:14px 14px 0 0;box-shadow:0 -4px 20px rgba(0,0,0,.12);z-index:30;padding:0 14px}
+.grab{width:36px;height:5px;border-radius:3px;background:#CFCAC0;margin:7px auto 0}
+.sh-head{display:flex;justify-content:space-between;align-items:center;height:42px;font-size:15px}
+.sh-head b{font-weight:700}
+.addr{background:var(--card);border-radius:12px;padding:12px 13px}
+.addr .a{font-weight:700;font-size:16px}
+.addr .c{color:var(--ink3);font-size:11.5px;margin-top:3px}
+.hint{color:var(--ink3);font-size:11.5px;margin:7px 2px 14px}
+.sec{color:var(--ink3);font-size:11.5px;font-weight:600;letter-spacing:.4px;margin:0 2px 6px}
+.list{background:var(--card);border-radius:12px;overflow:hidden}
+.row{display:flex;align-items:center;height:42px;padding:0 13px;gap:11px;font-size:15px;border-bottom:1px solid var(--border);position:relative}
+.row:last-child{border-bottom:none}
+.row .k{margin-left:auto;color:var(--ink3);font-size:12px}
+.ic{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+/* stats */
+#stats{position:absolute;inset:0;background:var(--bg);padding:0 14px}
+.nav{position:absolute;left:0;right:0;top:46px;height:44px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px}
+.nav .back{position:absolute;left:10px;font-weight:400;display:flex;align-items:center;gap:4px}
+.seg{position:absolute;left:14px;right:14px;top:96px;height:34px;border-radius:9px;background:#E6E3DB;display:flex;padding:2px}
+.seg div{flex:1;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--ink2)}
+.seg .on{background:#fff;border-radius:7px;color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.card{position:absolute;left:14px;right:14px;background:var(--card);border-radius:14px}
+.lbl{color:var(--ink2);font-size:13px}
+.big{font-weight:800;font-size:32px;letter-spacing:-.5px;margin-top:2px}
+.mid{font-weight:700;font-size:22px;margin-top:2px}
+.up{color:#3E8E63;font-size:12.5px;margin-top:3px}
+.bar{position:absolute;bottom:0;width:7px;background:var(--ink);border-radius:2px 2px 0 0}
+</style></head>
+<body>
+<div id="cam"><div id="screen"></div></div>
+<script>
+const P = new URLSearchParams(location.search); const SCENE = P.get('scene') || 'fill';
+// ---------- helpers ----------
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, t) => a + (b - a) * t;
+const ease = t => { t = clamp(t); return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };   // cubic in-out
+const easeOut = t => 1 - Math.pow(1 - clamp(t), 3);
+const back = t => { t = clamp(t); const c = 1.45; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
+const spring = t => { t = clamp(t); return 1 - Math.exp(-6.5 * t) * Math.cos(9 * t); };
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+function keyframes(t, ks) { // ks: [[time,{...}]], cubic in-out between keys
+  if (t <= ks[0][0]) return ks[0][1];
+  for (let i = 0; i < ks.length - 1; i++) {
+    const [t0, a] = ks[i], [t1, b] = ks[i + 1];
+    if (t <= t1) { const e = ease((t - t0) / (t1 - t0)); const o = {}; for (const k in a) o[k] = lerp(a[k], b[k], e); return o; }
+  }
+  return ks[ks.length - 1][1];
+}
+const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html) e.innerHTML = html; return e; };
+const screen = document.getElementById('screen'), cam = document.getElementById('cam');
+const COL = { sale: '#34C759', no: '#FF3B30', int: '#FF9500', lead: '#AF52DE', home: '#5856D6', call: '#007AFF', grey: '#8E8E93', add: '#007AFF' };
+const ICON = {
+  sale: '<path d="M13.5 20.5l4.5 4.5 8.5-9" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>',
+  no: '<path d="M15 15l10 10M25 15l-10 10" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>',
+  int: '<path d="M20 12.5l2.3 4.8 5.2.7-3.8 3.6.9 5.2L20 24.3l-4.6 2.5.9-5.2-3.8-3.6 5.2-.7z" fill="#fff"/>',
+  lead: '<circle cx="20" cy="17" r="3.6" fill="#fff"/><path d="M13.5 26.5c.8-3.6 3.4-5.3 6.5-5.3s5.7 1.7 6.5 5.3z" fill="#fff"/>',
+  home: '<path d="M13.5 20.5L20 14.5l6.5 6v6.5h-4.3v-4.3h-4.4v4.3h-4.3z" fill="#fff"/>',
+  call: '<path d="M13 16.5a2.5 2.5 0 012.5-2.5h9a2.5 2.5 0 012.5 2.5v5.5a2.5 2.5 0 01-2.5 2.5h-5l-4 3v-3a2.5 2.5 0 01-2.5-2.5z" fill="#fff"/>',
+  add: '<path d="M20 14v12M14 20h12" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>',
+  grey: '<circle cx="20" cy="20" r="3.5" fill="#fff"/>'
+};
+const pinSVG = k => `<svg viewBox="0 0 40 52" width="100%" height="100%"><path d="M20 50.5C20 50.5 3.5 33.5 3.5 20a16.5 16.5 0 1 1 33 0C36.5 33.5 20 50.5 20 50.5z" fill="${COL[k]}" stroke="#fff" stroke-width="3"/><g transform="translate(0,0)">${ICON[k]}</g></svg>`;
+const icRow = k => `<div class="ic" style="background:${COL[k]}"><svg viewBox="10 10 20 20" width="16" height="16">${ICON[k]}</svg></div>`;
+
+// ---------- map ----------
+const W = 1500, H = 2100;
+const world = el('div'); world.id = 'world'; world.style.width = W + 'px'; world.style.height = H + 'px';
+const ANG = -14 * Math.PI / 180, CROSS = 72 * Math.PI / 180;
+const streets = []; // residential streets: {x0,y0,len,ang,name}
+function mapSVG() {
+  let s = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect width="${W}" height="${H}" fill="var(--land)"/>`;
+  s += `<path d="M-50 1500 C 250 1440 420 1520 600 1700 S 900 2050 1200 2200 L -50 2200Z" fill="var(--park)"/>`;
+  s += `<path d="M1180 -50 C 1260 200 1420 300 1600 330 L1600 -50Z" fill="var(--water)"/>`;
+  const names = ['Western Road', 'Essex Street', 'McDonald Avenue', 'Victoria Street', 'Grange Street', 'Oakland Avenue', 'Ridout Street'];
+  const dx = Math.cos(ANG), dy = Math.sin(ANG), nx = -dy, ny = dx;
+  let houses = '', roads = '', labels = '';
+  for (let i = 0; i < 7; i++) {
+    const off = 180 + i * 260; const x0 = -200, y0 = off + 380, len = 2200;
+    const main = i === 0;
+    streets.push({ x0, y0, len, ang: ANG, name: names[i], main });
+    const x1 = x0 + dx * len, y1 = y0 + dy * len;
+    roads += `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="${main ? 'var(--main-edge)' : 'var(--road-edge)'}" stroke-width="${main ? 22 : 15}" stroke-linecap="round"/>`;
+    roads += `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="${main ? 'var(--main)' : 'var(--road)'}" stroke-width="${main ? 19 : 12.5}" stroke-linecap="round"/>`;
+    if (!main) for (let side of [-1, 1]) {
+      for (let d = 30; d < len - 30; d += 25 + rnd() * 6) {
+        if (rnd() < .07) { d += 20; continue; }
+        const w = 14 + rnd() * 7, h = 17 + rnd() * 9, o = 25 + h / 2 + rnd() * 4;
+        const cx = x0 + dx * d + nx * o * side, cy = y0 + dy * d + ny * o * side;
+        houses += `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="1.5" fill="var(--blocks)" transform="translate(${cx.toFixed(1)},${cy.toFixed(1)}) rotate(${(ANG * 180 / Math.PI + (rnd() - .5) * 4).toFixed(1)})"/>`;
+        streets[streets.length - 1].lots = streets[streets.length - 1].lots || [];
+        streets[streets.length - 1].lots.push({ d, side, x: x0 + dx * d + nx * (o - h / 2 + 4) * side, y: y0 + dy * d + ny * (o - h / 2 + 4) * side, hx: cx, hy: cy });
+      }
+    }
+    for (let k = 0; k < 3; k++) {
+      const d = 260 + k * 640, lx = x0 + dx * d + nx * -1, ly = y0 + dy * d + ny * -1;
+      labels += `<text x="${lx}" y="${ly}" transform="rotate(${ANG * 180 / Math.PI} ${lx} ${ly})" font-size="${main ? 9.5 : 8.5}" font-weight="500" fill="#8E897E" text-anchor="middle" dominant-baseline="central" font-family="Inter">${names[i]}</text>`;
+    }
+  }
+  const cdx = Math.cos(CROSS), cdy = Math.sin(CROSS);
+  for (let j = 0; j < 4; j++) {
+    const x0 = 120 + j * 420, y0 = -200;
+    const x1 = x0 + cdx * 2600, y1 = y0 + cdy * 2600;
+    roads += `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="var(--road-edge)" stroke-width="15"/><line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="var(--road)" stroke-width="12.5"/>`;
+  }
+  s += houses + roads + labels + '</svg>';
+  return s;
+}
+world.innerHTML = mapSVG();
+const layer = el('div'); layer.style.cssText = 'position:absolute;left:0;top:0'; world.appendChild(layer);
+function addPin(k, x, y, t0) {
+  const sh = el('div', 'shadow'); sh.style.left = x + 'px'; sh.style.top = y + 'px'; layer.appendChild(sh);
+  const p = el('div', 'pin', pinSVG(k)); p.style.left = x + 'px'; p.style.top = y + 'px'; layer.appendChild(p);
+  return { k, x, y, t0, p, sh, scale: 1 };
+}
+function drawPin(o, t) {
+  const a = prog(t, o.t0, o.t0 + .55);
+  if (a <= 0) { o.p.style.opacity = 0; o.sh.style.opacity = 0; return; }
+  const yoff = -46 * (1 - easeOut(a / .6 > 1 ? 1 : a / .6)), sc = lerp(.35, 1, back(a)) * o.scale;
+  o.p.style.opacity = clamp(a * 4); o.sh.style.opacity = clamp(a * 2) * .9;
+  o.p.style.transform = `translateY(${yoff.toFixed(2)}px) scale(${sc.toFixed(4)})`;
+  o.sh.style.transform = `scale(${lerp(.3, 1, easeOut(a)).toFixed(3)})`;
+}
+function setMapCam(cx, cy, z, top = 0, h = 640) { world.style.transform = `translate(${(180 - cx * z).toFixed(3)}px,${(top + h / 2 - cy * z).toFixed(3)}px) scale(${z.toFixed(5)})`; }
+function setOuter(cx, cy, z) { cam.style.transform = `translate(${(180 - cx * z).toFixed(3)}px,${(320 - cy * z).toFixed(3)}px) scale(${z.toFixed(5)})`; }
+
+// ---------- chrome ----------
+function chrome(root) {
+  root.appendChild(el('div', 'status', `<div class="time">9:41</div><div class="island"></div>
+   <svg style="right:72px" width="18" height="11" viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx="1" fill="#000"/><rect x="5" y="5" width="3" height="6" rx="1" fill="#000"/><rect x="10" y="2.5" width="3" height="8.5" rx="1" fill="#000"/><rect x="15" y="0" width="3" height="11" rx="1" fill="#000"/></svg>
+   <svg style="right:50px" width="16" height="11" viewBox="0 0 16 11"><path d="M8 10.5l2.2-2.6a3.3 3.3 0 00-4.4 0zM3.4 5.6a7 7 0 019.2 0l-1.3 1.5a5 5 0 00-6.6 0zM.6 2.9a11 11 0 0114.8 0l-1.3 1.5a9 9 0 00-12.2 0z" fill="#000"/></svg>
+   <svg style="right:20px" width="26" height="12" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3.2" fill="none" stroke="#000" opacity=".4"/><rect x="2" y="2" width="19" height="8" rx="2" fill="#000"/><rect x="23.6" y="4" width="1.6" height="4" rx=".8" fill="#000" opacity=".4"/></svg>`));
+  root.appendChild(el('div', 'search', `<svg width="15" height="15" viewBox="0 0 15 15"><circle cx="6.2" cy="6.2" r="4.8" fill="none" stroke="#8A867D" stroke-width="1.7"/><path d="M9.8 9.8l3.7 3.7" stroke="#8A867D" stroke-width="1.7" stroke-linecap="round"/></svg>Search an address`));
+  const f = el('div', 'sq', `<svg width="16" height="12" viewBox="0 0 16 12"><path d="M1 1h14M4 6h8M6.5 11h3" stroke="#1C1C1A" stroke-width="1.7" stroke-linecap="round"/></svg>`); f.style.right = '50px'; root.appendChild(f);
+  const u = el('div', 'sq', `<svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7.7" fill="none" stroke="#1C1C1A" stroke-width="1.6"/><circle cx="9" cy="7.3" r="2.6" fill="#1C1C1A"/><path d="M4.4 14.2c1-2.2 2.7-3.1 4.6-3.1s3.6.9 4.6 3.1" fill="#1C1C1A"/></svg>`); u.style.right = '8px'; root.appendChild(u);
+  root.appendChild(el('div', 'chips', `<div class="chip"><svg width="13" height="13" viewBox="0 0 13 13"><circle cx="6.5" cy="6.5" r="5.6" fill="none" stroke="#1C1C1A" stroke-width="1.4"/><circle cx="6.5" cy="6.5" r="2.6" fill="#1C1C1A"/></svg>On Shift</div>
+    <div class="chip"><svg width="13" height="13" viewBox="0 0 13 13"><path d="M4.5 2.5L1.8 5.2l2.7 2.7M2 5.2h6a3.5 3.5 0 010 7H6" fill="none" stroke="#1C1C1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>49 to re-knock</div>`));
+  const z = el('div', 'ctrl', `<div style="height:38px;display:flex;align-items:center;font-size:21px;font-weight:300">+</div><div style="width:24px;height:1px;background:#E2DED6"></div><div style="height:38px;display:flex;align-items:center;font-size:21px;font-weight:300">−</div>`); z.style.bottom = '226px'; root.appendChild(z);
+  const l = el('div', 'ctrl', `<svg width="17" height="17" viewBox="0 0 17 17"><path d="M8.5 2.5c3.6 0 6 1.7 6 3.9s-2.4 3.9-6 3.9c-.9 0-1.8-.1-2.6-.3-.7 1-.6 2.2.6 3.4-2.2-.2-3.3-1.4-3.4-3C2.6 9.7 2.5 8.2 2.5 6.4c0-2.2 2.4-3.9 6-3.9z" fill="none" stroke="#1C1C1A" stroke-width="1.5" stroke-linejoin="round"/></svg>`); l.style.cssText += 'height:38px;bottom:178px'; root.appendChild(l);
+  const n = el('div', 'ctrl', `<svg width="16" height="16" viewBox="0 0 16 16"><path d="M14 2L2 7.3l5.4 1.3L8.7 14z" fill="none" stroke="#1C1C1A" stroke-width="1.5" stroke-linejoin="round"/></svg>`); n.style.cssText += 'height:38px;bottom:132px'; root.appendChild(n);
+  const fab = el('div', 'fab', `<svg width="18" height="18" viewBox="0 0 18 18"><path d="M9 2v14M2 9h14" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>`); fab.style.bottom = '74px'; root.appendChild(fab);
+  root.appendChild(el('div', 'home'));
+}
+
+// ---------- scenes ----------
+let render = () => {}, DURATION = 8;
+if (SCENE === 'fill') {
+  DURATION = 9.5;
+  screen.appendChild(world); chrome(screen);
+  const kinds = ['sale', 'no', 'no', 'home', 'home', 'home', 'int', 'lead', 'call', 'no', 'home', 'sale'];
+  const pins = [];
+  // reps walk streets 2..5 from left to right; pins appear by walk order
+  const walk = [[2, 0, 1.0], [3, 0.15, 1.05], [4, 0.3, 1.1], [1, .45, 1.0], [5, .6, 1.1]];
+  for (const [si, delay, speed] of walk) {
+    const st = streets[si];
+    for (const lot of st.lots) {
+      if (lot.x < 120 || lot.x > 1350 || lot.y < 150 || lot.y > 1900 || rnd() < .38) continue;
+      const t0 = 0.25 + delay + (lot.x - 120) / 1230 * 5.0 / speed + rnd() * .12;
+      let k = kinds[Math.floor(rnd() * kinds.length)];
+      if (si === 3 && lot.x > 640 && lot.x < 860) k = 'sale';     // the cluster we zoom into
+      pins.push(addPin(k, lot.x, lot.y, t0));
+    }
+  }
+  // a few pins already there at the start
+  for (const p of pins.slice(0, 0)) p.t0 = -1;
+  const target = streets[3]; const tx = 750, ty = target.y0 + Math.tan(ANG) * (750 - target.x0);
+  const glows = [el('div', 'glow'), el('div', 'glow')]; glows.forEach(g => layer.appendChild(g));
+  render = t => {
+    const c = keyframes(t, [[0, { x: 520, y: ty - 120, z: 1.45 }], [1.0, { x: 560, y: ty - 110, z: 1.38 }], [5.6, { x: 740, y: 1080, z: 0.62 }],
+      [7.2, { x: tx, y: ty - 6, z: 1.9 }], [9.5, { x: tx + 8, y: ty - 4, z: 2.0 }]]);
+    setMapCam(c.x, c.y, c.z);
+    for (const p of pins) drawPin(p, t);
+    glows.forEach((g, i) => { const a = prog(t, 7.25 + i * .5, 8.6 + i * .5); const r = lerp(8, 70, easeOut(a));
+      g.style.cssText = `left:${tx - r}px;top:${ty - 14 - r}px;width:${2 * r}px;height:${2 * r}px;opacity:${a > 0 ? (1 - a) * .9 : 0}`; });
+  };
+}
+if (SCENE === 'tap') {
+  DURATION = 8;
+  screen.appendChild(world); chrome(screen);
+  const st = streets[1]; const lot = st.lots.find(l => l.x > 640 && l.side === -1) ; const hx = lot.x, hy = lot.y;
+  const neighbours = st.lots.filter(l => Math.abs(l.x - hx) < 260 && l !== lot && rnd() < .55).map(l => addPin(['home', 'no', 'home', 'call', 'sale', 'int'][Math.floor(rnd() * 6)], l.x, l.y, -1));
+  const halo = el('div', 'halo'), dot = el('div', 'dot'); const dx = hx + 6, dy = hy + 30;
+  [halo, dot].forEach(d => { d.style.left = dx + 'px'; d.style.top = dy + 'px'; layer.appendChild(d); });
+  const rip = el('div', 'ripple'); layer.appendChild(rip);
+  const blue = addPin('add', hx, hy, 1.0); const green = addPin('sale', hx, hy, 99);
+  blue.p.style.width = green.p.style.width = '40px'; blue.p.style.height = green.p.style.height = '52px';
+  blue.p.style.marginLeft = green.p.style.marginLeft = '-20px'; blue.p.style.marginTop = green.p.style.marginTop = '-52px';
+  const glow = el('div', 'glow'); layer.appendChild(glow);
+  const sheet = el('div'); sheet.id = 'sheet';
+  sheet.innerHTML = `<div class="grab"></div><div class="sh-head"><span style="color:var(--ink2)">Cancel</span><b>New marker</b><span style="width:44px"></span></div>
+   <div class="addr"><div class="a">26 Essex St</div><div class="c">42.99502, -81.26784</div></div><div class="hint">Tap the map to move the blue pin.</div>
+   <div class="sec">WHAT HAPPENED HERE?</div><div class="list">
+   <div class="row" id="rsale">${icRow('sale')}Sale<span class="k">Knock</span></div>
+   <div class="row">${icRow('no')}Not Interested<span class="k">Knock</span></div>
+   <div class="row">${icRow('int')}Interested<span class="k">Knock</span></div>
+   <div class="row">${icRow('lead')}Lead<span class="k"></span></div>
+   <div class="row">${icRow('home')}Not Home<span class="k">Knock</span></div></div>`;
+  screen.appendChild(sheet);
+  const rsale = sheet.querySelector('#rsale'); const rr = el('div', 'ripple'); rsale.appendChild(rr);
+  render = t => {
+    // map camera: centre the house, lift it above the sheet while the sheet is up
+    const up = ease(prog(t, 1.35, 1.95)) * (1 - ease(prog(t, 3.75, 4.3)));
+    const z = keyframes(t, [[0, { z: 1.9 }], [1.0, { z: 2.0 }], [4.3, { z: 2.0 }], [5.6, { z: 2.55 }], [8, { z: 2.65 }]]).z * (1 - .3 * up);
+    setMapCam(hx, hy - 20, z, -up * 118);
+    // location dot pulse
+    const ph = (t % 1.6) / 1.6; halo.style.transform = `scale(${lerp(1, 2.3, easeOut(ph))})`; halo.style.opacity = (1 - ph) * .8;
+    // tap ripple on the house
+    const a = prog(t, .72, 1.25); const r = lerp(3, 16, easeOut(a));
+    rip.style.cssText = `left:${hx - r}px;top:${hy - 10 - r}px;width:${2 * r}px;height:${2 * r}px;opacity:${a > 0 && a < 1 ? (1 - a) * .9 : 0}`;
+    // blue pin until swap, then green pin pops in its place
+    if (t < 4.35) { drawPin(blue, t); green.p.style.opacity = 0; green.sh.style.opacity = 0; }
+    else {
+      blue.p.style.opacity = 0; blue.sh.style.opacity = 0;
+      const b = prog(t, 4.35, 5.0); const sc = lerp(.55, 1, spring(b));
+      green.p.style.opacity = 1; green.sh.style.opacity = .9; green.p.style.transform = `scale(${sc.toFixed(4)})`;
+    }
+    const g = prog(t, 4.9, 6.4), gr = lerp(10, 46, easeOut(g));
+    glow.style.cssText = `left:${hx - gr}px;top:${hy - 26 - gr}px;width:${2 * gr}px;height:${2 * gr}px;opacity:${g > 0 && g < 1 ? (1 - g) : 0}`;
+    // sheet slide
+    const s = spring(prog(t, 1.3, 2.3)) * (1 - ease(prog(t, 3.7, 4.25)));
+    sheet.style.transform = `translateY(${((1 - s) * 420).toFixed(2)}px)`;
+    // Sale row press
+    const pr = prog(t, 3.2, 3.6); rsale.style.background = pr > 0 && t < 3.9 ? `rgba(28,28,26,${.08 * Math.sin(Math.PI * clamp(pr * 1.3))})` : 'transparent';
+    const rrr = lerp(5, 90, easeOut(pr)); rr.style.cssText = `left:${40 - rrr}px;top:${21 - rrr}px;width:${2 * rrr}px;height:${2 * rrr}px;opacity:${pr > 0 && pr < 1 ? (1 - pr) * .5 : 0}`;
+    // outer punch-in: onto the Sale row while choosing, back out for the pin
+    const o = keyframes(t, [[0, { x: 180, y: 320, z: 1 }], [2.4, { x: 180, y: 320, z: 1 }], [3.0, { x: 160, y: 414, z: 1.42 }], [3.7, { x: 160, y: 414, z: 1.42 }],
+      [4.4, { x: 180, y: 320, z: 1 }], [8, { x: 180, y: 320, z: 1 }]]);
+    setOuter(o.x, o.y, o.z);
+  };
+}
+if (SCENE === 'stats') {
+  DURATION = 7;
+  const s = el('div'); s.id = 'stats'; screen.appendChild(s);
+  s.appendChild(el('div', 'status', `<div class="time">9:41</div><div class="island"></div>`));
+  s.appendChild(el('div', 'nav', `<span class="back"><svg width="10" height="17" viewBox="0 0 10 17"><path d="M8.5 1.5L2 8.5l6.5 7" fill="none" stroke="#1C1C1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Settings</span>Sales Summary`));
+  s.appendChild(el('div', 'seg', `<div>Today</div><div>Week</div><div class="on">Month</div><div>Custom</div>`));
+  s.appendChild(el('div', '', `<div style="position:absolute;left:16px;top:140px;color:var(--ink2);font-size:14px">Oct 1 – Oct 31</div>`));
+  const c1 = el('div', 'card'); c1.style.cssText += 'top:168px;height:212px';
+  c1.innerHTML = `<div style="position:absolute;left:16px;top:16px"><div class="lbl">Revenue</div><div class="big" id="rev">$0</div><div class="up">▲ $4,269 vs last month</div></div>
+   <div style="position:absolute;left:190px;top:16px"><div class="lbl">Sales</div><div class="big" id="sales">0</div><div class="up">▲ 17 vs last month</div></div>
+   <div style="position:absolute;left:0;right:0;top:118px;height:1px;background:var(--border)"></div>
+   <div style="position:absolute;left:16px;top:130px"><div class="lbl">Conversion</div><div class="mid" id="conv">0%</div><div class="up">▲ 4.1 pts</div></div>
+   <div style="position:absolute;left:128px;top:130px;border-left:1px solid var(--border);padding-left:14px;height:62px"><div class="lbl">Doors</div><div class="mid" id="doors">0</div></div>
+   <div style="position:absolute;left:236px;top:130px;border-left:1px solid var(--border);padding-left:14px;height:62px"><div class="lbl">Knocks</div><div class="mid" id="knocks">0</div></div>`;
+  s.appendChild(c1);
+  s.appendChild(el('div', '', `<div style="position:absolute;left:16px;top:398px;font-weight:600;font-size:15px;color:var(--ink2)">Over time</div>`));
+  const c2 = el('div', 'card'); c2.style.cssText += 'top:426px;height:190px';
+  c2.innerHTML = `<div style="position:absolute;left:16px;top:14px;font-weight:700;font-size:16px">10% overall</div><div id="bars" style="position:absolute;left:16px;right:40px;top:50px;height:110px;border-bottom:1px solid var(--border)"></div>
+    <div style="position:absolute;right:12px;top:46px;font-size:11px;color:var(--ink3)">40%</div><div style="position:absolute;right:12px;top:100px;font-size:11px;color:var(--ink3)">20%</div>`;
+  s.appendChild(c2);
+  const vals = [14, 5, 7, 0, 0, 0, 7, 0, 7, 10, 0, 0, 9, 9, 7, 0, 0, 4, 0, 7, 7, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  const bars = vals.map((v, i) => { const b = el('div', 'bar'); b.style.left = (i * 8.6) + 'px'; c2.querySelector('#bars').appendChild(b); return [b, v]; });
+  s.appendChild(el('div', 'home'));
+  const cnt = (id, to, a, f) => { s.querySelector(id).textContent = f(Math.round(to * easeOut(a))); };
+  const money = n => '$' + n.toLocaleString('en-US');
+  render = t => {
+    const a = prog(t, .4, 2.2);
+    cnt('#rev', 6831, a, money); cnt('#sales', 24, a, n => n); cnt('#conv', 10, prog(t, .8, 2.4), n => n + '%');
+    cnt('#doors', 240, prog(t, .8, 2.4), n => n); cnt('#knocks', 413, prog(t, .8, 2.4), n => n);
+    bars.forEach(([b, v], i) => { const h = v / 40 * 110 * spring(prog(t, 3.6 + i * .035, 4.6 + i * .035)); b.style.height = Math.max(0, h).toFixed(2) + 'px'; });
+    const o = keyframes(t, [[0, { x: 180, y: 300, z: 1.0 }], [0.2, { x: 180, y: 300, z: 1.0 }], [1.6, { x: 126, y: 250, z: 1.45 }], [2.9, { x: 129, y: 252, z: 1.5 }],
+      [4.0, { x: 172, y: 352, z: 1.1 }], [7, { x: 174, y: 358, z: 1.14 }]]);
+    setOuter(o.x, o.y, o.z);
+  };
+}
+if (SCENE === 'cta') {
+  DURATION = 3.5;
+  const c = el('div'); c.style.cssText = 'position:absolute;inset:0;background:#F7F4EC;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:"Nunito Sans"';
+  c.innerHTML = `<img id="ic" src="icon.png" style="width:96px;height:96px;border-radius:22px;box-shadow:0 6px 18px rgba(0,0,0,.14)">
+   <div id="t1" style="margin-top:22px;font-weight:900;font-size:34px;letter-spacing:-.6px;color:#1C1C1A">SalesMapper</div>
+   <div id="t2" style="margin-top:6px;font-weight:600;font-size:18px;color:#57544D">Every door, one map.</div>
+   <div id="t3" style="margin-top:34px;background:#1C1C1A;color:#F7F5EF;font-weight:800;font-size:18px;padding:13px 24px;border-radius:26px">Free trial · link in bio</div>`;
+  screen.appendChild(c);
+  const q = id => c.querySelector(id);
+  render = t => {
+    q('#ic').style.transform = `scale(${lerp(.6, 1, spring(prog(t, 0, .7))).toFixed(4)})`; q('#ic').style.opacity = clamp(t * 5);
+    [['#t1', .2], ['#t2', .35], ['#t3', .55]].forEach(([id, d]) => { const a = easeOut(prog(t, d, d + .5)); q(id).style.opacity = a; q(id).style.transform = `translateY(${(1 - a) * 14}px)`; });
+    const pulse = 1 + .03 * Math.sin(Math.max(0, t - 1.2) * 4) * (t > 1.2 ? 1 : 0); q('#t3').style.transform += ` scale(${pulse.toFixed(4)})`;
+  };
+}
+window.DURATION = DURATION; window.renderAt = t => render(t);
+render(0);
+</script></body></html>

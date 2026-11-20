@@ -1,0 +1,79 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Caption,Nunito Sans Black,104,&H00FFFFFF,&H00FFFFFF,&H001A1C1C,&H78000000,0,0,0,0,100,100,0,0,1,10,4,5,60,60,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:00.29,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}YOUR{\c&HFFFFFF&} REPS
+Dialogue: 0,0:00:00.29,0:00:00.59,Caption,,0,0,0,,{\an5\pos(540,1344)}YOUR {\c&H59C734&}REPS{\c&HFFFFFF&}
+Dialogue: 0,0:00:00.59,0:00:00.93,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}KNOCK{\c&HFFFFFF&} TWO
+Dialogue: 0,0:00:00.93,0:00:01.18,Caption,,0,0,0,,{\an5\pos(540,1344)}KNOCK {\c&H59C734&}TWO{\c&HFFFFFF&}
+Dialogue: 0,0:00:01.18,0:00:01.62,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}HUNDRED{\c&HFFFFFF&} DOORS
+Dialogue: 0,0:00:01.62,0:00:01.96,Caption,,0,0,0,,{\an5\pos(540,1344)}HUNDRED {\c&H59C734&}DOORS{\c&HFFFFFF&}
+Dialogue: 0,0:00:01.96,0:00:02.11,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}A{\c&HFFFFFF&} DAY.
+Dialogue: 0,0:00:02.11,0:00:02.65,Caption,,0,0,0,,{\an5\pos(540,1344)}A {\c&H59C734&}DAY.{\c&HFFFFFF&}
+Dialogue: 0,0:00:02.80,0:00:03.07,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}HALF{\c&HFFFFFF&} OF
+Dialogue: 0,0:00:03.07,0:00:03.24,Caption,,0,0,0,,{\an5\pos(540,1344)}HALF {\c&H59C734&}OF{\c&HFFFFFF&}
+Dialogue: 0,0:00:03.24,0:00:03.51,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}THEM{\c&HFFFFFF&} ARE
+Dialogue: 0,0:00:03.51,0:00:03.73,Caption,,0,0,0,,{\an5\pos(540,1344)}THEM {\c&H59C734&}ARE{\c&HFFFFFF&}
+Dialogue: 0,0:00:03.73,0:00:04.22,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}FORGOTTEN{\c&HFFFFFF&} BY
+Dialogue: 0,0:00:04.22,0:00:04.40,Caption,,0,0,0,,{\an5\pos(540,1344)}FORGOTTEN {\c&H59C734&}BY{\c&HFFFFFF&}
+Dialogue: 0,0:00:04.40,0:00:05.05,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}FRIDAY.{\c&HFFFFFF&}
+Dialogue: 0,0:00:05.30,0:00:05.53,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}WITH{\c&HFFFFFF&} SALESMAPPER,
+Dialogue: 0,0:00:05.53,0:00:06.07,Caption,,0,0,0,,{\an5\pos(540,1344)}WITH {\c&H59C734&}SALESMAPPER,{\c&HFFFFFF&}
+Dialogue: 0,0:00:06.07,0:00:06.30,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}THEY{\c&HFFFFFF&} TAP
+Dialogue: 0,0:00:06.30,0:00:06.50,Caption,,0,0,0,,{\an5\pos(540,1344)}THEY {\c&H59C734&}TAP{\c&HFFFFFF&}
+Dialogue: 0,0:00:06.50,0:00:06.69,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}THE{\c&HFFFFFF&} HOUSE,
+Dialogue: 0,0:00:06.69,0:00:07.25,Caption,,0,0,0,,{\an5\pos(540,1344)}THE {\c&H59C734&}HOUSE,{\c&HFFFFFF&}
+Dialogue: 0,0:00:07.30,0:00:07.56,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}PICK{\c&HFFFFFF&} WHAT
+Dialogue: 0,0:00:07.56,0:00:07.82,Caption,,0,0,0,,{\an5\pos(540,1344)}PICK {\c&H59C734&}WHAT{\c&HFFFFFF&}
+Dialogue: 0,0:00:07.82,0:00:08.55,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}HAPPENED,{\c&HFFFFFF&}
+Dialogue: 0,0:00:08.70,0:00:08.94,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}AND{\c&HFFFFFF&} KEEP
+Dialogue: 0,0:00:08.94,0:00:09.22,Caption,,0,0,0,,{\an5\pos(540,1344)}AND {\c&H59C734&}KEEP{\c&HFFFFFF&}
+Dialogue: 0,0:00:09.22,0:00:09.95,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}WALKING.{\c&HFFFFFF&}
+Dialogue: 0,0:00:10.30,0:00:10.48,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}NO{\c&HFFFFFF&} CLIPBOARD.
+Dialogue: 0,0:00:10.48,0:00:11.01,Caption,,0,0,0,,{\an5\pos(540,1344)}NO {\c&H59C734&}CLIPBOARD.{\c&HFFFFFF&}
+Dialogue: 0,0:00:11.01,0:00:11.18,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}NO{\c&HFFFFFF&} SPREADSHEET.
+Dialogue: 0,0:00:11.18,0:00:12.05,Caption,,0,0,0,,{\an5\pos(540,1344)}NO {\c&H59C734&}SPREADSHEET.{\c&HFFFFFF&}
+Dialogue: 0,0:00:12.30,0:00:12.64,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}EVERY{\c&HFFFFFF&} DOOR
+Dialogue: 0,0:00:12.64,0:00:12.93,Caption,,0,0,0,,{\an5\pos(540,1344)}EVERY {\c&H59C734&}DOOR{\c&HFFFFFF&}
+Dialogue: 0,0:00:12.93,0:00:13.27,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}LANDS{\c&HFFFFFF&} ON
+Dialogue: 0,0:00:13.27,0:00:13.47,Caption,,0,0,0,,{\an5\pos(540,1344)}LANDS {\c&H59C734&}ON{\c&HFFFFFF&}
+Dialogue: 0,0:00:13.47,0:00:13.71,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}ONE{\c&HFFFFFF&} MAP,
+Dialogue: 0,0:00:13.71,0:00:14.25,Caption,,0,0,0,,{\an5\pos(540,1344)}ONE {\c&H59C734&}MAP,{\c&HFFFFFF&}
+Dialogue: 0,0:00:14.40,0:00:14.69,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}YOUR{\c&HFFFFFF&} WHOLE
+Dialogue: 0,0:00:14.69,0:00:15.03,Caption,,0,0,0,,{\an5\pos(540,1344)}YOUR {\c&H59C734&}WHOLE{\c&HFFFFFF&}
+Dialogue: 0,0:00:15.03,0:00:15.38,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}TEAM,{\c&HFFFFFF&} STREET
+Dialogue: 0,0:00:15.38,0:00:15.77,Caption,,0,0,0,,{\an5\pos(540,1344)}TEAM, {\c&H59C734&}STREET{\c&HFFFFFF&}
+Dialogue: 0,0:00:15.77,0:00:15.96,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}BY{\c&HFFFFFF&} STREET.
+Dialogue: 0,0:00:15.96,0:00:16.65,Caption,,0,0,0,,{\an5\pos(540,1344)}BY {\c&H59C734&}STREET.{\c&HFFFFFF&}
+Dialogue: 0,0:00:17.00,0:00:17.18,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}SO{\c&HFFFFFF&} YOU
+Dialogue: 0,0:00:17.18,0:00:17.41,Caption,,0,0,0,,{\an5\pos(540,1344)}SO {\c&H59C734&}YOU{\c&HFFFFFF&}
+Dialogue: 0,0:00:17.41,0:00:17.68,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}KNOW{\c&HFFFFFF&} EXACTLY
+Dialogue: 0,0:00:17.68,0:00:18.09,Caption,,0,0,0,,{\an5\pos(540,1344)}KNOW {\c&H59C734&}EXACTLY{\c&HFFFFFF&}
+Dialogue: 0,0:00:18.09,0:00:18.32,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}WHO{\c&HFFFFFF&} TO
+Dialogue: 0,0:00:18.32,0:00:18.50,Caption,,0,0,0,,{\an5\pos(540,1344)}WHO {\c&H59C734&}TO{\c&HFFFFFF&}
+Dialogue: 0,0:00:18.50,0:00:19.25,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}RE-KNOCK,{\c&HFFFFFF&}
+Dialogue: 0,0:00:19.40,0:00:19.60,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}AND{\c&HFFFFFF&} WHERE
+Dialogue: 0,0:00:19.60,0:00:19.88,Caption,,0,0,0,,{\an5\pos(540,1344)}AND {\c&H59C734&}WHERE{\c&HFFFFFF&}
+Dialogue: 0,0:00:19.88,0:00:20.08,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}THE{\c&HFFFFFF&} SALES
+Dialogue: 0,0:00:20.08,0:00:20.36,Caption,,0,0,0,,{\an5\pos(540,1344)}THE {\c&H59C734&}SALES{\c&HFFFFFF&}
+Dialogue: 0,0:00:20.36,0:00:20.85,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}ARE.{\c&HFFFFFF&}
+Dialogue: 0,0:00:21.00,0:00:21.52,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}REVENUE,{\c&HFFFFFF&} SALES,
+Dialogue: 0,0:00:21.52,0:00:21.93,Caption,,0,0,0,,{\an5\pos(540,1344)}REVENUE, {\c&H59C734&}SALES,{\c&HFFFFFF&}
+Dialogue: 0,0:00:21.93,0:00:22.85,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}CONVERSION,{\c&HFFFFFF&}
+Dialogue: 0,0:00:23.00,0:00:23.43,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}UPDATED{\c&HFFFFFF&} AS
+Dialogue: 0,0:00:23.43,0:00:23.63,Caption,,0,0,0,,{\an5\pos(540,1344)}UPDATED {\c&H59C734&}AS{\c&HFFFFFF&}
+Dialogue: 0,0:00:23.63,0:00:23.91,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}THEY{\c&HFFFFFF&} KNOCK.
+Dialogue: 0,0:00:23.91,0:00:24.55,Caption,,0,0,0,,{\an5\pos(540,1344)}THEY {\c&H59C734&}KNOCK.{\c&HFFFFFF&}
+Dialogue: 0,0:00:24.80,0:00:25.19,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}EVERY{\c&HFFFFFF&} DOOR.
+Dialogue: 0,0:00:25.19,0:00:25.58,Caption,,0,0,0,,{\an5\pos(540,1344)}EVERY {\c&H59C734&}DOOR.{\c&HFFFFFF&}
+Dialogue: 0,0:00:25.58,0:00:25.86,Caption,,0,0,0,,{\an5\pos(540,1344)}{\c&H59C734&}ONE{\c&HFFFFFF&} MAP.
+Dialogue: 0,0:00:25.86,0:00:26.45,Caption,,0,0,0,,{\an5\pos(540,1344)}ONE {\c&H59C734&}MAP.{\c&HFFFFFF&}

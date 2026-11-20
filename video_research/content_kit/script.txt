@@ -1,0 +1,16 @@
+Voiceover script (timed to the template; ~2.9 words/s, keep the pauses)
+
+  0.0-  2.4s  Your reps knock two hundred doors a day.
+  2.8-  4.8s  Half of them are forgotten by Friday.
+  5.3-  7.0s  With SalesMapper, they tap the house,
+  7.3-  8.3s  pick what happened,
+  8.7-  9.7s  and keep walking.
+ 10.3- 11.8s  No clipboard. No spreadsheet.
+ 12.3- 14.0s  Every door lands on one map,
+ 14.4- 16.4s  your whole team, street by street.
+ 17.0- 19.0s  So you know exactly who to re-knock,
+ 19.4- 20.6s  and where the sales are.
+ 21.0- 22.6s  Revenue, sales, conversion,
+ 23.0- 24.3s  updated as they knock.
+ 24.8- 26.2s  Every door. One map.
+ 27.3- 28.8s  Free trial, link in bio.
