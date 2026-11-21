@@ -16,12 +16,14 @@ CLIPS = {
     "HOOK":     ("HOOK.mov",     1.0, 99, None, GRADE_SDR),   # skip their "Hey!", open on "We're"                     # @claytonnelson_ "We're not interested. Sorry."
     "IMG_9770": ("IMG_9770.MOV", 0.0, 99, None, GRADE_HLG),                     # "If you knock doors, you hear that all day."
     "IMG_9771": ("IMG_9771.MOV", 18.6, 99, None, GRADE_HLG),                    # 2nd take: "It's one of the most common objections..."
-    "IMG_9773": ("IMG_9773.MOV", 0.0, 10.40, "Instead: find common ground", GRADE_HLG),   # cut after "pitch" (drops trailing "the...")
+    "IMG_9774": ("IMG_9774.MOV", 0.0, 99, "Instead: find common ground", GRADE_HLG),     # clean take, ends "pitch your services."
     "IMG_9779": ("IMG_9779.MOV", 0.0, 99, "What it sounds like", GRADE_HLG),
+    "IMG_9780": ("IMG_9780.MOV", 0.0, 99, "Interest? Hook them. None? Move on", GRADE_HLG),  # "semblance of interest"
+    "IMG_9781": ("IMG_9781.MOV", 0.0, 99, None, GRADE_HLG),                     # "Follow for more information like this."
 }
 order = list(CLIPS)
 FACE_FIRST = "IMG_9770"           # push-in on first face shot (H14)
-HOOK_CARD_ON = ["IMG_9770", "IMG_9771"]
+HOOK_CARD_ON = ["IMG_9770"]      # 9771 carries the door-outcomes screen
 FIX = {"Amen.": "Hey man,", "Amen,": "Hey man,", "interested,": "interested.", "sorry.": "Sorry."}
 GAP_MAX, KEEP_AFTER, KEEP_BEFORE, LEAD, TAIL = 0.30, 0.10, 0.08, 0.04, 0.14
 out = "build"; os.makedirs(f"{out}/segs", exist_ok=True); os.makedirs(f"{out}/anim", exist_ok=True)
@@ -148,12 +150,24 @@ def anim(scene, a, b, page='ios.html', **cues):
     f = os.path.abspath(f'{out}/anim/{scene}.mp4')
     subprocess.run(['node', 'render2.js', f'{scene}&{q}', f, '60'], cwd='../mockup', env={**os.environ, 'PAGE': page}, check=True, capture_output=True)
     return f
-s1 = F(at('saying', 'IMG_9773') - 0.05); e1 = F(at('homeowner', 'IMG_9773', 'e') + 0.15)   # back to face for 'and use that to pitch'
-strike_c = at('i', 'IMG_9773') - s1; type_c = at('draw', 'IMG_9773') - s1
+s1 = F(at('saying', 'IMG_9774') - 0.05); e1 = F(at('homeowner', 'IMG_9774', 'e') + 0.15)   # back to face for 'and use that to pitch'
+strike_c = at('i', 'IMG_9774') - s1; type_c = at('find', 'IMG_9774') - s1
 done_notes = type_c + 0.95
 assert done_notes + 0.4 <= e1 - s1, f'H6: notes finishes {done_notes:.2f}s, window {e1 - s1:.2f}s'
 print(f'runtime ok: notes done {done_notes:.2f}s, window {e1 - s1:.2f}s, hold {e1 - s1 - done_notes:.2f}s')
 ins = [(anim('notes', s1, e1, strike=strike_c, type=type_c, title='Objections', l1='"I totally get that"', l2='= find common ground'), s1, e1)]
+# door-outcomes breakdown in the SalesMapper app over "one of the most common objections" (bars done 1.6 s, highlight done 2.15 s)
+s0, e0 = sec['IMG_9771']
+assert 2.15 + 0.4 <= e0 - s0, f'H6: outcomes window {e0 - s0:.2f}s'
+ins.insert(0, (anim('outcomes', s0, e0, page='mockup.html'), s0, e0))
+# real app: tap a door, mark it Interested ("get that person on the hook"); scene action done at 6.4 s, sped up to fit
+s3, e3 = F(at('if', 'IMG_9780') - 0.05), sec['IMG_9780'][1]
+K = max(1.0, 6.4 / (e3 - s3 - 0.45)); raw = anim('tap', 0, 8, page='mockup.html', nozoom='1', pick='int')
+tapf = os.path.abspath(f'{out}/anim/tap_fast.mp4')
+subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', raw, '-vf', f'setpts=PTS/{K:.4f}', '-t', f'{e3 - s3:.3f}', '-an', '-c:v', 'libx264', '-crf', '14', '-pix_fmt', 'yuv420p', tapf], check=True)
+assert 6.4 / K + 0.4 <= e3 - s3 + 1e-6, 'H6: tap'
+print(f'runtime ok: outcomes 2.15/{e0 - s0:.2f}s, tap done {6.4 / K:.2f}/{e3 - s3:.2f}s (x{K:.2f})')
+ins.append((tapf, s3, e3))
 json.dump(ins, open(f'{out}/inserts.json', 'w'))
 padded = []
 for k, (f, a, b) in enumerate(ins):
@@ -163,7 +177,7 @@ for k, (f, a, b) in enumerate(ins):
     padded.append(p)
 
 # ---------- 4. labels (H10/H12)
-labels = [('ov/credit.png', *sec['HOOK'])]                                       # credit the original creator on the hook clip
+labels = []   # no credit tag: Nathan adds it himself if needed
 labels.append(('ov/hook.png', sec[HOOK_CARD_ON[0]][0], sec[HOOK_CARD_ON[-1]][1]))
 n = 0
 for c in order:
@@ -174,9 +188,8 @@ for c in order:
     open(f'{out}/lab{n}.html', 'w').write(h)
     subprocess.run(['node', '../template/shot.js', os.path.abspath(f'{out}/lab{n}.html'), os.path.abspath(f'{out}/lab{n}.png')], check=True)
     a_, b_ = sec[c]
-    if c == order[-1]: b_ = F(b_ - 1.6)                                          # last 1.6 s: CTA instead of label
     labels.append((f'{out}/lab{n}.png', a_, b_))
-labels.append(('ov/cta.png', F(sec[order[-1]][1] - 1.6), sec[order[-1]][1]))
+labels.append(('ov/cta.png', *sec['IMG_9781']))                                 # on his spoken 'Follow for more'
 args = ['ffmpeg', '-v', 'error', '-y', '-i', f'{out}/main.mkv'] + sum([['-i', p] for p in padded], []) + sum([['-i', p] for p, _, _ in labels], [])
 fc = ['[0:v]setsar=1[b0]']; last = 'b0'; half = 0.5 / FPS
 for i, (f, a, b) in enumerate(ins, 1):
@@ -196,9 +209,10 @@ fx(sec[HOOK_CARD_ON[0]][0], 'pop', G['pop'])                                    
 on_screen = lambda tt: any(x - 1e-3 <= tt < y - 1e-3 for _, x, y in ins)
 for c in sorted({a for _, a, _ in ins} | {b for _, _, b in ins}):
     if on_screen(c - 0.02) != on_screen(c + 0.02): fx(c - 0.23, 'whoosh', G['whoosh'] * (1.0 if on_screen(c + 0.02) else .75))
-for p, a, b in labels[2:]:
+for p, a, b in labels[1:]:
     if not on_screen(a + 0.02): fx(a + 0.03, 'pop_hi', G['pop_hi'])
 fx(s1 + strike_c, 'strike', G['strike'])
+fx(s3 + 4.35 / K, 'pop', G['pop'])                                               # Interested pin lands
 rng = np.random.default_rng(3)
 for q in range(len('= find common ground')):
     if rng.random() < .15: continue

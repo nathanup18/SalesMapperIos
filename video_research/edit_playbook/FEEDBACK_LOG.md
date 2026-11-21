@@ -119,6 +119,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Wrong: the hook's lo was 0.0, so "Hey" leaked in. Then the fix skipped "We're not interested" entirely, because the screen-recorded voice peaks around +15-19 dB over its floor and the onset gate needed +20, and Whisper had merged "Hey" into "We're" (s=0.0), so the word filter dropped it.
 - Rule: section 3 pipeline. For third-party or screen-recorded audio, check the onset against that clip's own energy curve (use about +6 dB) and correct merged word starts by hand. Re-transcribe the first 4 s of the final and confirm the first word. Inserts end about 0.15 s after the last word they illustrate, with a hold under 2 s, then cut back to the face.
 
+**F30** (not-interested v2). "Remove the fat watermark at the start, I will add it myself if necessary. I want the clip where I say semblance and the follow for more information like this to show up. Make sure that the animations complete. Add more of them. They don't all have to be Apple styled… just non-pure Clauded stuff… other animations that you can find that are clean."
+- Wrong: no credit tag wanted. Two clips (IMG_9780 "semblance of interest", IMG_9781 spoken follow CTA) were never downloaded because only part of the Drive folder was pulled. Too few inserts (one in 25 s).
+- Rule: list and transcribe EVERY new clip in the raw folder before cutting; a closing "follow for more" clip always goes last with the CTA text on it. Don't add credit tags to borrowed clips unless asked. Aim for an insert every 5-8 s, built as real software (SalesMapper app screens: outcomes breakdown, tap-to-mark pin; iOS apps) or clean data viz. Lottie/CDN libraries are blocked by this environment's network, so build scenes in mockup.html / ios.html. Never zoom a UI so far that values crop.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -132,6 +136,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - d2d_spouse_objection_v1_sfx_captions.mp4 and d2d_spouse_objection_v1_sfx_clean.mp4: push-in hook, two-tier headline, 77 subtle synthesized SFX. QA PASS on both, runtime gate PASS.
 
 - d2d_not_interested_captions.mp4 and d2d_not_interested_clean.mp4 ("We're not interested" objection, stitched hook from @claytonnelson_ with a credit tag). Shipped 2026-11-21, 24.7 s, QA PASS on both, runtime gate PASS (Notes hold 1.5 s). Edit script: content_kit/edits/not_interested/make_edit5.py.
+- d2d_not_interested v2 (captions + clean): 30.5 s, adds IMG_9774 (clean take), IMG_9780, IMG_9781; inserts: app door-outcomes, iOS Notes, app tap→Interested; no credit tag. QA PASS both, runtime gate PASS.
 
 ## Performance
 (Log 48 h stats per posted video here.)

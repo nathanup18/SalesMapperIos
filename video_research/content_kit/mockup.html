@@ -213,7 +213,7 @@ if (SCENE === 'tap') {
   const halo = el('div', 'halo'), dot = el('div', 'dot'); const dx = hx + 6, dy = hy + 30;
   [halo, dot].forEach(d => { d.style.left = dx + 'px'; d.style.top = dy + 'px'; layer.appendChild(d); });
   const rip = el('div', 'ripple'); layer.appendChild(rip);
-  const blue = addPin('add', hx, hy, 1.0); const green = addPin('sale', hx, hy, 99);
+  const PICK = P.get('pick') || 'sale'; const blue = addPin('add', hx, hy, 1.0); const green = addPin(PICK, hx, hy, 99);
   blue.p.style.width = green.p.style.width = '40px'; blue.p.style.height = green.p.style.height = '52px';
   blue.p.style.marginLeft = green.p.style.marginLeft = '-20px'; blue.p.style.marginTop = green.p.style.marginTop = '-52px';
   const glow = el('div', 'glow'); layer.appendChild(glow);
@@ -221,9 +221,9 @@ if (SCENE === 'tap') {
   sheet.innerHTML = `<div class="grab"></div><div class="sh-head"><span style="color:var(--ink2)">Cancel</span><b>New marker</b><span style="width:44px"></span></div>
    <div class="addr"><div class="a">26 Essex St</div><div class="c">42.99502, -81.26784</div></div><div class="hint">Tap the map to move the blue pin.</div>
    <div class="sec">WHAT HAPPENED HERE?</div><div class="list">
-   <div class="row" id="rsale">${icRow('sale')}Sale<span class="k">Knock</span></div>
-   <div class="row">${icRow('no')}Not Interested<span class="k">Knock</span></div>
-   <div class="row">${icRow('int')}Interested<span class="k">Knock</span></div>
+   <div class="row" ${PICK==='sale'?'id="rsale"':''}>${icRow('sale')}Sale<span class="k">Knock</span></div>
+   <div class="row" ${PICK==='no'?'id="rsale"':''}>${icRow('no')}Not Interested<span class="k">Knock</span></div>
+   <div class="row" ${PICK==='int'?'id="rsale"':''}>${icRow('int')}Interested<span class="k">Knock</span></div>
    <div class="row">${icRow('lead')}Lead<span class="k"></span></div>
    <div class="row">${icRow('home')}Not Home<span class="k">Knock</span></div></div>`;
   screen.appendChild(sheet);
@@ -291,6 +291,36 @@ if (SCENE === 'stats') {
     bars.forEach(([b, v], i) => { const h = v / 40 * 110 * spring(prog(t, 3.6 + i * .035, 4.6 + i * .035)); b.style.height = Math.max(0, h).toFixed(2) + 'px'; });
     const o = keyframes(t, [[0, { x: 180, y: 300, z: 1.0 }], [0.2, { x: 180, y: 300, z: 1.0 }], [1.6, { x: 126, y: 250, z: 1.45 }], [2.9, { x: 129, y: 252, z: 1.5 }],
       [4.0, { x: 172, y: 352, z: 1.1 }], [7, { x: 174, y: 358, z: 1.14 }]]);
+    setOuter(o.x, o.y, o.z);
+  };
+}
+
+if (SCENE === 'outcomes') {
+  DURATION = parseFloat(P.get('dur') || 3);
+  const s = el('div'); s.id = 'stats'; screen.appendChild(s);
+  s.appendChild(el('div', 'status', `<div class="time">9:41</div><div class="island"></div>`));
+  s.appendChild(el('div', 'nav', `<span class="back"><svg width="10" height="17" viewBox="0 0 10 17"><path d="M8.5 1.5L2 8.5l6.5 7" fill="none" stroke="#1C1C1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Settings</span>Sales Summary`));
+  s.appendChild(el('div', 'seg', `<div>Today</div><div>Week</div><div class="on">Month</div><div>Custom</div>`));
+  s.appendChild(el('div', '', `<div style="position:absolute;left:16px;top:144px;font-weight:600;font-size:15px;color:var(--ink2)">Door outcomes</div>`));
+  const c = el('div', 'card'); c.style.cssText += 'top:172px;height:300px'; s.appendChild(c);
+  const rows = [['no', 'Not Interested', 46], ['home', 'Not Home', 31], ['int', 'Interested', 11], ['sale', 'Sale', 8], ['lead', 'Lead', 4]];
+  const R = rows.map(([k, name, v], i) => {
+    const r = el('div'); r.style.cssText = `position:absolute;left:14px;right:14px;top:${18 + i * 56}px;height:44px;border-radius:10px`;
+    r.innerHTML = `<div style="position:absolute;left:8px;top:2px;display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600">${icRow(k)}<span>${name}</span></div>
+      <div class="pc" style="position:absolute;right:8px;top:4px;font-size:15px;font-weight:700;font-variant-numeric:tabular-nums">0%</div>
+      <div style="position:absolute;left:8px;right:8px;top:32px;height:6px;border-radius:3px;background:#ECE9E1"><div class="fl" style="height:6px;border-radius:3px;width:0;background:${COL[k]}"></div></div>`;
+    c.appendChild(r); return [r, v, i];
+  });
+  s.appendChild(el('div', 'home'));
+  render = t => {
+    for (const [r, v, i] of R) {
+      const a = easeOut(prog(t, .25 + i * .12, 1.15 + i * .12));
+      r.querySelector('.fl').style.width = (v / 46 * 100 * a).toFixed(2) + '%';
+      r.querySelector('.pc').textContent = Math.round(v * a) + '%';
+      if (i === 0) { const h = prog(t, 1.75, 2.15); r.style.background = `rgba(255,59,48,${(.12 * ease(h)).toFixed(3)})`; r.style.transform = `scale(${(1 + .03 * Math.sin(Math.PI * h)).toFixed(4)})`; }
+      else r.style.opacity = (1 - .45 * ease(prog(t, 1.75, 2.15))).toFixed(3);
+    }
+    const o = keyframes(t, [[0, { x: 180, y: 320, z: 1.0 }], [9, { x: 180, y: 320, z: 1.0 }]]);
     setOuter(o.x, o.y, o.z);
   };
 }
