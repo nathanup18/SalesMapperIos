@@ -50,8 +50,10 @@ floor = np.percentile(db, 5)
 for s in TL:
     t0 = s["out0"]; i0 = int(t0 * 100)
     seg = db[i0:i0 + 100]
-    thr = floor + 15  # low enough to count fricatives (s, f, h) as speech, above room tone
-    hit = np.argmax(seg > thr) if (seg > thr).any() else None
+    thr = floor + 12  # counts fricatives and plosive bursts (s, f, h, k, t) as speech
+    on = seg > thr
+    run = np.array([on[i:i + 3].all() for i in range(max(0, len(on) - 2))])  # >=30 ms of continuous energy, not a click
+    hit = int(np.argmax(run)) if run.any() else None
     gap = None if hit is None else hit / 100
     first_of_clip = s is TL[0] or TL[TL.index(s) - 1]["clip"] != s["clip"]
     label = "frame 0" if t0 < 0.01 else (f"clip start @{t0:.2f}s" if first_of_clip else f"inner cut @{t0:.2f}s")

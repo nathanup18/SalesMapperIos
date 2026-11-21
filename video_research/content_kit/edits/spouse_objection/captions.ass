@@ -1,0 +1,100 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Caption,Nunito Sans Black,96,&H00FFFFFF,&H00FFFFFF,&H001A1C1C,&H78000000,0,0,0,0,100,100,0,0,1,10,4,5,60,60,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:00.19,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}HERE'S{\c&HFFFFFF&} HOW
+Dialogue: 0,0:00:00.19,0:00:00.29,Caption,,0,0,0,,{\an5\pos(540,1640)}HERE'S {\c&H59C734&}HOW{\c&HFFFFFF&}
+Dialogue: 0,0:00:00.29,0:00:00.37,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}TO{\c&HFFFFFF&} HANDLE
+Dialogue: 0,0:00:00.31,0:00:00.53,Caption,,0,0,0,,{\an5\pos(540,1640)}TO {\c&H59C734&}HANDLE{\c&HFFFFFF&}
+Dialogue: 0,0:00:00.53,0:00:00.69,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}THE{\c&HFFFFFF&} I
+Dialogue: 0,0:00:00.69,0:00:00.85,Caption,,0,0,0,,{\an5\pos(540,1640)}THE {\c&H59C734&}I{\c&HFFFFFF&}
+Dialogue: 0,0:00:00.85,0:00:00.97,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}NEED{\c&HFFFFFF&} TO
+Dialogue: 0,0:00:00.97,0:00:01.11,Caption,,0,0,0,,{\an5\pos(540,1640)}NEED {\c&H59C734&}TO{\c&HFFFFFF&}
+Dialogue: 0,0:00:01.11,0:00:01.33,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}TALK{\c&HFFFFFF&} TO
+Dialogue: 0,0:00:01.33,0:00:01.47,Caption,,0,0,0,,{\an5\pos(540,1640)}TALK {\c&H59C734&}TO{\c&HFFFFFF&}
+Dialogue: 0,0:00:01.47,0:00:01.59,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}MY{\c&HFFFFFF&} SPOUSE
+Dialogue: 0,0:00:01.59,0:00:01.97,Caption,,0,0,0,,{\an5\pos(540,1640)}MY {\c&H59C734&}SPOUSE{\c&HFFFFFF&}
+Dialogue: 0,0:00:01.97,0:00:02.83,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}OBJECTION.{\c&HFFFFFF&}
+Dialogue: 0,0:00:02.83,0:00:03.00,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}9{\c&HFFFFFF&} TIMES
+Dialogue: 0,0:00:03.00,0:00:03.24,Caption,,0,0,0,,{\an5\pos(540,1640)}9 {\c&H59C734&}TIMES{\c&HFFFFFF&}
+Dialogue: 0,0:00:03.24,0:00:03.36,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}OUT{\c&HFFFFFF&} OF
+Dialogue: 0,0:00:03.36,0:00:03.44,Caption,,0,0,0,,{\an5\pos(540,1640)}OUT {\c&H59C734&}OF{\c&HFFFFFF&}
+Dialogue: 0,0:00:03.44,0:00:03.70,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}10,{\c&HFFFFFF&}
+Dialogue: 0,0:00:03.70,0:00:03.80,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}IT'S{\c&HFFFFFF&} NOT
+Dialogue: 0,0:00:03.80,0:00:04.00,Caption,,0,0,0,,{\an5\pos(540,1640)}IT'S {\c&H59C734&}NOT{\c&HFFFFFF&}
+Dialogue: 0,0:00:04.00,0:00:04.18,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}THE{\c&HFFFFFF&} SPOUSE.
+Dialogue: 0,0:00:04.18,0:00:04.64,Caption,,0,0,0,,{\an5\pos(540,1640)}THE {\c&H59C734&}SPOUSE.{\c&HFFFFFF&}
+Dialogue: 0,0:00:04.64,0:00:04.72,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}THEY{\c&HFFFFFF&} JUST
+Dialogue: 0,0:00:04.72,0:00:04.86,Caption,,0,0,0,,{\an5\pos(540,1640)}THEY {\c&H59C734&}JUST{\c&HFFFFFF&}
+Dialogue: 0,0:00:04.86,0:00:05.14,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}DON'T{\c&HFFFFFF&} HAVE
+Dialogue: 0,0:00:05.14,0:00:05.28,Caption,,0,0,0,,{\an5\pos(540,1640)}DON'T {\c&H59C734&}HAVE{\c&HFFFFFF&}
+Dialogue: 0,0:00:05.28,0:00:05.40,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}A{\c&HFFFFFF&} REASON
+Dialogue: 0,0:00:05.40,0:00:05.60,Caption,,0,0,0,,{\an5\pos(540,1640)}A {\c&H59C734&}REASON{\c&HFFFFFF&}
+Dialogue: 0,0:00:05.60,0:00:05.78,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}TO{\c&HFFFFFF&} SAY
+Dialogue: 0,0:00:05.78,0:00:05.92,Caption,,0,0,0,,{\an5\pos(540,1640)}TO {\c&H59C734&}SAY{\c&HFFFFFF&}
+Dialogue: 0,0:00:05.92,0:00:06.18,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}YES{\c&HFFFFFF&} YET.
+Dialogue: 0,0:00:06.18,0:00:06.60,Caption,,0,0,0,,{\an5\pos(540,1640)}YES {\c&H59C734&}YET.{\c&HFFFFFF&}
+Dialogue: 0,0:00:06.60,0:00:06.89,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}THAT'S{\c&HFFFFFF&} WHY
+Dialogue: 0,0:00:06.89,0:00:06.99,Caption,,0,0,0,,{\an5\pos(540,1640)}THAT'S {\c&H59C734&}WHY{\c&HFFFFFF&}
+Dialogue: 0,0:00:06.99,0:00:07.13,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}THE{\c&HFFFFFF&} NEXT
+Dialogue: 0,0:00:07.13,0:00:07.35,Caption,,0,0,0,,{\an5\pos(540,1640)}THE {\c&H59C734&}NEXT{\c&HFFFFFF&}
+Dialogue: 0,0:00:07.35,0:00:07.61,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}THING{\c&HFFFFFF&} YOU
+Dialogue: 0,0:00:07.61,0:00:07.77,Caption,,0,0,0,,{\an5\pos(540,1640)}THING {\c&H59C734&}YOU{\c&HFFFFFF&}
+Dialogue: 0,0:00:07.77,0:00:07.91,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}SHOULD{\c&HFFFFFF&} ASK
+Dialogue: 0,0:00:07.91,0:00:08.21,Caption,,0,0,0,,{\an5\pos(540,1640)}SHOULD {\c&H59C734&}ASK{\c&HFFFFFF&}
+Dialogue: 0,0:00:08.21,0:00:08.92,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}IS,{\c&HFFFFFF&}
+Dialogue: 0,0:00:08.93,0:00:09.07,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}IF{\c&HFFFFFF&} IT
+Dialogue: 0,0:00:09.07,0:00:09.21,Caption,,0,0,0,,{\an5\pos(540,1640)}IF {\c&H59C734&}IT{\c&HFFFFFF&}
+Dialogue: 0,0:00:09.21,0:00:09.31,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}WERE{\c&HFFFFFF&} JUST
+Dialogue: 0,0:00:09.31,0:00:09.59,Caption,,0,0,0,,{\an5\pos(540,1640)}WERE {\c&H59C734&}JUST{\c&HFFFFFF&}
+Dialogue: 0,0:00:09.59,0:00:09.81,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}UP{\c&HFFFFFF&} TO
+Dialogue: 0,0:00:09.81,0:00:09.99,Caption,,0,0,0,,{\an5\pos(540,1640)}UP {\c&H59C734&}TO{\c&HFFFFFF&}
+Dialogue: 0,0:00:09.99,0:00:10.62,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}YOU,{\c&HFFFFFF&}
+Dialogue: 0,0:00:10.68,0:00:10.80,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}YOU{\c&HFFFFFF&} DO
+Dialogue: 0,0:00:10.80,0:00:10.96,Caption,,0,0,0,,{\an5\pos(540,1640)}YOU {\c&H59C734&}DO{\c&HFFFFFF&}
+Dialogue: 0,0:00:10.96,0:00:11.23,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}IT?{\c&HFFFFFF&}
+Dialogue: 0,0:00:11.23,0:00:11.38,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}IF{\c&HFFFFFF&} THEY
+Dialogue: 0,0:00:11.38,0:00:11.52,Caption,,0,0,0,,{\an5\pos(540,1640)}IF {\c&H59C734&}THEY{\c&HFFFFFF&}
+Dialogue: 0,0:00:11.52,0:00:11.68,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}SAY{\c&HFFFFFF&} YES,
+Dialogue: 0,0:00:11.68,0:00:12.02,Caption,,0,0,0,,{\an5\pos(540,1640)}SAY {\c&H59C734&}YES,{\c&HFFFFFF&}
+Dialogue: 0,0:00:12.02,0:00:12.10,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}THEN{\c&HFFFFFF&} GET
+Dialogue: 0,0:00:12.08,0:00:12.22,Caption,,0,0,0,,{\an5\pos(540,1640)}THEN {\c&H59C734&}GET{\c&HFFFFFF&}
+Dialogue: 0,0:00:12.22,0:00:12.34,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}THE{\c&HFFFFFF&} SPOUSE
+Dialogue: 0,0:00:12.34,0:00:12.62,Caption,,0,0,0,,{\an5\pos(540,1640)}THE {\c&H59C734&}SPOUSE{\c&HFFFFFF&}
+Dialogue: 0,0:00:12.62,0:00:13.10,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}OUTSIDE{\c&HFFFFFF&} AND
+Dialogue: 0,0:00:13.10,0:00:13.30,Caption,,0,0,0,,{\an5\pos(540,1640)}OUTSIDE {\c&H59C734&}AND{\c&HFFFFFF&}
+Dialogue: 0,0:00:13.30,0:00:13.54,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}CLOSE{\c&HFFFFFF&} THAT
+Dialogue: 0,0:00:13.54,0:00:13.80,Caption,,0,0,0,,{\an5\pos(540,1640)}CLOSE {\c&H59C734&}THAT{\c&HFFFFFF&}
+Dialogue: 0,0:00:13.80,0:00:14.04,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}DEAL{\c&HFFFFFF&} NOW.
+Dialogue: 0,0:00:14.04,0:00:14.67,Caption,,0,0,0,,{\an5\pos(540,1640)}DEAL {\c&H59C734&}NOW.{\c&HFFFFFF&}
+Dialogue: 0,0:00:14.70,0:00:14.78,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}IF{\c&HFFFFFF&} THEY
+Dialogue: 0,0:00:14.78,0:00:14.90,Caption,,0,0,0,,{\an5\pos(540,1640)}IF {\c&H59C734&}THEY{\c&HFFFFFF&}
+Dialogue: 0,0:00:14.90,0:00:15.06,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}SAY{\c&HFFFFFF&} NO,
+Dialogue: 0,0:00:15.06,0:00:15.46,Caption,,0,0,0,,{\an5\pos(540,1640)}SAY {\c&H59C734&}NO,{\c&HFFFFFF&}
+Dialogue: 0,0:00:15.46,0:00:15.64,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}THEN{\c&HFFFFFF&} YOU
+Dialogue: 0,0:00:15.64,0:00:15.72,Caption,,0,0,0,,{\an5\pos(540,1640)}THEN {\c&H59C734&}YOU{\c&HFFFFFF&}
+Dialogue: 0,0:00:15.72,0:00:15.86,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}GET{\c&HFFFFFF&} TO
+Dialogue: 0,0:00:15.86,0:00:15.94,Caption,,0,0,0,,{\an5\pos(540,1640)}GET {\c&H59C734&}TO{\c&HFFFFFF&}
+Dialogue: 0,0:00:15.94,0:00:16.20,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}FIGURE{\c&HFFFFFF&} OUT
+Dialogue: 0,0:00:16.20,0:00:16.32,Caption,,0,0,0,,{\an5\pos(540,1640)}FIGURE {\c&H59C734&}OUT{\c&HFFFFFF&}
+Dialogue: 0,0:00:16.32,0:00:16.44,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}WHAT{\c&HFFFFFF&} THE
+Dialogue: 0,0:00:16.44,0:00:16.54,Caption,,0,0,0,,{\an5\pos(540,1640)}WHAT {\c&H59C734&}THE{\c&HFFFFFF&}
+Dialogue: 0,0:00:16.54,0:00:16.72,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}REAL{\c&HFFFFFF&} OBJECTION
+Dialogue: 0,0:00:16.72,0:00:17.06,Caption,,0,0,0,,{\an5\pos(540,1640)}REAL {\c&H59C734&}OBJECTION{\c&HFFFFFF&}
+Dialogue: 0,0:00:17.06,0:00:17.60,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}IS.{\c&HFFFFFF&}
+Dialogue: 0,0:00:17.60,0:00:17.81,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}CLOSE{\c&HFFFFFF&} THOSE
+Dialogue: 0,0:00:17.81,0:00:18.01,Caption,,0,0,0,,{\an5\pos(540,1640)}CLOSE {\c&H59C734&}THOSE{\c&HFFFFFF&}
+Dialogue: 0,0:00:18.01,0:00:18.29,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}DEALS{\c&HFFFFFF&} AND
+Dialogue: 0,0:00:18.29,0:00:18.47,Caption,,0,0,0,,{\an5\pos(540,1640)}DEALS {\c&H59C734&}AND{\c&HFFFFFF&}
+Dialogue: 0,0:00:18.47,0:00:18.71,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}FOLLOW{\c&HFFFFFF&} FOR
+Dialogue: 0,0:00:18.71,0:00:18.87,Caption,,0,0,0,,{\an5\pos(540,1640)}FOLLOW {\c&H59C734&}FOR{\c&HFFFFFF&}
+Dialogue: 0,0:00:18.87,0:00:19.35,Caption,,0,0,0,,{\an5\pos(540,1640)}{\c&H59C734&}MORE.{\c&HFFFFFF&}

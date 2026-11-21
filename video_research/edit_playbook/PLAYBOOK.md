@@ -94,6 +94,11 @@ Full data: video_research/summary.md and comparison_table.md.
   - `referrals`: a loop between a coffee shop, an auto shop and "Your team", with arrowheads and moving dots (2.25 s)
   - `giftcard`: a $1,000 local gift card bundle that flies in, counts up and fans into more cards, with business tags
   - `reciprocity`: a You → Homeowner loop, "Value" out and "Trust + the sale" back
+  - `notspouse`: the objection bubble gets struck through, then "No reason to say yes… yet" appears with an empty "reason to buy" meter
+  - `theline`: chat bubbles, the homeowner's objection then your line in green (`say=` cue)
+  - `branch`: a YES/NO tree whose steps land on spoken cues (`get=`, `close=`, `no=`, `fig=`)
+- Cue-timed inserts: pass word times from the cut output as URL params (`scene&dur=…&cue=…`). The animation then matches his speech wherever the cuts land.
+- The kicker line must not repeat the section label. It adds information (for example, label "Ask this" with kicker "THE LINE").
 - **Timing:** start 0.05 s before the key word and end 0.1 s after the phrase. If the insert opens a section, it starts on the cut (H5).
 - **Look:** background #F7F4EC, Nunito Sans, ink #1C1C1A, pin colors (green = win, orange = re-knock, indigo = not home, red = no), and a small uppercase kicker line at about y=450 px. Animations use spring or ease curves driven by one clock.
 - **Layout:** keep content between y≈420 and y≈1540 px. The section label sits above that band and captions below it.

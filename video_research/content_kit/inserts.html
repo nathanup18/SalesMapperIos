@@ -129,5 +129,50 @@ if(SCENE==='reciprocity'){ DURATION=2.9;
     const g=prog(t,2.2,2.9); you.style.boxShadow=`0 0 0 ${lerp(0,22,easeOut(g))}px rgba(52,199,89,${.35*(1-g)}), 0 8px 20px rgba(28,28,26,.18)`;
   };
 }
+
+const Q=new URLSearchParams(location.search); const qn=(k,d)=>Q.has(k)?parseFloat(Q.get(k)):d;
+if(SCENE==='notspouse'){ DURATION=qn('dur',2.6);
+  el('<div class="kicker" style="top:150px">What they really mean</div>');
+  const b=el(`<div class="bubble" style="top:200px;padding-left:18px;font-size:20px;background:#ECE9E2;box-shadow:none">“I need to <span id="st" style="position:relative">talk to my spouse<span id="ln" style="position:absolute;left:0;top:52%;height:4px;background:#FF3B30;border-radius:2px;width:0"></span></span>.”</div>`);
+  const card=el(`<div class="bubble" style="top:300px;padding:20px 18px;text-align:center;font-size:26px;font-weight:900;line-height:1.15">No reason to say <span style="color:#34C759">yes</span>… yet</div>`);
+  const meter=el(`<div class="abs" style="left:40px;right:40px;top:418px"><div style="font-weight:800;font-size:13px;color:var(--ink3);letter-spacing:1.2px;margin-bottom:8px">REASON TO BUY</div><div style="height:16px;border-radius:8px;background:#E3DED3;overflow:hidden"><div id="fill" style="height:100%;width:0;background:#34C759;border-radius:8px"></div></div></div>`);
+  const ln=b.querySelector('#ln'), fill=meter.querySelector('#fill');
+  render=t=>{
+    const a=prog(t,0,.35); b.style.opacity=clamp(a*3); b.style.transform=`translateY(${(1-spring(a))*24}px)`;
+    ln.style.width=(100*ease(prog(t,.35,.75)))+'%';
+    const c=prog(t,.75,1.2); card.style.opacity=clamp(c*3); card.style.transform=`scale(${lerp(.8,1,spring(c))})`;
+    const m=prog(t,1.1,1.4); meter.style.opacity=clamp(m*3);
+    fill.style.width=(8*Math.sin(Math.PI*clamp(prog(t,1.4,2.0))))+'%';
+  };
+}
+if(SCENE==='theline'){ DURATION=qn('dur',2.4); const say=qn('say',0.05);
+  el('<div class="kicker" style="top:150px">The line</div>');
+  const h=el(`<div class="abs" style="left:24px;top:196px;max-width:250px;background:#ECE9E2;border-radius:20px 20px 20px 6px;padding:14px 18px;font-weight:700;font-size:18px">I need to talk to my spouse.<div style="font-size:11px;color:var(--ink3);margin-top:4px;font-weight:800;letter-spacing:1px">HOMEOWNER</div></div>`);
+  const y=el(`<div class="abs" style="right:24px;top:296px;max-width:270px;background:#34C759;color:#fff;border-radius:20px 20px 6px 20px;padding:16px 18px;font-weight:900;font-size:23px;line-height:1.2;box-shadow:0 10px 24px rgba(52,199,89,.35)">If it were just up to you, would you do it?<div style="font-size:11px;opacity:.85;margin-top:6px;font-weight:800;letter-spacing:1px">YOU</div></div>`);
+  render=t=>{
+    const a=prog(t,0,.3); h.style.opacity=clamp(a*3); h.style.transform=`translateY(${(1-spring(a))*18}px)`;
+    const b=prog(t,say,say+.45); y.style.opacity=clamp(b*3); y.style.transform=`translateY(${(1-spring(b))*26}px) scale(${lerp(.85,1,spring(b))})`;
+  };
+}
+if(SCENE==='branch'){ DURATION=qn('dur',6); const tGet=qn('get',1.1), tClose=qn('close',2.3), tNo=qn('no',3.7), tFig=qn('fig',4.9);
+  el('<div class="kicker" style="top:150px">Two ways it goes</div>');
+  const q=el('<div class="pill" style="top:184px;background:#fff;color:#1C1C1A;border:1px solid var(--border);font-size:15px;padding:9px 16px">“If it were just up to you…”</div>');
+  const svg=el('<svg class="abs" style="left:0;top:0" width="360" height="640" viewBox="0 0 360 640"><path id="pl" d="M180 230 C180 262 95 262 95 292" fill="none" stroke="#34C759" stroke-width="5" stroke-linecap="round"/><path id="pr" d="M180 230 C180 262 265 262 265 292" fill="none" stroke="#FF9500" stroke-width="5" stroke-linecap="round"/></svg>');
+  const yes=el('<div class="abs" style="left:40px;top:296px;width:110px;text-align:center;background:#34C759;color:#fff;border-radius:16px;padding:9px 0;font-weight:900;font-size:20px">YES</div>');
+  const no=el('<div class="abs" style="right:40px;top:296px;width:110px;text-align:center;background:#FF9500;color:#fff;border-radius:16px;padding:9px 0;font-weight:900;font-size:20px">NO</div>');
+  const g1=el('<div class="abs" style="left:16px;top:352px;width:158px;background:#fff;border-radius:14px;padding:10px 12px;font-weight:800;font-size:14.5px;line-height:1.2;box-shadow:0 4px 12px rgba(0,0,0,.08)">Get the spouse outside</div>');
+  const g2=el(`<div class="abs" style="left:16px;top:416px;width:158px;background:#1C1C1A;color:#fff;border-radius:14px;padding:10px 12px;font-weight:900;font-size:15px;display:flex;align-items:center;gap:8px"><span style="width:22px;height:22px;border-radius:50%;background:#34C759;display:flex;align-items:center;justify-content:center">${CHECK}</span>Close it now</div>`);
+  const n1=el(`<div class="abs" style="right:16px;top:352px;width:158px;background:#fff;border-radius:14px;padding:10px 12px;font-weight:800;font-size:14.5px;line-height:1.2;box-shadow:0 4px 12px rgba(0,0,0,.08);display:flex;gap:8px;align-items:center"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="9" cy="9" r="6" fill="none" stroke="#FF9500" stroke-width="2.6"/><path d="M13.5 13.5L19 19" stroke="#FF9500" stroke-width="2.8" stroke-linecap="round"/></svg>Find the real objection</div>`);
+  const P=['#pl','#pr'].map(id=>{const p=svg.querySelector(id),L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;return [p,L]});
+  const pop=(e,a,base='')=>{e.style.opacity=clamp(a*3); e.style.transform=`${base} translateY(${(1-spring(a))*16}px) scale(${lerp(.85,1,spring(a))})`;};
+  render=t=>{
+    pop(q,prog(t,0,.35),'translateX(-50%)');
+    P[0][0].style.strokeDashoffset=P[0][1]*(1-ease(prog(t,.15,.55))); pop(yes,prog(t,.4,.8));
+    pop(g1,prog(t,tGet,tGet+.4)); pop(g2,prog(t,tClose,tClose+.4));
+    const nd=nd2=>nd2; P[1][0].style.strokeDashoffset=P[1][1]*(1-ease(prog(t,tNo,tNo+.4))); pop(no,prog(t,tNo+.25,tNo+.65));
+    pop(n1,prog(t,tFig,tFig+.4));
+    const yd=clamp((t-tNo+.2)*3); [yes,g1,g2].forEach(e=>e.style.filter=`saturate(${1-.0*yd})`);
+  };
+}
 window.DURATION=DURATION; window.renderAt=t=>render(t); render(0);
 </script></body></html>
