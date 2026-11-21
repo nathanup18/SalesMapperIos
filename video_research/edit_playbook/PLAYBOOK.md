@@ -1,6 +1,6 @@
 # Short-form video edit playbook (living)
 
-Version: 5 (2026-11-21)
+Version: 6 (2026-11-21)
 Owner: Nathan. This file is the source of truth for the `short-form-video-edit` skill. The skill loads it at the start of every run and updates it whenever Nathan gives feedback (see "Learning protocol" at the bottom). Never treat it as frozen.
 
 Rule priority, highest first:
@@ -54,14 +54,21 @@ H8. Post caption: lead with the most concrete story and its outcome, and end wit
 - The goal is followers. The first line is the strongest concrete moment (for example, "We handed every homeowner $1,000 in local gift cards before we pitched."). The next line is what happened after (the outcome). The last line is "Follow for more D2D tips".
 - Don't just list all the tips in the caption.
 
+H9. Don't touch contrast. [F18]
+- No eq or contrast, saturation or gamma grade. Only convert HDR (HLG/bt2020) to SDR bt709 color space: `zscale=tin=bt709:t=bt709:min=bt2020nc:m=bt709:pin=bt2020:p=bt709:rin=tv:r=tv,format=yuv420p`.
+
+H10. The hook headline is big and black. [F19]
+- White card, black (#000) text in Nunito Sans Black, no colored words. It fills up to the top third: box top at y≥180 (below the TikTok/Reels top bar), bottom at y≤640, side margins ≥60 px (box width about 960 px), text about 110-125 px, 2-3 lines.
+- It should jolt the viewer. Size up rather than down, but never past the margins or the top third.
+
 ---
 
 ## 2. Nathan's preferences (soft, but default to these)
 - **Captions:** word-by-word, 2 words per chunk, uppercase Nunito Sans Black 96 px, white with a dark outline, active word green #34C759.
 - **Section labels:** a white rounded pill at the top (y≈250), with a green number circle and 3-5 words.
-- **Hook text:** in the same pill style, 6-8 words, with one word highlighted green. It sits over his face, at the top.
+- **Hook text:** see H10 (big, black, top third). 6-8 words.
 - **Jump cuts:** alternate 100% and 112% punch-ins on every cut inside a take.
-- **Color:** iPhone footage is HLG HDR. Convert it with `zscale=tin=bt709:t=bt709:min=bt2020nc:m=bt709:pin=bt2020:p=bt709` plus `eq=contrast=1.06:saturation=1.04:gamma=0.97`. Don't use hable or mobius tonemapping; they push skin red.
+- **Color:** iPhone footage is HLG HDR. Use only the color-space conversion in H9. No contrast grade. Don't use hable or mobius tonemapping; they push skin red.
 - **Audio:** highpass at 70 Hz, loudnorm to I=-14, TP=-1.5. Use a 10-15 ms fade at every cut.
 - **Music:** never bake music into the file. Nathan adds a trending sound in the TikTok or Instagram app at 5-10% volume, instrumental, without lyrics.
 - **Ending:** his spoken CTA plus a text pill ("Follow for more D2D tips"). No outro card, no logo sting.
@@ -130,6 +137,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v6 (2026-11-21): H9 no contrast grade (F18). H10 big black hook headline filling the top third (F19).
 - v5 (2026-11-21): QA gate automated (dead air, black frames, flashes, caption-chin, completion). Fixed A/V drift from AAC segment concat (PCM segments). Inserts are full-timeline pre-renders with first-frame padding. Frame 0 hand fix. Added make_edit.py.
 - v4 (2026-11-21): moved to the living playbook on GitHub. Backfilled 13 feedback items from the first editing session. Added the hard rules, QA gate and learning protocol.
 - v3 (2026-11-21): face-first hooks, captions below the chin, custom animated inserts.

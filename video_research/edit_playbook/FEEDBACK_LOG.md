@@ -66,6 +66,14 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 **F17** (found by visual QA review). Frame 0 showed his hand in front of the lens for 4 frames.
 - Rule: H1, hold the first clean frame over the hand and keep the audio.
 
+**F18** (FINAL versions). "Both versions, but with the contrast not changed on the video."
+- Wrong: the grade added contrast 1.06, saturation 1.04 and gamma 0.97.
+- Rule: H9. No contrast, saturation or gamma changes. Only the HDR→SDR color-space conversion, which is needed so HLG footage doesn't look washed out.
+
+**F19** (FINAL versions). "The initial text banner… the headline needs to be larger, cover more of the screen, and have black font so that it actually shows up and jars the user… almost covering the top third of the screen… as long as it fits the margins."
+- Wrong: the hook pill was 70 px text in an 880 px box, roughly the top 13% of the screen, with one green word.
+- Rule: H10. The hook headline is big: black text on white, filling up to the top third (bottom edge ≤ y 640) inside 60 px side margins, starting below the platform's top UI (y ≥ 180).
+
 **Process notes (session 1)**
 - Nathan doesn't want to wait on long batch jobs. Ship the first pass fast, then refine. Use the faster Whisper model if transcription is the bottleneck.
 - He iterates in small, specific notes. Apply each one exactly, re-check the whole video for side effects, and say what else changed.
