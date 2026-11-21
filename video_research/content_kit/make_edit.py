@@ -8,7 +8,7 @@ import numpy as np
 V = sys.argv[1]
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
 W = json.load(open('words.json'))
-GRADE = "zscale=tin=bt709:t=bt709:min=bt2020nc:m=bt709:pin=bt2020:p=bt709:rin=tv:r=tv,format=yuv420p,eq=contrast=1.06:saturation=1.04:gamma=0.97"
+GRADE = "zscale=tin=bt709:t=bt709:min=bt2020nc:m=bt709:pin=bt2020:p=bt709:rin=tv:r=tv,format=yuv420p"  # H9: no contrast grade
 FPS = 30; F = lambda x: round(x * FPS) / FPS
 CAP_Y = 1640
 # clip -> (source start override, section label)
@@ -134,7 +134,7 @@ for f, a, b in ins:
     a, b = F(a), F(b)
     near = [s for s in starts if -0.5 < a - s < 0.5]          # opens a section -> start on the cut (no face flash)
     if near: a = near[0]
-    tail = [e for e in ends if 0 <= e - b < 0.5]             # ends within 0.5 s of section end -> run to the cut
+    tail = [e for e in ends if abs(e - b) < 0.5]             # ends within 0.5 s of a section end (either side) -> end exactly on the cut
     if tail: b = tail[0]
     try: anim = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]))
     except Exception: anim = 0
