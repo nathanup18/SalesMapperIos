@@ -1,0 +1,79 @@
+# Feedback log
+
+Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, what Nathan said, what was wrong, and the rule it produced (PLAYBOOK section). The weekly consolidation agent adds a "Consolidated" note when it merges entries.
+
+## Session 1: "3 ways to double your close rate" (2026-11-21)
+
+**F1** (v1). "Take care to order the clips properly, cutting deadspace as close as possible."
+- Wrong: nothing yet. This set the bar.
+- Rule: H1. Tight cuts; Nathan's preference overrides the research's "leave 0.5-0.9 s beats".
+
+**F2** (v1). "The caption shouldn't be on my mouth. It looks bad. Put them under my mouth."
+- Wrong: captions were centered at y=1344 (70% down), which landed over his mouth on punched-in shots.
+- Rule: H2. Measure the face per shot and place captions below the chin (y≈1610).
+
+**F3** (v1). "At the start, I want just my face. I don't want the cutaway immediately… I don't want the software over you."
+- Wrong: v1 opened on 0.7 s of the app map (following the research rule "open without a face").
+- Rule: H3. Talking-head hooks are face-only. Nathan's preference beats the research.
+
+**F4** (v1). "Create custom animated designs that show what we're trying to demonstrate. Like a gift card… represent points of the video where we don't have B-roll… keep cutting back and forth."
+- Wrong: v1 had almost no visual change in the body.
+- Rule: H4 plus section 4. Built questions, re-knock, referrals, gift card and reciprocity inserts.
+
+**F5** (v3). "For 2, just start with the graphic, don't have the millisecond cut to my face."
+- Wrong: the insert started 0.15 s after the section cut, causing a flash of his face.
+- Rule: H5. A section-opening insert starts on the cut.
+
+**F6** (v2). "At the start of the video when I say 1 there's slight deadspace."
+- Wrong: the segment started 0.3 s before "One", because the cut point was taken from Whisper's early word time instead of the waveform.
+- Rule: H1. Cut points come from the waveform; check every segment start, not only the first.
+
+**F7** (v3). "Complete the animation for the referrals."
+- Wrong: the 2.3 s animation was given a 1.35 s window and got cut mid-draw.
+- Rule: H6. Window must be at least the animation length; widen or retime.
+
+**F8** (v5, found in QA before delivery). One face frame between two back-to-back graphics at a section boundary; the label switched a frame off from the graphic.
+- Wrong: boundaries weren't on the frame grid, and the insert clip ran out a frame early.
+- Rule: H5. Snap to the frame grid; pad insert clips; check ±3 frames at every boundary.
+
+**F9** (v4). "There's a bit of dead time right at the beginning of the original video."
+- Wrong: frame 0 had 0.2 s of silence before "3". The very first segment was never checked.
+- Rule: H1. Frame 0 is checked explicitly; qa_check.py `deadair` covers it.
+
+**F10** (v4). "Rebuild this video and have the giving them something as the starting bit of information. I thought that was actually great."
+- Rule: H7. The strongest story leads. Cut "One is" so numbering doesn't contradict the new order.
+
+**F11** (v1). Nathan accepted the order hook → qualifying (he says "One") → re-knock → give first → CTA as correct for the 1-2-3 version.
+- Rule: H7. Follow the spoken numbering.
+
+**F12**. Post-caption goal: "My goal is to drive followers… leading with the $1,000 in local gift cards… put a follow for more at the bottom."
+- Rule: H8.
+
+**F13**. "Redo the caption around what happens after we give the $1000 gift card, not just going through all three."
+- Rule: H8. Story plus outcome, not a list of the tips.
+
+**F14** (system). "Feed the context of the session back into the skill… continue to learn whenever it is invoked… it's important to emphasize that the dead space is not there. The captions are not over my mouth. Elements are properly aligned and animations show up for their full duration. But these pieces alone aren't all that matters."
+- Rule: the playbook moved to GitHub with this log and the learning protocol, and the QA gate is automated. The four named items are the minimum bar, not the goal. Keep raising taste and quality.
+
+**F15** (found by the new QA, before delivery). Section starts had 0.2-0.46 s of apparent dead air, growing later in the video.
+- Wrong: joining AAC segments drifted the audio about 21 ms per cut. The dead air at "Give", "Re-knock" and "If" in earlier versions was partly this drift.
+- Rule: H1, PCM segment audio.
+
+**F16** (found by visual QA review). Black single frames before some inserts, and inserts starting 1-2 frames late.
+- Wrong: input offsets plus black padding on the insert pre-renders.
+- Rule: H5, full-timeline pre-renders padded with the first frame; qa_check `black`.
+
+**F17** (found by visual QA review). Frame 0 showed his hand in front of the lens for 4 frames.
+- Rule: H1, hold the first clean frame over the hand and keep the audio.
+
+**Process notes (session 1)**
+- Nathan doesn't want to wait on long batch jobs. Ship the first pass fast, then refine. Use the faster Whisper model if transcription is the bottleneck.
+- He iterates in small, specific notes. Apply each one exactly, re-check the whole video for side effects, and say what else changed.
+- Upload limits: Drive uploads from a session are capped at about 3.1 MB per file, and downloads at 10 MB. Send full quality through chat.
+
+## Shipped
+- d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
+- d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
+
+## Performance
+(Log 48 h stats per posted video here.)
