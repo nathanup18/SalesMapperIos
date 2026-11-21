@@ -49,6 +49,10 @@ for name, lo, hi, part in ORDER:
             segs.append((name, cur, r0[1] + KEEP_AFTER, part)); cur = r1[0] - KEEP_BEFORE
     segs.append((name, cur, end, part))
 
+OVERRIDE_START = {"IMG_9722": 10.10}  # trim breath/dead air before "One"
+for k,(n,a0,b0,p) in enumerate(segs):
+    if n in OVERRIDE_START and a0 < OVERRIDE_START[n] and (k==0 or segs[k-1][0]!=n):
+        segs[k]=(n,OVERRIDE_START[n],b0,p)
 # render segments with alternating punch-in
 os.makedirs('segs', exist_ok=True)
 t = 0.0; timeline = []
