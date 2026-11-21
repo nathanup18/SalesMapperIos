@@ -106,6 +106,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Wrong: 7 whooshes (one per cut, including screen→screen and app overlays). The send swoosh was 2 dB under his speech, so it was masked.
 - Rule: H15 updated. Whoosh only on face↔screen cuts. Signature moments (iMessage send) must be audible: bright 1.1-3.2 kHz glide, verified ≥ +6 dB above speech in the 2-7 kHz band (it measured +8.3).
 
+**F27** (spouse v5). "Reduce the saturation on these. I don't want it brighter. Keep it standard lighting."
+- Wrong: the HLG→SDR conversion also converted bt2020→bt709 primaries, which pushed skin red. Face saturation measured 74 vs 57 for neutral (+30%).
+- Rule: H9 updated. Grade = matrix conversion only (`scale=in_color_matrix=bt2020:out_color_matrix=bt709,format=yuv420p`). No primaries or gamut expansion, no eq, no tonemap. Same brightness as the source.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.

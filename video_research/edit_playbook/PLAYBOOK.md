@@ -1,6 +1,6 @@
 # Short-form video edit playbook (living)
 
-Version: 13 (2026-11-21)
+Version: 14 (2026-11-21)
 Owner: Nathan. This file is the source of truth for the `short-form-video-edit` skill. The skill loads it at the start of every run and updates it whenever Nathan gives feedback (see "Learning protocol" at the bottom). Never treat it as frozen.
 
 Rule priority, highest first:
@@ -57,7 +57,7 @@ H8. Post caption: lead with the most concrete story and its outcome, and end wit
 - Don't just list all the tips in the caption.
 
 H9. Don't touch contrast. [F18]
-- No eq or contrast, saturation or gamma grade. Only convert HDR (HLG/bt2020) to SDR bt709 color space: `zscale=tin=bt709:t=bt709:min=bt2020nc:m=bt709:pin=bt2020:p=bt709:rin=tv:r=tv,format=yuv420p`.
+- No eq or contrast, saturation or gamma grade, and no gamut expansion. iPhone HLG footage gets only a matrix conversion: `scale=in_color_matrix=bt2020:out_color_matrix=bt709,format=yuv420p`. The zscale primaries conversion (bt2020→bt709) made skin about 30% more saturated and red, which Nathan rejected. Target: "standard lighting", looking like the phone shows it, not brighter. [F18, F27]
 
 H10. The hook headline is big and black. [F19]
 - White card, black (#000) text in Nunito Sans Black, no colored words. It fills up to the top third: box top at y≥180 (below the TikTok/Reels top bar), bottom at y≤640, side margins ≥60 px (box width about 960 px), text about 110-125 px, 2-3 lines.
@@ -94,7 +94,7 @@ H15. Subtle sound design. [F24]
 - **Section labels:** a white rounded pill at the top (y≈250), with a green number circle and 3-5 words.
 - **Hook text:** see H10 (big, black, top third). 6-8 words.
 - **Jump cuts:** alternate 100% and 112% punch-ins on every cut inside a take.
-- **Color:** iPhone footage is HLG HDR. Use only the color-space conversion in H9. No contrast grade. Don't use hable or mobius tonemapping; they push skin red.
+- **Color:** iPhone footage is HLG HDR. Use only the matrix conversion in H9. No contrast or saturation changes, and no tonemapping (hable and mobius push skin red).
 - **Audio:** highpass at 70 Hz, loudnorm to I=-14, TP=-1.5. Use a 10-15 ms fade at every cut.
 - **Music:** never bake music into the file. Nathan adds a trending sound in the TikTok or Instagram app at 5-10% volume, instrumental, without lyrics.
 - **Ending:** his spoken CTA plus a text pill ("Follow for more D2D tips"). No outro card, no logo sting.
@@ -170,6 +170,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v14 (2026-11-21): neutral grade, matrix-only conversion, no added saturation (F27).
 - v13 (2026-11-21): fewer whooshes (face↔screen only), audible iMessage send (F26).
 - v12 (2026-11-21): H14 hook push-in plus two-tier hook text; H15 synthesized subtle SFX; audio-length QA, QA_VOICE (F24, F25).
 - v11 (2026-11-21): runtime gate in code, no cropped UI (F23). Look approved by Nathan.
