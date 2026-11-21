@@ -256,7 +256,7 @@ if (SCENE === 'tap') {
     // outer punch-in: onto the Sale row while choosing, back out for the pin
     const o = keyframes(t, [[0, { x: 180, y: 320, z: 1 }], [2.4, { x: 180, y: 320, z: 1 }], [3.0, { x: 160, y: 414, z: 1.42 }], [3.7, { x: 160, y: 414, z: 1.42 }],
       [4.4, { x: 180, y: 320, z: 1 }], [8, { x: 180, y: 320, z: 1 }]]);
-    setOuter(o.x, o.y, o.z);
+    if (P.get('nozoom')) setOuter(180, 320, 1); else setOuter(o.x, o.y, o.z);
   };
 }
 if (SCENE === 'stats') {

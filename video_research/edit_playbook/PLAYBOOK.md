@@ -1,6 +1,6 @@
 # Short-form video edit playbook (living)
 
-Version: 10 (2026-11-21)
+Version: 11 (2026-11-21)
 Owner: Nathan. This file is the source of truth for the `short-form-video-edit` skill. The skill loads it at the start of every run and updates it whenever Nathan gives feedback (see "Learning protocol" at the bottom). Never treat it as frozen.
 
 Rule priority, highest first:
@@ -45,6 +45,8 @@ H5. No flashes. [F5, F8]
 H6. Animations play to completion. [F7]
 - An insert stays on screen at least as long as its animation, with every element finished and held for about 0.4 s.
 - If the spoken window is too short, widen it to the surrounding phrase or retime the animation to fit. Never cut a graphic mid-draw.
+- Enforced in code: the edit script computes each animation's "done" time from its cues and asserts done + 0.4 s ≤ window before rendering (see make_edit3.py). Includes sends, "Delivered" and final check marks. [F23]
+- Never show cropped or zoomed UI. App clips come from unzoomed renders (`tap&nozoom=1`); speed them up (up to about 1.8x) rather than cutting the action short. [F23]
 
 H7. Order follows the content, and the strongest story is the payoff or the lead. [F10, F11]
 - Keep the spoken numbering consistent ("One is…"). If clips are reordered, cut the spoken number so it still makes sense ("One is simply asking" becomes "Simply asking").
@@ -158,6 +160,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v11 (2026-11-21): runtime gate in code, no cropped UI (F23). Look approved by Nathan.
 - v10 (2026-11-21): iOS screen library (iMessage, Notes, Reminders); labels hidden over screens; two-version output in make_edit3.
 - v9 (2026-11-21): H11 real-software graphics, H12 TikTok native text, H13 captioned plus clean versions (F22).
 - v8 (2026-11-21): temporary link share for big raw clips is pre-approved (F21).

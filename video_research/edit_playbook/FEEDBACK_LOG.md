@@ -90,6 +90,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - He iterates in small, specific notes. Apply each one exactly, re-check the whole video for side effects, and say what else changed.
 - Upload limits: Drive uploads from a session are capped at about 3.1 MB per file, and downloads at 10 MB. Send full quality through chat.
 
+**F23** (spouse v2, approved). "I like it. These videos look good. Just make sure that the animations have full runtime. Nothing is oddly cropped."
+- Found in review: the iMessage send landed 0.2 s before the cut ("Delivered" never showed), and the app clip was a zoomed punch-in (sheet cropped at the left) and 0.5 s too short for tap → green pin.
+- Rule: H6 is now enforced in code. make_edit computes each animation's done time from its cues and fails the build unless done + 0.4 s fits the window. Real-app clips use unzoomed footage (mockup.html `tap&nozoom=1`), sped up when needed so the full action fits. Never crop UI.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -97,6 +101,8 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - d2d_spouse_objection_v1_final.mp4 ("I need to talk to my spouse"). Shipped 2026-11-21, 19.3 s, QA PASS. Built from playbook v8 with no corrections yet. New inserts: notspouse, theline, branch (cue-timed to word times). Retakes cut in IMG_9748 and IMG_9749. QA dead-air check made plosive-aware (the "k" in "Close" was misread as silence; found by QA).
 
 - d2d_spouse_objection_v1_captions.mp4 and d2d_spouse_objection_v1_clean.mp4: rebuilt with H11-H13 (iOS Notes, iMessage, Reminders; real app Sale tap; TikTok Sans labels, hook and captions). QA PASS on both. Found in review: labels covered the phone title bars, so labels are now hidden over screens.
+
+- d2d_spouse_objection_v3_captions.mp4 and d2d_spouse_objection_v3_clean.mp4: runtime and crop fixes (F23). QA PASS, runtime gate PASS. Nathan approved the look.
 
 ## Performance
 (Log 48 h stats per posted video here.)

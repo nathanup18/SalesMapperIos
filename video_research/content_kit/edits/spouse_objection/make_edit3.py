@@ -131,9 +131,19 @@ s2 = at('if', 'IMG_9751') - 0.05;    e2 = sec['IMG_9751'][1]
 s3 = sec['IMG_9752'][0];             e3 = sec['IMG_9752'][1]
 c_close = at('close', 'IMG_9752'); c_no = at('if', 'IMG_9752', nth=1)
 appclip = os.path.abspath(f'{out}/anim/app_sale.mp4')   # real SalesMapper UI: tap Sale, pin turns green
-subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', '3.05', '-i', '../mockup/out/app_tap.mp4', '-t', f'{c_no - c_close + 0.4:.3f}', '-an', '-c:v', 'libx264', '-crf', '14', appclip], check=True)
+# unzoomed app clip; Sale tap (3.15 s) through pin fully green (5.05 s) = 1.9 s, sped up to fit the window
+APP_A, APP_B = 3.10, 5.10; win = c_no - c_close
+speed = max(1.0, (APP_B - APP_A) / (win - 0.25))       # leave about 0.25 s hold on the green pin
+subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', f'{APP_A}', '-t', f'{APP_B - APP_A}', '-i', '../mockup/out/app_tap_nozoom.mp4',
+                '-vf', f'setpts=PTS/{speed:.4f},fps=30,tpad=stop_mode=clone:stop_duration=2', '-t', f'{win + 0.4:.3f}', '-an', '-c:v', 'libx264', '-crf', '14', appclip], check=True)
+print('app speed', round(speed, 2))
+done = {'notes': at('they', 'IMG_9749') - s1 + 0.95, 'imessage': min(at('it?', 'IMG_9751', 'e') - s2 - 0.05, (e2 - s2) - 1.05) + 0.65,
+        'reminders': at('figure', 'IMG_9752') - s3 + 0.3}
+for k, (d, w) in {'notes': (done['notes'], e1 - s1), 'imessage': (done['imessage'], e2 - s2), 'reminders': (done['reminders'], e3 - s3)}.items():
+    assert d + 0.4 <= w + 1e-6, f'H6: {k} finishes at {d:.2f}s but window is {w:.2f}s'
+    print(f'runtime ok: {k} done {d:.2f}s, window {w:.2f}s, hold {w - d:.2f}s')
 ins = [(anim('notes', s1, e1, strike=at('spouse.', 'IMG_9749') - s1 if False else at('not', 'IMG_9749') - s1, type=at('they', 'IMG_9749') - s1), s1, e1),
-       (anim('imessage', s2, e2, say=0.05, send=at('it?', 'IMG_9751', 'e') - s2 - 0.05), s2, e2),
+       (anim('imessage', s2, e2, say=0.05, send=min(at('it?', 'IMG_9751', 'e') - s2 - 0.05, (e2 - s2) - 1.05)), s2, e2),
        (anim('reminders', s3, e3, get=at('get', 'IMG_9752') - s3, close=c_close - s3, no=c_no - s3, fig=at('figure', 'IMG_9752') - s3), s3, e3),
        (appclip, c_close - 0.05, c_no - 0.05)]
 starts = {v[0]: k for k, v in sec.items()}; ends = {v[1]: k for k, v in sec.items()}
