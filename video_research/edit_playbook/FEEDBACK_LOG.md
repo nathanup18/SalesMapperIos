@@ -115,6 +115,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Process: built a side-by-side of 4 grades on 2 frames and Nathan compared them to the original in Photos. He picked option 1, the accurate zscale bt2020→bt709 conversion with no eq. (libplacebo with Dolby Vision was tried, but software Vulkan renders stripe artifacts here, so it's unusable.)
 - Rule: H9 final. Grade = accurate conversion, no saturation or contrast changes. When color is disputed, don't guess again: show a labeled lineup and let him match it to his phone.
 
+**F29** (not-interested v1, found in review before delivery). The borrowed hook clip opened with the other creator's "Hey!", and the Notes screen held 3.1 s after typing finished.
+- Wrong: the hook's lo was 0.0, so "Hey" leaked in. Then the fix skipped "We're not interested" entirely, because the screen-recorded voice peaks around +15-19 dB over its floor and the onset gate needed +20, and Whisper had merged "Hey" into "We're" (s=0.0), so the word filter dropped it.
+- Rule: section 3 pipeline. For third-party or screen-recorded audio, check the onset against that clip's own energy curve (use about +6 dB) and correct merged word starts by hand. Re-transcribe the first 4 s of the final and confirm the first word. Inserts end about 0.15 s after the last word they illustrate, with a hold under 2 s, then cut back to the face.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -126,6 +130,8 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - d2d_spouse_objection_v3_captions.mp4 and d2d_spouse_objection_v3_clean.mp4: runtime and crop fixes (F23). QA PASS, runtime gate PASS. Nathan approved the look.
 
 - d2d_spouse_objection_v1_sfx_captions.mp4 and d2d_spouse_objection_v1_sfx_clean.mp4: push-in hook, two-tier headline, 77 subtle synthesized SFX. QA PASS on both, runtime gate PASS.
+
+- d2d_not_interested_captions.mp4 and d2d_not_interested_clean.mp4 ("We're not interested" objection, stitched hook from @claytonnelson_ with a credit tag). Shipped 2026-11-21, 24.7 s, QA PASS on both, runtime gate PASS (Notes hold 1.5 s). Edit script: content_kit/edits/not_interested/make_edit5.py.
 
 ## Performance
 (Log 48 h stats per posted video here.)
