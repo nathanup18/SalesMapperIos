@@ -96,5 +96,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 
 - d2d_spouse_objection_v1_final.mp4 ("I need to talk to my spouse"). Shipped 2026-11-21, 19.3 s, QA PASS. Built from playbook v8 with no corrections yet. New inserts: notspouse, theline, branch (cue-timed to word times). Retakes cut in IMG_9748 and IMG_9749. QA dead-air check made plosive-aware (the "k" in "Close" was misread as silence; found by QA).
 
+- d2d_spouse_objection_v1_captions.mp4 and d2d_spouse_objection_v1_clean.mp4: rebuilt with H11-H13 (iOS Notes, iMessage, Reminders; real app Sale tap; TikTok Sans labels, hook and captions). QA PASS on both. Found in review: labels covered the phone title bars, so labels are now hidden over screens.
+
 ## Performance
 (Log 48 h stats per posted video here.)

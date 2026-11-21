@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;width:1080px;height:1920px;background:transparent;font-family:"TikTok Sans"}
+#b{position:absolute;left:60px;width:960px;top:190px;box-sizing:border-box;background:#fff;border-radius:34px;padding:34px 44px 40px;
+box-shadow:0 14px 40px rgba(0,0,0,.30);display:flex;align-items:center;justify-content:center}
+#t{color:#000;font-weight:900;text-align:center;line-height:1.02;letter-spacing:-2px;font-size:100px}
+</style></head><body><div id="b"><div id="t">“I need to talk to my spouse.”</div></div>
+<script>
+// largest font that keeps the card inside the top third (bottom <= 640) and the margins
+const b=document.getElementById('b'), t=document.getElementById('t');
+for(let fs=170; fs>=80; fs-=2){ t.style.fontSize=fs+'px'; const r=b.getBoundingClientRect();
+  if(r.bottom<=640 && t.scrollWidth<=960-88){ document.title='fs='+fs+' bottom='+Math.round(r.bottom); break; } }
+</script></body></html>

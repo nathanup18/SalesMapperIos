@@ -1,6 +1,6 @@
 # Short-form video edit playbook (living)
 
-Version: 9 (2026-11-21)
+Version: 10 (2026-11-21)
 Owner: Nathan. This file is the source of truth for the `short-form-video-edit` skill. The skill loads it at the start of every run and updates it whenever Nathan gives feedback (see "Learning protocol" at the bottom). Never treat it as frozen.
 
 Rule priority, highest first:
@@ -65,6 +65,8 @@ H11. Graphics must look like real software, never "AI motion graphics". [F22]
 - Conversations: a real iMessage look. Status bar, contact header with an initials avatar, grey received bubbles (#E9E9EA), blue sent bubbles (#0A84FF), tails, "Delivered", and the typing indicator. Everyday notes and lists: an iOS Notes or Reminders look. Gift cards: an Apple Wallet pass look. Doors, re-knocks, results: the SalesMapper app UI (mockup.html scenes or real recordings).
 - No beige cards, soft pills or "kicker" headings. If a frame wouldn't plausibly appear on a real phone or in a real app, don't use it.
 - Use an SF-like UI font (Inter) inside phone UIs.
+- Library: content_kit/ios.html, with scenes `imessage` (your line types into the field, then sends; `say=` and `send=` cues), `notes` (strike plus typed line; `strike=` and `type=`), and `reminders` (items check on spoken cues; `get=`, `close=`, `no=`, `fig=`). For results, cut to real SalesMapper app footage (for example, app_tap at about 3.05 s: Sale tapped, pin turns green).
+- Section labels never cover a full-screen phone or app screen. They show over the face only. If a section opens on a screen, the screen's own title names the step (for example, a Reminders list titled "Then do this").
 
 H12. On-screen text uses TikTok's native style. [F22]
 - Font: TikTok Sans (or the closest native equivalent). Section labels look typed in TikTok's text tool: a white background box with black text or white text with a black outline, sized large. Step numbers are big ("1." at the same size as the title, or larger), not tiny badges.
@@ -156,6 +158,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v10 (2026-11-21): iOS screen library (iMessage, Notes, Reminders); labels hidden over screens; two-version output in make_edit3.
 - v9 (2026-11-21): H11 real-software graphics, H12 TikTok native text, H13 captioned plus clean versions (F22).
 - v8 (2026-11-21): temporary link share for big raw clips is pre-approved (F21).
 - v7 (2026-11-21): Drive convention, edited raw clips go to a dated subfolder (F20).
