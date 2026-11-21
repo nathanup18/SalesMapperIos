@@ -94,6 +94,9 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Found in review: the iMessage send landed 0.2 s before the cut ("Delivered" never showed), and the app clip was a zoomed punch-in (sheet cropped at the left) and 0.5 s too short for tap → green pin.
 - Rule: H6 is now enforced in code. make_edit computes each animation's done time from its cues and fails the build unless done + 0.4 s fits the window. Real-app clips use unzoomed footage (mockup.html `tap&nozoom=1`), sped up when needed so the full action fits. Never crop UI.
 
+**F24** (spouse v3). "I need something to make the initial couple seconds a little more enticing. I also want to add a couple of subtle sound effects like swooshes, pops, and whishes when certain elements show up on the screen."
+- Rule: PENDING clarification (asked 2026-11-21).
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
