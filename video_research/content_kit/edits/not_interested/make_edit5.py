@@ -17,7 +17,7 @@ CLIPS = {
     "IMG_9770": ("IMG_9770.MOV", 0.0, 99, None, GRADE_HLG),                     # "If you knock doors, you hear that all day."
     "IMG_9771": ("IMG_9771.MOV", 18.6, 99, None, GRADE_HLG),                    # 2nd take: "It's one of the most common objections..."
     "IMG_9774": ("IMG_9774.MOV", 0.0, 99, "Instead: find common ground", GRADE_HLG),     # clean take, ends "pitch your services."
-    "IMG_9779": ("IMG_9779.MOV", 0.0, 99, "What it sounds like", GRADE_HLG),
+    "IMG_9779": ("IMG_9779.MOV", 0.0, 10.35, "What it sounds like", GRADE_HLG),
     "IMG_9780": ("IMG_9780.MOV", 0.0, 99, "Interest? Hook them. None? Move on", GRADE_HLG),  # "semblance of interest"
     "IMG_9781": ("IMG_9781.MOV", 0.0, 99, None, GRADE_HLG),                     # "Follow for more information like this."
 }
@@ -150,12 +150,16 @@ def anim(scene, a, b, page='ios.html', **cues):
     f = os.path.abspath(f'{out}/anim/{scene}.mp4')
     subprocess.run(['node', 'render2.js', f'{scene}&{q}', f, '60'], cwd='../mockup', env={**os.environ, 'PAGE': page}, check=True, capture_output=True)
     return f
-s1 = F(at('saying', 'IMG_9774') - 0.05); e1 = F(at('homeowner', 'IMG_9774', 'e') + 0.15)   # back to face for 'and use that to pitch'
-strike_c = at('i', 'IMG_9774') - s1; type_c = at('find', 'IMG_9774') - s1
-done_notes = type_c + 0.95
+s1 = F(at('saying', 'IMG_9774') - 0.05); e1 = sec['IMG_9774'][1]      # Notes runs to the end of the section: always moving
+SPD = 0.6
+NOTE = [('= find common ground', 'find'), ('• same street, same shirt', 'between'), ('• one thing you share', 'homeowner'), ('→ use it to pitch', 'use')]
+tl = [at(w, 'IMG_9774') - s1 for _, w in NOTE]
+t1 = at('i', 'IMG_9774') - s1 - 0.1; strike_c = at('you', 'IMG_9774') - s1 - 0.25; type_c = tl[0]
+done_notes = tl[-1] + SPD
 assert done_notes + 0.4 <= e1 - s1, f'H6: notes finishes {done_notes:.2f}s, window {e1 - s1:.2f}s'
 print(f'runtime ok: notes done {done_notes:.2f}s, window {e1 - s1:.2f}s, hold {e1 - s1 - done_notes:.2f}s')
-ins = [(anim('notes', s1, e1, strike=strike_c, type=type_c, title='Objections', l1='"I totally get that"', l2='= find common ground'), s1, e1)]
+ins = [(anim('notes', s1, e1, t1=t1, strike=strike_c, type=type_c, spd=SPD, title='Objections', l1='"I totally get that"',
+             **{f'l{k + 2}': txt for k, (txt, _) in enumerate(NOTE)}, **{f't{k + 2}': x for k, x in enumerate(tl)}), s1, e1)]
 # door-outcomes breakdown in the SalesMapper app over "one of the most common objections" (bars done 1.6 s, highlight done 2.15 s)
 s0, e0 = sec['IMG_9771']
 assert 2.15 + 0.4 <= e0 - s0, f'H6: outcomes window {e0 - s0:.2f}s'
@@ -214,9 +218,10 @@ for p, a, b in labels[1:]:
 fx(s1 + strike_c, 'strike', G['strike'])
 fx(s3 + 4.35 / K, 'pop', G['pop'])                                               # Interested pin lands
 rng = np.random.default_rng(3)
-for q in range(len('= find common ground')):
-    if rng.random() < .15: continue
-    fx(s1 + type_c + 0.9 * q / 20 + rng.uniform(-.01, .01), f'key{rng.integers(4)}', G['key'] * rng.uniform(.7, 1.1))
+for txt, t0 in [('"I totally get that"', t1)] + [(x, y) for (x, _), y in zip(NOTE, tl)]:
+    for q in range(len(txt)):
+        if rng.random() < .3: continue
+        fx(s1 + t0 + SPD * q / len(txt) + rng.uniform(-.01, .01), f'key{rng.integers(4)}', G['key'] * rng.uniform(.6, 1.0))
 with wave.open(f'{out}/sfx_track.wav', 'w') as w:
     w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((np.clip(track, -1, 1) * 32767).astype(np.int16).tobytes())
 json.dump(evs, open(f'{out}/sfx_events.json', 'w'))

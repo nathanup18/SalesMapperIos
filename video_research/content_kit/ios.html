@@ -60,23 +60,27 @@ if(SCENE==='imessage'){ const say=qn('say',.4);
   };
 }
 
-if(SCENE==='notes'){ const strike=qn('strike',.5), type=qn('type',1.0);
+if(SCENE==='notes'){ const strike=qn('strike',.5), type=qn('type',1.0); const TITLE=Q.get('title')||'Objections', L1=Q.get('l1')||'"I need to talk to my spouse"', L2=Q.get('l2')||'= no reason to say yes yet';
   statusBar();
   el(`<div class="abs" style="left:0;right:0;top:44px;height:44px">
    <div class="abs" style="left:8px;top:10px;display:flex;align-items:center;gap:4px;color:#E5A000;font-size:17px"><svg width="12" height="20" viewBox="0 0 12 20"><path d="M10 2L2 10l8 8" fill="none" stroke="#E5A000" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Notes</div>
    <svg class="abs" style="right:56px;top:12px" width="20" height="22" viewBox="0 0 20 22"><path d="M10 1v13M5 6l5-5 5 5M3 10v10h14V10" fill="none" stroke="#E5A000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
    <div class="abs" style="right:14px;top:10px;width:26px;height:26px;border-radius:50%;border:2px solid #E5A000;display:flex;align-items:center;justify-content:center;gap:2px"><span style="width:3px;height:3px;border-radius:50%;background:#E5A000"></span><span style="width:3px;height:3px;border-radius:50%;background:#E5A000"></span><span style="width:3px;height:3px;border-radius:50%;background:#E5A000"></span></div></div>`);
   el(`<div class="abs" style="left:0;right:0;top:96px;text-align:center;font-size:12px;color:#8E8E93">November 21, 2026 at 9:41 AM</div>`);
-  el(`<div class="abs" style="left:20px;right:20px;top:122px;font-size:26px;font-weight:700;letter-spacing:-.6px">Objections</div>`);
-  const l1=el(`<div class="abs" style="left:20px;right:20px;top:166px;font-size:17px;line-height:1.35"><span id="o" style="position:relative">"I need to talk to my spouse"<span id="ln" style="position:absolute;left:0;top:55%;height:1.6px;background:#000;width:0"></span></span></div>`);
-  const full='= no reason to say yes yet';
-  const l2=el(`<div class="abs" style="left:20px;right:20px;top:198px;font-size:17px;line-height:1.35"><span id="tx"></span><span id="cur" style="display:inline-block;width:2px;height:21px;background:#E5A000;vertical-align:-4px;margin-left:1px"></span></div>`);
+  el(`<div class="abs" style="left:20px;right:20px;top:122px;font-size:26px;font-weight:700;letter-spacing:-.6px">${TITLE}</div>`);
+  const l1=el(`<div class="abs" style="left:20px;right:20px;top:166px;font-size:17px;line-height:1.35"><span id="o" style="position:relative">${L1}<span id="ln" style="position:absolute;left:0;top:55%;height:1.6px;background:#000;width:0"></span></span></div>`);
+  // typed lines: l2..l5 at t2..t5 (l2 falls back to 'type'); l1 is typed at t1 when given, else shown from the start
+  const T1=Q.has('t1')?qn('t1',0):null, SPD=qn('spd',.85);
+  const L=[[L2,qn('t2',type)]]; for(const k of [3,4,5]) if(Q.get('l'+k)) L.push([Q.get('l'+k),qn('t'+k,9)]);
+  const rows=L.map(([txt,t0],i)=>{const d=el(`<div class="abs" style="left:20px;right:20px;top:${198+i*30}px;font-size:17px;line-height:1.35"><span class="tx"></span><span class="cur" style="display:inline-block;width:2px;height:21px;background:#E5A000;vertical-align:-4px;margin-left:1px;opacity:0"></span></div>`);return [d.querySelector('.tx'),d.querySelector('.cur'),txt,t0];});
   el('<div class="home"></div>');
-  const ln=l1.querySelector('#ln'), tx=l2.querySelector('#tx'), cur=l2.querySelector('#cur');
+  const ln=l1.querySelector('#ln'), o=l1.querySelector('#o'), o1=o.firstChild;
   render=t=>{
+    if(T1!==null){ const n=Math.floor(L1.length*clamp((t-T1)/Math.min(.7,SPD))); o1.textContent=L1.slice(0,n); }
     ln.style.width=(100*easeOut(prog(t,strike,strike+.3)))+'%';
-    const n=Math.floor(full.length*clamp((t-type)/0.9)); tx.textContent=full.slice(0,n);
-    cur.style.opacity=(t>type-.2 && (n<full.length || Math.floor(t*2.2)%2===0))?1:0;
+    const cur=rows.filter(r=>t>=r[3]-.2).pop();
+    rows.forEach(r=>{ const [tx,c,txt,t0]=r; const n=Math.floor(txt.length*clamp((t-t0)/SPD)); tx.textContent=txt.slice(0,n);
+      c.style.opacity=(r===cur && (n<txt.length || Math.floor(t*2.2)%2===0))?1:0; });
   };
 }
 

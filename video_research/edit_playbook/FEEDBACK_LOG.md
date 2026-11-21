@@ -123,6 +123,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Wrong: no credit tag wanted. Two clips (IMG_9780 "semblance of interest", IMG_9781 spoken follow CTA) were never downloaded because only part of the Drive folder was pulled. Too few inserts (one in 25 s).
 - Rule: list and transcribe EVERY new clip in the raw folder before cutting; a closing "follow for more" clip always goes last with the CTA text on it. Don't add credit tags to borrowed clips unless asked. Aim for an insert every 5-8 s, built as real software (SalesMapper app screens: outcomes breakdown, tap-to-mark pin; iOS apps) or clean data viz. Lottie/CDN libraries are blocked by this environment's network, so build scenes in mockup.html / ios.html. Never zoom a UI so far that values crop.
 
+**F31** (not-interested v3). "Cut the last all good, but I'll give them the spiel… On the notepad, when you're typing into notes, I want there to be three things… three or four. So it's just constantly moving."
+- Wrong: the role-play ended on a weak "So all good?". The Notes screen typed one line and then sat still.
+- Rule: end role-plays on the last line of the pitch, not on filler. Typing inserts type 3-4 lines, each starting on the spoken word it matches (ios.html notes now takes l1-l5/t1-t5, spd), so something on screen moves every ~0.8 s for the whole window.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -137,6 +141,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 
 - d2d_not_interested_captions.mp4 and d2d_not_interested_clean.mp4 ("We're not interested" objection, stitched hook from @claytonnelson_ with a credit tag). Shipped 2026-11-21, 24.7 s, QA PASS on both, runtime gate PASS (Notes hold 1.5 s). Edit script: content_kit/edits/not_interested/make_edit5.py.
 - d2d_not_interested v2 (captions + clean): 30.5 s, adds IMG_9774 (clean take), IMG_9780, IMG_9781; inserts: app door-outcomes, iOS Notes, app tap→Interested; no credit tag. QA PASS both, runtime gate PASS.
+- d2d_not_interested v3: 29.9 s, ends role-play on "out of your hair anyway", Notes types 4 lines. QA PASS both.
 
 ## Performance
 (Log 48 h stats per posted video here.)
