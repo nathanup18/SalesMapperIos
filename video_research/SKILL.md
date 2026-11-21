@@ -38,6 +38,8 @@ Wherever the speaker names something concrete and there's no real B-roll for it,
 - Cadence: return to the face between inserts; aim for a visual change every 3-6 s across the body. Never in the first ~2 s hook.
 - Look: brand background #F7F4EC, Nunito Sans (900 for numbers/titles), ink #1C1C1A, pin colors for status (green = win, orange = re-knock, indigo = not home, red = no). Spring/ease animations driven by one clock, no jitter. Small uppercase kicker line on top that restates the point in 3-5 words.
 - Layout: keep the top ~450 px clear for the section label and keep content above y≈1540 so captions stay readable.
+- If a section opens with an insert, start the insert on the section's first frame. Never leave a flash of the face (a few frames) between the cut and the graphic.
+- The insert's on-screen time must be at least as long as its animation. Either widen the window to the surrounding phrase or retime the animation to fit, so every element finishes and holds about 0.5 s before cutting away. Never cut a graphic mid-draw.
 - Real B-roll wins when it exists (e.g. handshake for "partnered with local businesses"); use stock only when it actually matches the words.
 - Build with video_research/content_kit/inserts.html + render.js (60 fps PNG frames to ffmpeg); add a new scene per visual.
 
