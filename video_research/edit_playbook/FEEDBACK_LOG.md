@@ -80,6 +80,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 **F21**. Asked about the temporary share for raw clips over 10 MB, Nathan answered: "Yes, and always for raw clips."
 - Rule: section 5 step 1. Don't ask again; still remind him to set the files back to Restricted.
 
+**F22** (spouse objection v1). "I'm looking for realistic things that could appear in a real software, not obviously AI generated… the messages… look like it's on an iPhone, sending blue messages. The bars on the top look like they should be normal captions, not these Claude generated things… step one, those boxes should be bigger. The font… should have some distinct typography… I want a version with captions and without."
+- Wrong: the inserts read as generic AI motion graphics (beige cards, soft pills, Nunito). The chat wasn't a real iMessage look. The section labels looked like custom pills, not native captions. The number badges were too small. The typography had no character.
+- Rule: PENDING clarification (asked 2026-11-21). Direction so far: graphics must look like real software or native platform UI; deliver captioned and caption-free versions.
+
 **Process notes (session 1)**
 - Nathan doesn't want to wait on long batch jobs. Ship the first pass fast, then refine. Use the faster Whisper model if transcription is the bottleneck.
 - He iterates in small, specific notes. Apply each one exactly, re-check the whole video for side effects, and say what else changed.
