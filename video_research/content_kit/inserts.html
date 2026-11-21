@@ -1,0 +1,122 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+:root{--bg:#F7F4EC;--card:#fff;--ink:#1C1C1A;--ink2:#57544D;--ink3:#8A867D;--border:#E3DED3;--land:#ECE8DF;--blocks:#DDD7CB;
+--green:#34C759;--red:#FF3B30;--orange:#FF9500;--indigo:#5856D6;--blue:#007AFF;--purple:#AF52DE}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:360px;height:640px;overflow:hidden;background:var(--bg);font-family:"Nunito Sans",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#s{position:absolute;inset:0;overflow:hidden}
+.abs{position:absolute}
+.bubble{position:absolute;left:22px;right:22px;background:#fff;border-radius:18px;padding:14px 16px 14px 54px;font-weight:700;font-size:16.5px;line-height:1.25;box-shadow:0 6px 18px rgba(28,28,26,.10)}
+.qn{position:absolute;left:14px;top:50%;margin-top:-15px;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-weight:900;font-size:15px;display:flex;align-items:center;justify-content:center}
+.chk{position:absolute;right:-8px;top:-8px;width:28px;height:28px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.pill{position:absolute;left:50%;padding:12px 24px;border-radius:26px;background:var(--ink);color:#F7F5EF;font-weight:900;font-size:18px;white-space:nowrap}
+.kicker{position:absolute;left:0;right:0;text-align:center;font-weight:800;font-size:15px;letter-spacing:1.6px;color:var(--ink3);text-transform:uppercase}
+.gc{position:absolute;width:290px;height:182px;left:35px;border-radius:18px;overflow:hidden;box-shadow:0 18px 40px rgba(28,28,26,.28)}
+.node{position:absolute;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff;text-align:center;line-height:1.1;box-shadow:0 8px 20px rgba(28,28,26,.18)}
+</style></head><body><div id="s"></div>
+<script>
+const SCENE = new URLSearchParams(location.search).get('scene');
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)), lerp=(a,b,t)=>a+(b-a)*t;
+const easeOut=t=>1-Math.pow(1-clamp(t),3), ease=t=>{t=clamp(t);return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2};
+const spring=t=>{t=clamp(t);return 1-Math.exp(-6.5*t)*Math.cos(9*t)};
+const prog=(t,a,b)=>clamp((t-a)/(b-a));
+const S=document.getElementById('s');
+const el=(h)=>{const d=document.createElement('div');d.innerHTML=h.trim();const e=d.firstChild;S.appendChild(e);return e};
+const CHECK='<svg width="14" height="14" viewBox="0 0 14 14"><path d="M2.5 7.4l3 3 6-6.6" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+let render=()=>{}, DURATION=3;
+
+if(SCENE==='questions'){ DURATION=2.8;
+  const k=el('<div class="kicker" style="top:150px">Before you pitch</div>');
+  const qs=['How long have you been in the home?','Had any issues with it lately?','Who else would weigh in on this?'];
+  const B=qs.map((q,i)=>el(`<div class="bubble" style="top:${196+i*86}px"><div class="qn">${i+1}</div>${q}<div class="chk">${CHECK}</div></div>`));
+  const pill=el('<div class="pill" style="top:470px">Then pitch  →</div>');
+  render=t=>{
+    k.style.opacity=easeOut(prog(t,0,.3));
+    B.forEach((b,i)=>{const a=prog(t,.12+i*.38,.62+i*.38); b.style.opacity=clamp(a*3); b.style.transform=`translateX(${(1-spring(a))*-60}px)`;
+      const c=b.querySelector('.chk'); const ca=prog(t,.5+i*.38,.85+i*.38); c.style.transform=`scale(${spring(ca)})`; c.style.opacity=ca>0?1:0;});
+    const p=prog(t,1.75,2.25); pill.style.opacity=clamp(p*3); pill.style.transform=`translateX(-50%) scale(${lerp(.7,1,spring(p))})`;
+  };
+}
+
+if(SCENE==='reknock'){ DURATION=2.9;
+  S.style.background='var(--land)';
+  el('<div class="kicker" style="top:150px">Nobody home? Come back.</div>');
+  el('<div class="abs" style="left:-20px;right:-20px;top:372px;height:34px;background:#FBFAF6;border-top:2px solid #E2DDD2;border-bottom:2px solid #E2DDD2"></div>');
+  const kinds=['sale','home','no','home','sale'], COL={sale:'#34C759',no:'#FF3B30',home:'#5856D6'};
+  const ICO={sale:'<path d="M13.5 20.5l4.5 4.5 8.5-9" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>',
+   no:'<path d="M15 15l10 10M25 15l-10 10" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>',
+   home:'<path d="M13.5 20.5L20 14.5l6.5 6v6.5h-4.3v-4.3h-4.4v4.3h-4.3z" fill="#fff"/>',
+   re:'<path d="M14 18a6.5 6.5 0 1 1 1.6 6.6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M11.5 14.8l2.6 3.6 3.6-2.4" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'};
+  const pin=(c,ic)=>`<svg viewBox="0 0 40 52" width="100%" height="100%"><path d="M20 50.5C20 50.5 3.5 33.5 3.5 20a16.5 16.5 0 1 1 33 0C36.5 33.5 20 50.5 20 50.5z" fill="${c}" stroke="#fff" stroke-width="3"/>${ic}</svg>`;
+  const H=kinds.map((k,i)=>{const x=18+i*66;
+    const h=el(`<div class="abs" style="left:${x}px;top:300px;width:58px;height:62px"><svg viewBox="0 0 58 62" width="58" height="62"><path d="M4 28L29 6l25 22v30H4z" fill="#DDD7CB" stroke="#CFC8BA" stroke-width="2"/><rect x="23" y="38" width="12" height="20" rx="2" fill="#B9B3A7"/></svg></div>`);
+    const p=el(`<div class="abs" style="left:${x+11}px;top:236px;width:36px;height:47px;transform-origin:50% 100%;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))">${pin(COL[k],ICO[k])}</div>`);
+    const r=el(`<div class="abs" style="left:${x+11}px;top:236px;width:36px;height:47px;transform-origin:50% 100%;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25));opacity:0">${pin('#FF9500',ICO.re)}</div>`);
+    return {k,x,p,r,h};});
+  const truck=el(`<div class="abs" style="top:356px;left:0;width:96px;height:46px"><svg viewBox="0 0 96 46" width="96" height="46"><rect x="2" y="6" width="62" height="30" rx="5" fill="#1C1C1A"/><rect x="2" y="22" width="62" height="5" fill="#34C759"/><path d="M64 14h16l12 12v10H64z" fill="#1C1C1A"/><path d="M68 17h10l8 8H68z" fill="#C3DBDF"/><circle cx="20" cy="38" r="7" fill="#57544D" stroke="#fff" stroke-width="2"/><circle cx="76" cy="38" r="7" fill="#57544D" stroke="#fff" stroke-width="2"/><text x="33" y="19" font-family="Nunito Sans" font-weight="900" font-size="10" fill="#fff" text-anchor="middle">SERVICE</text></svg></div>`);
+  const lbl=el('<div class="pill" style="top:470px;background:#FF9500;color:#fff">Re-knock  ↻</div>');
+  render=t=>{
+    H.forEach((o,i)=>{const a=prog(t,.05+i*.08,.45+i*.08); o.p.style.transform=`translateY(${(1-easeOut(a))*-30}px) scale(${lerp(.5,1,spring(a))})`; o.p.style.opacity=clamp(a*3);
+      if(o.k==='home'){const s=prog(t,1.25+(i===3?.2:0),1.65+(i===3?.2:0)); o.p.style.opacity=clamp(a*3)*(1-s); o.r.style.opacity=s; o.r.style.transform=`scale(${lerp(.6,1,spring(s))*(1+.06*Math.sin(Math.max(0,t-1.9)*7)*(t>1.9?1:0))})`;
+        o.h.style.transform=`scale(${1+.05*Math.sin(Math.PI*prog(t,1.25,1.7))})`;}});
+    const tx=lerp(-110,370,ease(prog(t,.35,2.6))); truck.style.transform=`translateX(${tx}px)`;
+    const p=prog(t,1.9,2.35); lbl.style.opacity=clamp(p*3); lbl.style.transform=`translateX(-50%) scale(${lerp(.7,1,spring(p))})`;
+  };
+}
+
+if(SCENE==='referrals'){ DURATION=2.3;
+  el('<div class="kicker" style="top:150px">Local businesses refer each other</div>');
+  const N=[['Coffee<br>shop','#8B5E3C',180,236],['Auto<br>shop','#007AFF',92,384],['Your<br>team','#1C1C1A',268,384]];
+  const svg=el('<svg class="abs" style="left:0;top:0" width="360" height="640" viewBox="0 0 360 640"></svg>');
+  const arcs=[[0,2],[2,1],[1,0]].map(([a,b])=>{const A=N[a],B=N[b]; const mx=(A[2]+B[2])/2+(180-(A[2]+B[2])/2)*-.25, my=(A[3]+B[3])/2+((A[3]+B[3])/2-335)*-.6;
+    const p=document.createElementNS('http://www.w3.org/2000/svg','path'); p.setAttribute('d',`M${A[2]} ${A[3]} Q${mx} ${my} ${B[2]} ${B[3]}`); p.setAttribute('fill','none'); p.setAttribute('stroke','#34C759'); p.setAttribute('stroke-width','5'); p.setAttribute('stroke-linecap','round'); svg.appendChild(p); const L=p.getTotalLength(); p.style.strokeDasharray=L; p.style.strokeDashoffset=L; return [p,L];});
+  const nodes=N.map(n=>el(`<div class="node" style="left:${n[2]}px;top:${n[3]}px;background:${n[1]}">${n[0]}</div>`));
+  const pill=el('<div class="pill" style="top:458px">Referrals flow both ways</div>');
+  render=t=>{
+    nodes.forEach((n,i)=>{const a=prog(t,.05+i*.15,.5+i*.15); n.style.transform=`scale(${spring(a)})`;});
+    arcs.forEach(([p,L],i)=>{p.style.strokeDashoffset=L*(1-ease(prog(t,.55+i*.3,1.05+i*.3)));});
+    const p=prog(t,1.6,2.0); pill.style.opacity=clamp(p*3); pill.style.transform=`translateX(-50%) scale(${lerp(.7,1,spring(p))})`;
+  };
+}
+
+if(SCENE==='giftcard'){ DURATION=4.0;
+  el('<div class="kicker" style="top:150px">Hand them value first</div>');
+  const back=[['#8B5E3C','Main St. Coffee','$250'],['#007AFF','Northside Auto','$500']].map(([c,n,v])=>el(`<div class="gc" style="top:240px;background:linear-gradient(135deg,${c},#1C1C1A 140%)">
+     <div class="abs" style="left:20px;top:18px;color:#fff;font-weight:900;font-size:14px;letter-spacing:1.2px;opacity:.85">GIFT CARD</div>
+     <div class="abs" style="left:20px;bottom:18px;color:#fff;font-weight:800;font-size:15px">${n}</div><div class="abs" style="right:20px;bottom:14px;color:#fff;font-weight:900;font-size:26px">${v}</div></div>`));
+  const card=el(`<div class="gc" style="top:240px;background:linear-gradient(135deg,#2A2A27 0%,#1C1C1A 55%,#0E0E0D 100%)">
+     <div class="abs" style="left:0;right:0;top:0;height:8px;background:#34C759"></div>
+     <div class="abs" style="left:20px;top:24px;color:#F7F5EF;font-weight:900;font-size:14px;letter-spacing:1.6px">LOCAL GIFT CARD BUNDLE</div>
+     <div class="abs" style="left:20px;top:62px;width:42px;height:32px;border-radius:6px;background:linear-gradient(135deg,#E9D8A6,#C9A85B)"></div>
+     <div id="amt" class="abs" style="right:20px;bottom:16px;color:#fff;font-weight:900;font-size:46px;letter-spacing:-1px">$0</div>
+     <div class="abs" style="left:74px;top:70px;color:#9CE6B0;font-weight:800;font-size:13px">5 local businesses</div>
+     <div id="shine" class="abs" style="top:-40px;bottom:-40px;width:70px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);transform:skewX(-20deg)"></div></div>`);
+  const tags=['Coffee','Auto','Florist','Gym','Pizza'].map((n,i)=>el(`<div class="abs" style="top:${446+Math.floor(i/3)*40}px;left:${[38,140,240,88,190][i]}px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:7px 14px;font-weight:800;font-size:14px;box-shadow:0 3px 8px rgba(0,0,0,.06)">${n}</div>`));
+  const amt=card.querySelector('#amt'), shine=card.querySelector('#shine');
+  render=t=>{
+    const a=prog(t,0,.75); card.style.transform=`perspective(700px) translateY(${(1-spring(a))*160}px) rotateX(${(1-easeOut(a))*35}deg) rotateZ(${(1-easeOut(a))*-8}deg)`; card.style.opacity=clamp(a*4);
+    back.forEach((b,i)=>{const f=prog(t,1.6+i*.15,2.2+i*.15); b.style.opacity=clamp(f*3); b.style.transform=`rotate(${lerp(0,(i?8:-8),spring(f))}deg) translate(${lerp(0,(i?26:-26),spring(f))}px,${lerp(0,-14,spring(f))}px) scale(.93)`;});
+    amt.textContent='$'+Math.round(1000*easeOut(prog(t,.5,1.6))).toLocaleString('en-US');
+    shine.style.left=lerp(-100,380,ease(prog(t,1.0,1.8)))+'px';
+    tags.forEach((g,i)=>{const p=prog(t,2.1+i*.12,2.5+i*.12); g.style.opacity=clamp(p*3); g.style.transform=`translateY(${(1-spring(p))*18}px)`;});
+  };
+}
+
+if(SCENE==='reciprocity'){ DURATION=2.9;
+  el('<div class="kicker" style="top:150px">Give first. They give back.</div>');
+  const you=el('<div class="node" style="left:92px;top:340px;background:#34C759;width:110px;height:110px;margin:-55px 0 0 -55px;font-size:16px">You</div>');
+  const ho=el('<div class="node" style="left:268px;top:340px;background:#1C1C1A;width:110px;height:110px;margin:-55px 0 0 -55px;font-size:15px">Home-<br>owner</div>');
+  const svg=el('<svg class="abs" style="left:0;top:0" width="360" height="640" viewBox="0 0 360 640"><path id="a1" d="M120 300 Q180 240 240 300" fill="none" stroke="#34C759" stroke-width="5" stroke-linecap="round"/><path id="a2" d="M240 382 Q180 442 120 382" fill="none" stroke="#1C1C1A" stroke-width="5" stroke-linecap="round"/></svg>');
+  const t1=el('<div class="pill" style="top:218px;background:#fff;color:#1C1C1A;border:1px solid var(--border);font-size:15px;padding:8px 16px">🎁 Value</div>');
+  const t2=el('<div class="pill" style="top:436px;background:#fff;color:#1C1C1A;border:1px solid var(--border);font-size:15px;padding:8px 16px">✓ Trust + the sale</div>');
+  const P=['#a1','#a2'].map(id=>{const p=svg.querySelector(id),L=p.getTotalLength();p.style.strokeDasharray=L;return [p,L]});
+  render=t=>{
+    [you,ho].forEach((n,i)=>{n.style.transform=`scale(${spring(prog(t,i*.15,.5+i*.15))})`;});
+    P.forEach(([p,L],i)=>{p.style.strokeDashoffset=L*(1-ease(prog(t,.5+i*.9,1.1+i*.9)));});
+    [t1,t2].forEach((x,i)=>{const p=prog(t,.85+i*.9,1.25+i*.9);x.style.opacity=clamp(p*3);x.style.transform=`translateX(-50%) scale(${lerp(.7,1,spring(p))})`;});
+    const g=prog(t,2.2,2.9); you.style.boxShadow=`0 0 0 ${lerp(0,22,easeOut(g))}px rgba(52,199,89,${.35*(1-g)}), 0 8px 20px rgba(28,28,26,.18)`;
+  };
+}
+window.DURATION=DURATION; window.renderAt=t=>render(t); render(0);
+</script></body></html>
