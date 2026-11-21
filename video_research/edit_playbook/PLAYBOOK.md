@@ -1,6 +1,6 @@
 # Short-form video edit playbook (living)
 
-Version: 12 (2026-11-21)
+Version: 13 (2026-11-21)
 Owner: Nathan. This file is the source of truth for the `short-form-video-edit` skill. The skill loads it at the start of every run and updates it whenever Nathan gives feedback (see "Learning protocol" at the bottom). Never treat it as frozen.
 
 Rule priority, highest first:
@@ -82,7 +82,7 @@ H14. The opening has energy. [F24]
 - Hook text frames the problem instead of restating the topic: a two-tier card, a smaller lead line ("Stop losing deals to") over the big quote, still inside H10's bounds.
 
 H15. Subtle sound design. [F24]
-- Synthesized in-house only (content_kit/sfx/make_sfx.py): whoosh (cuts to and from screens, peak on the cut, softer on cut-backs), pop (hook card), pop_hi (labels shown over the face), strike (Notes strike-through), key clicks (typing, about 85% of characters, randomized), swoosh_send (iMessage send), check (Reminders), tap and drop (app tap and pin landing).
+- Synthesized in-house only (content_kit/sfx/make_sfx.py): whoosh (ONLY on face↔screen cuts, never screen→screen or app overlays in and out; peak on the cut, softer on cut-backs) [F26], imsg_send (iPhone-style swoop-up, gain about 0.7, must measure ≥ +6 dB over speech in 2-7 kHz) [F26], pop (hook card), pop_hi (labels shown over the face), strike (Notes strike-through), key clicks (typing, about 85% of characters, randomized), swoosh_send (iMessage send), check (Reminders), tap and drop (app tap and pin landing).
 - Level: subtle. Peaks around -18 dBFS against voice at -14 LUFS. Felt, not heard.
 - Place every sound from the same word-timed cues as the animation it belongs to.
 - Mix: loudnorm → aresample 48k → amix(normalize=0, longest) → atrim to video length → alimiter. [F25]
@@ -170,6 +170,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v13 (2026-11-21): fewer whooshes (face↔screen only), audible iMessage send (F26).
 - v12 (2026-11-21): H14 hook push-in plus two-tier hook text; H15 synthesized subtle SFX; audio-length QA, QA_VOICE (F24, F25).
 - v11 (2026-11-21): runtime gate in code, no cropped UI (F23). Look approved by Nathan.
 - v10 (2026-11-21): iOS screen library (iMessage, Notes, Reminders); labels hidden over screens; two-version output in make_edit3.

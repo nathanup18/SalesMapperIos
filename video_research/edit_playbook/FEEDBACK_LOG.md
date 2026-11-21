@@ -102,6 +102,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Wrong: loudnorm works at 192 kHz internally; amix(duration=first) with an unresampled loudnorm output truncated the mix.
 - Rule: always `aresample=48000` after loudnorm before mixing, mix with duration=longest, then atrim to the video length. qa_check now fails if audio is shorter than video, and measures dead air on a voice-only track (QA_VOICE) so SFX can't mask or fake it.
 
+**F26** (spouse SFX v4). "There's a few too many wishes [whooshes]… I don't hear that iMessage cue." Asked which to cut: screen-to-screen and in and out of the app. Send sound: clear iPhone-style.
+- Wrong: 7 whooshes (one per cut, including screen→screen and app overlays). The send swoosh was 2 dB under his speech, so it was masked.
+- Rule: H15 updated. Whoosh only on face↔screen cuts. Signature moments (iMessage send) must be audible: bright 1.1-3.2 kHz glide, verified ≥ +6 dB above speech in the 2-7 kHz band (it measured +8.3).
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.

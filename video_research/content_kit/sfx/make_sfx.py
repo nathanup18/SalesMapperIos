@@ -38,3 +38,10 @@ x = th * .8; x[:len(p)] += p * .6; save('drop', x)
 # strike: quick pencil-like scratch (Notes strike-through)
 n = int(.22 * SR); s = sweep_noise(.22, 3000, 5200, 1.8) * env(n, .1 * n, .5 * n); save('strike', s)
 print('ok')
+# imsg_send: clear iPhone-style "swoop-up" (original synthesis): bright rising glide + crisp air, cuts through speech
+n = int(.24 * SR); t = np.arange(n) / SR
+f = 1100 + (3200 - 1100) * (t / t[-1]) ** 1.4
+tone = (np.sin(2 * np.pi * np.cumsum(f) / SR) + .35 * np.sin(4 * np.pi * np.cumsum(f) / SR)) * env(n, .06 * n, .5 * n)
+air = sweep_noise(.24, 3000, 9000, 1.5) * env(n, .15 * n, .55 * n) * .5
+save('imsg_send', tone + air)
+print('imsg_send ok')

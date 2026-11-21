@@ -215,10 +215,13 @@ SR = 48000; track = np.zeros(int((t + 1) * SR)); ev = []
 def fx(at_, name, g):
     if at_ < 0: at_ = 0
     x = _load(name) * g; i = int(at_ * SR); track[i:i + len(x)] += x[:max(0, len(track) - i)]; ev.append((round(at_, 3), name))
-G = dict(whoosh=.13, swoosh_send=.12, pop=.11, pop_hi=.09, tap=.10, key0=.035, key1=.035, key2=.035, key3=.035, check=.12, drop=.14, strike=.07)
+G = dict(whoosh=.13, swoosh_send=.12, imsg_send=.7, pop=.11, pop_hi=.09, tap=.10, key0=.035, key1=.035, key2=.035, key3=.035, check=.12, drop=.14, strike=.07)
 fx(0.0, 'pop', G['pop'])                                                    # hook card
 cuts = sorted({round(a, 3) for _, a, _ in ins} | {round(b, 3) for _, _, b in ins})
-for c in cuts: fx(c - 0.23, 'whoosh', G['whoosh'] * (1.0 if any(abs(c - a) < 1e-3 for _, a, _ in ins) else .75))
+on_screen = lambda tt: any(x - 1e-3 <= tt < y - 1e-3 for _, x, y in ins)
+for c in cuts:   # F26: whoosh only on face <-> screen cuts, never screen -> screen or app in/out
+    before, after = on_screen(c - 0.02), on_screen(c + 0.02)
+    if before != after: fx(c - 0.23, 'whoosh', G['whoosh'] * (1.0 if after else .75))
 for j, (p, a, b) in enumerate(labels[1:], 1):                                # labels that show over the face
     vis = not any(x - 1e-3 <= a < y - 1e-3 for _, x, y in ins)
     if vis: fx(a + 0.03, 'pop_hi', G['pop_hi'])
@@ -231,7 +234,7 @@ def keys(t0, t1, nchar):
         fx(t0 + (t1 - t0) * q / nchar + rng.uniform(-.01, .01), f'key{rng.integers(4)}', G['key0'] * rng.uniform(.7, 1.1))
 keys(s1 + type_c, s1 + type_c + 0.9, 26)
 send_c = min(at('it?', 'IMG_9751', 'e') - s2 - 0.05, (e2 - s2) - 1.05)
-keys(s2 + 0.05, s2 + send_c - 0.08, 43); fx(s2 + send_c, 'swoosh_send', G['swoosh_send'])
+keys(s2 + 0.05, s2 + send_c - 0.08, 43); fx(s2 + send_c - 0.02, 'imsg_send', G['imsg_send'])   # F26: clearly audible send
 fx(s3 + (at('get', 'IMG_9752') - s3), 'check', G['check']); fx(at('figure', 'IMG_9752'), 'check', G['check'])
 fx(c_close - 0.05 + 0.10 / speed, 'tap', G['tap']); fx(c_close - 0.05 + 1.25 / speed, 'drop', G['drop'])
 with _w.open(f'{out}/sfx_track.wav', 'w') as w:
