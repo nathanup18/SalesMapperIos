@@ -8,7 +8,7 @@ import numpy as np
 V = sys.argv[1]
 D = os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
 W = json.load(open('words.json'))
-GRADE = "scale=in_color_matrix=bt2020:out_color_matrix=bt709,format=yuv420p"  # F27: matrix fix only, no gamut expansion (no added saturation), standard lighting
+GRADE = "zscale=tin=bt709:t=bt709:min=bt2020nc:m=bt709:pin=bt2020:p=bt709:rin=tv:r=tv,format=yuv420p"  # F28: accurate HLG bt2020->bt709, no eq; Nathan matched this to his phone
 FPS = 30; F = lambda x: round(x * FPS) / FPS
 CAP_Y = 1640
 # clip -> (source start override, section label)

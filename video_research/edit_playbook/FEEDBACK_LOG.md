@@ -110,6 +110,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Wrong: the HLG→SDR conversion also converted bt2020→bt709 primaries, which pushed skin red. Face saturation measured 74 vs 57 for neutral (+30%).
 - Rule: H9 updated. Grade = matrix conversion only (`scale=in_color_matrix=bt2020:out_color_matrix=bt709,format=yuv420p`). No primaries or gamut expansion, no eq, no tonemap. Same brightness as the source.
 
+**F28** (spouse v6). "I want all of the lighting to be the same as the video… I look pale. It looks like I don't have a face."
+- Wrong: the F27 matrix-only grade left bt2020 primaries uninterpreted, which washed out the skin (face saturation 60 vs 77-81 accurate).
+- Process: built a side-by-side of 4 grades on 2 frames and Nathan compared them to the original in Photos. He picked option 1, the accurate zscale bt2020→bt709 conversion with no eq. (libplacebo with Dolby Vision was tried, but software Vulkan renders stripe artifacts here, so it's unusable.)
+- Rule: H9 final. Grade = accurate conversion, no saturation or contrast changes. When color is disputed, don't guess again: show a labeled lineup and let him match it to his phone.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
