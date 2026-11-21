@@ -95,7 +95,12 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Rule: H6 is now enforced in code. make_edit computes each animation's done time from its cues and fails the build unless done + 0.4 s fits the window. Real-app clips use unzoomed footage (mockup.html `tap&nozoom=1`), sped up when needed so the full action fits. Never crop UI.
 
 **F24** (spouse v3). "I need something to make the initial couple seconds a little more enticing. I also want to add a couple of subtle sound effects like swooshes, pops, and whishes when certain elements show up on the screen."
-- Rule: PENDING clarification (asked 2026-11-21).
+- Clarified (Q&A): opening = slow punch-in on his face plus stronger hook text. SFX on headline and labels, cuts to screens, UI actions and typing. Sounds synthesized in-house (no licensing). Level: subtle.
+- Rule: H14, H15.
+
+**F25** (found by QA, spouse SFX build). After adding SFX, the audio ended 2.9 s early: the CTA was gone.
+- Wrong: loudnorm works at 192 kHz internally; amix(duration=first) with an unresampled loudnorm output truncated the mix.
+- Rule: always `aresample=48000` after loudnorm before mixing, mix with duration=longest, then atrim to the video length. qa_check now fails if audio is shorter than video, and measures dead air on a voice-only track (QA_VOICE) so SFX can't mask or fake it.
 
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
@@ -106,6 +111,8 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - d2d_spouse_objection_v1_captions.mp4 and d2d_spouse_objection_v1_clean.mp4: rebuilt with H11-H13 (iOS Notes, iMessage, Reminders; real app Sale tap; TikTok Sans labels, hook and captions). QA PASS on both. Found in review: labels covered the phone title bars, so labels are now hidden over screens.
 
 - d2d_spouse_objection_v3_captions.mp4 and d2d_spouse_objection_v3_clean.mp4: runtime and crop fixes (F23). QA PASS, runtime gate PASS. Nathan approved the look.
+
+- d2d_spouse_objection_v1_sfx_captions.mp4 and d2d_spouse_objection_v1_sfx_clean.mp4: push-in hook, two-tier headline, 77 subtle synthesized SFX. QA PASS on both, runtime gate PASS.
 
 ## Performance
 (Log 48 h stats per posted video here.)

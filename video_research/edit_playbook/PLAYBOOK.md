@@ -1,6 +1,6 @@
 # Short-form video edit playbook (living)
 
-Version: 11 (2026-11-21)
+Version: 12 (2026-11-21)
 Owner: Nathan. This file is the source of truth for the `short-form-video-edit` skill. The skill loads it at the start of every run and updates it whenever Nathan gives feedback (see "Learning protocol" at the bottom). Never treat it as frozen.
 
 Rule priority, highest first:
@@ -76,6 +76,16 @@ H12. On-screen text uses TikTok's native style. [F22]
 
 H13. Ship two versions of every edit: captioned and clean. [F22]
 - Clean = no burned-in word captions (labels and the hook stay), so Nathan can use the platform's auto-captions.
+
+H14. The opening has energy. [F24]
+- Hook shot: smooth push-in on his face, 100%→110% across the hook, using subpixel warpAffine (no ffmpeg zoompan, which jitters). Later jump cuts alternate 100%/112%, starting at 100% after the hook.
+- Hook text frames the problem instead of restating the topic: a two-tier card, a smaller lead line ("Stop losing deals to") over the big quote, still inside H10's bounds.
+
+H15. Subtle sound design. [F24]
+- Synthesized in-house only (content_kit/sfx/make_sfx.py): whoosh (cuts to and from screens, peak on the cut, softer on cut-backs), pop (hook card), pop_hi (labels shown over the face), strike (Notes strike-through), key clicks (typing, about 85% of characters, randomized), swoosh_send (iMessage send), check (Reminders), tap and drop (app tap and pin landing).
+- Level: subtle. Peaks around -18 dBFS against voice at -14 LUFS. Felt, not heard.
+- Place every sound from the same word-timed cues as the animation it belongs to.
+- Mix: loudnorm → aresample 48k → amix(normalize=0, longest) → atrim to video length → alimiter. [F25]
 
 ---
 
@@ -160,6 +170,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v12 (2026-11-21): H14 hook push-in plus two-tier hook text; H15 synthesized subtle SFX; audio-length QA, QA_VOICE (F24, F25).
 - v11 (2026-11-21): runtime gate in code, no cropped UI (F23). Look approved by Nathan.
 - v10 (2026-11-21): iOS screen library (iMessage, Notes, Reminders); labels hidden over screens; two-version output in make_edit3.
 - v9 (2026-11-21): H11 real-software graphics, H12 TikTok native text, H13 captioned plus clean versions (F22).

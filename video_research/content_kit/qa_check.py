@@ -43,7 +43,8 @@ def in_insert(t):
 # ---- deadair
 with tempfile.TemporaryDirectory() as td:
     wav = os.path.join(td, "a.wav")
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", video, "-ac", "1", "-ar", "16000", wav], check=True)
+    src = os.environ.get("QA_VOICE") or video   # dead air is about the voice: use a voice-only track when SFX are mixed in
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", src, "-ac", "1", "-ar", "16000", wav], check=True)
     w = wave.open(wav); x = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(float) / 32768
 db = np.array([20 * np.log10(np.sqrt(np.mean(x[i:i + 160] ** 2)) + 1e-9) for i in range(0, len(x) - 160, 160)])
 floor = np.percentile(db, 5)
@@ -91,6 +92,14 @@ srt = sorted(INS, key=lambda r: r[1])
 for (fa, a1, b1), (fb, a2, b2) in zip(srt, srt[1:]):
     if 0 < a2 - b1 < 0.25:
         fails.append(f"flash: {a2 - b1:.3f}s gap of face between {os.path.basename(fa)} and {os.path.basename(fb)} at {b1:.2f}s")
+
+# ---- audio must cover the whole video (a mix can silently truncate)
+_dur = lambda kind: float(subprocess.check_output(["ffprobe", "-v", "error", "-select_streams", kind, "-show_entries", "stream=duration", "-of", "csv=p=0", video]).split()[0])
+try:
+    va, vv = _dur("a:0"), _dur("v:0")
+    if va < vv - 0.10: fails.append(f"audio: audio ends at {va:.2f}s but video runs {vv:.2f}s")
+except Exception as e:
+    notes.append(f"audio: couldn't compare stream durations ({e})")
 
 # ---- black / blank frames anywhere (scan the middle band of every frame; labels/captions sit outside it)
 raw = subprocess.run(["ffmpeg", "-v", "error", "-i", video, "-vf", "scale=90:160,format=gray", "-f", "rawvideo", "-"], capture_output=True).stdout
