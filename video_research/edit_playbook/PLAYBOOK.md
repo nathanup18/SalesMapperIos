@@ -1,6 +1,6 @@
 # Short-form video edit playbook (living)
 
-Version: 6 (2026-11-21)
+Version: 7 (2026-11-21)
 Owner: Nathan. This file is the source of truth for the `short-form-video-edit` skill. The skill loads it at the start of every run and updates it whenever Nathan gives feedback (see "Learning protocol" at the bottom). Never treat it as frozen.
 
 Rule priority, highest first:
@@ -112,6 +112,8 @@ One command does the cut, captions and composite: `python make_edit.py <variant>
 6. Run `qa_check.py`. It must pass before anything is sent.
 7. Deliver the full-quality file through chat. Put a preview of 3 MB or less in Drive under 06 Final renders (the upload limit).
 
+Drive convention [F20]: files at the top level of `01 Raw footage` are unedited, new footage. When a video ships, move its raw clips into a subfolder `01 Raw footage/<YYYY-MM-DD> · <video title> (edited)`. Only edit what's at the top level unless Nathan says otherwise.
+
 ## 6. QA gate (run before every delivery; any failure blocks it)
 - [ ] Frame 0 and every clip start: speech within 0.10 s; inner cuts within 0.25 s (qa_check.py `deadair`)
 - [ ] No black frames anywhere (qa_check.py `black`)
@@ -137,6 +139,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v7 (2026-11-21): Drive convention, edited raw clips go to a dated subfolder (F20).
 - v6 (2026-11-21): H9 no contrast grade (F18). H10 big black hook headline filling the top third (F19).
 - v5 (2026-11-21): QA gate automated (dead air, black frames, flashes, caption-chin, completion). Fixed A/V drift from AAC segment concat (PCM segments). Inserts are full-timeline pre-renders with first-frame padding. Frame 0 hand fix. Added make_edit.py.
 - v4 (2026-11-21): moved to the living playbook on GitHub. Backfilled 13 feedback items from the first editing session. Added the hard rules, QA gate and learning protocol.

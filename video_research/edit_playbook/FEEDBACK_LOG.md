@@ -74,6 +74,9 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Wrong: the hook pill was 70 px text in an 880 px box, roughly the top 13% of the screen, with one green word.
 - Rule: H10. The hook headline is big: black text on white, filling up to the top third (bottom edge ≤ y 640) inside 60 px side margins, starting below the platform's top UI (y ≥ 180).
 
+**F20**. "Move the old videos in my Google Drive… into their own folder within the drive. I'm gonna add some more now."
+- Rule: section 5 Drive convention. Edited raws go to `01 Raw footage/<date> · <title> (edited)`, and the top level holds new footage only.
+
 **Process notes (session 1)**
 - Nathan doesn't want to wait on long batch jobs. Ship the first pass fast, then refine. Use the faster Whisper model if transcription is the bottleneck.
 - He iterates in small, specific notes. Apply each one exactly, re-check the whole video for side effects, and say what else changed.
