@@ -1,6 +1,6 @@
 # Short-form video edit playbook (living)
 
-Version: 8 (2026-11-21)
+Version: 9 (2026-11-21)
 Owner: Nathan. This file is the source of truth for the `short-form-video-edit` skill. The skill loads it at the start of every run and updates it whenever Nathan gives feedback (see "Learning protocol" at the bottom). Never treat it as frozen.
 
 Rule priority, highest first:
@@ -60,6 +60,18 @@ H9. Don't touch contrast. [F18]
 H10. The hook headline is big and black. [F19]
 - White card, black (#000) text in Nunito Sans Black, no colored words. It fills up to the top third: box top at y≥180 (below the TikTok/Reels top bar), bottom at y≤640, side margins ≥60 px (box width about 960 px), text about 110-125 px, 2-3 lines.
 - It should jolt the viewer. Size up rather than down, but never past the margins or the top third.
+
+H11. Graphics must look like real software, never "AI motion graphics". [F22]
+- Conversations: a real iMessage look. Status bar, contact header with an initials avatar, grey received bubbles (#E9E9EA), blue sent bubbles (#0A84FF), tails, "Delivered", and the typing indicator. Everyday notes and lists: an iOS Notes or Reminders look. Gift cards: an Apple Wallet pass look. Doors, re-knocks, results: the SalesMapper app UI (mockup.html scenes or real recordings).
+- No beige cards, soft pills or "kicker" headings. If a frame wouldn't plausibly appear on a real phone or in a real app, don't use it.
+- Use an SF-like UI font (Inter) inside phone UIs.
+
+H12. On-screen text uses TikTok's native style. [F22]
+- Font: TikTok Sans (or the closest native equivalent). Section labels look typed in TikTok's text tool: a white background box with black text or white text with a black outline, sized large. Step numbers are big ("1." at the same size as the title, or larger), not tiny badges.
+- The hook headline (H10) also uses TikTok Sans.
+
+H13. Ship two versions of every edit: captioned and clean. [F22]
+- Clean = no burned-in word captions (labels and the hook stay), so Nathan can use the platform's auto-captions.
 
 ---
 
@@ -144,6 +156,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v9 (2026-11-21): H11 real-software graphics, H12 TikTok native text, H13 captioned plus clean versions (F22).
 - v8 (2026-11-21): temporary link share for big raw clips is pre-approved (F21).
 - v7 (2026-11-21): Drive convention, edited raw clips go to a dated subfolder (F20).
 - v6 (2026-11-21): H9 no contrast grade (F18). H10 big black hook headline filling the top third (F19).
