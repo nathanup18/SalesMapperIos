@@ -77,6 +77,9 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 **F20**. "Move the old videos in my Google Drive… into their own folder within the drive. I'm gonna add some more now."
 - Rule: section 5 Drive convention. Edited raws go to `01 Raw footage/<date> · <title> (edited)`, and the top level holds new footage only.
 
+**F21**. Asked about the temporary share for raw clips over 10 MB, Nathan answered: "Yes, and always for raw clips."
+- Rule: section 5 step 1. Don't ask again; still remind him to set the files back to Restricted.
+
 **Process notes (session 1)**
 - Nathan doesn't want to wait on long batch jobs. Ship the first pass fast, then refine. Use the faster Whisper model if transcription is the bottleneck.
 - He iterates in small, specific notes. Apply each one exactly, re-check the whole video for side effects, and say what else changed.

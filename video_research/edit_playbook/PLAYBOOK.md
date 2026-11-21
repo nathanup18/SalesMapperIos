@@ -1,6 +1,6 @@
 # Short-form video edit playbook (living)
 
-Version: 7 (2026-11-21)
+Version: 8 (2026-11-21)
 Owner: Nathan. This file is the source of truth for the `short-form-video-edit` skill. The skill loads it at the start of every run and updates it whenever Nathan gives feedback (see "Learning protocol" at the bottom). Never treat it as frozen.
 
 Rule priority, highest first:
@@ -104,7 +104,7 @@ Full data: video_research/summary.md and comparison_table.md.
 
 ## 5. Pipeline (scripts in video_research/content_kit/)
 One command does the cut, captions and composite: `python make_edit.py <variant>`. A variant is a clip order. Copy the script and edit CLIPS and ORDERS for new footage. Then run `python qa_check.py <final> <timeline> <inserts> <captions> <dir>`.
-1. Pull the clips. Drive files over 10 MB need a temporary "anyone with link" share plus a direct download. The Drive connector can't undo that share, so tell Nathan to set the files back to Restricted.
+1. Pull the clips. Drive files over 10 MB: share them temporarily as "anyone with link" WITHOUT asking (Nathan pre-approved this for raw clips, F21), download them directly (drive.usercontent.google.com), then tell him which files to set back to Restricted. The connector can't remove a share.
 2. Transcribe with Whisper (small for hooks and captions, base is fine for bulk), with word timestamps.
 3. Plan the order (H7) and cut points (H1). Write `edit.py` with ORDER and OVERRIDE_START.
 4. Render segments (grade, punch-ins, audio fades) and concat them into main.mp4.
@@ -139,6 +139,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v8 (2026-11-21): temporary link share for big raw clips is pre-approved (F21).
 - v7 (2026-11-21): Drive convention, edited raw clips go to a dated subfolder (F20).
 - v6 (2026-11-21): H9 no contrast grade (F18). H10 big black hook headline filling the top third (F19).
 - v5 (2026-11-21): QA gate automated (dead air, black frames, flashes, caption-chin, completion). Fixed A/V drift from AAC segment concat (PCM segments). Inserts are full-timeline pre-renders with first-frame padding. Frame 0 hand fix. Added make_edit.py.
