@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;width:1080px;height:1920px;background:transparent;font-family:"TikTok Sans"}
+#b{position:absolute;left:60px;width:960px;top:190px;box-sizing:border-box;background:#fff;border-radius:34px;padding:30px 40px 38px;box-shadow:0 14px 40px rgba(0,0,0,.30);text-align:center}
+#k{color:#000;font-weight:800;font-size:58px;letter-spacing:-.5px;line-height:1.1;margin-bottom:12px}
+#t{color:#000;font-weight:900;line-height:1.02;letter-spacing:-2px;font-size:100px}
+</style></head><body><div id="b"><div id="k">Every rep after day one:</div><div id="t">“I'm not built for this.”</div></div>
+<script>
+const b=document.getElementById('b'), t=document.getElementById('t');
+for(let fs=150; fs>=70; fs-=2){ t.style.fontSize=fs+'px'; const r=b.getBoundingClientRect(); if(r.bottom<=640 && t.scrollWidth<=960-80) break; }
+</script></body></html>
