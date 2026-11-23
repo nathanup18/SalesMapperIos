@@ -179,6 +179,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 **F43** (2026-11-23, Business IQ cards). "I just want some variance: some square, some rectangle long side down, some rectangle short side down."
 - Rule: in a run of term cards, rotate three shapes so no two consecutive cards match: wide (800x440 base), square (500x500), tall (400x570). Shape is a `shape` field per term in terms.json (default rotation wide, square, tall), so single cards can be swapped.
 - Square/tall layout: diagram on top, formula pill (auto-shrinks to 12 px, then wraps), definition, then a label strip (Detail view glyph, Scale study, Touchpoint; tall adds the l3 row). Side profile, material and the scale circles are wide-only. The page logs OVERLAP/OVERFLOW if text collides.
+- Process note: the auto-mode classifier blocked two "anyone with link" shares once; Nathan approved a retry and it went through.
 - Placement unchanged: top at y 1222 (IG) / 1218 (TikTok), centered at x 540 (IG) or 465 (TikTok, clear of the right rail). IG scale 1.2/1.2/1.12 (tall bottom 1860), TikTok 1.08/1.08/1.0.
 
 ## Shipped
@@ -204,6 +205,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - d2d_IQ_v2.mp4: zoom 1.2x up-shift, header, one-word captions, 16 brighter cards, original HDR. 18.9 s.
 - d2d_IQ_v3.mp4: bigger cards + red follow pop-up. 18.9 s, original HDR.
 - d2d_IQ_v4.mp4 (Reels) + d2d_IQ_v4_TIKTOK.mp4: 18.6 s, vivid red CTA, TikTok-safe layout.
+- business_IQ_instagram.mp4 + business_IQ_tiktok.mp4 (F43 card shapes): 20.5 s, cards rotate wide/square/tall, audio decodes clean, face luma within 2.5/1023 of source, original HDR.
 
 ## Performance
 (Log 48 h stats per posted video here.)
