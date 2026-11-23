@@ -198,6 +198,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 
 **F47** (2026-11-23, Business IQ post caption). "I want the caption to be more general business focused for this to get a wider audience."
 - Rule: videos about general business concepts get a general-business caption (no D2D wording; "Follow for more business tips"; general hashtags like #businessowner #entrepreneur #smallbusiness). The D2D follow line and hashtags apply only to door-to-door content.
+- Follow-up: "like aspirational stuff. I like the entrepreneur hashtag, the business owner hashtag." Tone for general-business captions is aspirational (owning a job vs owning a business, building something that runs without you). Always include #entrepreneur and #businessowner.
 - Comment trigger kept but made unique per video ("OWNER" here, "IQ" for D2D Sales IQ) so one auto-DM keyword doesn't serve two different cheat sheets.
 
 ## Shipped
