@@ -155,6 +155,12 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Takes: match the room. 9843-9845 were shot in a different room from the term clips, so the hook came from 9848.
 - Font gotcha: Google Fonts woff2 subsets fall back to serif in headless Chromium. Install full TTFs (request the CSS with no browser user-agent).
 
+**F38** (D2D IQ v2). "I like this. Make the font and the image you've added brighter… zoom my video clip in and move it up… I want the photos to be popping up where captions normally are on Instagram Reels… mimic his text exactly… 'Door-to-Door Sales IQ' header, '(owner edition)' below… my captions popping up one word at a time in the middle of the screen… at the start below my chin, kind of my chest area."
+- Rule: overlays on HDR are mapped brighter than reference white (white = 88% HLG signal, not 75%). Only the overlays; footage untouched.
+- Rule: to make room for graphics, zoom the footage 1.2x bottom-anchored (scale 1296x2304, crop y 384): the face moves up about 150 px (chin ~1110, max 1203) and graphics go at y >= 1240, where Reels captions usually sit. A plain scale/crop in yuv420p10 doesn't change color.
+- Header in his style: bold sans (Inter 800, 84 px, thin dark stroke) + "(owner edition)" regular below, top of frame, during the hook. Keep it inside ~90 px side margins.
+- Captions: ONE word at a time, white Instrument Serif ~118 px with dark shadow, chest area (y 1240), hook and outro only (term titles carry the middle). Fix Whisper errors in captions ("fall for more" -> "follow for more").
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -175,6 +181,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - d2d_3_lines_SPLICE_original_picture.mp4: 54.2 s, plain splice, original HDR kept (luma diff 0.6/1023).
 - d2d_3_lines_SPLICE_tight5.mp4: 51.3 s, tight splice, original HDR, speech at 0.04 s.
 - d2d_IQ_terms.mp4 (+ d2d_IQ_no_cards.mp4, card PNG pack): 18.9 s, 16 term cards, original HDR, speech at 0.03 s.
+- d2d_IQ_v2.mp4: zoom 1.2x up-shift, header, one-word captions, 16 brighter cards, original HDR. 18.9 s.
 
 ## Performance
 (Log 48 h stats per posted video here.)
