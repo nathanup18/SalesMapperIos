@@ -192,20 +192,20 @@
   "def": "How long a new hire takes to pay for themselves."
  },
  {
-  "key": "conc",
-  "title": "Customer Concentration,",
-  "name": "Customer Concentration",
-  "acc": "#D9534F",
-  "dia": "conc",
-  "glyph": "pie",
-  "dcap": "One account, magnified.",
-  "mat": "Risk",
-  "scale": "A few customers.<br>Most of the money.",
-  "touch": "Your biggest account.",
-  "l3": "Rule of thumb",
-  "t3": "Over 20% from one client is a risk.",
-  "formula": "CONCENTRATION = TOP CUSTOMERS \u00f7 TOTAL REVENUE",
-  "def": "How much of your revenue rides on a few customers."
+  "key": "ebitda",
+  "title": "EBITDA,",
+  "name": "EBITDA",
+  "acc": "#7B61D1",
+  "dia": "ebitda",
+  "glyph": "bars",
+  "dcap": "One year, magnified.",
+  "mat": "Valuation",
+  "scale": "Profit before<br>the paper costs.",
+  "touch": "The day you sell.",
+  "l3": "Why it matters",
+  "t3": "Companies sell for a multiple of it.",
+  "formula": "EBITDA = NET INCOME + INTEREST + TAX + D&A",
+  "def": "Profit before interest, taxes and depreciation. What buyers value you on."
  },
  {
   "key": "r40",
@@ -224,24 +224,8 @@
   "def": "A quick test of whether growth and profit are balanced."
  },
  {
-  "key": "fcf",
-  "title": "Free Cash Flow Conversion,",
-  "name": "FCF Conversion",
-  "acc": "#2A9D8F",
-  "dia": "fcf",
-  "glyph": "money",
-  "dcap": "One dollar, magnified.",
-  "mat": "Cash quality",
-  "scale": "Profit on paper.<br>Cash in hand.",
-  "touch": "Month-end bank balance.",
-  "l3": "Why it matters",
-  "t3": "Profit you can\u2019t collect isn\u2019t profit yet.",
-  "formula": "FCF CONVERSION = FREE CASH FLOW \u00f7 NET INCOME",
-  "def": "How much of your profit actually turns into cash."
- },
- {
   "key": "oplev",
-  "title": "and Operating Leverage.",
+  "title": "Operating Leverage,",
   "name": "Operating Leverage",
   "acc": "#3A6FD8",
   "dia": "oplev",
@@ -254,5 +238,21 @@
   "t3": "It cuts both ways when sales drop.",
   "formula": "OP LEVERAGE = % CHANGE PROFIT \u00f7 % CHANGE SALES",
   "def": "Fixed costs make each extra sale more profitable."
+ },
+ {
+  "key": "unit",
+  "title": "Unit Economics.",
+  "name": "Unit Economics",
+  "acc": "#2E9E5B",
+  "dia": "unit",
+  "glyph": "person",
+  "dcap": "One customer, magnified.",
+  "mat": "Per customer",
+  "scale": "One customer.<br>Profit or loss.",
+  "touch": "Every new account.",
+  "l3": "Rule of thumb",
+  "t3": "If one customer loses money, more customers lose more.",
+  "formula": "UNIT ECONOMICS = LTV \u00f7 CAC",
+  "def": "Whether one customer makes or loses you money."
  }
 ]

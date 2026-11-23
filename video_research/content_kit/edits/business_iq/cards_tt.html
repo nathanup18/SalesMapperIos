@@ -2,7 +2,7 @@
 html,body{margin:0;width:1080px;height:1920px;background:transparent;overflow:hidden}
 #title{position:absolute;left:40px;right:150px;top:262px;text-align:center;font-family:"Instrument Serif";font-size:92px;line-height:1;color:#fff;letter-spacing:-.5px;
  text-shadow:0 0 22px rgba(0,0,0,.55),0 2px 8px rgba(0,0,0,.6),0 0 2px rgba(0,0,0,.75)}
-#card{position:absolute;left:60px;top:1222px;transform:scale(.88);transform-origin:0 0;width:800px;height:440px;background:#EFF0F2;box-sizing:border-box;font-family:Inter;color:#2b2e33}
+#card{position:absolute;left:34px;top:1218px;transform:scale(1.08);transform-origin:0 0;width:800px;height:440px;background:#EFF0F2;box-sizing:border-box;font-family:Inter;color:#2b2e33}
 .lbl{font-family:"IBM Plex Mono";font-size:10.5px;letter-spacing:2.2px;text-transform:uppercase}
 .cap{font-size:11.5px;line-height:1.32;color:#3d4148}
 .abs{position:absolute}
@@ -107,6 +107,12 @@ const D = {
  r40: () => `<rect x="150" y="${150 - 75}" width="90" height="75" fill="${A}" fill-opacity=".85"/><rect x="150" y="${150 - 120}" width="90" height="45" fill="${A}" fill-opacity=".4"/>` + mono(195, 120, 10, 'GROWTH 25%', '#fff') + mono(195, 58, 10, 'MARGIN 15%') + `<line x1="60" y1="30" x2="330" y2="30" stroke="${ink}" stroke-dasharray="5 4"/>` + mono(330, 24, 9, '40', ink, 'end') + `<line x1="60" y1="150" x2="330" y2="150" stroke="${ink}"/>` + mono(195, 180, 10, 'GROWTH + PROFIT ≥ 40%', A),
  fcf: () => `<rect x="80" y="40" width="90" height="110" fill="${mute}" fill-opacity=".55"/><rect x="220" y="72" width="90" height="78" fill="${A}" fill-opacity=".9"/>` + `<line x1="50" y1="150" x2="340" y2="150" stroke="${ink}"/>` + mono(125, 168, 10, 'NET PROFIT', mute) + mono(265, 168, 10, 'CASH IN THE BANK', A) + big(195, 206, '71%', '').replace('y="226"', 'y="999"'),
  oplev: () => `<line x1="30" y1="160" x2="370" y2="160" stroke="${ink}"/><line x1="30" y1="110" x2="370" y2="110" stroke="${mute}" stroke-width="2"/>` + mono(36, 104, 9, 'FIXED COSTS', mute, 'start') + `<line x1="30" y1="160" x2="370" y2="30" stroke="${A}" stroke-width="2.4"/>` + mono(366, 50, 9, 'REVENUE', A, 'end') + `<path d="M161 110 L370 30 L370 110 Z" fill="${A}" fill-opacity=".15"/>` + mono(300, 96, 10, 'PROFIT', A) + mono(195, 190, 10, 'EACH SALE PAST BREAK-EVEN IS MOSTLY PROFIT', A),
+
+ ebitda: () => `<rect x="20" y="40" width="70" height="120" fill="${A}" fill-opacity=".35"/><rect x="100" y="40" width="60" height="70" fill="${mute}" fill-opacity=".6"/><rect x="170" y="110" width="60" height="50" fill="${A}" fill-opacity=".9"/>` +
+   `<rect x="240" y="80" width="60" height="30" fill="none" stroke="${A}" stroke-dasharray="4 3"/><rect x="310" y="80" width="60" height="80" fill="${A}" fill-opacity=".9"/>` + `<line x1="10" y1="160" x2="380" y2="160" stroke="${ink}"/>` +
+   mono(55, 178, 9, 'REVENUE', mute) + mono(130, 178, 9, 'COSTS', mute) + mono(200, 178, 9, 'NET', mute) + mono(270, 178, 9, '+I +T +D&A', A) + mono(340, 178, 9, 'EBITDA', A) + mono(195, 206, 10, 'WHAT BUYERS VALUE YOU ON', A),
+ unit: () => person(50, 60) + mono(50, 112, 9, 'ONE CUSTOMER', mute) + `<rect x="110" y="40" width="240" height="34" fill="${A}" fill-opacity=".9"/><rect x="110" y="86" width="40" height="34" fill="${mute}" fill-opacity=".6"/>` +
+   mono(230, 62, 11, 'LIFETIME PROFIT  $4,800', '#fff') + mono(160, 108, 10, 'CAC $310', ink, 'start') + big(230, 172, '15×', 'RETURN ON EVERY CUSTOMER WON'),
 };
 document.getElementById('dia').innerHTML = D[T.dia]();
 const G = { // detail-view glyphs
