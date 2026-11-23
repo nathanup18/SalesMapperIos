@@ -171,6 +171,8 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - TikTok layout (separate render, same content): header/titles down to y 250-262 (below the Following/For You tabs), card scaled .88 and shifted left (x 60-764) clear of the right action rail, captions centered in x 30-940. Files: cards_tt.html, overlay_tt.html; env PFX/OVL/CAP/HL/OUTF on build2.py.
 - Move fast: when Nathan says so, skip extra previews and ship.
 
+**F41** (D2D IQ v4). "I don't want the elements to be translucent." Rule: graphics (cards, boxes) are 100% opaque. No see-through backgrounds.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
