@@ -196,6 +196,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Rule: when Whisper shows a long gap inside a phrase, check the waveform for two speech bursts. If the words before the gap repeat after it, it's a false start: keep only the restart. Whisper drops repeated words, so a clean-looking transcript can hide a stutter.
 - Fix: the outro starts at 9.3 s; restart words patched into words.json for captions. Runtime 19.7 s, DELIVERY PASS both.
 
+**F47** (2026-11-23, Business IQ post caption). "I want the caption to be more general business focused for this to get a wider audience."
+- Rule: videos about general business concepts get a general-business caption (no D2D wording; "Follow for more business tips"; general hashtags like #businessowner #entrepreneur #smallbusiness). The D2D follow line and hashtags apply only to door-to-door content.
+- Comment trigger kept but made unique per video ("OWNER" here, "IQ" for D2D Sales IQ) so one auto-DM keyword doesn't serve two different cheat sheets.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
