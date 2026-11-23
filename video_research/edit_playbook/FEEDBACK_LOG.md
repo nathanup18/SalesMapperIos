@@ -131,6 +131,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Decision: generate an ORIGINAL cinematic scene instead of real movie footage (copyright, and this environment can't fetch film clips). Kling 3.0 in Higgsfield, 15 s, 9:16, sound on, 30 credits: one prompt with four numbered shots, each line in quotes with who says it, "no music, no on-screen text, no subtitles". All four lines came out correct and lip-synced on the first try.
 - Pipeline: the Higgsfield file host (d8j0ntlcm91z4.cloudfront.net) was added to the environment allowlist. Cut silent gaps the same as talking heads (H1), fix Whisper's number/homophone errors in captions ("40"→"Forty", "nose"→"no's"), and freeze the last frame 1.6 s under the follow card instead of cutting the punchline short.
 
+**F33** (2026-11-23, direction change). "Do I really need to be doing all this editing? … using default captions that users would see, and then having like basic headers with text that isn't too blown up makes sense." Then: "I put all the [takes] into the Google Drive. I want you to start editing that."
+- Evidence: the niche scrape agrees. Cut rate, burned captions and banner graphics did not separate top from bottom videos; natural pauses did (the only significant result).
+- Rule (LIGHT default): best take per line; trim real dead air only, keep ~0.15-0.3 s beats between thoughts (GAP_MAX 0.6, KEEP 0.16/0.12, TAIL 0.22); normal-size TikTok text header from frame 0 and numbered labels (no top-third block); jump-cut zoom alternation; no custom inserts or SFX unless a moment truly needs explaining; deliver the clean version as primary (platform auto-captions on) plus a simple captioned backup. Supersedes H10 size, H14 two-tier card, H15 SFX and the "insert every 5-8 s" note in F30 for default edits. First used on content_kit/edits/three_lines/make_edit6.py.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -147,6 +151,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - d2d_not_interested v2 (captions + clean): 30.5 s, adds IMG_9774 (clean take), IMG_9780, IMG_9781; inserts: app door-outcomes, iOS Notes, app tap→Interested; no credit tag. QA PASS both, runtime gate PASS.
 - d2d_not_interested v3: 29.9 s, ends role-play on "out of your hair anyway", Notes types 4 lines. QA PASS both.
 - d2d_day_one_captions.mp4 / _clean.mp4 (AI cinematic rep + manager scene): 11.9 s, QA PASS both.
+- d2d_3_lines_clean.mp4 / _captions.mp4 ("3 lines", light style): 54.1 s, 15 takes, QA PASS both.
 
 ## Performance
 (Log 48 h stats per posted video here.)
