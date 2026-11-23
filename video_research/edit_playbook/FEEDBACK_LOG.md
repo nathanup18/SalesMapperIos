@@ -191,6 +191,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Rectangles follow the Bryson reference: about 1.45:1 (base 640x440, 768x528 on IG), not the flat 1.8:1. The reference cards are ~70% of frame width with the top right at the chin.
 - Card top tracks the chin: chin.py runs YuNet on the zoomed frame every 0.1 s in each card's window. Box bottom = chin; top = lowest chin + 20 px (here y 1007-1144, was a fixed 1222). render.js reads seg/tops.json. Model: face_detection_yunet_2023mar.onnx from media.githubusercontent.com (opencv_zoo); OpenCV 5 has no Haar cascades.
 
+**F46** (2026-11-23, Business IQ outro). "At the end, there's the 'if you know those', that kind of stutter, where I say 'if you know' first and then kind of fall over my words. That needs to be cropped out of both. Besides that, it's good."
+- What went wrong: IMG_9875 has a false start "If you know" (6.80-7.45 s), a 2 s pause, then the restart "If you know those" at 9.45. Whisper merged them ("If you" from the false start, "know those" from the restart), so the cut kept both. The pause was cut but the repeat stayed in.
+- Rule: when Whisper shows a long gap inside a phrase, check the waveform for two speech bursts. If the words before the gap repeat after it, it's a false start: keep only the restart. Whisper drops repeated words, so a clean-looking transcript can hide a stutter.
+- Fix: the outro starts at 9.3 s; restart words patched into words.json for captions. Runtime 19.7 s, DELIVERY PASS both.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -218,6 +223,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 
 - business_IQ_instagram.mp4 + business_IQ_tiktok.mp4: 20.5 s, 16 spec-sheet cards, 140 px captions, original HDR. Shipped 2026-11-23 after a corrupt-audio first delivery (F44).
 - business_IQ_instagram.mp4 + business_IQ_tiktok.mp4 v2 (F45): wide/wide/square, chin-tracked cards, 20.5 s, DELIVERY PASS both.
+- business_IQ v3 (F46): false start cut from outro, 19.7 s, DELIVERY PASS both. Nathan: "besides that, it's good."
 
 ## Performance
 (Log 48 h stats per posted video here.)
