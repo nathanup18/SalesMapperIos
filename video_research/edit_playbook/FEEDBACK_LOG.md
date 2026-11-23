@@ -135,6 +135,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Evidence: the niche scrape agrees. Cut rate, burned captions and banner graphics did not separate top from bottom videos; natural pauses did (the only significant result).
 - Rule (LIGHT default): best take per line; trim real dead air only, keep ~0.15-0.3 s beats between thoughts (GAP_MAX 0.6, KEEP 0.16/0.12, TAIL 0.22); normal-size TikTok text header from frame 0 and numbered labels (no top-third block); jump-cut zoom alternation; no custom inserts or SFX unless a moment truly needs explaining; deliver the clean version as primary (platform auto-captions on) plus a simple captioned backup. Supersedes H10 size, H14 two-tier card, H15 SFX and the "insert every 5-8 s" note in F30 for default edits. First used on content_kit/edits/three_lines/make_edit6.py.
 
+**F34** (3 lines, light-style cut). "Stop making it lighter. I don't want this to ever happen again. Also, I want the default. I want black on white for this text. Maybe I should just edit it in Instagram. Yeah, just don't do it. I'll do it."
+- Outcome: Nathan is editing this video himself in Instagram. Stop work on it.
+- Rule: on-screen text is black on white. "Lighter" is not yet clear (picture brightness vs. the lighter editing style from F33), so F33 is SUSPENDED until he says which. Don't ship another edit in either direction without confirming.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
