@@ -176,6 +176,31 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 **F42** (2026-11-23, session wrap-up). "Take all the lessons from this session and record them into the skill. Never, ever increase the saturation or brightness of my overall lighting without asking me first. I don't appreciate that. From here, just keep getting better… in the future, do little pop-ups when you want to ask me certain questions on how the content's going to be formatted."
 - Rules: PLAYBOOK H0 (no brightness/saturation/look changes without asking) and H16 (formatting questions as AskUserQuestion pop-ups, multiple choice). F29-F41 consolidated into PLAYBOOK v16 (H1, H9, H13, H17, H18, section 2, QA gate).
 
+**F43** (2026-11-23, Business IQ cards). "I just want some variance: some square, some rectangle long side down, some rectangle short side down."
+- Rule: in a run of term cards, rotate three shapes so no two consecutive cards match: wide (800x440 base), square (500x500), tall (400x570). Shape is a `shape` field per term in terms.json (default rotation wide, square, tall), so single cards can be swapped.
+- Square/tall layout: diagram on top, formula pill (auto-shrinks to 12 px, then wraps), definition, then a label strip (Detail view glyph, Scale study, Touchpoint; tall adds the l3 row). Side profile, material and the scale circles are wide-only. The page logs OVERLAP/OVERFLOW if text collides.
+- Process note: the auto-mode classifier blocked two "anyone with link" shares once; Nathan approved a retry and it went through.
+- Placement unchanged: top at y 1222 (IG) / 1218 (TikTok), centered at x 540 (IG) or 465 (TikTok, clear of the right rail). IG scale 1.2/1.2/1.12 (tall bottom 1860), TikTok 1.08/1.08/1.0.
+
+**F44** (Business IQ, 2026-11-23). "Dont worry about the audio. I can just mute it… can you just give it to me, this is crazy, your workflows have been so extended today… make my captions slightly larger… send it when it's done."
+- Wrong: the first file delivered had ~3,000 AAC decode errors because two build2 renders ran at the same time and overwrote each other's files. QA never decoded the whole file, so it shipped. Then several extra render loops before he got a usable file.
+- Rule: never run two renders at once. Every file passes content_kit/delivery_check.py (full decode with zero errors; HLG/bt2020/10-bit; audio/video length; optional face-luma vs source) before it is sent. Speed rule: one render, one QA pass, send. No preview loops unless he asks. IQ-format captions default to 140 px (was 118). Audio is optional on IQ-style videos.
+
+**F45** (2026-11-23, Business IQ cards v2). "More squares and then rectangles, not the ones that are long up and down, because then the user can't see it. I also want these images shifted slightly farther up so they're right below my chin." Pop-up answers: 2 rectangles for every square, observe the reference video; track the chin; keep the size.
+- Replaces F43's tall shape: no portrait cards. Rotation is wide, wide, square (terms.json `shape`).
+- Rectangles follow the Bryson reference: about 1.45:1 (base 640x440, 768x528 on IG), not the flat 1.8:1. The reference cards are ~70% of frame width with the top right at the chin.
+- Card top tracks the chin: chin.py runs YuNet on the zoomed frame every 0.1 s in each card's window. Box bottom = chin; top = lowest chin + 20 px (here y 1007-1144, was a fixed 1222). render.js reads seg/tops.json. Model: face_detection_yunet_2023mar.onnx from media.githubusercontent.com (opencv_zoo); OpenCV 5 has no Haar cascades.
+
+**F46** (2026-11-23, Business IQ outro). "At the end, there's the 'if you know those', that kind of stutter, where I say 'if you know' first and then kind of fall over my words. That needs to be cropped out of both. Besides that, it's good."
+- What went wrong: IMG_9875 has a false start "If you know" (6.80-7.45 s), a 2 s pause, then the restart "If you know those" at 9.45. Whisper merged them ("If you" from the false start, "know those" from the restart), so the cut kept both. The pause was cut but the repeat stayed in.
+- Rule: when Whisper shows a long gap inside a phrase, check the waveform for two speech bursts. If the words before the gap repeat after it, it's a false start: keep only the restart. Whisper drops repeated words, so a clean-looking transcript can hide a stutter.
+- Fix: the outro starts at 9.3 s; restart words patched into words.json for captions. Runtime 19.7 s, DELIVERY PASS both.
+
+**F47** (2026-11-23, Business IQ post caption). "I want the caption to be more general business focused for this to get a wider audience."
+- Rule: videos about general business concepts get a general-business caption (no D2D wording; "Follow for more business tips"; general hashtags like #businessowner #entrepreneur #smallbusiness). The D2D follow line and hashtags apply only to door-to-door content.
+- Follow-up: "like aspirational stuff. I like the entrepreneur hashtag, the business owner hashtag." Tone for general-business captions is aspirational (owning a job vs owning a business, building something that runs without you). Always include #entrepreneur and #businessowner.
+- Comment trigger kept but made unique per video ("OWNER" here, "IQ" for D2D Sales IQ) so one auto-DM keyword doesn't serve two different cheat sheets.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -199,6 +224,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - d2d_IQ_v2.mp4: zoom 1.2x up-shift, header, one-word captions, 16 brighter cards, original HDR. 18.9 s.
 - d2d_IQ_v3.mp4: bigger cards + red follow pop-up. 18.9 s, original HDR.
 - d2d_IQ_v4.mp4 (Reels) + d2d_IQ_v4_TIKTOK.mp4: 18.6 s, vivid red CTA, TikTok-safe layout.
+- business_IQ_instagram.mp4 + business_IQ_tiktok.mp4 (F43 card shapes): 20.5 s, cards rotate wide/square/tall, audio decodes clean, face luma within 2.5/1023 of source, original HDR.
+
+- business_IQ_instagram.mp4 + business_IQ_tiktok.mp4: 20.5 s, 16 spec-sheet cards, 140 px captions, original HDR. Shipped 2026-11-23 after a corrupt-audio first delivery (F44).
+- business_IQ_instagram.mp4 + business_IQ_tiktok.mp4 v2 (F45): wide/wide/square, chin-tracked cards, 20.5 s, DELIVERY PASS both.
+- business_IQ v3 (F46): false start cut from outro, 19.7 s, DELIVERY PASS both. Nathan: "besides that, it's good."
 
 ## Performance
 (Log 48 h stats per posted video here.)

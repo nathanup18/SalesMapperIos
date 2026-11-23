@@ -18,7 +18,9 @@ Code: `video_research/content_kit/edits/business_iq/`
 - Words: `words.json` (Whisper, with the 9875 second-take words patched in).
 - **Gotcha:** never run two renders at once. Overlapping build2 runs corrupted the AAC audio and overwrote card sizes. Run Instagram, then TikTok, sequentially, then check `ffmpeg -v error -i out.mp4 -f null -` prints nothing.
 
-## NEXT TASK 1: card shape variety (Nathan's request)
+## DONE (F43, F45): card shape variety. Shipped v2: wide, wide, square (reference proportions), card tops track the chin via chin.py. Pipeline: build.py, chin.py (YUNET=model path), render.js (IG then TikTok), build2.py IG then TikTok, delivery_check.py.
+
+## (old) NEXT TASK 1: card shape variety (Nathan's request)
 "I just want some variance: some square, some rectangle long side down, some rectangle short side down."
 - Give the 16 cards a mix of three shapes, so consecutive cards don't share a shape:
   - Wide (current, landscape, long side down)

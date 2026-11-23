@@ -2,7 +2,7 @@
 import json, wave, subprocess, os, numpy as np, cv2
 W = json.load(open('words.json')); FPS = 30; F = lambda x: round(x * FPS) / FPS
 CLIPS = [("HOOK", "IMG_9870", 0, 99), ("B1", "IMG_9871", 0, 99), ("B2", "IMG_9872", 0, 99), ("B3", "IMG_9873", 0, 99), ("B4", "IMG_9874", 7.6, 99),
-         ("O1", "IMG_9875", 6.6, 99)]    # outro: complete second take (first take stops at "run a real busi-"); the pause after "If you" gets cut
+         ("O1", "IMG_9875", 9.3, 99)]    # outro: complete second take from the restart at 9.45 (F46: 6.8-7.45 is a false start "If you know", then a 2 s pause)
 FILE = {a: f for a, f, _, _ in CLIPS}
 TERMS = [("ltv", "B1", 3.9), ("cac", "B1", 4.7), ("arr", "B1", 5.2), ("gm", "B1", 5.75),
          ("cm", "B2", 2.2), ("churn", "B2", 3.3), ("ndr", "B2", 3.85), ("payback", "B2", 4.9),

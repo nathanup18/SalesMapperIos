@@ -11,7 +11,7 @@ def to_out(c, t):
 HOOK = [(w['w'], max(0.03, to_out('HOOK', w['s']))) for w in W['IMG_9870']]; HOOK[0] = (HOOK[0][0], 0.03)
 OUT = []
 for w in W['IMG_9875']:
-    if w['s'] < 6.6: continue
+    if w['s'] < 9.3: continue
     if w['w'].lower().startswith('follow'): OUT.append(("follow for more", to_out('O1', w['s']))); break   # red pop-up, held to the end
     OUT.append((w['w'], to_out('O1', w['s'])))
 OUT[0] = (OUT[0][0], [x['out0'] for x in tl if x['clip'] == 'O1'][0] + 0.02)

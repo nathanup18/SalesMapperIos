@@ -11,9 +11,10 @@
   "scale": "One customer.<br>Many payments.",
   "touch": "Every renewal after the first one.",
   "l3": "Rule of thumb",
-  "t3": "Under 3\u00d7 CAC and the model doesn\u2019t work.",
-  "formula": "LTV = AVG REVENUE \u00d7 GROSS MARGIN \u00f7 CHURN",
-  "def": "Total gross profit one customer hands you before they leave."
+  "t3": "Under 3× CAC and the model doesn’t work.",
+  "formula": "LTV = AVG REVENUE × GROSS MARGIN ÷ CHURN",
+  "def": "Total gross profit one customer hands you before they leave.",
+  "shape": "wide"
  },
  {
   "key": "cac",
@@ -28,8 +29,9 @@
   "touch": "The first yes.",
   "l3": "Lever",
   "t3": "Referrals and re-knocks cost almost nothing.",
-  "formula": "CAC = SALES & MARKETING SPEND \u00f7 NEW CUSTOMERS",
-  "def": "What it costs you to win one new customer."
+  "formula": "CAC = SALES & MARKETING SPEND ÷ NEW CUSTOMERS",
+  "def": "What it costs you to win one new customer.",
+  "shape": "wide"
  },
  {
   "key": "arr",
@@ -44,8 +46,9 @@
   "touch": "Every subscription renewal.",
   "l3": "Why it matters",
   "t3": "Recurring revenue is what buyers pay up for.",
-  "formula": "ARR = MONTHLY RECURRING REVENUE \u00d7 12",
-  "def": "The yearly value of the revenue that renews on its own."
+  "formula": "ARR = MONTHLY RECURRING REVENUE × 12",
+  "def": "The yearly value of the revenue that renews on its own.",
+  "shape": "square"
  },
  {
   "key": "gm",
@@ -60,8 +63,9 @@
   "touch": "The cost to deliver.",
   "l3": "Rule of thumb",
   "t3": "Low margin means growth just means more work.",
-  "formula": "GROSS MARGIN = (REVENUE \u2212 COGS) \u00f7 REVENUE",
-  "def": "What you keep from each dollar after the direct cost of delivering."
+  "formula": "GROSS MARGIN = (REVENUE − COGS) ÷ REVENUE",
+  "def": "What you keep from each dollar after the direct cost of delivering.",
+  "shape": "wide"
  },
  {
   "key": "cm",
@@ -76,8 +80,9 @@
   "touch": "The next sale, costed on its own.",
   "l3": "Why it matters",
   "t3": "Negative here means growth makes you poorer.",
-  "formula": "CONTRIBUTION = PRICE \u2212 VARIABLE COST PER UNIT",
-  "def": "What one more sale actually adds before fixed costs."
+  "formula": "CONTRIBUTION = PRICE − VARIABLE COST PER UNIT",
+  "def": "What one more sale actually adds before fixed costs.",
+  "shape": "wide"
  },
  {
   "key": "churn",
@@ -92,8 +97,9 @@
   "touch": "The renewal date.",
   "l3": "Lever",
   "t3": "Most churn happens in the first 90 days.",
-  "formula": "CHURN = CUSTOMERS LOST \u00f7 CUSTOMERS AT START",
-  "def": "The share of customers who leave in a period."
+  "formula": "CHURN = CUSTOMERS LOST ÷ CUSTOMERS AT START",
+  "def": "The share of customers who leave in a period.",
+  "shape": "square"
  },
  {
   "key": "ndr",
@@ -108,8 +114,9 @@
   "touch": "The upsell.",
   "l3": "Rule of thumb",
   "t3": "Over 100% means you grow without new sales.",
-  "formula": "NDR = (START + UPSELL \u2212 CHURN) \u00f7 START",
-  "def": "How much revenue last year\u2019s customers bring this year."
+  "formula": "NDR = (START + UPSELL − CHURN) ÷ START",
+  "def": "How much revenue last year’s customers bring this year.",
+  "shape": "wide"
  },
  {
   "key": "payback",
@@ -124,8 +131,9 @@
   "touch": "The month you break even.",
   "l3": "Rule of thumb",
   "t3": "Under 12 months and you can fund your own growth.",
-  "formula": "PAYBACK = CAC \u00f7 MONTHLY GROSS PROFIT",
-  "def": "How many months until a customer pays back what you spent to win them."
+  "formula": "PAYBACK = CAC ÷ MONTHLY GROSS PROFIT",
+  "def": "How many months until a customer pays back what you spent to win them.",
+  "shape": "wide"
  },
  {
   "key": "ccc",
@@ -140,8 +148,9 @@
   "touch": "Between paying and getting paid.",
   "l3": "Lever",
   "t3": "Deposits up front shrink this fastest.",
-  "formula": "CCC = DIO + DSO \u2212 DPO",
-  "def": "Days your cash is tied up before it comes back."
+  "formula": "CCC = DIO + DSO − DPO",
+  "def": "Days your cash is tied up before it comes back.",
+  "shape": "square"
  },
  {
   "key": "dso",
@@ -156,8 +165,9 @@
   "touch": "The silence between invoice and payment.",
   "l3": "Lever",
   "t3": "Deposits and shorter terms beat chasing.",
-  "formula": "DSO = (RECEIVABLES \u00f7 REVENUE) \u00d7 DAYS",
-  "def": "How long you wait to get paid after you\u2019ve done the work."
+  "formula": "DSO = (RECEIVABLES ÷ REVENUE) × DAYS",
+  "def": "How long you wait to get paid after you’ve done the work.",
+  "shape": "wide"
  },
  {
   "key": "wc",
@@ -172,8 +182,9 @@
   "touch": "Payroll week.",
   "l3": "Why it matters",
   "t3": "Profitable companies still die from no cash.",
-  "formula": "WORKING CAPITAL = CURRENT ASSETS \u2212 CURRENT LIABILITIES",
-  "def": "The cash cushion that keeps the lights on."
+  "formula": "WORKING CAPITAL = CURRENT ASSETS − CURRENT LIABILITIES",
+  "def": "The cash cushion that keeps the lights on.",
+  "shape": "wide"
  },
  {
   "key": "ramp",
@@ -189,7 +200,8 @@
   "l3": "Lever",
   "t3": "Ride-alongs and scripts cut it in half.",
   "formula": "RAMP = DAYS UNTIL A REP HITS FULL QUOTA",
-  "def": "How long a new hire takes to pay for themselves."
+  "def": "How long a new hire takes to pay for themselves.",
+  "shape": "square"
  },
  {
   "key": "ebitda",
@@ -205,7 +217,8 @@
   "l3": "Why it matters",
   "t3": "Companies sell for a multiple of it.",
   "formula": "EBITDA = NET INCOME + INTEREST + TAX + D&A",
-  "def": "Profit before interest, taxes and depreciation. What buyers value you on."
+  "def": "Profit before interest, taxes and depreciation. What buyers value you on.",
+  "shape": "wide"
  },
  {
   "key": "r40",
@@ -220,8 +233,9 @@
   "touch": "Every board meeting.",
   "l3": "Why it matters",
   "t3": "Fast and broke or slow and rich can both pass.",
-  "formula": "GROWTH % + PROFIT MARGIN % \u2265 40",
-  "def": "A quick test of whether growth and profit are balanced."
+  "formula": "GROWTH % + PROFIT MARGIN % ≥ 40",
+  "def": "A quick test of whether growth and profit are balanced.",
+  "shape": "wide"
  },
  {
   "key": "oplev",
@@ -236,8 +250,9 @@
   "touch": "Past break-even.",
   "l3": "Why it matters",
   "t3": "It cuts both ways when sales drop.",
-  "formula": "OP LEVERAGE = % CHANGE PROFIT \u00f7 % CHANGE SALES",
-  "def": "Fixed costs make each extra sale more profitable."
+  "formula": "OP LEVERAGE = % CHANGE PROFIT ÷ % CHANGE SALES",
+  "def": "Fixed costs make each extra sale more profitable.",
+  "shape": "square"
  },
  {
   "key": "unit",
@@ -252,7 +267,8 @@
   "touch": "Every new account.",
   "l3": "Rule of thumb",
   "t3": "If one customer loses money, more customers lose more.",
-  "formula": "UNIT ECONOMICS = LTV \u00f7 CAC",
-  "def": "Whether one customer makes or loses you money."
+  "formula": "UNIT ECONOMICS = LTV ÷ CAC",
+  "def": "Whether one customer makes or loses you money.",
+  "shape": "wide"
  }
 ]

@@ -1,6 +1,6 @@
 # Short-form video edit playbook (living)
 
-Version: 16 (2026-11-23)
+Version: 17 (2026-11-23)
 Owner: Nathan. This file is the source of truth for the `short-form-video-edit` skill. The skill loads it at the start of every run and updates it whenever Nathan gives feedback (see "Learning protocol" at the bottom). Never treat it as frozen.
 
 Rule priority, highest first:
@@ -134,7 +134,9 @@ H18. Copying a reference creator's format. [F37-F40]
 - **Every clip counts:** list and transcribe EVERY new file in the raw folder before cutting. A closing "follow for more" clip always goes last. [F30]
 - **Post captions:** a comment trigger works best ("Comment 'GUIDE' / 'IQ' and I'll send you…"). The last line before hashtags is "Follow for more door-to-door tips 🚪". Max 5 hashtags. Offer options as a pop-up (H16).
 - **Scripts and hooks:** the knowledge must be real and counterintuitive to the D2D community (not the standard playbook with new labels). Hooks combine clarity with on-topic curiosity and avoid delay, comprehension loss, irrelevance and disinterest. Flag unbackable stats (e.g. "112%") and suggest safer wording.
-- **Speed:** when he says "move fast", ship the fix without extra previews or questions, then refine.
+- **Speed:** default to one render, one QA pass, then send. No preview loops or long multi-step workflows unless he asks; when he says "move fast", skip questions too. [F40, F44]
+- **Audio on IQ-style videos:** optional. He often mutes and adds a sound in-app, so never hold a delivery for an audio fix. [F44]
+- **IQ-format captions:** one word at a time, Instrument Serif 140 px. [F44]
 - **Platform tips he uses:** Creator account (not Business) for the full music library; added music at 5-10% under his voice at 100%.
 
 ---
@@ -194,6 +196,8 @@ Drive convention [F20]: files at the top level of `01 Raw footage` are unedited,
 - [ ] ±3 frames around every cut, insert and label boundary: no face flash, label and graphic in sync (qa_check.py `boundaries` contact sheet, then look at it)
 - [ ] Each insert's on-screen time is at least its animation length plus 0.4 s
 - [ ] Contact sheet of the whole video reviewed (one frame every 1.5 s)
+- [ ] delivery_check.py PASS on every file sent: full decode with zero errors, still HLG bt2020 10-bit, audio and video the same length [F44]
+- [ ] Renders run one at a time, never in parallel (parallel builds corrupted audio and card sizes) [F44]
 - [ ] Placeholders and judgment calls listed in the delivery message
 
 ---
@@ -210,6 +214,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v17 (2026-11-23): delivery_check.py full-decode gate, one render at a time, one-render-then-send speed rule, optional audio on IQ videos, 140 px IQ captions (F44).
 - v16 (2026-11-23): H0 never change brightness/saturation without asking (F42); H16 formatting questions as pop-ups (F42); H9 keep original HDR, graphics converted into HLG (F35, F38, F40); H1 tight splice + dead-air audit + core-only word guard (F36, F40); H17 opaque graphics placed below the measured chin, 1.2x up-shift (F37-F41); H18 reference-format workflow + TikTok layout (F37-F40); preferences: role-play endings, every clip, comment-trigger captions, real counterintuitive scripts, move fast.
 - v15 (2026-11-21): H9 final, accurate conversion, confirmed by Nathan against his phone (F28); lineup method for color disputes.
 - v14 (2026-11-21): neutral grade, matrix-only conversion, no added saturation (F27).
