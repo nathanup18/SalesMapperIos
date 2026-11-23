@@ -31,7 +31,7 @@
   "t3": "Referrals and re-knocks cost almost nothing.",
   "formula": "CAC = SALES & MARKETING SPEND ÷ NEW CUSTOMERS",
   "def": "What it costs you to win one new customer.",
-  "shape": "square"
+  "shape": "wide"
  },
  {
   "key": "arr",
@@ -48,7 +48,7 @@
   "t3": "Recurring revenue is what buyers pay up for.",
   "formula": "ARR = MONTHLY RECURRING REVENUE × 12",
   "def": "The yearly value of the revenue that renews on its own.",
-  "shape": "tall"
+  "shape": "square"
  },
  {
   "key": "gm",
@@ -82,7 +82,7 @@
   "t3": "Negative here means growth makes you poorer.",
   "formula": "CONTRIBUTION = PRICE − VARIABLE COST PER UNIT",
   "def": "What one more sale actually adds before fixed costs.",
-  "shape": "square"
+  "shape": "wide"
  },
  {
   "key": "churn",
@@ -99,7 +99,7 @@
   "t3": "Most churn happens in the first 90 days.",
   "formula": "CHURN = CUSTOMERS LOST ÷ CUSTOMERS AT START",
   "def": "The share of customers who leave in a period.",
-  "shape": "tall"
+  "shape": "square"
  },
  {
   "key": "ndr",
@@ -133,7 +133,7 @@
   "t3": "Under 12 months and you can fund your own growth.",
   "formula": "PAYBACK = CAC ÷ MONTHLY GROSS PROFIT",
   "def": "How many months until a customer pays back what you spent to win them.",
-  "shape": "square"
+  "shape": "wide"
  },
  {
   "key": "ccc",
@@ -150,7 +150,7 @@
   "t3": "Deposits up front shrink this fastest.",
   "formula": "CCC = DIO + DSO − DPO",
   "def": "Days your cash is tied up before it comes back.",
-  "shape": "tall"
+  "shape": "square"
  },
  {
   "key": "dso",
@@ -184,7 +184,7 @@
   "t3": "Profitable companies still die from no cash.",
   "formula": "WORKING CAPITAL = CURRENT ASSETS − CURRENT LIABILITIES",
   "def": "The cash cushion that keeps the lights on.",
-  "shape": "square"
+  "shape": "wide"
  },
  {
   "key": "ramp",
@@ -201,7 +201,7 @@
   "t3": "Ride-alongs and scripts cut it in half.",
   "formula": "RAMP = DAYS UNTIL A REP HITS FULL QUOTA",
   "def": "How long a new hire takes to pay for themselves.",
-  "shape": "tall"
+  "shape": "square"
  },
  {
   "key": "ebitda",
@@ -235,7 +235,7 @@
   "t3": "Fast and broke or slow and rich can both pass.",
   "formula": "GROWTH % + PROFIT MARGIN % ≥ 40",
   "def": "A quick test of whether growth and profit are balanced.",
-  "shape": "square"
+  "shape": "wide"
  },
  {
   "key": "oplev",
@@ -252,7 +252,7 @@
   "t3": "It cuts both ways when sales drop.",
   "formula": "OP LEVERAGE = % CHANGE PROFIT ÷ % CHANGE SALES",
   "def": "Fixed costs make each extra sale more profitable.",
-  "shape": "tall"
+  "shape": "square"
  },
  {
   "key": "unit",

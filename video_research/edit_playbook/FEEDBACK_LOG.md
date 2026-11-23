@@ -186,6 +186,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Wrong: the first file delivered had ~3,000 AAC decode errors because two build2 renders ran at the same time and overwrote each other's files. QA never decoded the whole file, so it shipped. Then several extra render loops before he got a usable file.
 - Rule: never run two renders at once. Every file passes content_kit/delivery_check.py (full decode with zero errors; HLG/bt2020/10-bit; audio/video length; optional face-luma vs source) before it is sent. Speed rule: one render, one QA pass, send. No preview loops unless he asks. IQ-format captions default to 140 px (was 118). Audio is optional on IQ-style videos.
 
+**F45** (2026-11-23, Business IQ cards v2). "More squares and then rectangles, not the ones that are long up and down, because then the user can't see it. I also want these images shifted slightly farther up so they're right below my chin." Pop-up answers: 2 rectangles for every square, observe the reference video; track the chin; keep the size.
+- Replaces F43's tall shape: no portrait cards. Rotation is wide, wide, square (terms.json `shape`).
+- Rectangles follow the Bryson reference: about 1.45:1 (base 640x440, 768x528 on IG), not the flat 1.8:1. The reference cards are ~70% of frame width with the top right at the chin.
+- Card top tracks the chin: chin.py runs YuNet on the zoomed frame every 0.1 s in each card's window. Box bottom = chin; top = lowest chin + 20 px (here y 1007-1144, was a fixed 1222). render.js reads seg/tops.json. Model: face_detection_yunet_2023mar.onnx from media.githubusercontent.com (opencv_zoo); OpenCV 5 has no Haar cascades.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -212,6 +217,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - business_IQ_instagram.mp4 + business_IQ_tiktok.mp4 (F43 card shapes): 20.5 s, cards rotate wide/square/tall, audio decodes clean, face luma within 2.5/1023 of source, original HDR.
 
 - business_IQ_instagram.mp4 + business_IQ_tiktok.mp4: 20.5 s, 16 spec-sheet cards, 140 px captions, original HDR. Shipped 2026-11-23 after a corrupt-audio first delivery (F44).
+- business_IQ_instagram.mp4 + business_IQ_tiktok.mp4 v2 (F45): wide/wide/square, chin-tracked cards, 20.5 s, DELIVERY PASS both.
 
 ## Performance
 (Log 48 h stats per posted video here.)
