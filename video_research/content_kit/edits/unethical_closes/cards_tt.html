@@ -1,0 +1,136 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;width:1080px;height:1920px;background:transparent;overflow:hidden}
+#title{position:absolute;left:40px;right:150px;top:262px;text-align:center;font-family:"Instrument Serif";font-size:92px;line-height:1;color:#fff;letter-spacing:-.5px;
+ text-shadow:0 0 22px rgba(0,0,0,.55),0 2px 8px rgba(0,0,0,.6),0 0 2px rgba(0,0,0,.75)}
+#card{position:absolute;left:34px;top:1218px;transform:scale(1.08);transform-origin:0 0;width:800px;height:440px;background:#EFF0F2;box-sizing:border-box;font-family:Inter;color:#2b2e33}
+.lbl{font-family:"IBM Plex Mono";font-size:10.5px;letter-spacing:2.2px;text-transform:uppercase}
+.cap{font-size:11.5px;line-height:1.32;color:#3d4148}
+.abs{position:absolute}
+.plus{position:absolute;font-family:Inter;font-weight:300;font-size:22px;color:#9aa0a8}
+#name{position:absolute;left:210px;width:380px;top:16px;text-align:center;font-weight:600;font-size:17px;color:#16181b}
+#dia{position:absolute;left:205px;top:44px;width:390px;height:228px}
+#formula{position:absolute;left:0;right:0;top:300px;text-align:center}
+#formula span{display:inline-block;font-family:"IBM Plex Mono";font-weight:500;font-size:16.5px;letter-spacing:1.4px;padding:10px 22px;border-radius:6px;border:1.6px solid;color:#1e2125}
+#def{position:absolute;left:0;right:0;top:362px;text-align:center;font-style:italic;font-size:14.5px;color:#22252a}
+</style></head><body>
+<div id="title"></div>
+<div id="card">
+ <div class="abs lbl" style="left:24px;top:16px" data-acc>Detail view</div>
+ <svg class="abs" style="left:24px;top:34px" width="120" height="120" id="detail"></svg>
+ <div class="abs cap" style="left:24px;top:160px;width:150px;text-align:center" id="dcap"></div>
+ <div class="abs lbl" style="left:24px;top:190px" data-acc>Side profile</div>
+ <svg class="abs" style="left:24px;top:206px" width="180" height="20"><ellipse cx="45" cy="10" rx="44" ry="7" fill="none" stroke="#2b2e33" stroke-width="1"/><ellipse cx="45" cy="10" rx="24" ry="3.5" fill="none" stroke="#9aa0a8" stroke-width=".8"/>
+  <g stroke="#6b7078" stroke-width=".9"><line x1="100" y1="10" x2="178" y2="10"/><line x1="100" y1="5" x2="100" y2="15"/><line x1="178" y1="5" x2="178" y2="15"/>
+  <line x1="113" y1="7" x2="113" y2="13"/><line x1="126" y1="7" x2="126" y2="13"/><line x1="152" y1="7" x2="152" y2="13"/><line x1="165" y1="7" x2="165" y2="13"/></g><circle cx="139" cy="10" r="3.2" data-fill/></svg>
+ <div class="abs lbl" style="left:24px;top:236px" data-acc>Material</div>
+ <svg class="abs" style="left:24px;top:252px" width="20" height="20"><circle cx="9" cy="9" r="8" data-fill/></svg>
+ <div class="abs cap" style="left:24px;top:274px" id="mat"></div>
+ <div id="name"></div><svg id="dia" viewBox="0 0 390 228"></svg>
+ <div class="abs lbl" style="left:618px;top:16px" data-acc>Client hate</div>
+ <svg class="abs" style="left:618px;top:36px" width="160" height="30" id="hate"></svg>
+ <div class="abs cap" style="left:618px;top:80px;width:160px" id="scale"></div>
+ <div class="abs lbl" style="left:618px;top:124px" data-acc>Touchpoint</div>
+ <div class="abs cap" style="left:618px;top:141px;width:160px" id="touch"></div>
+ <div class="abs lbl" style="left:618px;top:186px" data-acc id="l3"></div>
+ <div class="abs cap" style="left:618px;top:203px;width:162px" id="t3"></div>
+ <div id="formula"><span></span></div><div id="def"></div>
+ <div class="plus" style="left:12px;top:398px">+</div><div class="plus" style="right:12px;top:398px">+</div>
+</div>
+<script>
+const T = JSON.parse(decodeURIComponent(location.hash.slice(1)));
+const A = T.acc, tint = A + '22', ink = '#2b2e33', mute = '#9aa0a8';
+document.getElementById('title').textContent = T.title;
+document.getElementById('name').textContent = T.name;
+for (const [id, v] of Object.entries({dcap: T.dcap, mat: T.mat, scale: T.scale, touch: T.touch, l3: T.l3, t3: T.t3, def: T.def})) document.getElementById(id).innerHTML = v;
+document.querySelectorAll('[data-acc]').forEach(e => e.style.color = A);
+document.querySelectorAll('[data-fill]').forEach(e => e.setAttribute('fill', A));
+const f = document.querySelector('#formula span'); f.textContent = T.formula; f.style.borderColor = A; f.style.background = A + '1a';
+const mono = (x, y, s, t, c = ink, a = 'middle') => `<text x="${x}" y="${y}" font-family="IBM Plex Mono" font-size="${s}" letter-spacing="1.2" fill="${c}" text-anchor="${a}">${t}</text>`;
+const sans = (x, y, s, t, c = ink, w = 400, a = 'middle') => `<text x="${x}" y="${y}" font-family="Inter" font-weight="${w}" font-size="${s}" fill="${c}" text-anchor="${a}">${t}</text>`;
+const door = (x, y, w, h, on, open) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2" fill="${on ? A : 'none'}" fill-opacity="${on ? .85 : 0}" stroke="${on ? A : ink}" stroke-width="1.2"/>` +
+  (open ? `<path d="M${x + w} ${y} l${w * .45} ${h * .12} v${h * .76} l-${w * .45} ${h * .12}z" fill="${A}" fill-opacity=".35" stroke="${A}"/>` : `<circle cx="${x + w * .78}" cy="${y + h * .55}" r="1.6" fill="${on ? '#fff' : ink}"/>`);
+const house = (x, y, s, on, dim) => `<g opacity="${dim ? .45 : 1}"><path d="M${x} ${y + s * .45} L${x + s / 2} ${y} L${x + s} ${y + s * .45} V${y + s} H${x} Z" fill="${on ? A : 'none'}" fill-opacity="${on ? .85 : 0}" stroke="${on ? A : ink}" stroke-width="1.2"/>
+  <rect x="${x + s * .4}" y="${y + s * .62}" width="${s * .2}" height="${s * .38}" fill="${on ? '#fff' : 'none'}" stroke="${on ? '#fff' : ink}" stroke-width="1"/></g>`;
+const check = (x, y, s, c = '#fff') => `<path d="M${x} ${y} l${s * .35} ${s * .35} l${s * .65} -${s * .7}" fill="none" stroke="${c}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>`;
+const person = (x, y, c = ink) => `<circle cx="${x}" cy="${y}" r="7" fill="none" stroke="${c}" stroke-width="1.3"/><path d="M${x - 12} ${y + 24} q12 -18 24 0" fill="none" stroke="${c}" stroke-width="1.3"/>`;
+const arrow = (x1, y1, x2, y2, c = ink, dash = '') => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="1.3" ${dash ? `stroke-dasharray="${dash}"` : ''}/><path d="M${x2} ${y2} l-7 -4 v8z" fill="${c}" transform="rotate(${Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI} ${x2} ${y2})"/>`;
+const box = (x, y, w, h, t, on, dash) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="${on ? A : A}" fill-opacity="${on ? .9 : .12}" stroke="${on ? A : A}" stroke-width="1.3" ${dash ? 'stroke-dasharray="4 3"' : ''}/>` + mono(x + w / 2, y + h / 2 + 4, 11, t, on ? '#fff' : ink);
+const big = (x, y, n, sub) => sans(x, y, 38, n, '#16181b', 700) + mono(x, y + 20, 10, sub, A);
+const D = {
+ knock: () => { let s = ''; for (let i = 0; i < 9; i++) s += door(14 + i * 41, 40, 26, 48, i < 7, false); return s + `<path d="M14 104 v6 h357 v-6" fill="none" stroke="${mute}"/>` + mono(192, 126, 10, 'ONE HOUR', mute) + big(195, 186, '42', 'DOORS PER HOUR'); },
+ contact: () => { let s = ''; for (let i = 0; i < 10; i++) s += door(12 + (i % 5) * 76, 24 + Math.floor(i / 5) * 70, 26, 50, [1, 4, 7].includes(i), [1, 4, 7].includes(i)); return s + big(195, 196, '30%', 'DOORS THAT OPEN'); },
+ jones: () => { let s = ''; [0, 1, 2, 3, 4].forEach(i => s += house(18 + i * 74, 60, 54, i === 2 || i === 3, i === 0)); s += check(166, 102, 22); s += arrow(222, 46, 262, 46, A) + arrow(168, 46, 128, 46, A, '3 3');
+   return s + mono(195, 30, 10, 'ONE YES', A) + mono(195, 150, 10, 'NEIGHBORS FOLLOW', mute) + big(195, 202, '2×', 'EASIER NEXT DOOR'); },
+ pitch: () => `<path d="M30 30 H360 L300 92 H90 Z" fill="${A}" fill-opacity=".14" stroke="${A}"/><path d="M90 100 H300 L250 150 H140 Z" fill="${A}" fill-opacity=".85" stroke="${A}"/>` +
+   mono(195, 66, 11, 'CONTACTS') + mono(195, 130, 11, 'FULL PITCHES', '#fff') + big(195, 204, '55%', 'MAKE IT PAST THE BRUSH-OFF'),
+ ticket: () => { const h = [60, 90, 48, 120, 76, 98, 66]; let s = ''; h.forEach((v, i) => s += `<rect x="${30 + i * 48}" y="${150 - v}" width="30" height="${v}" fill="${A}" fill-opacity="${i === 3 ? .9 : .35}"/>`);
+   return s + `<line x1="20" y1="${150 - 80}" x2="370" y2="${150 - 80}" stroke="${ink}" stroke-dasharray="5 4"/>` + mono(370, 62, 10, 'AVERAGE', ink, 'end') + `<line x1="20" y1="150" x2="370" y2="150" stroke="${ink}"/>` + big(195, 198, '$1,240', 'PER SALE'); },
+ rpk: () => { let s = ''; const v = ['$0', '$0', '$0', '$48', '$0', '$0', '$0', '$26']; v.forEach((t, i) => { s += door(16 + i * 46, 36, 26, 46, t !== '$0', false) + mono(29 + i * 46, 104, 10, t, t !== '$0' ? A : mute); });
+   return s + `<line x1="16" y1="118" x2="368" y2="118" stroke="${mute}"/>` + big(195, 180, '$7.40', 'EVERY KNOCK, EVEN THE NO’S'); },
+ assume: () => { let s = ''; const d = ['M', 'T', 'W', 'T', 'F']; d.forEach((t, i) => { const on = i === 3; s += `<rect x="${40 + i * 64}" y="40" width="54" height="62" rx="4" fill="${A}" fill-opacity="${on ? .9 : .1}" stroke="${A}"/>` + mono(67 + i * 64, 64, 11, t, on ? '#fff' : ink) + mono(67 + i * 64, 88, 13, 17 + i, on ? '#fff' : ink); });
+   return s + `<rect x="58" y="128" width="274" height="34" rx="17" fill="#fff" stroke="${ink}" stroke-width="1"/>` + sans(195, 150, 13, '“So we’ll get you in Thursday.”', ink, 500) + mono(195, 196, 10, 'NO “IF.” JUST “WHEN.”', A); },
+ onecall: () => `<line x1="20" y1="90" x2="370" y2="90" stroke="${ink}"/><circle cx="60" cy="90" r="18" fill="${A}"/>` + check(52, 90, 16) + mono(60, 132, 10, 'VISIT 1', A) +
+   [170, 260, 350].map((x, i) => `<circle cx="${x}" cy="90" r="14" fill="none" stroke="${mute}" stroke-dasharray="3 3"/>` + mono(x, 132, 10, '“LATER”', mute)).join('') + `<path d="M150 70 l40 40 M190 70 l-40 40" stroke="${mute}" stroke-width="1"/>` + big(195, 196, '1', 'VISIT. THAT’S THE WINDOW.'),
+ puppy: () => box(20, 60, 110, 56, 'TRY IT') + arrow(136, 88, 182, 88, A) + house(196, 50, 66, true) + check(214, 92, 26) + arrow(270, 88, 312, 88, A) + box(318, 60, 64, 56, 'KEEP', true) +
+   mono(195, 30, 10, 'GIVING IT BACK FEELS LIKE A LOSS', mute) + big(195, 186, 'Free', 'TRIAL, THEN THE ASK'),
+ take: () => box(150, 50, 110, 60, 'THE OFFER', true) + arrow(266, 80, 340, 80, A) + `<rect x="270" y="50" width="110" height="60" rx="3" fill="none" stroke="${A}" stroke-dasharray="4 3"/>` + person(70, 64) + arrow(98, 80, 140, 80, ink) +
+   mono(70, 128, 10, 'HOMEOWNER', mute) + mono(320, 128, 10, 'PULLED BACK', A) + big(195, 196, '↩', 'THEY LEAN IN'),
+ tie: () => `<line x1="20" y1="90" x2="370" y2="90" stroke="${ink}"/>` + [70, 150, 230, 310].map((x, i) => `<circle cx="${x}" cy="90" r="13" fill="${A}"/>` + check(x - 6, 90, 12) + mono(x, 66, 10, '…RIGHT?', A)).join('') +
+   mono(20, 116, 10, 'PITCH START', mute, 'start') + mono(370, 116, 10, 'CLOSE', mute, 'end') + big(195, 190, '4', 'SMALL YESES BEFORE THE BIG ONE'),
+ feel: () => [['FEEL', '“I get it.”'], ['FELT', '“Others did too.”'], ['FOUND', '“Here’s what they found.”']].map(([k, q], i) => box(14 + i * 128, 50, 106, 54, k, i === 2) + sans(67 + i * 128, 128, 10.5, q, ink, 400) + (i < 2 ? arrow(122 + i * 128, 77, 140 + i * 128, 77, A) : '')).join('') +
+   big(195, 198, '3', 'STEPS, IN THIS ORDER'),
+ warm: () => person(50, 58) + mono(50, 110, 10, 'REP') + arrow(76, 70, 150, 70, A) + `<rect x="152" y="48" width="86" height="44" rx="22" fill="${A}" fill-opacity=".9"/>` + mono(195, 75, 11, 'INTRO', '#fff') + arrow(240, 70, 314, 70, A) + person(340, 58, A) + mono(340, 110, 10, 'CLOSER', A) +
+   house(170, 112, 50, false) + big(195, 204, '0', 'TIME FOR THEM TO COOL OFF'),
+ trial: () => `<path d="M60 150 A135 135 0 0 1 330 150" fill="none" stroke="${mute}" stroke-width="10"/><path d="M60 150 A135 135 0 0 1 252 25" fill="none" stroke="${A}" stroke-width="10"/>` +
+   `<line x1="195" y1="150" x2="262" y2="62" stroke="${ink}" stroke-width="2.4"/><circle cx="195" cy="150" r="6" fill="${ink}"/>` + mono(56, 172, 10, 'COLD', mute) + mono(334, 172, 10, 'READY', mute) + mono(195, 196, 11, '“HOW DOES THAT SOUND SO FAR?”', A),
+ claw: () => `<path d="M50 140 Q195 -20 340 140" fill="none" stroke="${A}" stroke-width="2"/>` + `<circle cx="50" cy="140" r="16" fill="${A}"/>` + mono(50, 145, 12, '$', '#fff') + mono(50, 176, 10, 'PAID', A) +
+   `<circle cx="340" cy="140" r="16" fill="none" stroke="${A}" stroke-width="1.6"/><path d="M332 132 l16 16 M348 132 l-16 16" stroke="${A}" stroke-width="2"/>` + mono(340, 176, 10, 'CANCELLED', A) + arrow(300, 162, 92, 162, ink, '4 3') +
+   big(195, 116, '−$', 'COMMISSION TAKEN BACK'),
+ turf: () => `<rect x="20" y="20" width="350" height="170" fill="none" stroke="${ink}"/>` + `<path d="M20 100 L150 84 L196 20 M150 84 L232 190 M232 190 L280 96 L370 110 M196 20 L280 96" fill="none" stroke="${A}" stroke-width="2"/>` +
+   [[80, 54], [96, 150], [260, 46], [320, 160], [200, 120]].map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="9" fill="${A}" fill-opacity="${.35 + i * .12}"/>` + mono(x, y + 4, 9, 'R' + (i + 1), '#fff')).join('') + mono(195, 214, 10, 'ONE REP PER ZONE. NO OVERLAP.', A),
+
+ ltv: () => { let s = person(30, 70) + mono(30, 120, 9, 'ONE CUSTOMER', mute); for (let i = 0; i < 7; i++) s += `<rect x="${70 + i * 42}" y="${40 + (i % 2) * 0}" width="30" height="60" fill="${A}" fill-opacity="${.45 + i * .07}"/>` + mono(85 + i * 42, 116, 9, 'M' + (i + 1), mute);
+   return s + `<path d="M366 52 l14 14 M380 52 l-14 14" stroke="${ink}" stroke-width="1.6"/>` + mono(373, 116, 9, 'LEAVE', mute) + big(195, 188, '$4,800', 'GROSS PROFIT BEFORE THEY LEAVE'); },
+ cac: () => `<path d="M30 30 H360 L250 110 H140 Z" fill="${A}" fill-opacity=".14" stroke="${A}"/>` + mono(195, 62, 11, 'ADS + REPS + LEADS') + `<circle cx="195" cy="132" r="16" fill="${A}"/>` + person(195, 124, '#fff') + big(195, 196, '$310', 'TO WIN ONE CUSTOMER'),
+ arr: () => { let s = ''; for (let i = 0; i < 12; i++) s += `<rect x="${24 + i * 29}" y="${130 - 8 - i * 6}" width="22" height="${8 + i * 6}" fill="${A}" fill-opacity="${i === 11 ? .95 : .4}"/>`; return s + `<line x1="20" y1="130" x2="370" y2="130" stroke="${ink}"/>` + mono(20, 146, 9, 'JAN', mute, 'start') + mono(370, 146, 9, 'DEC', mute, 'end') + big(195, 192, '$1.2M', 'RECURRING, ANNUALIZED'); },
+ gm: () => `<rect x="30" y="50" width="330" height="40" fill="${A}" fill-opacity=".9"/><rect x="268" y="50" width="92" height="40" fill="${mute}" fill-opacity=".6"/>` + mono(150, 75, 11, 'GROSS PROFIT', '#fff') + mono(314, 75, 10, 'COGS') + `<path d="M30 100 v8 h330 v-8" fill="none" stroke="${mute}"/>` + mono(195, 124, 10, 'ONE DOLLAR OF REVENUE', mute) + big(195, 186, '72%', 'KEPT AFTER DIRECT COSTS'),
+ cm: () => box(20, 40, 150, 40, 'PRICE', true) + box(180, 40, 80, 40, 'COGS', false, true) + box(266, 40, 104, 40, 'VARIABLE', false, true) + arrow(95, 90, 95, 120, A) + box(30, 124, 130, 40, 'CONTRIBUTION', true) + mono(195, 196, 10, 'WHAT ONE MORE SALE ADDS BEFORE FIXED COSTS', A),
+ churn: () => { let s = ''; for (let i = 0; i < 20; i++) { const x = 30 + (i % 10) * 34, y = 40 + Math.floor(i / 10) * 40, out = [3, 14].includes(i); s += `<circle cx="${x}" cy="${y}" r="10" fill="${out ? 'none' : A}" fill-opacity=".8" stroke="${out ? ink : A}" ${out ? 'stroke-dasharray="3 3"' : ''}/>`; }
+   return s + arrow(150, 160, 210, 160, ink, '4 3') + big(195, 206, '10%', 'OF CUSTOMERS LOST PER YEAR').replace('y="206"', 'y="208"'); },
+ ndr: () => `<rect x="70" y="50" width="90" height="100" fill="${mute}" fill-opacity=".5"/><rect x="230" y="38" width="90" height="112" fill="${A}" fill-opacity=".9"/>` + `<line x1="40" y1="150" x2="350" y2="150" stroke="${ink}"/>` + mono(115, 168, 10, 'LAST YEAR', mute) + mono(275, 168, 10, 'SAME CUSTOMERS NOW', A) + big(195, 30, '', '') + sans(275, 30, 18, '112%', '#16181b', 700) + mono(195, 204, 10, 'UPSELLS > CANCELS', A),
+ payback: () => `<line x1="20" y1="100" x2="370" y2="100" stroke="${ink}"/><path d="M20 160 C120 150 200 110 250 100 S330 60 370 40" fill="none" stroke="${A}" stroke-width="2.2"/><circle cx="250" cy="100" r="6" fill="${A}"/>` + mono(250, 86, 10, 'BREAK EVEN', A) + mono(20, 176, 9, 'DAY 0  −CAC', mute, 'start') + big(110, 60, '7 mo', 'TO EARN IT BACK'),
+ ccc: () => `<circle cx="195" cy="100" r="70" fill="none" stroke="${mute}" stroke-width="8"/><path d="M195 30 A70 70 0 1 1 125 100" fill="none" stroke="${A}" stroke-width="8"/>` + mono(195, 22, 9, 'CASH OUT', mute) + mono(110, 100, 9, 'CASH IN', A, 'end') + sans(195, 106, 30, '38', '#16181b', 700) + mono(195, 124, 9, 'DAYS', A),
+ dso: () => `<path d="M60 150 A135 135 0 0 1 330 150" fill="none" stroke="${A}" stroke-width="2.4"/><line x1="40" y1="150" x2="350" y2="150" stroke="${ink}"/>` + `<rect x="44" y="104" width="32" height="40" fill="#fff" stroke="${ink}"/>` + `<circle cx="330" cy="140" r="10" fill="${A}"/>` + mono(60, 172, 9, 'INVOICE SENT', mute) + mono(330, 172, 9, 'CASH LANDS', A) + sans(195, 120, 34, '47', '#16181b', 700) + mono(195, 138, 9, 'DAYS SALES OUTSTANDING', A),
+ wc: () => `<rect x="40" y="40" width="140" height="110" fill="${A}" fill-opacity=".85"/><rect x="210" y="80" width="140" height="70" fill="${mute}" fill-opacity=".6"/>` + mono(110, 100, 10, 'CURRENT ASSETS', '#fff') + mono(280, 120, 10, 'CURRENT DEBTS') + `<line x1="20" y1="150" x2="370" y2="150" stroke="${ink}"/>` + mono(195, 172, 10, 'THE GAP = WHAT KEEPS YOU RUNNING', A),
+ ramp: () => `<line x1="30" y1="160" x2="370" y2="160" stroke="${ink}"/><line x1="30" y1="60" x2="370" y2="60" stroke="${ink}" stroke-dasharray="5 4"/>` + mono(370, 52, 9, 'QUOTA', ink, 'end') + `<path d="M30 160 C120 158 170 80 260 64 S340 60 370 60" fill="none" stroke="${A}" stroke-width="2.4"/><circle cx="250" cy="66" r="6" fill="${A}"/>` + mono(250, 92, 10, '6 WEEKS', A) + mono(30, 178, 9, 'DAY 1', mute, 'start') + mono(195, 204, 10, 'UNTIL A NEW REP PAYS FOR THEMSELVES', A),
+ conc: () => `<circle cx="120" cy="100" r="66" fill="${mute}" fill-opacity=".35"/><path d="M120 100 L120 34 A66 66 0 0 1 182 122 Z" fill="${A}"/>` + mono(148, 76, 12, '38%', '#fff') + mono(260, 80, 10, 'TOP 3 CUSTOMERS', A, 'start') + mono(260, 100, 10, 'EVERYONE ELSE', mute, 'start') + mono(195, 196, 10, 'LOSE ONE, LOSE A THIRD', A),
+ r40: () => `<rect x="150" y="${150 - 75}" width="90" height="75" fill="${A}" fill-opacity=".85"/><rect x="150" y="${150 - 120}" width="90" height="45" fill="${A}" fill-opacity=".4"/>` + mono(195, 120, 10, 'GROWTH 25%', '#fff') + mono(195, 58, 10, 'MARGIN 15%') + `<line x1="60" y1="30" x2="330" y2="30" stroke="${ink}" stroke-dasharray="5 4"/>` + mono(330, 24, 9, '40', ink, 'end') + `<line x1="60" y1="150" x2="330" y2="150" stroke="${ink}"/>` + mono(195, 180, 10, 'GROWTH + PROFIT ≥ 40%', A),
+ fcf: () => `<rect x="80" y="40" width="90" height="110" fill="${mute}" fill-opacity=".55"/><rect x="220" y="72" width="90" height="78" fill="${A}" fill-opacity=".9"/>` + `<line x1="50" y1="150" x2="340" y2="150" stroke="${ink}"/>` + mono(125, 168, 10, 'NET PROFIT', mute) + mono(265, 168, 10, 'CASH IN THE BANK', A) + big(195, 206, '71%', '').replace('y="226"', 'y="999"'),
+ oplev: () => `<line x1="30" y1="160" x2="370" y2="160" stroke="${ink}"/><line x1="30" y1="110" x2="370" y2="110" stroke="${mute}" stroke-width="2"/>` + mono(36, 104, 9, 'FIXED COSTS', mute, 'start') + `<line x1="30" y1="160" x2="370" y2="30" stroke="${A}" stroke-width="2.4"/>` + mono(366, 50, 9, 'REVENUE', A, 'end') + `<path d="M161 110 L370 30 L370 110 Z" fill="${A}" fill-opacity=".15"/>` + mono(300, 96, 10, 'PROFIT', A) + mono(195, 190, 10, 'EACH SALE PAST BREAK-EVEN IS MOSTLY PROFIT', A),
+
+ ebitda: () => `<rect x="20" y="40" width="70" height="120" fill="${A}" fill-opacity=".35"/><rect x="100" y="40" width="60" height="70" fill="${mute}" fill-opacity=".6"/><rect x="170" y="110" width="60" height="50" fill="${A}" fill-opacity=".9"/>` +
+   `<rect x="240" y="80" width="60" height="30" fill="none" stroke="${A}" stroke-dasharray="4 3"/><rect x="310" y="80" width="60" height="80" fill="${A}" fill-opacity=".9"/>` + `<line x1="10" y1="160" x2="380" y2="160" stroke="${ink}"/>` +
+   mono(55, 178, 9, 'REVENUE', mute) + mono(130, 178, 9, 'COSTS', mute) + mono(200, 178, 9, 'NET', mute) + mono(270, 178, 9, '+I +T +D&A', A) + mono(340, 178, 9, 'EBITDA', A) + mono(195, 206, 10, 'WHAT BUYERS VALUE YOU ON', A),
+ unit: () => person(50, 60) + mono(50, 112, 9, 'ONE CUSTOMER', mute) + `<rect x="110" y="40" width="240" height="34" fill="${A}" fill-opacity=".9"/><rect x="110" y="86" width="40" height="34" fill="${mute}" fill-opacity=".6"/>` +
+   mono(230, 62, 11, 'LIFETIME PROFIT  $4,800', '#fff') + mono(160, 108, 10, 'CAC $310', ink, 'start') + big(230, 172, '15×', 'RETURN ON EVERY CUSTOMER WON'),
+
+ label: () => person(40, 70) + box(110, 40, 120, 44, 'LOWER PACKAGE', false, true) + box(250, 40, 120, 44, 'FULL PACKAGE', true) + arrow(68, 70, 104, 62, ink) + `<path d="M170 92 Q240 140 310 92" fill="none" stroke="${A}" stroke-width="1.8"/>` + `<path d="M310 92 l-9 1 l5 7z" fill="${A}"/>` + mono(240, 140, 10, 'THEY ARGUE THEMSELVES UP', A) + mono(170, 112, 10, '…SILENCE…', mute) + big(195, 196, '↑', 'THE LABEL STINGS, SO THEY UPGRADE'),
+ permit: () => `<rect x="150" y="30" width="90" height="120" rx="3" fill="none" stroke="${ink}" stroke-width="1.4"/><rect x="160" y="40" width="70" height="100" fill="${A}" fill-opacity=".85"/>` + mono(195, 94, 11, 'EXIT', '#fff') + person(70, 70) + arrow(98, 86, 142, 86, ink, '4 3') + `<path d="M262 90 Q312 40 362 90" fill="none" stroke="${A}" stroke-width="1.8"/>` + mono(312, 110, 10, 'THEY TALK', A) + mono(312, 124, 10, 'THEMSELVES BACK IN', A) + mono(195, 180, 10, '“DO YOU WANT ME TO SAY IT’S OKAY TO WALK AWAY?”', A),
+ cosign: () => person(130, 50) + person(260, 50, A) + mono(130, 102, 10, 'HIM', mute) + mono(260, 102, 10, 'HER APPROVAL?', A) + `<line x1="150" y1="64" x2="240" y2="64" stroke="${mute}" stroke-dasharray="4 3"/>` + `<rect x="90" y="122" width="210" height="34" rx="17" fill="#fff" stroke="${ink}"/>` + sans(195, 144, 12.5, '“Or are you going to move?”', ink, 500) + mono(195, 196, 10, 'MAKE THEM PROVE THEY CAN DECIDE', A),
+ rival: () => `<path d="M110 80 Q195 20 280 80 Q195 140 110 80Z" fill="none" stroke="${ink}" stroke-width="1.6"/><circle cx="195" cy="80" r="26" fill="${A}"/><circle cx="195" cy="80" r="10" fill="#fff"/>` + mono(195, 156, 10, 'YOUR COMPETITOR IS WATCHING', A) + mono(195, 196, 10, 'WALKING AWAY NOW HELPS THEM', mute),
+ kids: () => person(150, 50) + `<g transform="translate(240 70) scale(.7)">${person(0, 0, A)}</g>` + mono(150, 102, 10, 'YOU', mute) + mono(240, 102, 10, 'WATCHING', A) + `<rect x="70" y="124" width="250" height="34" rx="17" fill="#fff" stroke="${ink}"/>` + sans(195, 146, 12.5, '“Are you setting a proper example?”', ink, 500) + mono(195, 196, 10, 'INDECISION BECOMES A LESSON', A),
+ follow: () => `<rect x="110" y="44" width="170" height="54" rx="27" fill="${A}"/>` + sans(195, 79, 22, 'Follow', '#fff', 700) + mono(195, 128, 10, 'FREE HERE  vs  THOUSANDS ELSEWHERE', ink) + mono(195, 196, 10, '“IT’S YOUR CHOICE.”', A),
+};
+document.getElementById('dia').innerHTML = D[T.dia]();
+document.getElementById('hate').innerHTML = [0,1,2,3,4,5].map(i => `<rect x="${i * 26}" y="4" width="21" height="20" rx="3" fill="${i < T.hate ? '#E5202E' : 'none'}" stroke="${i < T.hate ? '#E5202E' : '#9aa0a8'}"/>`).join('') + `<text x="158" y="19" font-family="IBM Plex Mono" font-size="11" text-anchor="end" fill="#E5202E"></text>`;
+const G = { // detail-view glyphs
+ door: `<rect x="44" y="30" width="32" height="60" rx="2" fill="${A}" fill-opacity=".85"/><circle cx="69" cy="62" r="2" fill="#fff"/>`, house: house(32, 30, 56, true),
+ bars: `<rect x="34" y="60" width="14" height="30" fill="${A}" fill-opacity=".4"/><rect x="53" y="40" width="14" height="50" fill="${A}"/><rect x="72" y="52" width="14" height="38" fill="${A}" fill-opacity=".4"/>`,
+ money: `<circle cx="60" cy="60" r="24" fill="${A}"/>` + `<text x="60" y="68" font-family="Inter" font-weight="700" font-size="24" fill="#fff" text-anchor="middle">$</text>`,
+ check: `<circle cx="60" cy="60" r="24" fill="${A}"/>` + check(49, 60, 22), cal: `<rect x="36" y="38" width="48" height="46" rx="4" fill="${A}"/><rect x="36" y="38" width="48" height="12" fill="${ink}" fill-opacity=".25"/>`,
+ arrow: arrow(30, 60, 90, 60, A), person: person(60, 46, A), gauge: `<path d="M32 76 A28 28 0 0 1 88 76" fill="none" stroke="${A}" stroke-width="6"/><line x1="60" y1="76" x2="74" y2="56" stroke="${ink}" stroke-width="2"/>`,
+ pie: `<circle cx="60" cy="60" r="26" fill="${mute}" fill-opacity=".4"/><path d="M60 60 L60 34 A26 26 0 0 1 84 70 Z" fill="${A}"/>`,
+ map: `<rect x="34" y="34" width="52" height="52" fill="none" stroke="${ink}"/><path d="M34 62 L60 56 L72 34 M60 56 L68 86" stroke="${A}" stroke-width="2" fill="none"/>`
+};
+document.getElementById('detail').innerHTML = `<circle cx="60" cy="60" r="56" fill="none" stroke="${ink}" stroke-width="1.2"/>` + G[T.glyph];
+</script></body></html>
