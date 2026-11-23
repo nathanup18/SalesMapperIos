@@ -6,7 +6,7 @@ win = json.load(open('seg/cards.json'))
 HOOK = [("Let's", .03), ("see", .34), ("if", .48), ("you", .60), ("actually", .74), ("know", 1.0), ("door-to-door", 1.26), ("sales.", 1.74)]
 OUT = [("If", 14.93), ("you", 15.03), ("know", 15.13), ("all", 15.23), ("those,", 15.41), ("you're", 15.6), ("definitely", 15.77), ("in", 16.11), ("business.", 16.41),
        ("So", 16.85), ("go", 16.95), ("out", 17.13), ("there", 17.27), ("and", 17.39), ("make", 17.47), ("some", 17.57), ("money", 17.71), ("and", 17.95),
-       ("follow", 18.17), ("for", 18.37), ("more.", 18.51)]
+       ("follow for more", 18.17)]   # his red pop-up: one box, held to the end
 states = []   # (png, start, end)
 def caps(words, end, header):
     for i, (w, s) in enumerate(words):
@@ -21,8 +21,8 @@ js = "const { chromium } = require('playwright'); const path=require('path'); (a
 os.makedirs('cap', exist_ok=True); n = 0; files = []
 for (kind, x), a, b in states:
     if kind == 'card': files.append(f'cards/card_{x}.png'); continue
-    f = f'cap/c{n:02d}.png'; n += 1; files.append(f)
-    js += f"await p.goto('file://'+path.resolve('cards/overlay.html')+'?h={kind}&w={urllib.parse.quote(x)}&n={n}'); await p.evaluate(()=>document.fonts.ready); await p.waitForTimeout(60); await p.screenshot({{path:'{f}',omitBackground:true}});\n"
+    f = f'cap/c{n:02d}.png'; n += 1; files.append(f); red = '&r=1' if x == 'follow for more' else ''
+    js += f"await p.goto('file://'+path.resolve('cards/overlay.html')+'?h={kind}&w={urllib.parse.quote(x)}{red}&n={n}'); await p.evaluate(()=>document.fonts.ready); await p.waitForTimeout(60); await p.screenshot({{path:'{f}',omitBackground:true}});\n"
 js += "await b.close();})();"; open('cap/r.js', 'w').write(js); subprocess.run(['node', 'cap/r.js'], check=True)
 # sRGB overlay -> HLG, white at 88% HLG signal (brighter than the 75% reference, per Nathan)
 a_, b_, c_ = 0.17883277, 0.28466892, 0.55991073; SIG = 0.88
@@ -48,5 +48,5 @@ fc = ("[0:v]scale=1296:2304:flags=lanczos,crop=1080:1920:108:384[z];"          #
       "[1:v]fps=30,scale=in_range=full:out_range=tv:out_color_matrix=bt2020,format=yuva444p10le[ov];[z][ov]overlay=format=yuv420p10:eof_action=pass[v]")
 subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', 'seg/main.mov', '-f', 'concat', '-safe', '0', '-i', 'hlg2/list.txt', '-filter_complex', fc, '-map', '[v]', '-map', '0:a',
                 '-c:v', 'libx265', '-preset', 'medium', '-crf', '14', '-pix_fmt', 'yuv420p10le', '-x265-params', X] + HDR +
-               ['-tag:v', 'hvc1', '-c:a', 'aac', '-b:a', '256k', '-t', f'{T:.3f}', '-movflags', '+faststart', 'd2d_IQ_v2.mp4'], check=True)
+               ['-tag:v', 'hvc1', '-c:a', 'aac', '-b:a', '256k', '-t', f'{T:.3f}', '-movflags', '+faststart', 'd2d_IQ_v3.mp4'], check=True)
 print('done', round(T, 2), 's,', len(states), 'overlay states')

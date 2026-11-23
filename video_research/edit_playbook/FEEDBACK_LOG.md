@@ -161,6 +161,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Header in his style: bold sans (Inter 800, 84 px, thin dark stroke) + "(owner edition)" regular below, top of frame, during the hook. Keep it inside ~90 px side margins.
 - Captions: ONE word at a time, white Instrument Serif ~118 px with dark shadow, chest area (y 1240), hook and outro only (term titles carry the middle). Fix Whisper errors in captions ("fall for more" -> "follow for more").
 
+**F39** (D2D IQ v3). "I want the follow for more to be that big pop-up that he had. Like red pop-up with the white text… the graphics should be bigger."
+- Rule: the closing CTA is a solid red box (#E5202E) with white Instrument Serif "follow for more", in the caption spot, held to the end (replaces the one-word captions for that phrase).
+- Rule: spec-sheet cards at full size (800x440, 74% of frame width), top just under the lowest chin position (y 1226 after the 1.2x up-shift).
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -182,6 +186,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - d2d_3_lines_SPLICE_tight5.mp4: 51.3 s, tight splice, original HDR, speech at 0.04 s.
 - d2d_IQ_terms.mp4 (+ d2d_IQ_no_cards.mp4, card PNG pack): 18.9 s, 16 term cards, original HDR, speech at 0.03 s.
 - d2d_IQ_v2.mp4: zoom 1.2x up-shift, header, one-word captions, 16 brighter cards, original HDR. 18.9 s.
+- d2d_IQ_v3.mp4: bigger cards + red follow pop-up. 18.9 s, original HDR.
 
 ## Performance
 (Log 48 h stats per posted video here.)
