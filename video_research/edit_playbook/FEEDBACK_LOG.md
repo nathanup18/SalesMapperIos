@@ -139,6 +139,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Outcome: Nathan is editing this video himself in Instagram. Stop work on it.
 - Rule: on-screen text is black on white. "Lighter" is not yet clear (picture brightness vs. the lighter editing style from F33), so F33 is SUSPENDED until he says which. Don't ship another edit in either direction without confirming.
 
+**F35** (3 lines). "The picture. So literally just take the original clips and keep the picture normal. I just want it spliced… Every single time I'm telling you, stop making it look so bright."
+- Root cause: every edit converted the iPhone's HDR (HLG, bt2020, 10-bit) to SDR (F27/F28 grades). On his phone the result never matched the original, and read as brighter/washed. Lineups compared SDR candidates to each other, never to the untouched HDR.
+- Rule (H9, replaces all earlier grades): NEVER convert color. Keep the source HDR as-is: libx265 10-bit (yuv420p10le), colorprim=bt2020, transfer=arib-std-b67, colormatrix=bt2020nc, tag hvc1. Verify mean 10-bit luma of a source frame vs the output frame (diff < 1%). Overlays/captions, if ever wanted again, must be composited without changing the picture's color space.
+- Also: when he says "just splice", deliver ONLY the cut: no text, no zoom, no captions, no graphics. F33 light style is dropped; F34 resolved (lighter = picture).
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -156,6 +161,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - d2d_not_interested v3: 29.9 s, ends role-play on "out of your hair anyway", Notes types 4 lines. QA PASS both.
 - d2d_day_one_captions.mp4 / _clean.mp4 (AI cinematic rep + manager scene): 11.9 s, QA PASS both.
 - d2d_3_lines_clean.mp4 / _captions.mp4 ("3 lines", light style): 54.1 s, 15 takes, QA PASS both.
+- d2d_3_lines_SPLICE_original_picture.mp4: 54.2 s, plain splice, original HDR kept (luma diff 0.6/1023).
 
 ## Performance
 (Log 48 h stats per posted video here.)
