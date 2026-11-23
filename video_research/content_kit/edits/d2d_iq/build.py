@@ -6,7 +6,7 @@ TERMS = [("knock", "IMG_9850", 24.9), ("contact", "IMG_9850", 25.6), ("jones", "
          ("ticket", "IMG_9851", 4.5), ("rpk", "IMG_9851", 5.5), ("assume", "IMG_9851", 6.3), ("onecall", "IMG_9851", 7.2),
          ("puppy", "IMG_9852", 7.7), ("take", "IMG_9852", 8.32), ("tie", "IMG_9852", 9.3), ("feel", "IMG_9852", 10.1),
          ("warm", "IMG_9853", 1.7), ("trial", "IMG_9854", 2.4), ("claw", "IMG_9854", 3.6), ("turf", "IMG_9854", 4.2)]
-PRE, POST, MAXGAP = 0.03, 0.06, 0.15
+PRE, POST, MAXGAP = 0.02, 0.04, 0.08   # F40: keep it moving
 def speech(n):
     w = wave.open(f'{n}.wav'); x = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(float) / 32768
     db = np.array([20 * np.log10(np.sqrt(np.mean(x[i:i + 160] ** 2)) + 1e-9) for i in range(0, len(x) - 160, 160)])
@@ -27,11 +27,12 @@ for n, lo in CLIPS:
     cur = max(lo, regs[0][0] - PRE)
     for r0, r1 in zip(regs, regs[1:]):
         g0, g1 = r0[1] + POST, r1[0] - PRE
-        for w in ws:
-            if w['s'] < g1 and w['e'] > g0:
-                if w['s'] >= g0 - 0.05: g1 = min(g1, w['s'])
-                else: g0 = max(g0, w['e'])
-        if r1[0] - r0[1] > MAXGAP and g1 - g0 > 0.08: segs.append((n, cur, g0)); cur = g1
+        for w in ws:                         # guard only each word's core: Whisper spans in fast lists run word-to-word with no gap
+            cs, ce = w['s'] + 0.3 * (w['e'] - w['s']), w['e'] - 0.3 * (w['e'] - w['s'])
+            if cs < g1 and ce > g0:
+                if cs >= g0: g1 = min(g1, cs)
+                else: g0 = max(g0, ce)
+        if r1[0] - r0[1] > MAXGAP and g1 - g0 > 0.04: segs.append((n, cur, g0)); cur = g1
     segs.append((n, cur, min(dur - 0.02, regs[-1][1] + POST)))
 X = 'colorprim=bt2020:transfer=arib-std-b67:colormatrix=bt2020nc:range=limited:log-level=error'
 HDR = ['-color_primaries', 'bt2020', '-color_trc', 'arib-std-b67', '-colorspace', 'bt2020nc', '-color_range', 'tv']

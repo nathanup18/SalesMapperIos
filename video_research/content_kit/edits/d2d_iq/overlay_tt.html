@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;width:1080px;height:1920px;background:transparent;overflow:hidden}
+#hd{position:absolute;left:0;right:110px;top:250px;text-align:center;color:#fff;font-family:Inter}
+#h1{font-weight:800;font-size:84px;letter-spacing:-2px;line-height:1.02;-webkit-text-stroke:2.5px rgba(0,0,0,.55);paint-order:stroke fill;text-shadow:0 3px 14px rgba(0,0,0,.45)}
+#h2{font-weight:400;font-size:56px;line-height:1.1;-webkit-text-stroke:2px rgba(0,0,0,.5);paint-order:stroke fill;text-shadow:0 3px 12px rgba(0,0,0,.4)}
+#w{position:absolute;left:30px;right:140px;top:1240px;text-align:center;font-family:"Instrument Serif";font-size:118px;color:#fff;line-height:1;
+ text-shadow:0 0 24px rgba(0,0,0,.55),0 2px 8px rgba(0,0,0,.6),0 0 2px rgba(0,0,0,.8)}
+#w.red span{display:inline-block;background:#FF1430;padding:4px 30px 14px;text-shadow:none}
+</style></head><body><div id="hd"><div id="h1">Door-to-Door Sales IQ</div><div id="h2">(owner edition)</div></div><div id="w"></div>
+<script>const Q=new URLSearchParams(location.search); if(!Q.get('h')) document.getElementById('hd').style.display='none'; const w=document.getElementById('w'); if(Q.get('r')){w.className='red'; w.innerHTML='<span></span>'; w.firstChild.textContent=Q.get('w');} else w.textContent=Q.get('w')||'';</script></body></html>

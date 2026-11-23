@@ -165,6 +165,12 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Rule: the closing CTA is a solid red box (#E5202E) with white Instrument Serif "follow for more", in the caption spot, held to the end (replaces the one-word captions for that phrase).
 - Rule: spec-sheet cards at full size (800x440, 74% of frame width), top just under the lowest chin position (y 1226 after the 1.2x up-shift).
 
+**F40** (D2D IQ v4 + TikTok). "Make the red a little bit more vivacious… look for dead space… keep moving quick… prepare a version for TikTok… different places, the aspects and elements. Let's move quickly."
+- Red CTA: #FF1430 with sRGB values treated as BT.2020 primaries in the HLG conversion (wide gamut = more saturated than any SDR red).
+- Pace: pauses over 0.08 s squeezed (PRE 0.02 / POST 0.04). The word guard now protects only the middle 40% of each Whisper word, because in fast lists Whisper spans touch end to end and blocked every cut. What remains (0.08-0.15 s) is normal word spacing; going further sounds chopped. Next lever if asked: 1.08-1.1x atempo.
+- TikTok layout (separate render, same content): header/titles down to y 250-262 (below the Following/For You tabs), card scaled .88 and shifted left (x 60-764) clear of the right action rail, captions centered in x 30-940. Files: cards_tt.html, overlay_tt.html; env PFX/OVL/CAP/HL/OUTF on build2.py.
+- Move fast: when Nathan says so, skip extra previews and ship.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -187,6 +193,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - d2d_IQ_terms.mp4 (+ d2d_IQ_no_cards.mp4, card PNG pack): 18.9 s, 16 term cards, original HDR, speech at 0.03 s.
 - d2d_IQ_v2.mp4: zoom 1.2x up-shift, header, one-word captions, 16 brighter cards, original HDR. 18.9 s.
 - d2d_IQ_v3.mp4: bigger cards + red follow pop-up. 18.9 s, original HDR.
+- d2d_IQ_v4.mp4 (Reels) + d2d_IQ_v4_TIKTOK.mp4: 18.6 s, vivid red CTA, TikTok-safe layout.
 
 ## Performance
 (Log 48 h stats per posted video here.)
