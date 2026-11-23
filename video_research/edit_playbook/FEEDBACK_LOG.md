@@ -176,6 +176,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 **F42** (2026-11-23, session wrap-up). "Take all the lessons from this session and record them into the skill. Never, ever increase the saturation or brightness of my overall lighting without asking me first. I don't appreciate that. From here, just keep getting better… in the future, do little pop-ups when you want to ask me certain questions on how the content's going to be formatted."
 - Rules: PLAYBOOK H0 (no brightness/saturation/look changes without asking) and H16 (formatting questions as AskUserQuestion pop-ups, multiple choice). F29-F41 consolidated into PLAYBOOK v16 (H1, H9, H13, H17, H18, section 2, QA gate).
 
+**F43** (2026-11-23, Business IQ cards). "I just want some variance: some square, some rectangle long side down, some rectangle short side down."
+- Rule: in a run of term cards, rotate three shapes so no two consecutive cards match: wide (800x440 base), square (500x500), tall (400x570). Shape is a `shape` field per term in terms.json (default rotation wide, square, tall), so single cards can be swapped.
+- Square/tall layout: diagram on top, formula pill (auto-shrinks to 12 px, then wraps), definition, then a label strip (Detail view glyph, Scale study, Touchpoint; tall adds the l3 row). Side profile, material and the scale circles are wide-only. The page logs OVERLAP/OVERFLOW if text collides.
+- Placement unchanged: top at y 1222 (IG) / 1218 (TikTok), centered at x 540 (IG) or 465 (TikTok, clear of the right rail). IG scale 1.2/1.2/1.12 (tall bottom 1860), TikTok 1.08/1.08/1.0.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.

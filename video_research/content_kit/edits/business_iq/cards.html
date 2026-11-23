@@ -12,33 +12,54 @@ html,body{margin:0;width:1080px;height:1920px;background:transparent;overflow:hi
 #formula{position:absolute;left:0;right:0;top:300px;text-align:center}
 #formula span{display:inline-block;font-family:"IBM Plex Mono";font-weight:500;font-size:16.5px;letter-spacing:1.4px;padding:10px 22px;border-radius:6px;border:1.6px solid;color:#1e2125}
 #def{position:absolute;left:0;right:0;top:362px;text-align:center;font-style:italic;font-size:14.5px;color:#22252a}
+.grp{width:180px;height:10px}
+#gDet{left:24px;top:16px}#gSide{left:24px;top:190px}#gMat{left:24px;top:236px}#gScale{left:618px;top:16px}#gTouch{left:618px;top:124px}#gL3{left:618px;top:186px}
+/* square + tall: diagram on top, formula, definition, then a label strip below (F43) */
+.square #card,.tall #card{height:var(--h)}
+.square #name,.tall #name{left:0;width:100%}
+.square #formula span,.tall #formula span{white-space:normal}
+.square #def,.tall #def{left:26px;right:26px}
+.square #gSide,.square #gMat,.square #gL3,.tall #gSide,.tall #gMat,.square #circ,.tall #circ,.square #dcap,.tall #dcap{display:none}
+.square #detail,.tall #detail{width:88px;height:88px}
+.square .tx,.tall .tx{top:18px!important}
+.square #dia{left:70px;top:42px;width:360px;height:210px}
+.square #gDet{left:24px;top:374px}.square #gScale{left:170px;top:374px}.square #gTouch{left:330px;top:374px}
+.square #scale{width:146px!important}.square #touch{width:146px!important}
+.tall #dia{left:24px;top:42px;width:352px;height:206px}
+.tall #gDet{left:22px;top:382px}.tall #gScale{left:200px;top:382px}.tall #gTouch{left:200px;top:440px}.tall #gL3{left:22px;top:492px}
+.tall #scale,.tall #touch{width:178px!important}.tall #t3{width:356px!important}
 </style></head><body>
 <div id="title"></div>
 <div id="card">
- <div class="abs lbl" style="left:24px;top:16px" data-acc>Detail view</div>
- <svg class="abs" style="left:24px;top:34px" width="120" height="120" id="detail"></svg>
- <div class="abs cap" style="left:24px;top:160px;width:150px;text-align:center" id="dcap"></div>
- <div class="abs lbl" style="left:24px;top:190px" data-acc>Side profile</div>
- <svg class="abs" style="left:24px;top:206px" width="180" height="20"><ellipse cx="45" cy="10" rx="44" ry="7" fill="none" stroke="#2b2e33" stroke-width="1"/><ellipse cx="45" cy="10" rx="24" ry="3.5" fill="none" stroke="#9aa0a8" stroke-width=".8"/>
+ <div class="abs grp" id="gDet"><div class="abs lbl" style="left:0;top:0" data-acc>Detail view</div>
+  <svg class="abs" style="left:0;top:18px" width="120" height="120" viewBox="0 0 120 120" id="detail"></svg>
+  <div class="abs cap" style="left:0;top:144px;width:150px;text-align:center" id="dcap"></div></div>
+ <div class="abs grp" id="gSide"><div class="abs lbl" style="left:0;top:0" data-acc>Side profile</div>
+ <svg class="abs" style="left:0;top:16px" width="180" height="20"><ellipse cx="45" cy="10" rx="44" ry="7" fill="none" stroke="#2b2e33" stroke-width="1"/><ellipse cx="45" cy="10" rx="24" ry="3.5" fill="none" stroke="#9aa0a8" stroke-width=".8"/>
   <g stroke="#6b7078" stroke-width=".9"><line x1="100" y1="10" x2="178" y2="10"/><line x1="100" y1="5" x2="100" y2="15"/><line x1="178" y1="5" x2="178" y2="15"/>
-  <line x1="113" y1="7" x2="113" y2="13"/><line x1="126" y1="7" x2="126" y2="13"/><line x1="152" y1="7" x2="152" y2="13"/><line x1="165" y1="7" x2="165" y2="13"/></g><circle cx="139" cy="10" r="3.2" data-fill/></svg>
- <div class="abs lbl" style="left:24px;top:236px" data-acc>Material</div>
- <svg class="abs" style="left:24px;top:252px" width="20" height="20"><circle cx="9" cy="9" r="8" data-fill/></svg>
- <div class="abs cap" style="left:24px;top:274px" id="mat"></div>
+  <line x1="113" y1="7" x2="113" y2="13"/><line x1="126" y1="7" x2="126" y2="13"/><line x1="152" y1="7" x2="152" y2="13"/><line x1="165" y1="7" x2="165" y2="13"/></g><circle cx="139" cy="10" r="3.2" data-fill/></svg></div>
+ <div class="abs grp" id="gMat"><div class="abs lbl" style="left:0;top:0" data-acc>Material</div>
+  <svg class="abs" style="left:0;top:16px" width="20" height="20"><circle cx="9" cy="9" r="8" data-fill/></svg>
+  <div class="abs cap" style="left:0;top:38px;white-space:nowrap" id="mat"></div></div>
  <div id="name"></div><svg id="dia" viewBox="0 0 390 228"></svg>
- <div class="abs lbl" style="left:618px;top:16px" data-acc>Scale study</div>
- <svg class="abs" style="left:618px;top:34px" width="120" height="40"><circle cx="11" cy="20" r="9" fill="none" stroke="#2b2e33"/><circle cx="40" cy="20" r="14" fill="none" stroke="#2b2e33"/><circle cx="78" cy="20" r="19" fill="none" stroke="#2b2e33"/><path d="M78 11v18M69 20h18" stroke="#2b2e33" stroke-width="1.2"/></svg>
- <div class="abs cap" style="left:618px;top:80px;width:160px" id="scale"></div>
- <div class="abs lbl" style="left:618px;top:124px" data-acc>Touchpoint</div>
- <div class="abs cap" style="left:618px;top:141px;width:160px" id="touch"></div>
- <div class="abs lbl" style="left:618px;top:186px" data-acc id="l3"></div>
- <div class="abs cap" style="left:618px;top:203px;width:162px" id="t3"></div>
+ <div class="abs grp" id="gScale"><div class="abs lbl" style="left:0;top:0" data-acc>Scale study</div>
+  <svg class="abs" id="circ" style="left:0;top:18px" width="120" height="40"><circle cx="11" cy="20" r="9" fill="none" stroke="#2b2e33"/><circle cx="40" cy="20" r="14" fill="none" stroke="#2b2e33"/><circle cx="78" cy="20" r="19" fill="none" stroke="#2b2e33"/><path d="M78 11v18M69 20h18" stroke="#2b2e33" stroke-width="1.2"/></svg>
+  <div class="abs cap tx" style="left:0;top:64px;width:160px" id="scale"></div></div>
+ <div class="abs grp" id="gTouch"><div class="abs lbl" style="left:0;top:0" data-acc>Touchpoint</div>
+  <div class="abs cap tx" style="left:0;top:17px;width:160px" id="touch"></div></div>
+ <div class="abs grp" id="gL3"><div class="abs lbl" style="left:0;top:0" data-acc id="l3"></div>
+  <div class="abs cap tx" style="left:0;top:17px;width:162px" id="t3"></div></div>
  <div id="formula"><span></span></div><div id="def"></div>
- <div class="plus" style="left:12px;top:398px">+</div><div class="plus" style="right:12px;top:398px">+</div>
+ <div class="plus" style="left:12px;bottom:14px">+</div><div class="plus" style="right:12px;bottom:14px">+</div>
 </div>
 <script>
 const T = JSON.parse(decodeURIComponent(location.hash.slice(1)));
 const A = T.acc, tint = A + '22', ink = '#2b2e33', mute = '#9aa0a8';
+const SH = T.shape || 'wide', TT = /_tt/.test(location.pathname); document.body.className = SH;
+{ const c = document.getElementById('card'), dims = {wide: [800, 440], square: [500, 500], tall: [400, 570]}[SH];
+  const sc = TT ? {wide: 1.08, square: 1.08, tall: 1.0}[SH] : {wide: 1.2, square: 1.2, tall: 1.12}[SH];
+  c.style.width = dims[0] + 'px'; c.style.setProperty('--h', dims[1] + 'px'); c.style.transformOrigin = '0 0'; c.style.transform = `scale(${sc})`;
+  c.style.left = Math.round((TT ? 465 : 540) - dims[0] * sc / 2) + 'px'; c.style.top = (TT ? 1218 : 1222) + 'px'; }
 document.getElementById('title').textContent = T.title;
 document.getElementById('name').textContent = T.name;
 for (const [id, v] of Object.entries({dcap: T.dcap, mat: T.mat, scale: T.scale, touch: T.touch, l3: T.l3, t3: T.t3, def: T.def})) document.getElementById(id).innerHTML = v;
@@ -115,6 +136,18 @@ const D = {
    mono(230, 62, 11, 'LIFETIME PROFIT  $4,800', '#fff') + mono(160, 108, 10, 'CAC $310', ink, 'start') + big(230, 172, '15×', 'RETURN ON EVERY CUSTOMER WON'),
 };
 document.getElementById('dia').innerHTML = D[T.dia]();
+if (SH !== 'wide') { const c = document.getElementById('card'), fo = document.getElementById('formula'), de = document.getElementById('def');
+  fo.style.top = (SH === 'square' ? 266 : 262) + 'px'; let fs = 16.5; f.style.maxWidth = (c.offsetWidth - 36) + 'px'; f.style.whiteSpace = 'nowrap';
+  while (f.offsetWidth > c.offsetWidth - 36 && fs > 12) { fs -= .5; f.style.fontSize = fs + 'px'; }
+  if (f.offsetWidth > c.offsetWidth - 36 || f.scrollWidth > f.clientWidth) { f.style.whiteSpace = 'normal'; f.style.lineHeight = '1.35'; f.style.padding = '8px 16px'; }
+  de.style.top = (fo.offsetTop + f.offsetHeight + 12) + 'px';
+  const strip = document.getElementById('gDet').offsetTop, bot = de.offsetTop + de.offsetHeight;
+  if (bot > strip - 8) console.log('OVERLAP def', bot, strip);
+  for (const g of ['gDet', 'gScale', 'gTouch', 'gL3']) { const el = document.getElementById(g); if (getComputedStyle(el).display === 'none') continue;
+    let m = 0; el.querySelectorAll('*').forEach(x => { if (x.getClientRects().length) m = Math.max(m, x.offsetTop + x.offsetHeight); });
+    window.__bot = Math.max(window.__bot || 0, el.offsetTop + m); }
+  if (window.__bot > c.offsetHeight - 30) console.log('OVERFLOW', window.__bot, c.offsetHeight); }
+
 const G = { // detail-view glyphs
  door: `<rect x="44" y="30" width="32" height="60" rx="2" fill="${A}" fill-opacity=".85"/><circle cx="69" cy="62" r="2" fill="#fff"/>`, house: house(32, 30, 56, true),
  bars: `<rect x="34" y="60" width="14" height="30" fill="${A}" fill-opacity=".4"/><rect x="53" y="40" width="14" height="50" fill="${A}"/><rect x="72" y="52" width="14" height="38" fill="${A}" fill-opacity=".4"/>`,
