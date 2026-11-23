@@ -181,6 +181,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Square/tall layout: diagram on top, formula pill (auto-shrinks to 12 px, then wraps), definition, then a label strip (Detail view glyph, Scale study, Touchpoint; tall adds the l3 row). Side profile, material and the scale circles are wide-only. The page logs OVERLAP/OVERFLOW if text collides.
 - Placement unchanged: top at y 1222 (IG) / 1218 (TikTok), centered at x 540 (IG) or 465 (TikTok, clear of the right rail). IG scale 1.2/1.2/1.12 (tall bottom 1860), TikTok 1.08/1.08/1.0.
 
+**F44** (Business IQ, 2026-11-23). "Dont worry about the audio. I can just mute it… can you just give it to me, this is crazy, your workflows have been so extended today… make my captions slightly larger… send it when it's done."
+- Wrong: the first file delivered had ~3,000 AAC decode errors because two build2 renders ran at the same time and overwrote each other's files. QA never decoded the whole file, so it shipped. Then several extra render loops before he got a usable file.
+- Rule: never run two renders at once. Every file passes content_kit/delivery_check.py (full decode with zero errors; HLG/bt2020/10-bit; audio/video length; optional face-luma vs source) before it is sent. Speed rule: one render, one QA pass, send. No preview loops unless he asks. IQ-format captions default to 140 px (was 118). Audio is optional on IQ-style videos.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -204,6 +208,8 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - d2d_IQ_v2.mp4: zoom 1.2x up-shift, header, one-word captions, 16 brighter cards, original HDR. 18.9 s.
 - d2d_IQ_v3.mp4: bigger cards + red follow pop-up. 18.9 s, original HDR.
 - d2d_IQ_v4.mp4 (Reels) + d2d_IQ_v4_TIKTOK.mp4: 18.6 s, vivid red CTA, TikTok-safe layout.
+
+- business_IQ_instagram.mp4 + business_IQ_tiktok.mp4: 20.5 s, 16 spec-sheet cards, 140 px captions, original HDR. Shipped 2026-11-23 after a corrupt-audio first delivery (F44).
 
 ## Performance
 (Log 48 h stats per posted video here.)

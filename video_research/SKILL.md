@@ -11,7 +11,7 @@ This skill is a loader. The real instructions live in a living playbook on GitHu
 Source of truth: GitHub repo `nathanup18/SalesMapperIos`, branch `claude/zen-cori-hyds6x` (use `main` once the playbook is merged there). Read these files:
 - `video_research/edit_playbook/PLAYBOOK.md`: rules, preferences, pipeline and QA gate. Hard rules (section 1) override everything.
 - `video_research/edit_playbook/FEEDBACK_LOG.md`: every past correction. Skim the latest entries and the "Shipped" list.
-- Tools: `video_research/content_kit/` (make_edit.py, qa_check.py, inserts.html, render2.js, mockup.html, brand notes).
+- Tools: `video_research/content_kit/` (make_edit.py, qa_check.py, delivery_check.py, inserts.html, render2.js, mockup.html, brand notes).
 
 How to read them, in this order:
 1. If the repo is checked out locally (Claude Code): `git fetch origin <branch>` and read the files from `origin/<branch>`.
@@ -26,7 +26,7 @@ Follow PLAYBOOK.md: the pipeline (section 5), visual aids (section 4), preferenc
 - Never change the brightness, saturation or look of his footage without asking first (H0). Keep his original HDR picture.
 
 ## Step 2: QA gate (blocks delivery)
-Run `qa_check.py` on the rendered file and review the boundary contact sheet yourself. Fix every FAIL before sending. Re-transcribe the output to confirm no word was clipped. Tell Nathan the QA result in one line, and list any placeholders or judgment calls.
+Run `qa_check.py` and `delivery_check.py` on the rendered file and review the boundary contact sheet yourself. Fix every FAIL before sending. Re-transcribe the output to confirm no word was clipped. Tell Nathan the QA result in one line, and list any placeholders or judgment calls.
 
 ## Step 3: learning protocol (every time Nathan reacts, in the same turn)
 Nathan wants this editing to get better every time it's used. Treat each correction, preference or reaction as training data:
