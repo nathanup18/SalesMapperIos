@@ -144,6 +144,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Rule (H9, replaces all earlier grades): NEVER convert color. Keep the source HDR as-is: libx265 10-bit (yuv420p10le), colorprim=bt2020, transfer=arib-std-b67, colormatrix=bt2020nc, tag hvc1. Verify mean 10-bit luma of a source frame vs the output frame (diff < 1%). Overlays/captions, if ever wanted again, must be composited without changing the picture's color space.
 - Also: when he says "just splice", deliver ONLY the cut: no text, no zoom, no captions, no graphics. F33 light style is dropped; F34 resolved (lighter = picture).
 
+**F36** (3 lines splice). "Do a dead air audit… don't be afraid to cut up one clip if it's got a bunch of sloppy air in it. You can split it and cut that out… I really need to be talking instantly. And after the first speech is done, keep it flowing."
+- Audit (content_kit/deadair_audit.py): the first splice had 20 gaps >= 0.15 s, 5.5 s of dead air, mostly at take joins (LEAD+TAIL padding).
+- Rule (replaces the "keep natural beats" part of F33 for good): speech in the first 0.05 s; keep 30 ms before speech and 60 ms after; cut any silence > 0.15 s inside a take, splitting the take; never cut through a word (shrink the cut to Whisper's word edges); re-transcribe the final and confirm every word. Target: no gap > 0.3 s, total dead air < 5% of runtime. Result: 12 breaths of 0.15-0.28 s, 2.4 s total in 51.3 s, all words intact. Script: content_kit/edits/three_lines/splice2.py.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -162,6 +166,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - d2d_day_one_captions.mp4 / _clean.mp4 (AI cinematic rep + manager scene): 11.9 s, QA PASS both.
 - d2d_3_lines_clean.mp4 / _captions.mp4 ("3 lines", light style): 54.1 s, 15 takes, QA PASS both.
 - d2d_3_lines_SPLICE_original_picture.mp4: 54.2 s, plain splice, original HDR kept (luma diff 0.6/1023).
+- d2d_3_lines_SPLICE_tight5.mp4: 51.3 s, tight splice, original HDR, speech at 0.04 s.
 
 ## Performance
 (Log 48 h stats per posted video here.)
