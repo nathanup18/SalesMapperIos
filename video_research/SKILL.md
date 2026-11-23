@@ -22,6 +22,8 @@ Say in one line which playbook version you loaded (for example, "Playbook v5 loa
 
 ## Step 1: edit by the playbook
 Follow PLAYBOOK.md: the pipeline (section 5), visual aids (section 4), preferences (section 2), and research defaults only where the playbook is silent.
+- Ask Nathan formatting questions (layout, text style, caption choice, which take, where elements go) with the AskUserQuestion pop-up: 2-4 multiple-choice options, recommended first. Don't ask what the playbook already answers.
+- Never change the brightness, saturation or look of his footage without asking first (H0). Keep his original HDR picture.
 
 ## Step 2: QA gate (blocks delivery)
 Run `qa_check.py` on the rendered file and review the boundary contact sheet yourself. Fix every FAIL before sending. Re-transcribe the output to confirm no word was clipped. Tell Nathan the QA result in one line, and list any placeholders or judgment calls.
@@ -40,8 +42,10 @@ Never weaken or delete a hard rule unless Nathan says so. If new feedback confli
 When Nathan shares stats (views, 3-second hold, average % watched, follows), log them under "Performance" in FEEDBACK_LOG.md. Note which editing choices the top videos share. A weekly consolidation run merges duplicate feedback and promotes repeated patterns to hard rules.
 
 ## Fallback hard rules (only if the playbook can't be loaded)
-- **No dead space:** speech within 0.07 s of every segment start, including frame 0. Cut points come from the waveform, not Whisper. Keep segment audio as PCM until the final encode (avoids A/V drift).
-- **Captions:** never over the mouth. Measure the chin; captions go about 90 px below it (y≈1610-1640 on 1080x1920).
+- **Never brighten, saturate or regrade his footage without asking first.** Keep the original iPhone HDR (HLG, bt2020, 10-bit x265). Convert graphics into HDR, never the footage out of it.
+- **Ask with pop-ups:** formatting choices and captions go to him as AskUserQuestion multiple choice.
+- **No dead space:** speech within 0.05 s of frame 0; cut every silence over ~0.1 s, splitting takes; never cut through a word; re-transcribe to verify. Cut points come from the waveform, not Whisper. Keep segment audio as PCM until the final encode (avoids A/V drift).
+- **Captions and graphics:** never over the mouth. Measure the chin and place everything below it; graphics fully opaque.
 - **Opening:** talking-head hooks open on the face, with no app or graphic over the hook.
 - **Visual aids:** where there's no B-roll, build custom animated visuals (gift card, question card and so on) and cut back and forth with the face.
 - **No flashes or black frames:** a section-opening graphic starts on the cut. Snap boundaries to the frame grid. Pad inserts with their first frame.

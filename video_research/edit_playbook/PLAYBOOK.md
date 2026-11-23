@@ -1,6 +1,6 @@
 # Short-form video edit playbook (living)
 
-Version: 15 (2026-11-21)
+Version: 16 (2026-11-23)
 Owner: Nathan. This file is the source of truth for the `short-form-video-edit` skill. The skill loads it at the start of every run and updates it whenever Nathan gives feedback (see "Learning protocol" at the bottom). Never treat it as frozen.
 
 Rule priority, highest first:
@@ -14,9 +14,21 @@ Rule priority, highest first:
 
 Each rule links to its entry in FEEDBACK_LOG.md.
 
-H1. No dead space. [F1, F6, F9]
-- Every segment starts no more than 0.07 s before the first audible phoneme and ends no more than 0.15 s after the last one. This includes the very first frame of the video, which is the one most often missed.
-- Inside a take, shorten every pause longer than 0.3 s to about 0.2 s. Nathan prefers tight cuts over the research's "leave 0.5-0.9 s beats".
+H0. NEVER change the brightness, saturation, exposure, contrast or color of Nathan's footage without asking him first. [F18, F27, F28, F34, F35, F42]
+- His words: "never, ever increase the saturation or brightness of my overall lighting without asking me first. I don't appreciate that."
+- Default = the original picture, untouched (see H9). Any change to the look of his footage is a question for him (H16 pop-up), never a silent choice.
+- Check before every delivery: compare the mean 10-bit luma of a face crop in the output against the same frame in the source. They must match within ~1%.
+
+H16. Ask formatting questions with pop-ups, not walls of text. [F42]
+- Whenever a decision about how the content will look or read is his to make (layout, text style, caption choice, which take, where elements go, what a graphic should show), ask with the AskUserQuestion pop-up: 2-4 short multiple-choice options, recommended first, previews where they help.
+- Captions: always offer 3-4 options as a pop-up and let him pick (he asked for "multiple choice").
+- Don't ask what the playbook already answers, and don't block on trivia: pick the default, say so in one line, keep moving.
+
+H1. No dead space. Talk instantly, keep it flowing. [F1, F6, F9, F36, F40]
+- Speech starts within 0.05 s of frame 0. Keep 20-30 ms before speech and 40-60 ms after.
+- Inside a take, cut out every silence longer than 0.08-0.15 s, splitting the take as many times as needed ("don't be afraid to cut up one clip"). Target: no gap > 0.3 s, total dead air < 5% of runtime. Run content_kit/deadair_audit.py on the output and report before/after.
+- Never cut through a word: shrink a cut to Whisper's word edges, but guard only the middle ~40% of each word (in fast lists Whisper spans touch end to end and would block every cut). Re-transcribe and confirm every word survives.
+- What remains at ~0.08-0.15 s is normal word spacing; cutting further sounds chopped. Next lever, only if he asks: 1.08-1.1x speed with pitch kept.
 - Remove false starts and retakes, keeping the last clean take.
 - Find cut points from the audio waveform (10 ms RMS), not from Whisper word times alone. Whisper starts words 0.1-0.4 s early.
 - Keep segment audio as PCM (WAV in MKV) until the one final AAC encode. Joining AAC segments adds about 21 ms of encoder delay per cut, so by the end of a 10-cut video the audio sits 0.2 s behind the picture. That reads as dead air at section starts and slightly out-of-sync lips. [F15]
@@ -56,10 +68,11 @@ H8. Post caption: lead with the most concrete story and its outcome, and end wit
 - The goal is followers. The first line is the strongest concrete moment (for example, "We handed every homeowner $1,000 in local gift cards before we pitched."). The next line is what happened after (the outcome). The last line is "Follow for more D2D tips".
 - Don't just list all the tips in the caption.
 
-H9. Color = accurate, untouched. [F18, F27, F28]
-- iPhone HLG (bt2020) → SDR with the accurate conversion and nothing else: `zscale=tin=bt709:t=bt709:min=bt2020nc:m=bt709:pin=bt2020:p=bt709:rin=tv:r=tv,format=yuv420p`. Nathan matched this to his phone (F28).
-- No eq (contrast, saturation, gamma), no tonemap, and NOT the matrix-only shortcut (it makes him look pale, F28).
-- If color is ever questioned, build a labeled lineup (same frame, 3-4 grades) and let him pick against the original in Photos. Don't guess.
+H9. Keep the original HDR picture. Never convert his footage's color. [F35, supersedes F27/F28]
+- His iPhone films HLG HDR (bt2020, 10-bit). Every SDR conversion we tried (F27, F28) made it look "bright" on his phone. Output HDR as-is: libx265 10-bit yuv420p10le, `colorprim=bt2020:transfer=arib-std-b67:colormatrix=bt2020nc:range=limited`, tag hvc1, plus the matching -color_* flags.
+- Cuts, scale and crop in yuv420p10 don't change color. No eq, no tonemap, no grade (H0).
+- Graphics go INTO the HDR space, never the footage out of it: sRGB → linear → BT.2020 → SDR white at 75-88% HLG signal (88% when he wants graphics brighter, F38) → HLG OETF → 16-bit PNG → overlay=format=yuv420p10 (build2.py `to_hlg`). Wide-gamut trick for vivid reds: treat the sRGB values as BT.2020 primaries (F40).
+- Previews I make for myself are tonemapped and look washed out. Never judge his picture from them, and say so if I show one.
 
 H10. The hook headline is big and black. [F19]
 - White card, black (#000) text in Nunito Sans Black, no colored words. It fills up to the top third: box top at y≥180 (below the TikTok/Reels top bar), bottom at y≤640, side margins ≥60 px (box width about 960 px), text about 110-125 px, 2-3 lines.
@@ -78,6 +91,8 @@ H12. On-screen text uses TikTok's native style. [F22]
 
 H13. Ship two versions of every edit: captioned and clean. [F22]
 - Clean = no burned-in word captions (labels and the hook stay), so Nathan can use the platform's auto-captions.
+- When he says "just splice it", deliver ONLY the cut: no text, zoom, captions or graphics. [F35]
+- For reference-style videos he can also get a TikTok layout (H18).
 
 H14. The opening has energy. [F24]
 - Hook shot: smooth push-in on his face, 100%→110% across the hook, using subpixel warpAffine (no ffmpeg zoompan, which jitters). Later jump cuts alternate 100%/112%, starting at 100% after the hook.
@@ -89,6 +104,21 @@ H15. Subtle sound design. [F24]
 - Place every sound from the same word-timed cues as the animation it belongs to.
 - Mix: loudnorm → aresample 48k → amix(normalize=0, longest) → atrim to video length → alimiter. [F25]
 
+H17. Graphics: solid, readable, never on his face. [F30, F31, F37, F38, F39, F41]
+- 100% opaque. No translucent cards or boxes.
+- Measure his chin across the video (Haar face box bottom) and place cards and captions below the lowest chin position. If there's no room, zoom the footage 1.2x bottom-anchored (scale 1296x2304, crop y 384) so his face moves up ~150 px.
+- Keep something moving: an insert or card about every 5-8 s; typing screens type 3-4 lines, each starting on the spoken word it matches.
+- No credit tags on borrowed clips unless he asks.
+- Text on screen is black on white by default (F34), except when copying a reference's look.
+
+H18. Copying a reference creator's format. [F37-F40]
+- Pull frames at every beat of the reference, crop the graphics at full resolution, and copy the system (layout, fonts, label style, colors, CTA style), not the content.
+- Adapt placement to Nathan's framing (his face sits lower than most references).
+- Fonts: install full TTFs (Google Fonts CSS requested with no browser user agent); woff2 subsets fall back to serif in headless Chromium.
+- Pick takes from the same room as the rest of the clips.
+- TikTok layout: headers and titles at y ≥ 250 (below the Following/For You tabs), cards scaled ~0.88 and shifted left clear of the right action rail (x ≤ ~800), nothing important below y ~1600.
+- Library: content_kit/edits/d2d_iq/ (spec-sheet term cards: cards.html + terms.json, header/caption/red CTA overlay: overlay.html, *_tt.html TikTok variants, build.py cut + build2.py HDR composite).
+
 ---
 
 ## 2. Nathan's preferences (soft, but default to these)
@@ -99,7 +129,13 @@ H15. Subtle sound design. [F24]
 - **Color:** iPhone footage is HLG HDR. Use only the accurate conversion in H9.
 - **Audio:** highpass at 70 Hz, loudnorm to I=-14, TP=-1.5. Use a 10-15 ms fade at every cut.
 - **Music:** never bake music into the file. Nathan adds a trending sound in the TikTok or Instagram app at 5-10% volume, instrumental, without lyrics.
-- **Ending:** his spoken CTA plus a text pill ("Follow for more D2D tips"). No outro card, no logo sting.
+- **Ending:** his spoken CTA plus a text pill ("Follow for more D2D tips"). No outro card, no logo sting. In the reference style: solid red box, white serif "follow for more", held to the end.
+- **Role-plays:** end on the last line of the pitch, not on filler like "So all good?" [F31]
+- **Every clip counts:** list and transcribe EVERY new file in the raw folder before cutting. A closing "follow for more" clip always goes last. [F30]
+- **Post captions:** a comment trigger works best ("Comment 'GUIDE' / 'IQ' and I'll send you…"). The last line before hashtags is "Follow for more door-to-door tips 🚪". Max 5 hashtags. Offer options as a pop-up (H16).
+- **Scripts and hooks:** the knowledge must be real and counterintuitive to the D2D community (not the standard playbook with new labels). Hooks combine clarity with on-topic curiosity and avoid delay, comprehension loss, irrelevance and disinterest. Flag unbackable stats (e.g. "112%") and suggest safer wording.
+- **Speed:** when he says "move fast", ship the fix without extra previews or questions, then refine.
+- **Platform tips he uses:** Creator account (not Business) for the full music library; added music at 5-10% under his voice at 100%.
 
 ---
 
@@ -148,6 +184,8 @@ One command does the cut, captions and composite: `python make_edit.py <variant>
 Drive convention [F20]: files at the top level of `01 Raw footage` are unedited, new footage. When a video ships, move its raw clips into a subfolder `01 Raw footage/<YYYY-MM-DD> · <video title> (edited)`. Only edit what's at the top level unless Nathan says otherwise.
 
 ## 6. QA gate (run before every delivery; any failure blocks it)
+- [ ] H0: face luma in the output matches the source within ~1%, and the output is still HLG bt2020 10-bit
+- [ ] deadair_audit.py: speech ≤ 0.05 s from frame 0, no gap > 0.3 s
 - [ ] Frame 0 and every clip start: speech within 0.10 s; inner cuts within 0.25 s (qa_check.py `deadair`)
 - [ ] No black frames anywhere (qa_check.py `black`)
 - [ ] Frame 0 is a clean shot of the face: no hand or phone covering it
@@ -172,6 +210,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v16 (2026-11-23): H0 never change brightness/saturation without asking (F42); H16 formatting questions as pop-ups (F42); H9 keep original HDR, graphics converted into HLG (F35, F38, F40); H1 tight splice + dead-air audit + core-only word guard (F36, F40); H17 opaque graphics placed below the measured chin, 1.2x up-shift (F37-F41); H18 reference-format workflow + TikTok layout (F37-F40); preferences: role-play endings, every clip, comment-trigger captions, real counterintuitive scripts, move fast.
 - v15 (2026-11-21): H9 final, accurate conversion, confirmed by Nathan against his phone (F28); lineup method for color disputes.
 - v14 (2026-11-21): neutral grade, matrix-only conversion, no added saturation (F27).
 - v13 (2026-11-21): fewer whooshes (face↔screen only), audible iMessage send (F26).
