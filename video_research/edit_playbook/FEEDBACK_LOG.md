@@ -148,6 +148,13 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Audit (content_kit/deadair_audit.py): the first splice had 20 gaps >= 0.15 s, 5.5 s of dead air, mostly at take joins (LEAD+TAIL padding).
 - Rule (replaces the "keep natural beats" part of F33 for good): speech in the first 0.05 s; keep 30 ms before speech and 60 ms after; cut any silence > 0.15 s inside a take, splitting the take; never cut through a word (shrink the cut to Whisper's word edges); re-transcribe the final and confirm every word. Target: no gap > 0.3 s, total dead air < 5% of runtime. Result: 12 breaths of 0.15-0.28 s, 2.4 s total in 51.3 s, all words intact. Script: content_kit/edits/three_lines/splice2.py.
 
+**F37** (D2D IQ, reference: Bryson Bowman "Business IQ"). "Create the visuals that are in his clips for each of the terms that I provided and overlay them on the screen. I can do the rest of the editing… everything spliced together from the clips I provided."
+- Built: 16 spec-sheet cards (light card, DETAIL VIEW / SIDE PROFILE / MATERIAL / SCALE STUDY / TOUCHPOINT labels in IBM Plex Mono, per-term diagram, formula pill, italic one-line definition, one accent per term) + white Instrument Serif term title with a dark shadow. content_kit/edits/d2d_iq/.
+- Overlays on HDR footage: convert the graphic INTO HLG (sRGB -> linear -> BT.2020 -> SDR white at 75% HLG signal per BT.2408 -> HLG OETF, 16-bit PNG), overlay in yuv420p10, encode x265 HLG. The footage itself is never converted (face luma 637 vs source 640).
+- Placement: his framing puts the face high; ours sits lower (chin y 1250-1340). Measure the chin and put cards below it (scale .78, y 1372-1715). White titles need a dark shadow on a light wall.
+- Takes: match the room. 9843-9845 were shot in a different room from the term clips, so the hook came from 9848.
+- Font gotcha: Google Fonts woff2 subsets fall back to serif in headless Chromium. Install full TTFs (request the CSS with no browser user-agent).
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -167,6 +174,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - d2d_3_lines_clean.mp4 / _captions.mp4 ("3 lines", light style): 54.1 s, 15 takes, QA PASS both.
 - d2d_3_lines_SPLICE_original_picture.mp4: 54.2 s, plain splice, original HDR kept (luma diff 0.6/1023).
 - d2d_3_lines_SPLICE_tight5.mp4: 51.3 s, tight splice, original HDR, speech at 0.04 s.
+- d2d_IQ_terms.mp4 (+ d2d_IQ_no_cards.mp4, card PNG pack): 18.9 s, 16 term cards, original HDR, speech at 0.03 s.
 
 ## Performance
 (Log 48 h stats per posted video here.)
