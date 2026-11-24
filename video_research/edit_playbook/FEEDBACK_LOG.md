@@ -221,7 +221,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Wrong: lowest callout sat on a tiny corner block, partly behind him and the scale bar; callouts landed late ("money" / "It's").
 - Rule: hook header box is black with white text for this series (tool labels stay white). Data-map callouts go on large blocks clear of the person cutout, with up/down arrows and a pulsing outline on the pale block. Callouts pop on the earliest matching word ("earning" / "money"), not the end of the phrase.
 
-## Shipped
+
+**F52** (2026-11-24, 4 door-to-door tools v7). "Integrate the bit from SalesMapper about how reps can knock from their lock screen. I feel like that's been missed."
+- Wrong: IMG_9934 (the lock-screen line) was left out of the cut because its Whisper transcript merged a re-take ("...lets reps track" said twice), so the useful line looked broken.
+- Rules: before dropping a take, re-transcribe it in isolation; Whisper merges stumbles into one long word span (a 3.5 s "track"). Keep the clean second take. When the spoken word is wrong for the feature ("home screen" for lock screen), captions show the right word, audio untouched (his choice). Product demos come from salesmapper.ca captured frame-accurately: block video.play, seek the video per frame, pause and seek CSS animations (door_tools/cap_lock3.js). Sync the key action (Sale tap) to the matching word ("knocks"). Keep widget buttons above the caption band (y < 900).
+\n## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
 

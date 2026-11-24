@@ -2,7 +2,7 @@
 import json, wave, subprocess, os, numpy as np, cv2
 W = json.load(open('words.json')); FPS = 30; F = lambda x: round(x * FPS) / FPS
 CLIPS = [("HOOK", "IMG_9921", 0, 99), ("S1", "IMG_9922", 0, 99), ("I2", "IMG_9923", 1.5, 99), ("E2", "IMG_9926", 0, 99),
-         ("I3", "IMG_9927", 0, 99), ("E3", "IMG_9929", 0, 99), ("I4", "IMG_9931", 0, 99), ("E4", "IMG_9936", 0, 99), ("C4", "IMG_9937", 0, 99)]
+         ("I3", "IMG_9927", 0, 99), ("E3", "IMG_9929", 0, 99), ("I4", "IMG_9931", 0, 99), ("L4", "IMG_9934", 7.6, 11.2), ("E4", "IMG_9936", 0, 99), ("C4", "IMG_9937", 0, 99)]
 FILE = {a: f for a, f, _, _ in CLIPS}
 SECT = []; TITLE_SPAN = {}
 PRE, POST, MAXGAP = 0.02, 0.04, 0.08   # F40: keep it moving
