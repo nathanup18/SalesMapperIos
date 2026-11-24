@@ -65,7 +65,7 @@ FB = ImageFont.truetype('/usr/share/fonts/opentype/inter/Inter-ExtraBold.otf', 3
 FL = ImageFont.truetype('/usr/share/fonts/opentype/inter/Inter-Bold.otf', 17 * SS)
 def centroid(k):
     p = np.array(BL[k][0], float) * 2; return p[:, 0].mean(), p[:, 1].mean()
-CALL = [(HI, f'↑ ${BL[HI][1]}k · highest', 26.19), (LO, f'↓ ${BL[LO][1]}k · lowest', IN['money'])]
+CALL = [(HI, f'↑ ${BL[HI][1]}k · highest', 25.77), (LO, f'↓ ${BL[LO][1]}k · lowest', 26.19)]
 ANCH = {LO: (985, 700)}
 def ui(t, z, cx, cy):
     im = Image.new('RGBA', (1080 * SS, 1920 * SS), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
@@ -106,7 +106,7 @@ for i in range(n):
     ra = rd[..., 3:] * (1 - sa); img = img * (1 - ra) + rd[..., 2::-1] * 255 * ra
     lab = labl[..., 3:] * (1 - sa); img = img * (1 - lab) + labl[..., 2::-1] * 255 * lab
     ea = EDGE * (0.9 * min(1, (t - T0) / 0.2)); img = img * (1 - ea) + 255 * ea
-    for k, c in ((HI, 26.19), (LO, IN['money'])):
+    for k, c in ((HI, 25.77), (LO, 26.19)):
         a = HIE[k] * eo((t - c + 0.05) / 0.25)
         if k == LO and t > c: a = a * (0.8 + 0.2 * np.cos(2 * np.pi * (t - c) / 0.7))      # slow pulse so the pale block reads
         col = np.array([13, 0, 120]) if k == HI else np.array([255, 255, 255])

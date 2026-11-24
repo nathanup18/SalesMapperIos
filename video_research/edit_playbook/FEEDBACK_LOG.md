@@ -249,6 +249,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Built (sm_lifetime/compose3.py): door_tools sm_fill (pins flooding the map) on "43% more doors", sm_stats (revenue and sales counting up) from "sales"; no KPI tiles; label detail "more doors · more sales" (no numbers); #lab top 170 -> 270; CTA centred at y 960 unless the box would cover the mouth, then just under the chin (here chin 1118 -> CTA 1128), subscription card below it.
 - Rule: when he says he doesn't want numbers on screen, remove them from labels too, not just the tiles. "Winning" beats use moving app footage (pins flooding, counters rising), not static cards.
 
+
+**F58** (2026-11-24, 4 door-to-door tools v8). "Edit it out after I say 'so you can figure out who's earning all the money'. Then I say 'it's very effective, though', and that's kind of redundant. Let's just blip that."
+- Rule: cut filler verdict lines ("it's very effective", "it's great") that repeat what the visual already proved; end the section on the payoff word. Callouts move with the cut so each stays on screen at least ~1 s (highest on "who's", lowest on "earning").
+- Fix: tools_v9_instagram.mp4, 43.4 s (E3 ends on "money."), masks and cues shifted 34 frames.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -282,6 +287,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - sm_lifetime_captions.mp4 + sm_lifetime_clean.mp4 (F55): 21.8 s, Instagram, DELIVERY PASS both, face luma within 1% of source.
 - sm_lifetime_v2_captions.mp4 + _clean.mp4 (F56): 21.8 s, Instagram, DELIVERY PASS both.
 - sm_lifetime_v3_captions.mp4 + _clean.mp4 (F57): 21.8 s, map fill + sales count-up, header lower, CTA under chin. Decode clean.
+- tools_v9_instagram.mp4 (F58): 43.4 s, redundant "very effective" line cut. Decode clean.
 
 ## Performance
 (Log 48 h stats per posted video here.)
