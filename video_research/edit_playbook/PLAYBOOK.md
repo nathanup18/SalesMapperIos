@@ -1,6 +1,6 @@
 # Short-form video edit playbook (living)
 
-Version: 17 (2026-11-23)
+Version: 18 (2026-11-24)
 Owner: Nathan. This file is the source of truth for the `short-form-video-edit` skill. The skill loads it at the start of every run and updates it whenever Nathan gives feedback (see "Learning protocol" at the bottom). Never treat it as frozen.
 
 Rule priority, highest first:
@@ -92,7 +92,7 @@ H12. On-screen text uses TikTok's native style. [F22]
 H13. Ship two versions of every edit: captioned and clean. [F22]
 - Clean = no burned-in word captions (labels and the hook stay), so Nathan can use the platform's auto-captions.
 - When he says "just splice it", deliver ONLY the cut: no text, zoom, captions or graphics. [F35]
-- For reference-style videos he can also get a TikTok layout (H18).
+- Instagram version only. No TikTok layout unless he asks for one (F48).
 
 H14. The opening has energy. [F24]
 - Hook shot: smooth push-in on his face, 100%→110% across the hook, using subpixel warpAffine (no ffmpeg zoompan, which jitters). Later jump cuts alternate 100%/112%, starting at 100% after the hook.
@@ -117,6 +117,8 @@ H18. Copying a reference creator's format. [F37-F40]
 - Fonts: install full TTFs (Google Fonts CSS requested with no browser user agent); woff2 subsets fall back to serif in headless Chromium.
 - Pick takes from the same room as the rest of the clips.
 - TikTok layout: headers and titles at y ≥ 250 (below the Following/For You tabs), cards scaled ~0.88 and shifted left clear of the right action rail (x ≤ ~800), nothing important below y ~1600.
+- Map B-roll: never use his raw pinch-zoom screen recordings as moving footage (jitter). Pull stills at several zoom levels, register them (SIFT + estimateAffinePartial2D chain), and render one slow eased zoom toward a fixed point, then glide between called-out features on their words (door_tools/sv.py). [F48]
+- Data maps (income, demographics): trace the real blocks of the neighborhood on the screenshot, show the plain map first, then the same blocks over the Google Maps still. Sequential white → dark red (more = darker), legend very small, highest and lowest called out on their words. Numbers are illustrative unless he gives real ones (door_tools/inc.py). [F48]
 - Library: content_kit/edits/d2d_iq/ (spec-sheet term cards: cards.html + terms.json, header/caption/red CTA overlay: overlay.html, *_tt.html TikTok variants, build.py cut + build2.py HDR composite).
 
 ---
@@ -165,6 +167,7 @@ Full data: video_research/summary.md and comparison_table.md.
   - `branch`: a YES/NO tree whose steps land on spoken cues (`get=`, `close=`, `no=`, `fig=`)
 - Cue-timed inserts: pass word times from the cut output as URL params (`scene&dur=…&cue=…`). The animation then matches his speech wherever the cuts land.
 - The kicker line must not repeat the section label. It adds information (for example, label "Ask this" with kicker "THE LINE").
+- **Word sync:** every element of a screen (counter, toggle, highlight, badge) starts on its own spoken word, not on the shot start. Stagger only inside a word's 0.2 s window. One continuous screen per topic, highlight jumps card to card (F48).
 - **Timing:** start 0.05 s before the key word and end 0.1 s after the phrase. If the insert opens a section, it starts on the cut (H5).
 - **Look:** background #F7F4EC, Nunito Sans, ink #1C1C1A, pin colors (green = win, orange = re-knock, indigo = not home, red = no), and a small uppercase kicker line at about y=450 px. Animations use spring or ease curves driven by one clock.
 - **Layout:** keep content between y≈420 and y≈1540 px. The section label sits above that band and captions below it.
@@ -214,6 +217,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v18 (2026-11-24): Instagram only, no TikTok version; still-based smooth map zooms; word-synced screen elements; real-neighborhood heat maps with red-white scale (F48).
 - v17 (2026-11-23): delivery_check.py full-decode gate, one render at a time, one-render-then-send speed rule, optional audio on IQ videos, 140 px IQ captions (F44).
 - v16 (2026-11-23): H0 never change brightness/saturation without asking (F42); H16 formatting questions as pop-ups (F42); H9 keep original HDR, graphics converted into HLG (F35, F38, F40); H1 tight splice + dead-air audit + core-only word guard (F36, F40); H17 opaque graphics placed below the measured chin, 1.2x up-shift (F37-F41); H18 reference-format workflow + TikTok layout (F37-F40); preferences: role-play endings, every clip, comment-trigger captions, real counterintuitive scripts, move fast.
 - v15 (2026-11-21): H9 final, accurate conversion, confirmed by Nathan against his phone (F28); lineup method for color disputes.

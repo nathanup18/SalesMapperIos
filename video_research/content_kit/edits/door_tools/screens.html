@@ -1,0 +1,115 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+:root{--teal:#17838a;--teal2:#0f6a70;--org:#f0813f;--ink:#1f2933;--mut:#6b7785;--line:#e3e7eb;--bg:#f4f6f8}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;font-family:Inter;color:var(--ink)}
+body.op{background:var(--bg)} body.al{background:transparent}
+.abs{position:absolute} .card{background:#fff;border:2px solid var(--line);border-radius:26px}
+.h{font:800 64px Inter;color:var(--teal);letter-spacing:-1px}
+.k{font:500 32px Inter;color:var(--mut)} .v{font:800 52px Inter;color:var(--ink)}
+.top{position:absolute;left:0;right:0;top:0;height:150px;background:#fff;border-bottom:2px solid var(--line);display:flex;align-items:center;padding:0 46px;gap:22px;font:700 36px Inter}
+.logo{width:54px;height:54px;border-radius:14px;background:var(--teal);display:flex;align-items:center;justify-content:center}
+.ll{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:0 50px}
+.li{background:#fff;border:2px solid var(--line);border-radius:20px;padding:24px 26px;display:flex;gap:20px;align-items:center}
+.ico{width:64px;height:64px;border-radius:16px;background:#e5f3f4;display:flex;align-items:center;justify-content:center;font:800 30px Inter;color:var(--teal)}
+.ln{font:700 34px Inter} .lc{font:600 30px Inter;color:var(--mut);font-variant-numeric:tabular-nums}
+.tg{display:flex;justify-content:space-between;align-items:center;padding:30px 0;border-bottom:2px solid var(--line);font:600 38px Inter}
+.sw{width:104px;height:60px;border-radius:30px;background:#cfd6dc;position:relative;transition:none}.sw i{position:absolute;top:6px;left:6px;width:48px;height:48px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.2)}
+.hl{position:absolute;border:6px solid var(--org);border-radius:22px;box-shadow:0 0 0 9999px rgba(15,25,35,.0)}
+.cell{position:absolute}
+.lab{position:absolute;background:#fff;border-radius:14px;padding:10px 20px;font:800 36px Inter;box-shadow:0 6px 18px rgba(0,0,0,.35);white-space:nowrap}
+.mk{position:absolute;border:6px solid #34C759;border-radius:50%;box-shadow:0 0 0 3px rgba(0,0,0,.35)}
+.chip{position:absolute;background:#34C759;color:#fff;font:800 32px Inter;padding:6px 16px;border-radius:10px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.35)}
+</style></head><body><div id="r"></div>
+<script>
+const Q=new URLSearchParams(location.search), SC=Q.get('s'), r=document.getElementById('r');
+document.body.className=Q.get('alpha')?'al':'op'; window.DURATION=+Q.get('dur');
+const clamp=x=>Math.max(0,Math.min(1,x)), prog=(t,a,b)=>clamp((t-a)/(b-a)), ease=t=>1-Math.pow(1-clamp(t),3);
+const H=(h)=>{const d=document.createElement('div');d.innerHTML=h;r.appendChild(d);return d;};
+const topbar=t=>`<div class="top"><div class="logo"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M3 11L12 3l9 8v10h-6v-6H9v6H3z" fill="#fff"/></svg></div>${t}</div>`;
+let R=()=>{}; const K={}; if(Q.get('c')){const c=JSON.parse(Q.get('c')),t0=+Q.get('t0');for(const k in c)K[k]=c[k]-t0;}
+const pop=(t,a,d=0.2)=>ease(prog(t,a-0.04,a-0.04+d)); const num=n=>n.toLocaleString('en-US');
+if(SC==='leads'){
+  const L=[['High Equity',242943,'$'],['Pre-Foreclosures',4921,'!'],['Absentee Owners',96112,'A'],['Senior Owners',39534,'S'],['Free & Clear',152005,'✓'],['Tired Landlords',44727,'T'],['Vacant',7677,'V'],['Cash Buyers',58718,'C']];
+  H(topbar('Lead Lists')+`<div class="abs k" style="left:50px;top:190px">20 lists · 160M+ properties</div><div class="ll abs" style="top:260px;left:0;right:0">${L.map((l,i)=>`<div class="li" id="l${i}"><div class="ico">${l[2]}</div><div><div class="ln">${l[0]}</div><div class="lc" id="c${i}">0</div></div></div>`).join('')}</div>`);
+  R=t=>L.forEach((l,i)=>{const p=ease(prog(t,0.02+i*0.04,0.5+i*0.04));document.getElementById('c'+i).textContent=num(Math.round(l[1]*p));const e=document.getElementById('l'+i);e.style.opacity=ease(prog(t,i*0.03,0.15+i*0.03));});
+  document.getElementById('r').style.transformOrigin='50% 20%';const o=R;R=t=>{o(t);r.style.transform=`scale(${1+0.06*t/DURATION})`;};
+}
+if(SC==='filters'){
+  const F=['Owner occupied','Years owned 10+','Equity 50%+','Open mortgage','Pool on property','Absentee owner'], on=[1,1,1,1,1,0];
+  H(topbar('Filters <span id="n165" style="color:var(--teal);margin-left:8px;display:inline-block">165+</span>')+`<div class="abs" style="left:50px;right:50px;top:200px">${F.map((f,i)=>`<div class="tg" id="r${i}">${f}<div class="sw" id="s${i}"><i></i></div></div>`).join('')}
+   <div style="margin-top:50px;height:120px;border-radius:24px;background:var(--org);color:#fff;font:800 46px Inter;display:flex;align-items:center;justify-content:center" id="go">Show 2,418 homes</div></div>`);
+  const n=document.getElementById('n165');
+  R=t=>{const pn=pop(t,K.n165,0.22); n.textContent=Math.round(165*ease(prog(t,K.n165-0.04,K.n165+0.3)))+'+'; n.style.transform=`scale(${(1+0.35*Math.sin(Math.PI*pn)).toFixed(3)})`;
+    F.forEach((f,i)=>{const rr=document.getElementById('r'+i), pr=pop(t,K.n165+i*0.05,0.2); rr.style.opacity=0.25+0.75*pr; rr.style.transform=`translateX(${(1-pr)*40}px)`;
+      const p=on[i]?pop(t,K.filt+i*0.05,0.16):0;const s=document.getElementById('s'+i);s.style.background=p>0.5?'var(--teal)':'#cfd6dc';s.firstChild.style.left=(6+44*p)+'px';});
+    const g=document.getElementById('go');g.style.transform=`scale(${1+0.05*Math.sin(Math.PI*prog(t,K.filt+0.3,K.filt+0.6))})`;};
+}
+if(SC==='owner'||SC==='mortgage'||SC==='opp'||SC==='page'){
+  H(topbar('123 Foxwood Ave')+`
+   <div class="card abs" style="left:46px;right:46px;top:190px;height:470px;overflow:hidden"><div style="height:300px;background:linear-gradient(160deg,#9db6c9,#6d8aa3);display:flex;align-items:flex-end;justify-content:center"><svg width="420" height="250" viewBox="0 0 420 250"><path d="M40 120 L210 20 L380 120 V250 H40Z" fill="#e9e2d4"/><path d="M20 128 L210 10 L400 128" fill="none" stroke="#7a4b3a" stroke-width="22"/><rect x="180" y="160" width="60" height="90" fill="#5b6c7d"/><rect x="80" y="150" width="70" height="55" fill="#bcd3e6"/><rect x="270" y="150" width="70" height="55" fill="#bcd3e6"/></svg></div>
+    <div style="display:flex;justify-content:space-around;padding:30px 0" class="k"><span><b style="color:var(--ink)">4</b> beds</span><span><b style="color:var(--ink)">3</b> baths</span><span><b style="color:var(--ink)">2,140</b> sqft</span><span>Built <b style="color:var(--ink)">2009</b></span></div></div>
+   <div class="card abs" id="ca" style="left:46px;right:46px;top:690px;padding:34px 40px"><div class="h" style="font-size:52px">Owner</div>
+    <div class="tg" style="font-weight:500"><span class="k">Owner type</span><b>Individual</b></div><div class="tg" style="font-weight:500"><span class="k">Occupancy</span><b>Owner occupied</b></div>
+    <div class="tg" id="own" style="font-weight:500;border:0"><span class="k">Length of ownership</span><b style="font-size:44px">13 yrs 11 mo</b></div></div>
+   <div class="card abs" id="cb" style="left:46px;right:46px;top:1180px;padding:34px 40px"><div class="h" style="font-size:52px">Mortgage &amp; Debt</div>
+    <div style="display:flex;gap:30px;margin-top:22px"><div style="flex:1"><div class="k">Open mortgages</div><div class="v">1</div></div><div style="flex:1.6" id="bal"><div class="k">Estimated balance</div><div class="v" id="balv">$0</div></div></div></div>
+   <div class="card abs" id="cc" style="left:46px;right:46px;top:1480px;padding:30px 40px;display:flex;align-items:center;gap:34px"><svg width="150" height="150" viewBox="0 0 40 40"><circle cx="20" cy="20" r="15" fill="none" stroke="#e3e7eb" stroke-width="6"/><circle id="ring" cx="20" cy="20" r="15" fill="none" stroke="var(--teal)" stroke-width="6" stroke-dasharray="0 100" transform="rotate(-90 20 20)" pathLength="100"/></svg>
+    <div><div class="h" style="font-size:48px">Opportunity</div><div class="k">Equity (est.)</div><div class="v"><span id="eq">0</span>% · <span style="color:#1b8a42">High</span></div></div></div>
+   <div class="hl" id="hl"></div>`);
+  const hl=document.getElementById('hl'), box=id=>{const b=document.getElementById(id).getBoundingClientRect();return [b.left-12,b.top-12,b.width+24,b.height+24];};
+  if(SC==='page'){
+    const seq=[['own',K.lived],['cb',K.much],['cc',K.who]];
+    const at=t=>{let i=0;seq.forEach((x,j)=>{if(t>=x[1]-0.04)i=j;});return i;};
+    R=t=>{r.style.transform='none'; const i=at(t), [x1,y1,w1,h1]=box(seq[i][0]), pv=i>0?box(seq[i-1][0]):[x1,y1,w1,h1], m=i>0?ease(prog(t,seq[i][1]-0.04,seq[i][1]+0.14)):1;
+      const L=(a,b)=>a+(b-a)*m, x=L(pv[0],x1), y=L(pv[1],y1), w=L(pv[2],w1), h=L(pv[3],h1), op=pop(t,K.lived,0.18);
+      Object.assign(hl.style,{left:x+'px',top:y+'px',width:w+'px',height:h+'px',opacity:op,boxShadow:`0 0 0 9999px rgba(15,25,35,${(0.45*op).toFixed(2)})`});
+      const yr=document.querySelector('#own b'); yr.style.display='inline-block'; yr.style.transform=`scale(${(1+0.25*Math.sin(Math.PI*pop(t,K.long,0.25))).toFixed(3)})`;
+      document.getElementById('balv').textContent='$'+num(Math.round(103234*ease(prog(t,K.much-0.04,K.pay))));
+      const bv=document.getElementById('balv'); bv.style.display='inline-block'; bv.style.transform=`scale(${(1+0.18*Math.sin(Math.PI*pop(t,K.mort,0.25))).toFixed(3)})`;
+      const pe=ease(prog(t,K.who-0.04,K.good));document.getElementById('ring').setAttribute('stroke-dasharray',`${76*pe} 100`);document.getElementById('eq').textContent=Math.round(76*pe);
+      const hi=document.querySelector('#cc span[style]'); hi.style.display='inline-block'; hi.style.opacity=pop(t,K.good,0.15); hi.style.transform=`scale(${(0.6+0.4*pop(t,K.good,0.2)+0.15*Math.sin(Math.PI*pop(t,K.good,0.3))).toFixed(3)})`;
+      r.style.transformOrigin=`50% ${y+h/2}px`; r.style.transform=`scale(${(1+0.06*ease(prog(t,0,DURATION))).toFixed(4)})`;};
+  } else {
+  const tgt={owner:'own',mortgage:'cb',opp:'cc'}[SC];
+  R=t=>{const pb=ease(prog(t,0.1,0.9));document.getElementById('balv').textContent='$'+num(Math.round(103234*(SC==='owner'?0:SC==='mortgage'?pb:1)));
+    const pe=SC==='opp'?ease(prog(t,0.1,0.9)):(SC==='mortgage'?0:0);document.getElementById('ring').setAttribute('stroke-dasharray',`${76*pe} 100`);document.getElementById('eq').textContent=Math.round(76*pe);
+    const [x,y,w,h]=box(tgt), p=ease(prog(t,0.05,0.35)); Object.assign(hl.style,{left:x+'px',top:y+'px',width:w+'px',height:h+'px',opacity:p,boxShadow:`0 0 0 9999px rgba(15,25,35,${(0.45*p).toFixed(2)})`});
+    r.style.transformOrigin=`50% ${y+h/2}px`; r.style.transform=`scale(${1+0.10*ease(prog(t,0,DURATION))})`;};
+  }
+}
+// ---------- income (census heat map, built)
+function heat(cols,rows,cw,ch,x0,y0,seed,hot){let s=seed;const rnd=()=>{s=(s*16807)%2147483647;return s/2147483647};const pal=['#f3faf4','#d7f0dd','#a8dfb6','#6fca88','#34b35f','#1b8a42'];
+  const C=[[hot[0],hot[1],0.95,Math.max(cols,rows)*0.09]];for(let i=0;i<4;i++)C.push([rnd()*cols,rnd()*rows,0.3+rnd()*0.35,Math.max(cols,rows)*(0.06+rnd()*0.08)]);
+  let h='';for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){let f=0.04;C.forEach(([cx,cy,a,sg])=>{f+=a*Math.exp(-((x-cx)**2+(y-cy)**2)/(2*sg*sg));});f+=(rnd()-0.5)*0.12;
+   const v=Math.max(0,Math.min(5,Math.floor(f*6)));h+=`<div class="cell" data-d="${x+y}" style="left:${x0+x*cw}px;top:${y0+y*ch}px;width:${cw-4}px;height:${ch-4}px;background:${pal[v]}"></div>`;}return h;}
+const legend=(y)=>`<div class="abs" style="left:50px;right:50px;top:${y}px"><div class="k" style="margin-bottom:10px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6)">MEDIAN HOUSEHOLD INCOME · 2021 CENSUS</div><div style="height:26px;border-radius:13px;background:linear-gradient(90deg,#f3faf4,#a8dfb6,#34b35f,#1b8a42)"></div><div style="display:flex;justify-content:space-between;font:700 32px Inter;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6);margin-top:8px"><span>$40k</span><span>$180k+</span></div></div>`;
+if(SC==='inc_city'||SC==='inc_nbhd'){
+  const big=SC==='inc_city'; document.body.style.background='#2b3440';
+  H(heat(big?27:9,big?48:16,big?40:120,big?40:120,0,0,big?3:21,big?[14,22]:[5,8])+legend(1640));
+  const cells=[...r.querySelectorAll('.cell')];
+  R=t=>{cells.forEach(c=>{c.style.opacity=ease(prog(t,(+c.dataset.d)*(big?0.012:0.03),(+c.dataset.d)*(big?0.012:0.03)+0.3));});r.style.transformOrigin='50% 45%';r.style.transform=`scale(${1+0.12*t/DURATION})`;};
+}
+if(SC==='inc_table'){
+  const rows=[['DA 35390412','$162,400'],['DA 35390415','$148,900'],['DA 35390409','$141,200'],['DA 35390421','$96,300'],['DA 35390430','$71,800']];
+  H(topbar('Census income · by area')+`<div class="abs card" style="left:46px;right:46px;top:200px;padding:20px 40px">${rows.map((x,i)=>`<div class="tg" id="t${i}" style="font-weight:500"><span class="k" style="font-size:36px">${x[0]}</span><b style="font-size:46px;color:${i<3?'#1b8a42':'var(--ink)'}">${x[1]}</b></div>`).join('')}</div>`);
+  R=t=>rows.forEach((x,i)=>{const e=document.getElementById('t'+i);const p=ease(prog(t,i*0.12,0.25+i*0.12));e.style.opacity=p;e.style.transform=`translateX(${(1-p)*60}px)`;});
+}
+if(SC==='inc_over'||SC==='inc_hot'){ // alpha overlay on Nathan's satellite footage
+  H(heat(9,10,120,120,0,250,29,[6,4])+legend(1660)+`<div class="lab" id="tag" style="color:#1b8a42">$162k median</div>`);
+  const cells=[...r.querySelectorAll('.cell')], tag=document.getElementById('tag');
+  R=t=>{cells.forEach(c=>{c.style.opacity=(0.62*ease(prog(t,(+c.dataset.d)*0.03,(+c.dataset.d)*0.03+0.3))).toFixed(3);});
+    const p=SC==='inc_hot'?ease(prog(t,0.1,0.4)):0; tag.style.left=(6*120+60-150)+'px'; tag.style.top=(250+4*120-80)+'px'; tag.style.opacity=p; tag.style.transform=`scale(${0.7+0.3*p})`;};
+}
+// ---------- street-view overlays on Nathan's recording (alpha)
+if(SC==='zone'){
+  H(`<svg class="abs" width="1080" height="1920"><path id="pz" d="M250 520 L780 470 L860 980 L640 1260 L230 1150 Z" fill="rgba(52,199,89,.18)" stroke="#34C759" stroke-width="10" stroke-linejoin="round" pathLength="100" stroke-dasharray="0 100"/></svg><div class="lab" id="zl" style="left:300px;top:420px">Knock zone · ~180 homes</div>`);
+  const pz=document.getElementById('pz'), zl=document.getElementById('zl');
+  R=t=>{const p=ease(prog(t,0.05,0.8));pz.setAttribute('stroke-dasharray',`${100*p} 100`);pz.style.fillOpacity=prog(t,0.6,0.9);zl.style.opacity=ease(prog(t,0.6,0.9));};
+}
+if(SC==='scan'){
+  const C=JSON.parse(Q.get('c')), T0=+Q.get('t0');
+  const M=[['POOL',C.pool,608,1216,52],['POOL',C.pool+0.12,784,1212,52],['DECK',C.deck,750,1300,46],['DRIVEWAY',C.drive,880,1660,50],['BALCONY',C.balc,900,880,46]];
+  M.forEach(([n,c,x,y,rad],i)=>H(`<div class="mk" id="m${i}" style="left:${x-rad}px;top:${y-rad}px;width:${2*rad}px;height:${2*rad}px"></div><div class="chip" id="k${i}" style="left:${x-rad}px;top:${y-rad-56}px">${n} ✓</div>`));
+  R=t=>M.forEach(([n,c],i)=>{const p=prog(t+T0,c-0.05,c+0.22), s=p<1?0.5+0.5*ease(p)+0.1*Math.sin(p*Math.PI):1;['m','k'].forEach(z=>{const e=document.getElementById(z+i);e.style.opacity=p>0?1:0;e.style.transform=`scale(${s.toFixed(3)})`;});});
+}
+window.renderAt=t=>R(t);
+</script></body></html>

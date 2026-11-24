@@ -201,6 +201,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Follow-up: "like aspirational stuff. I like the entrepreneur hashtag, the business owner hashtag." Tone for general-business captions is aspirational (owning a job vs owning a business, building something that runs without you). Always include #entrepreneur and #businessowner.
 - Comment trigger kept but made unique per video ("OWNER" here, "IQ" for D2D Sales IQ) so one auto-DM keyword doesn't serve two different cheat sheets.
 
+**F48** (2026-11-24, 4 door-to-door tools v3, Instagram). "No more Tech Talk version." "With the Google Street View, it's good. I just don't need the random zooms all the time. I want you to slowly zoom in, then show me a deck, show me a pool, show me a driveway, and don't jitter." "PropStream is great. It's just that the elements aren't showing up at the right time... you need to sync the animations to the words." "Income map is not good... it needs to show a heat map of a certain area... take a map, like a neighborhood, and look it up... at the end overlay it onto the Google Maps, without playing the video, just take a screenshot. Darker red is more money, closer to white is less money, with a legend on screen that's very small. And you highlight who's earning the most, who's earning the least." "SalesMapper is good though."
+- Wrong: map B-roll used his raw screen-recorded pinch zooms (jittery). PropStream elements staggered from shot start, so they landed late. Income map was a generic green grid, not a real place.
+- Rules: (1) TikTok versions stopped; Instagram only unless he asks. (2) Map moves are built from registered stills (SIFT similarity chain into one coordinate space, one eased fixed-point zoom), never his raw pinch footage. (3) Each animated element starts on its own word (cue - 0.04 s, 0.15-0.25 s ease), not on the shot start; one continuous screen per topic with the highlight jumping card to card. (4) Data maps: trace real blocks from the actual neighborhood screenshot, show the plain map first, then the same blocks over the Google Maps still; sequential white-to-dark-red scale, tiny legend, highest and lowest called out on their words. Figures are illustrative unless he supplies real ones; say so.
+- Fix: door_tools v4 (sv.py street view, inc.py income map, screens.html cue-synced PropStream, compose4.py).
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -229,6 +234,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - business_IQ_instagram.mp4 + business_IQ_tiktok.mp4: 20.5 s, 16 spec-sheet cards, 140 px captions, original HDR. Shipped 2026-11-23 after a corrupt-audio first delivery (F44).
 - business_IQ_instagram.mp4 + business_IQ_tiktok.mp4 v2 (F45): wide/wide/square, chin-tracked cards, 20.5 s, DELIVERY PASS both.
 - business_IQ v3 (F46): false start cut from outro, 19.7 s, DELIVERY PASS both. Nathan: "besides that, it's good."
+- tools_v4_instagram.mp4 (4 door-to-door tools, F48): smooth still-based Street View zoom, word-synced PropStream, Sunningdale income heat map. Instagram only.
 
 ## Performance
 (Log 48 h stats per posted video here.)
