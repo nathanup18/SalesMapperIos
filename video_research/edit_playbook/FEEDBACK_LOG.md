@@ -226,6 +226,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Wrong: IMG_9934 (the lock-screen line) was left out of the cut because its Whisper transcript merged a re-take ("...lets reps track" said twice), so the useful line looked broken.
 - Rules: before dropping a take, re-transcribe it in isolation; Whisper merges stumbles into one long word span (a 3.5 s "track"). Keep the clean second take. When the spoken word is wrong for the feature ("home screen" for lock screen), captions show the right word, audio untouched (his choice). Product demos come from salesmapper.ca captured frame-accurately: block video.play, seek the video per frame, pause and seek CSS animations (door_tools/cap_lock3.js). Sync the key action (Sale tap) to the matching word ("knocks"). Keep widget buttons above the caption band (y < 900).
 
+
+**F53** (2026-11-24, 4 door-to-door tools v8). "I like the phone mockups, they just need to be larger."
+- Rule: crop product mockups to the phones' own bounding box and fill the frame width (about 1040 px of 1080), card colour as the full-frame fill. Fit the key UI (widget buttons) between the caption band and the person cutout instead of shrinking everything to dodge the caption.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
