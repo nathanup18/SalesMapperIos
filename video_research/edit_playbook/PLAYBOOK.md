@@ -217,6 +217,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v18.2 (2026-11-24): no shadow on header boxes; all app/graphic backdrops at 0.88 white, no dimmed blur fills, spotlight dim 15% max (F50).
 - v18.1 (2026-11-24): app/graphic backdrops use the 0.88 white LUT so they are not dimmed next to text boxes (F49).
 - v18 (2026-11-24): Instagram only, no TikTok version; still-based smooth map zooms; word-synced screen elements; real-neighborhood heat maps with red-white scale (F48).
 - v17 (2026-11-23): delivery_check.py full-decode gate, one render at a time, one-render-then-send speed rule, optional audio on IQ videos, 140 px IQ captions (F44).

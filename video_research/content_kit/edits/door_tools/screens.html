@@ -61,7 +61,7 @@ if(SC==='owner'||SC==='mortgage'||SC==='opp'||SC==='page'){
     const at=t=>{let i=0;seq.forEach((x,j)=>{if(t>=x[1]-0.04)i=j;});return i;};
     R=t=>{r.style.transform='none'; const i=at(t), [x1,y1,w1,h1]=box(seq[i][0]), pv=i>0?box(seq[i-1][0]):[x1,y1,w1,h1], m=i>0?ease(prog(t,seq[i][1]-0.04,seq[i][1]+0.14)):1;
       const L=(a,b)=>a+(b-a)*m, x=L(pv[0],x1), y=L(pv[1],y1), w=L(pv[2],w1), h=L(pv[3],h1), op=pop(t,K.lived,0.18);
-      Object.assign(hl.style,{left:x+'px',top:y+'px',width:w+'px',height:h+'px',opacity:op,boxShadow:`0 0 0 9999px rgba(15,25,35,${(0.45*op).toFixed(2)})`});
+      Object.assign(hl.style,{left:x+'px',top:y+'px',width:w+'px',height:h+'px',opacity:op,boxShadow:`0 0 0 9999px rgba(15,25,35,${(0.15*op).toFixed(2)})`});
       const yr=document.querySelector('#own b'); yr.style.display='inline-block'; yr.style.transform=`scale(${(1+0.25*Math.sin(Math.PI*pop(t,K.long,0.25))).toFixed(3)})`;
       document.getElementById('balv').textContent='$'+num(Math.round(103234*ease(prog(t,K.much-0.04,K.pay))));
       const bv=document.getElementById('balv'); bv.style.display='inline-block'; bv.style.transform=`scale(${(1+0.18*Math.sin(Math.PI*pop(t,K.mort,0.25))).toFixed(3)})`;

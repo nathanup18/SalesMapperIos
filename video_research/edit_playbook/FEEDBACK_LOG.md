@@ -211,6 +211,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Wrong: all B-roll went through the SDR to HLG LUT at white 0.75, so the opening 4-way split read grey next to the 0.88 title box.
 - Rule: full-screen app/graphic backdrops (screens, galleries) use the 0.88 white LUT (sdr2hlg_bright.cube, made by door_tools/mkcube.py) so they match the text boxes. His footage stays untouched (face luma checked: 741.9 vs 741.8).
 
+
+**F50** (2026-11-24, 4 door-to-door tools v5). "Just remove the shadow around that white box at the start, the header." "I don't know why PropStream, the income checker, and SalesMapper are all so much darker... I need them normal light."
+- Wrong: drop shadow on the hook box; all backdrops converted at 0.75 white; app clips had a -0.15 dimmed blur behind them; the PropStream spotlight dimmed the page at 45%.
+- Rule: no shadow on header boxes. Every app/graphic backdrop uses the 0.88 white LUT (satellite Street View stays at 0.75). No dimming on blur fills. Spotlight dim 15% max. He also tried then cancelled a black header box: keep white box, black text.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
