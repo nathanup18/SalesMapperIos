@@ -217,6 +217,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v18.3 (2026-11-24): black hook header box; map callouts on large visible blocks with arrows, on the earliest matching word (F51).
 - v18.2 (2026-11-24): no shadow on header boxes; all app/graphic backdrops at 0.88 white, no dimmed blur fills, spotlight dim 15% max (F50).
 - v18.1 (2026-11-24): app/graphic backdrops use the 0.88 white LUT so they are not dimmed next to text boxes (F49).
 - v18 (2026-11-24): Instagram only, no TikTok version; still-based smooth map zooms; word-synced screen elements; real-neighborhood heat maps with red-white scale (F48).

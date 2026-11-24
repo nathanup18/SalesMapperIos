@@ -20,10 +20,10 @@ BL = {'A': ([(0, 0), (340, 0), (320, 95), (0, 95)], 118),
       'D': ([(410, 140), (470, 92), (540, 45), (540, 196), (495, 200), (465, 215), (445, 260), (445, 240), (365, 182)], 104),
       'E': ([(0, 228), (122, 228), (122, 617), (150, 746), (0, 738)], 92), 'G': ([(122, 228), (300, 228), (318, 219), (318, 352), (122, 352)], 142),
       'H': ([(318, 219), (330, 212), (365, 182), (445, 240), (445, 487), (318, 487)], 121), 'I': ([(122, 352), (318, 352), (318, 487), (122, 487)], 168),
-      'J': ([(122, 487), (445, 487), (445, 617), (122, 617)], 151), 'L': ([(445, 260), (465, 215), (495, 200), (540, 196), (540, 790), (437, 790), (442, 617), (445, 487)], 97),
+      'J': ([(122, 487), (445, 487), (445, 617), (122, 617)], 151), 'L': ([(445, 260), (465, 215), (495, 200), (540, 196), (540, 790), (437, 790), (442, 617), (445, 487)], 74),
       'M': ([(122, 617), (442, 617), (437, 790), (300, 768), (150, 746)], 137), 'N': ([(0, 738), (118, 745), (118, 960), (0, 960)], 82),
-      'O': ([(118, 745), (150, 746), (300, 768), (437, 790), (440, 960), (118, 960)], 89), 'P': ([(437, 790), (540, 790), (540, 960), (440, 960)], 74)}
-HI, LO = 'I', 'P'
+      'O': ([(118, 745), (150, 746), (300, 768), (437, 790), (440, 960), (118, 960)], 89), 'P': ([(437, 790), (540, 790), (540, 960), (440, 960)], 97)}
+HI, LO = 'I', 'L'
 REDS = np.array([[255, 245, 240], [254, 224, 210], [252, 187, 161], [252, 146, 114], [251, 106, 74], [239, 59, 44], [203, 24, 29], [153, 0, 13], [110, 0, 8]], float)
 def red(v):
     u = np.clip((v - 70) / 100, 0, 1) * (len(REDS) - 1); i = min(int(u), len(REDS) - 2); f = u - i
@@ -43,7 +43,7 @@ def pmask(pts, w=None):
     return np.asarray(m.resize((1080, 1920), Image.LANCZOS)).astype(np.float32)[..., None] / 255
 PM = {k: pmask(p) for k, (p, v) in BL.items()}
 EDGE = np.clip(sum(pmask(p, 3) for p, v in BL.values()), 0, 1)
-HIE = {k: pmask(BL[k][0], 9) for k in (HI, LO)}
+HIE = {HI: pmask(BL[HI][0], 9), LO: pmask(BL[LO][0], 16)}
 labl = Image.new('RGBA', (1080 * SS, 1920 * SS), (0, 0, 0, 0)); d = ImageDraw.Draw(labl)
 FS = ImageFont.truetype('/usr/share/fonts/opentype/inter/Inter-SemiBold.otf', 22 * SS)
 for nm, (x, y, ang) in LBL.items():
@@ -65,7 +65,8 @@ FB = ImageFont.truetype('/usr/share/fonts/opentype/inter/Inter-ExtraBold.otf', 3
 FL = ImageFont.truetype('/usr/share/fonts/opentype/inter/Inter-Bold.otf', 17 * SS)
 def centroid(k):
     p = np.array(BL[k][0], float) * 2; return p[:, 0].mean(), p[:, 1].mean()
-CALL = [(HI, f'${BL[HI][1]}k · highest', IN['money']), (LO, f'${BL[LO][1]}k · lowest', 27.19)]
+CALL = [(HI, f'↑ ${BL[HI][1]}k · highest', 26.19), (LO, f'↓ ${BL[LO][1]}k · lowest', IN['money'])]
+ANCH = {LO: (985, 700)}
 def ui(t, z, cx, cy):
     im = Image.new('RGBA', (1080 * SS, 1920 * SS), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
     X = lambda x: ((x - cx) * z + 540) * SS; Y = lambda y: ((y - cy) * z + 960) * SS
@@ -82,7 +83,7 @@ def ui(t, z, cx, cy):
         p = (t - c + 0.05) / 0.27
         if p <= 0: continue
         s = 1 if p >= 1 else 0.6 + 0.4 * eo(p) + 0.08 * np.sin(p * np.pi)
-        mx, my = centroid(k); px, py = X(mx), Y(my)
+        mx, my = ANCH.get(k, centroid(k)); px, py = X(mx), Y(my)
         f = FB.font_variant(size=int(34 * SS * s)); bw = d.textlength(txt, font=f) + 36 * SS; bh = 60 * SS * s
         dark = k == HI; fill = (153, 0, 13, 255) if dark else (255, 255, 255, 255); fg = 'white' if dark else (120, 20, 20)
         bx = min(max(px - bw / 2, 20 * SS), 1060 * SS - bw); by = py - bh / 2
@@ -105,8 +106,10 @@ for i in range(n):
     ra = rd[..., 3:] * (1 - sa); img = img * (1 - ra) + rd[..., 2::-1] * 255 * ra
     lab = labl[..., 3:] * (1 - sa); img = img * (1 - lab) + labl[..., 2::-1] * 255 * lab
     ea = EDGE * (0.9 * min(1, (t - T0) / 0.2)); img = img * (1 - ea) + 255 * ea
-    for k, c in ((HI, IN['money']), (LO, 27.19)):
-        a = HIE[k] * eo((t - c + 0.05) / 0.25); col = np.array([13, 0, 120]) if k == HI else np.array([255, 255, 255])
+    for k, c in ((HI, 26.19), (LO, IN['money'])):
+        a = HIE[k] * eo((t - c + 0.05) / 0.25)
+        if k == LO and t > c: a = a * (0.8 + 0.2 * np.cos(2 * np.pi * (t - c) / 0.7))      # slow pulse so the pale block reads
+        col = np.array([13, 0, 120]) if k == HI else np.array([255, 255, 255])
         img = img * (1 - a) + col * a
     z, cx, cy = cam(t)
     M = np.array([[z, 0, 540 - cx * z], [0, z, 960 - cy * z]])

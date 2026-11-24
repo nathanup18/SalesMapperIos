@@ -216,6 +216,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Wrong: drop shadow on the hook box; all backdrops converted at 0.75 white; app clips had a -0.15 dimmed blur behind them; the PropStream spotlight dimmed the page at 45%.
 - Rule: no shadow on header boxes. Every app/graphic backdrop uses the 0.88 white LUT (satellite Street View stays at 0.75). No dimming on blur fills. Spotlight dim 15% max. He also tried then cancelled a black header box: keep white box, black text.
 
+
+**F51** (2026-11-24, 4 door-to-door tools v6). "Change the header to black back white text." "Make the lowest something else that's visual, because I can only see the highest. And I want them both to pop up a little quicker."
+- Wrong: lowest callout sat on a tiny corner block, partly behind him and the scale bar; callouts landed late ("money" / "It's").
+- Rule: hook header box is black with white text for this series (tool labels stay white). Data-map callouts go on large blocks clear of the person cutout, with up/down arrows and a pulsing outline on the pale block. Callouts pop on the earliest matching word ("earning" / "money"), not the end of the phrase.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
