@@ -230,6 +230,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 **F53** (2026-11-24, 4 door-to-door tools v8). "I like the phone mockups, they just need to be larger."
 - Rule: crop product mockups to the phones' own bounding box and fill the frame width (about 1040 px of 1080), card colour as the full-frame fill. Fit the key UI (widget buttons) between the caption band and the person cutout instead of shrinking everything to dodge the caption.
 
+
+**F54** (2026-11-24, 4 door-to-door tools v8). "I want less lead up from the phones showing up to the click, edit a bit of that time out of the visual. Then we are good."
+- Rule: in a product demo the key action (tap) lands within about 0.8-0.9 s of the shot appearing. Start the demo clip just before the action rather than holding its idle opening to sync to a later word. Approved as final.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
