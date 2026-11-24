@@ -1,0 +1,37 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;width:1080px;height:1920px;background:#111;overflow:hidden;font-family:Inter}
+.t{position:absolute;width:534px;height:954px;overflow:hidden;background:#f4f5f7}
+.in{position:absolute;inset:0;transform-origin:50% 50%;filter:blur(1.6px)}
+.chip{display:inline-block;background:#fff;border-radius:999px;padding:10px 20px;margin:6px;font:600 26px Inter;color:#333;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.tg{display:flex;justify-content:space-between;align-items:center;padding:22px 30px;border-bottom:1px solid #e4e6ea;font:500 30px Inter;color:#222}
+.sw{width:76px;height:44px;border-radius:22px;background:#34C759;position:relative}.sw::after{content:'';position:absolute;right:4px;top:4px;width:36px;height:36px;border-radius:50%;background:#fff}
+.sw.off{background:#d3d6dc}.sw.off::after{left:4px;right:auto}
+</style></head><body>
+<div class="t" style="left:0;top:0"><div class="in" id="a">
+  <svg width="534" height="954" style="position:absolute;inset:0"><rect width="534" height="954" fill="#e9eef1"/>
+   <g stroke="#fff" stroke-width="22"><path d="M-20 160 L560 120 M-20 420 L560 470 M120 -20 L160 980 M380 -20 L330 980"/></g>
+   <g fill="#cfe3c8"><rect x="190" y="200" width="120" height="180" rx="8"/><rect x="20" y="500" width="110" height="150" rx="8"/></g>
+   <circle cx="255" cy="330" r="22" fill="#E5202E"/><circle cx="255" cy="330" r="9" fill="#fff"/></svg>
+  <img src="tile_house.jpg" style="position:absolute;left:0;bottom:0;width:534px;height:430px;object-fit:cover">
+  <div style="position:absolute;left:20px;bottom:395px;background:#fff;border-radius:12px;padding:8px 16px;font:600 24px Inter;box-shadow:0 2px 8px rgba(0,0,0,.2)">Street-level view</div>
+  <svg width="534" height="430" style="position:absolute;left:0;bottom:0"><path d="M250 380 l17 -30 l17 30z M200 360 l-24 18 l24 18" fill="#fff" opacity=".9"/></svg>
+</div></div>
+<div class="t" style="left:546px;top:0"><div class="in" id="b" style="background:#fff">
+  <div style="padding:40px 30px 20px;font:700 40px Inter">Filters <span style="color:#3A6FD8">(165)</span></div>
+  <div style="padding:0 22px 14px"><span class="chip">Owner-occupied</span><span class="chip">Equity 50%+</span><span class="chip">Built 1995+</span></div>
+  <div class="tg">Years owned 10+<div class="sw"></div></div><div class="tg">Mortgage balance<div class="sw"></div></div>
+  <div class="tg">Absentee owner<div class="sw off"></div></div><div class="tg">Pool on lot<div class="sw"></div></div>
+  <div class="tg">Recently sold<div class="sw off"></div></div><div class="tg">High equity<div class="sw"></div></div>
+  <div style="margin:34px 30px;height:76px;border-radius:14px;background:#3A6FD8;color:#fff;font:700 32px Inter;display:flex;align-items:center;justify-content:center">Show 2,418 homes</div>
+</div></div>
+<div class="t" style="left:0;top:966px"><div class="in" id="c"><div id="heat" style="position:absolute;inset:0"></div>
+  <div style="position:absolute;left:24px;top:28px;background:#fff;border-radius:12px;padding:10px 18px;font:600 26px Inter;box-shadow:0 2px 8px rgba(0,0,0,.2)">Median income</div>
+  <div style="position:absolute;left:24px;right:24px;bottom:34px;height:22px;border-radius:11px;background:linear-gradient(90deg,#f3faf4,#a8dfb6,#34b35f,#1b8a42)"></div></div></div>
+<div class="t" style="left:546px;top:966px"><div class="in" id="d"><img src="tile_sm.png" style="position:absolute;left:-273px;top:-200px;width:1080px;height:1920px"></div></div>
+<script>
+const pal=['#f3faf4','#d7f0dd','#a8dfb6','#6fca88','#34b35f','#1b8a42'];let s=11;const r=()=>{s=(s*16807)%2147483647;return s/2147483647};
+const h=document.getElementById('heat');for(let y=0;y<12;y++)for(let x=0;x<7;x++){const d=document.createElement('div');Object.assign(d.style,{position:'absolute',left:x*78+'px',top:y*80+'px',width:'74px',height:'76px',background:pal[Math.floor(r()*6)]});h.appendChild(d);}
+window.DURATION=+(new URLSearchParams(location.search).get('dur')||3.7);
+window.renderAt=t=>{const z=(i,dir)=>`scale(${(1.04+0.035*t/DURATION).toFixed(4)}) translate(${dir*6*t/DURATION}px,${-dir*5*t/DURATION}px)`;
+ ['a','b','c','d'].forEach((id,i)=>document.getElementById(id).style.transform=z(i,i%2?1:-1));};
+</script></body></html>
