@@ -1,4 +1,4 @@
-"""SalesMapper lifetime-trial video (F53): tight splice in original HDR, hook 9948 -> reveal 9931 -> lock screen 9934 -> stats 9936 -> offer 9937."""
+"""SalesMapper lifetime-trial video (F55): tight splice in original HDR, hook 9948 -> reveal 9931 -> lock screen 9934 -> stats 9936 -> offer 9937."""
 import json, wave, subprocess, os, numpy as np, cv2
 W = json.load(open('words.json')); FPS = 30; F = lambda x: round(x * FPS) / FPS
 CLIPS = [("HOOK", "IMG_9948", 1.46, 7.48), ("REV", "IMG_9931", 1.40, 99), ("L4", "IMG_9934", 7.6, 11.2), ("E4", "IMG_9936", 0, 99), ("C4", "IMG_9937", 0, 99)]
@@ -19,7 +19,7 @@ def speech(n):
         else: i += 1
     return regs, len(x) / 16000
 segs = []
-FORCE = {"HOOK"}   # F53: "simple thing" is quiet enough that the gap finder cut "thing"; hook kept whole
+FORCE = {"HOOK"}   # F55: "simple thing" is quiet enough that the gap finder cut "thing"; hook kept whole
 for n, fn, lo, hi in CLIPS:
     if n in FORCE: segs.append((n, lo, hi)); continue
     regs, dur = speech(fn); ws = [w for w in W[fn] if lo - 0.3 <= w['s'] < hi]; last = min(hi, ws[-1]['e'])

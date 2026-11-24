@@ -226,7 +226,15 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Wrong: IMG_9934 (the lock-screen line) was left out of the cut because its Whisper transcript merged a re-take ("...lets reps track" said twice), so the useful line looked broken.
 - Rules: before dropping a take, re-transcribe it in isolation; Whisper merges stumbles into one long word span (a 3.5 s "track"). Keep the clean second take. When the spoken word is wrong for the feature ("home screen" for lock screen), captions show the right word, audio untouched (his choice). Product demos come from salesmapper.ca captured frame-accurately: block video.play, seek the video per frame, pause and seek CSS animations (door_tools/cap_lock3.js). Sync the key action (Sale tap) to the matching word ("knocks"). Keep widget buttons above the caption band (y < 900).
 
-**F53** (2026-11-24, SalesMapper lifetime-trial video v1). "Create a video centered around SalesMapper, playing off the concept of the lifetime free trial, pull the clips from the other video. Ask me questions." Pop-up answers: hook, reveal, offer; 3x hook + 43%/50% (120% dropped); lock-screen demo, stat cards, "free forever" graphic; ~20 s Instagram only. Lifetime trial is real for commenters (the site says 14 days with a card; Nathan confirmed commenters get lifetime).
+
+**F53** (2026-11-24, 4 door-to-door tools v8). "I like the phone mockups, they just need to be larger."
+- Rule: crop product mockups to the phones' own bounding box and fill the frame width (about 1040 px of 1080), card colour as the full-frame fill. Fit the key UI (widget buttons) between the caption band and the person cutout instead of shrinking everything to dodge the caption.
+
+
+**F54** (2026-11-24, 4 door-to-door tools v8). "I want less lead up from the phones showing up to the click, edit a bit of that time out of the visual. Then we are good."
+- Rule: in a product demo the key action (tap) lands within about 0.8-0.9 s of the shot appearing. Start the demo clip just before the action rather than holding its idle opening to sync to a later word. Approved as final.
+
+**F55** (2026-11-24, SalesMapper lifetime-trial video v1). "Create a video centered around SalesMapper, playing off the concept of the lifetime free trial, pull the clips from the other video. Ask me questions." Pop-up answers: hook, reveal, offer; 3x hook + 43%/50% (120% dropped); lock-screen demo, stat cards, "free forever" graphic; ~20 s Instagram only. Lifetime trial is real for commenters (the site says 14 days with a card; Nathan confirmed commenters get lifetime).
 - Cut (edits/sm_lifetime/cut.py): 9948 hook (kept whole: the gap finder cut the quiet "thing"), 9931 from 1.40 ("SalesMapper" only, "Last is" dropped), 9934 7.6-11.2 (clean second take), 9936, 9937. 21.8 s.
 - Found by QA: 9948 is MONO, the old clips stereo; concatenating PCM segments with different channel counts garbled every clip after the hook. Rule: force -ac 2 on every segment (now in cut.py). Re-transcribe the whole cut in chunks after every splice.
 - Found by QA: check the offer against salesmapper.ca before building a graphic around it; ask if it differs.
@@ -262,7 +270,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - business_IQ v3 (F46): false start cut from outro, 19.7 s, DELIVERY PASS both. Nathan: "besides that, it's good."
 - tools_v4_instagram.mp4 (4 door-to-door tools, F48): smooth still-based Street View zoom, word-synced PropStream, Sunningdale income heat map. Instagram only.
 - tools_v8_instagram.mp4 (F48-F52): 44.5 s, lock-screen line + site demo added, black hook header, bright backdrops. Instagram only.
-- sm_lifetime_captions.mp4 + sm_lifetime_clean.mp4 (F53): 21.8 s, Instagram, DELIVERY PASS both, face luma within 1% of source.
+- sm_lifetime_captions.mp4 + sm_lifetime_clean.mp4 (F55): 21.8 s, Instagram, DELIVERY PASS both, face luma within 1% of source.
 
 ## Performance
 (Log 48 h stats per posted video here.)

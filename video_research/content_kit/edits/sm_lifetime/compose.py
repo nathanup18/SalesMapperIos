@@ -1,4 +1,4 @@
-"""SalesMapper lifetime-trial video (F53). Run after cut.py in the same folder (needs seg/main.mov, seg/sec.json, lockf/ frames from
+"""SalesMapper lifetime-trial video (F55). Run after cut.py in the same folder (needs seg/main.mov, seg/sec.json, lockf/ frames from
 door_tools/cap_lock3.js, icon.png from salesmapper.ca, sm.html, YUNET model path in env).
 Footage: original HLG pixels only re-framed (push-in 1.0->1.1 on the hook, 1.2x bottom-anchored after) by warping Y/U/V planes, no color math (H0).
 Overlays: sRGB -> HLG (white at 88%), 100% opaque. Outputs: sm_lifetime_captions.mp4 + sm_lifetime_clean.mp4 (H13, Instagram only)."""
@@ -79,7 +79,7 @@ for qs, f in uniq.items():
     im = cv2.imread(f, cv2.IMREAD_UNCHANGED).astype(np.float64) / 255; rgb = im[..., 2::-1]
     red = (rgb[..., 0] > .9) & (rgb[..., 1] < .2) & (rgb[..., 2] < .3) if 'cta=' in qs else None
     HL[qs] = f'hl/{os.path.basename(f)}'; cv2.imwrite(HL[qs], hlg(rgb, im[..., 3], red))
-# demo: lock-screen phone full height until just after the tap, then the map phone for the pin drop (F53: phones large)
+# demo: lock-screen phone full height until just after the tap, then the map phone for the pin drop (F55: phones large)
 BG = np.array([236, 243, 246]) / 255
 for i in range(100):
     fr = cv2.imread(f'lockf/{i:05d}.png')
