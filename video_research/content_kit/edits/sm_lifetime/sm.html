@@ -27,8 +27,16 @@ html,body{margin:0;width:1080px;height:1920px;background:transparent;overflow:hi
 #sub .row b{margin-left:auto;font-weight:700}#sub img{width:96px;height:96px;border-radius:22px;margin-right:26px}
 #sub .app{font:700 46px Inter}#sub .app small{display:block;font:500 32px Inter;color:#8a8a8e}
 #sub .never{color:#1f9d55}
+/* from door_tools/text.html (F51 series style): black hook header, white tool label with red subtitle, no shadows (F50) */
+#hd{position:absolute;left:0;right:0;top:150px;text-align:center}
+#hd .b{display:inline-block;background:#000;color:#fff;border-radius:22px;padding:22px 40px 26px}
+#hd .t{font:800 66px Inter;letter-spacing:-1.5px;line-height:1.05}#hd .s{font:500 40px Inter;color:#d6d6d6;margin-top:6px}
+#lab{position:absolute;left:0;right:0;top:170px;text-align:center}
+#lab .b{display:inline-block;background:#fff;color:#000;border-radius:16px;padding:14px 30px;font:800 54px Inter;letter-spacing:-1px}
+#lab .d{display:inline-block;margin-top:12px;background:#E5202E;color:#fff;border-radius:10px;padding:6px 18px;font:700 30px Inter}
+#stats.top{left:150px;right:150px}
 </style></head><body>
-<div id="hook"></div><div id="cap"></div><div id="cta"></div>
+<div id="hook"></div><div id="hd"></div><div id="lab"></div><div id="cap"></div><div id="cta"></div>
 <div class="card" id="rev" style="display:none"><img src="icon.png"><div><div class="n">SalesMapper</div><div class="s">Door-to-door canvassing</div><div class="r">Knock from your lock screen</div></div><div class="get">GET</div></div>
 <div class="card" id="stats" style="display:none"><div class="tile" id="t1"><div class="k">Doors knocked</div><div class="v">+43%</div><div class="d">per rep</div></div>
  <div class="tile" id="t2"><div class="k">Sales</div><div class="v">+50%</div><div class="d">per team</div></div></div>
@@ -40,6 +48,9 @@ const Q = new URLSearchParams(location.search), y = +(Q.get('y') || 1200);
 if (Q.get('hl')) document.getElementById('hook').innerHTML = `<div class="b"><div class="l">${Q.get('hl')}</div><div class="t">${Q.get('ht')}</div></div>`;
 if (Q.get('w')) { const c = document.getElementById('cap'); c.textContent = Q.get('w'); c.style.top = (+Q.get('cy')) + 'px'; }
 if (Q.get('cta')) { const c = document.getElementById('cta'); c.innerHTML = '<span></span>'; c.firstChild.textContent = Q.get('cta'); c.style.top = (+Q.get('ctay')) + 'px'; }
+if (Q.get('hdt')) document.getElementById('hd').innerHTML = `<div class="b"><div class="t">${Q.get('hdt')}</div><div class="s">${Q.get('hds')}</div></div>`;
+if (Q.get('lt')) document.getElementById('lab').innerHTML = `<div class="b">${Q.get('lt')}</div><br><div class="d">${Q.get('ld')}</div>`;
+if (Q.get('top')) document.getElementById('stats').classList.add('top');
 const k = Q.get('k');
 if (k) { const e = document.getElementById(k); e.style.display = k === 'sub' ? 'block' : 'flex'; e.style.top = y + 'px';
   if (k === 'stats' && Q.get('n') === '1') document.getElementById('t2').classList.add('off'); }

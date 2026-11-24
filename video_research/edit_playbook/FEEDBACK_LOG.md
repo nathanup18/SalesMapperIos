@@ -240,6 +240,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Found by QA: check the offer against salesmapper.ca before building a graphic around it; ask if it differs.
 - Build (compose.py): hook push-in 1.0->1.1 and 1.2x bottom-anchored after, done by warping the 10-bit Y/U/V planes (no colour math); white two-tier hook card (H10/H14); App Store-style reveal row; salesmapper.ca lock-screen demo at full height (lock phone until the Sale tap, then the map phone for the pin drop, F52 "phones larger"); KPI tiles +43% / +50% on their words; iOS subscription card "Trial ends: Never, $0.00"; red "comment MAP". SFX on the same cues. Captioned + clean (H13).
 
+**F56** (2026-11-24, SalesMapper lifetime-trial v2). "I want to use some of the animations that show up in the video from the other chat, also, follow the principles of editing in the skill." Pop-up: Nathan in a moving corner box, real SalesMapper app clips, header + tool label style; keep one-word captions.
+- Built (sm_lifetime/compose2.py): real salesmapper.ca visuals (img/knock.mp4, the shift lock-screen demo, img/4-stats.jpg Sales Summary) full screen with Nathan cut out (rembg u2net_human_seg, original HDR pixels, 0.55 scale, lower corner alternating per section, soft shadow); black hook header and white "SalesMapper" label with red subtitle (door_tools/text.html look); face shots alternate 100%/120% (H14); a visual change every 2-4 s; lock demo tap 0.9 s after it appears (F54); audio highpass 70 + loudnorm -14; SFX on cues (whoosh only on face/screen cuts).
+- Asset sources for SalesMapper visuals: salesmapper.ca/img/knock.mp4 (knock flow), /img/shift.mp4 via cap_lock3.js (lock screen), /img/4-stats.jpg (Sales Summary). The model u2net_human_seg.onnx downloads from github.com/danielgatis/rembg releases.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -271,6 +275,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - tools_v4_instagram.mp4 (4 door-to-door tools, F48): smooth still-based Street View zoom, word-synced PropStream, Sunningdale income heat map. Instagram only.
 - tools_v8_instagram.mp4 (F48-F52): 44.5 s, lock-screen line + site demo added, black hook header, bright backdrops. Instagram only.
 - sm_lifetime_captions.mp4 + sm_lifetime_clean.mp4 (F55): 21.8 s, Instagram, DELIVERY PASS both, face luma within 1% of source.
+- sm_lifetime_v2_captions.mp4 + _clean.mp4 (F56): 21.8 s, Instagram, DELIVERY PASS both.
 
 ## Performance
 (Log 48 h stats per posted video here.)
