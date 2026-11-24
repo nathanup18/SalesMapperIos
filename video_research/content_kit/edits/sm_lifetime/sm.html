@@ -1,0 +1,46 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+/* SalesMapper lifetime-trial overlays (F55). One state per screenshot, driven by query params. 100% opaque (F41). */
+html,body{margin:0;width:1080px;height:1920px;background:transparent;overflow:hidden;font-family:Inter}
+#hook{position:absolute;left:60px;right:60px;top:180px;text-align:center}
+#hook .b{display:inline-block;background:#fff;color:#000;border-radius:26px;padding:22px 40px 30px;max-width:880px}
+#hook .l{font:900 50px "Nunito Sans";letter-spacing:-.5px;line-height:1.1}
+#hook .t{font:900 112px "Nunito Sans";letter-spacing:-2px;line-height:.98;margin-top:6px}
+#cap{position:absolute;left:30px;right:30px;text-align:center;font:800 108px "TikTok Sans";color:#fff;letter-spacing:-1px;
+ -webkit-text-stroke:9px #000;paint-order:stroke fill}
+#cta{position:absolute;left:0;right:0;text-align:center}
+#cta span{display:inline-block;background:#FF1430;color:#fff;font:800 96px "TikTok Sans";padding:10px 40px 20px;border-radius:18px}
+.card{position:absolute;left:90px;right:90px;background:#fff;border-radius:34px;color:#000;font-family:Inter}
+/* App Store-style listing row */
+#rev{display:flex;align-items:center;padding:34px 36px;gap:30px}
+#rev img{width:170px;height:170px;border-radius:38px}
+#rev .n{font:700 58px Inter;letter-spacing:-1px}#rev .s{font:400 34px Inter;color:#8a8a8e;margin-top:4px}
+#rev .r{font:600 28px Inter;color:#8a8a8e;margin-top:10px}#rev .get{margin-left:auto;background:#0A84FF;color:#fff;font:700 38px Inter;padding:14px 40px;border-radius:40px}
+/* KPI tiles like the app's team stats */
+#stats{background:transparent;display:flex;gap:28px}
+.tile{flex:1;background:#fff;border-radius:34px;padding:30px 32px 34px}
+.tile .k{font:600 32px Inter;color:#6b6b70}.tile .v{font:800 120px Inter;letter-spacing:-4px;color:#1f9d55;line-height:1.05;margin-top:6px}
+.tile .d{font:500 28px Inter;color:#8a8a8e}.tile.off{visibility:hidden}
+/* iOS Settings > Subscriptions look */
+#sub{padding:0;overflow:hidden}
+#sub .h{font:600 30px Inter;color:#6b6b70;padding:26px 36px 8px;text-transform:uppercase;letter-spacing:1px}
+#sub .row{display:flex;align-items:center;padding:22px 36px;border-top:2px solid #e5e5ea;font:500 42px Inter}
+#sub .row b{margin-left:auto;font-weight:700}#sub img{width:96px;height:96px;border-radius:22px;margin-right:26px}
+#sub .app{font:700 46px Inter}#sub .app small{display:block;font:500 32px Inter;color:#8a8a8e}
+#sub .never{color:#1f9d55}
+</style></head><body>
+<div id="hook"></div><div id="cap"></div><div id="cta"></div>
+<div class="card" id="rev" style="display:none"><img src="icon.png"><div><div class="n">SalesMapper</div><div class="s">Door-to-door canvassing</div><div class="r">Knock from your lock screen</div></div><div class="get">GET</div></div>
+<div class="card" id="stats" style="display:none"><div class="tile" id="t1"><div class="k">Doors knocked</div><div class="v">+43%</div><div class="d">per rep</div></div>
+ <div class="tile" id="t2"><div class="k">Sales</div><div class="v">+50%</div><div class="d">per team</div></div></div>
+<div class="card" id="sub" style="display:none"><div class="h">Subscription</div>
+ <div class="row"><img src="icon.png"><div class="app">SalesMapper<small>Free trial</small></div></div>
+ <div class="row">Trial ends<b class="never">Never</b></div><div class="row">Price<b>$0.00</b></div></div>
+<script>
+const Q = new URLSearchParams(location.search), y = +(Q.get('y') || 1200);
+if (Q.get('hl')) document.getElementById('hook').innerHTML = `<div class="b"><div class="l">${Q.get('hl')}</div><div class="t">${Q.get('ht')}</div></div>`;
+if (Q.get('w')) { const c = document.getElementById('cap'); c.textContent = Q.get('w'); c.style.top = (+Q.get('cy')) + 'px'; }
+if (Q.get('cta')) { const c = document.getElementById('cta'); c.innerHTML = '<span></span>'; c.firstChild.textContent = Q.get('cta'); c.style.top = (+Q.get('ctay')) + 'px'; }
+const k = Q.get('k');
+if (k) { const e = document.getElementById(k); e.style.display = k === 'sub' ? 'block' : 'flex'; e.style.top = y + 'px';
+  if (k === 'stats' && Q.get('n') === '1') document.getElementById('t2').classList.add('off'); }
+</script></body></html>

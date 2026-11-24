@@ -234,6 +234,12 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 **F54** (2026-11-24, 4 door-to-door tools v8). "I want less lead up from the phones showing up to the click, edit a bit of that time out of the visual. Then we are good."
 - Rule: in a product demo the key action (tap) lands within about 0.8-0.9 s of the shot appearing. Start the demo clip just before the action rather than holding its idle opening to sync to a later word. Approved as final.
 
+**F55** (2026-11-24, SalesMapper lifetime-trial video v1). "Create a video centered around SalesMapper, playing off the concept of the lifetime free trial, pull the clips from the other video. Ask me questions." Pop-up answers: hook, reveal, offer; 3x hook + 43%/50% (120% dropped); lock-screen demo, stat cards, "free forever" graphic; ~20 s Instagram only. Lifetime trial is real for commenters (the site says 14 days with a card; Nathan confirmed commenters get lifetime).
+- Cut (edits/sm_lifetime/cut.py): 9948 hook (kept whole: the gap finder cut the quiet "thing"), 9931 from 1.40 ("SalesMapper" only, "Last is" dropped), 9934 7.6-11.2 (clean second take), 9936, 9937. 21.8 s.
+- Found by QA: 9948 is MONO, the old clips stereo; concatenating PCM segments with different channel counts garbled every clip after the hook. Rule: force -ac 2 on every segment (now in cut.py). Re-transcribe the whole cut in chunks after every splice.
+- Found by QA: check the offer against salesmapper.ca before building a graphic around it; ask if it differs.
+- Build (compose.py): hook push-in 1.0->1.1 and 1.2x bottom-anchored after, done by warping the 10-bit Y/U/V planes (no colour math); white two-tier hook card (H10/H14); App Store-style reveal row; salesmapper.ca lock-screen demo at full height (lock phone until the Sale tap, then the map phone for the pin drop, F52 "phones larger"); KPI tiles +43% / +50% on their words; iOS subscription card "Trial ends: Never, $0.00"; red "comment MAP". SFX on the same cues. Captioned + clean (H13).
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -264,6 +270,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - business_IQ v3 (F46): false start cut from outro, 19.7 s, DELIVERY PASS both. Nathan: "besides that, it's good."
 - tools_v4_instagram.mp4 (4 door-to-door tools, F48): smooth still-based Street View zoom, word-synced PropStream, Sunningdale income heat map. Instagram only.
 - tools_v8_instagram.mp4 (F48-F52): 44.5 s, lock-screen line + site demo added, black hook header, bright backdrops. Instagram only.
+- sm_lifetime_captions.mp4 + sm_lifetime_clean.mp4 (F55): 21.8 s, Instagram, DELIVERY PASS both, face luma within 1% of source.
 
 ## Performance
 (Log 48 h stats per posted video here.)
