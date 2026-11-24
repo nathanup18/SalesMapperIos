@@ -217,6 +217,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v18.1 (2026-11-24): app/graphic backdrops use the 0.88 white LUT so they are not dimmed next to text boxes (F49).
 - v18 (2026-11-24): Instagram only, no TikTok version; still-based smooth map zooms; word-synced screen elements; real-neighborhood heat maps with red-white scale (F48).
 - v17 (2026-11-23): delivery_check.py full-decode gate, one render at a time, one-render-then-send speed rule, optional audio on IQ videos, 140 px IQ captions (F44).
 - v16 (2026-11-23): H0 never change brightness/saturation without asking (F42); H16 formatting questions as pop-ups (F42); H9 keep original HDR, graphics converted into HLG (F35, F38, F40); H1 tight splice + dead-air audit + core-only word guard (F36, F40); H17 opaque graphics placed below the measured chin, 1.2x up-shift (F37-F41); H18 reference-format workflow + TikTok layout (F37-F40); preferences: role-play endings, every clip, comment-trigger captions, real counterintuitive scripts, move fast.

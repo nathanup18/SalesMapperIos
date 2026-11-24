@@ -206,6 +206,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Rules: (1) TikTok versions stopped; Instagram only unless he asks. (2) Map moves are built from registered stills (SIFT similarity chain into one coordinate space, one eased fixed-point zoom), never his raw pinch footage. (3) Each animated element starts on its own word (cue - 0.04 s, 0.15-0.25 s ease), not on the shot start; one continuous screen per topic with the highlight jumping card to card. (4) Data maps: trace real blocks from the actual neighborhood screenshot, show the plain map first, then the same blocks over the Google Maps still; sequential white-to-dark-red scale, tiny legend, highest and lowest called out on their words. Figures are illustrative unless he supplies real ones; say so.
 - Fix: door_tools v4 (sv.py street view, inc.py income map, screens.html cue-synced PropStream, compose4.py).
 
+
+**F49** (2026-11-24, 4 door-to-door tools v4). "I want the initial backdrop for picture canvas view to be brighter because I feel like it's unnecessarily dimmed right now."
+- Wrong: all B-roll went through the SDR to HLG LUT at white 0.75, so the opening 4-way split read grey next to the 0.88 title box.
+- Rule: full-screen app/graphic backdrops (screens, galleries) use the 0.88 white LUT (sdr2hlg_bright.cube, made by door_tools/mkcube.py) so they match the text boxes. His footage stays untouched (face luma checked: 741.9 vs 741.8).
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
