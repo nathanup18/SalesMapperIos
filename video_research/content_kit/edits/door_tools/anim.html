@@ -1,0 +1,48 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;width:1080px;height:1920px;background:transparent;overflow:hidden;font-family:Inter}
+.abs{position:absolute}
+.box{position:absolute;border:4px solid #34C759;border-radius:10px;box-shadow:0 0 0 2px rgba(0,0,0,.25)}
+.chip{position:absolute;left:-4px;top:-46px;background:#34C759;color:#fff;font:700 26px Inter;letter-spacing:1px;padding:4px 12px;border-radius:8px;white-space:nowrap}
+.card{position:absolute;left:150px;top:1150px;width:780px;background:#fff;border-radius:22px;box-shadow:0 18px 50px rgba(0,0,0,.35);padding:28px 32px;box-sizing:border-box}
+.row{display:flex;justify-content:space-between;align-items:center;font-size:30px;padding:14px 0;border-top:1px solid #eee}
+.row b{font-weight:700}
+.fchip{display:inline-block;background:#EEF2FF;color:#3A6FD8;font:600 22px Inter;padding:6px 14px;border-radius:999px;margin:0 8px 8px 0}
+.cell{position:absolute;border-radius:6px}
+</style></head><body><div id="root"></div>
+<script>
+const Q=new URLSearchParams(location.search), SC=Q.get('scene'), C=JSON.parse(decodeURIComponent(Q.get('c'))), root=document.getElementById('root');
+const clamp=x=>Math.max(0,Math.min(1,x)), prog=(t,a,b)=>clamp((t-a)/(b-a)), ease=t=>1-Math.pow(1-clamp(t),3);
+const pop=(el,t,a)=>{const p=prog(t,a-0.05,a+0.25), s=p<1?0.6+0.4*ease(p)+0.08*Math.sin(p*Math.PI):1; el.style.opacity=p>0?1:0; el.style.transform=`scale(${s.toFixed(3)})`;};
+let render=()=>{};
+if(SC==='scan'){
+  const B=[['BALCONY',C.balc,120,1200,270,180],['POOL',C.pool,610,1170,300,210],['DECK',C.deck,200,1420,300,170],['DRIVEWAY',C.drive,640,1440,300,170]];
+  const els=B.map(([n,cue,x,y,w,h])=>{const d=document.createElement('div');d.className='box';Object.assign(d.style,{left:x+'px',top:y+'px',width:w+'px',height:h+'px',transformOrigin:'50% 50%'});d.innerHTML=`<div class="chip">${n} ✓</div>`;root.appendChild(d);return [d,cue]});
+  const line=document.createElement('div');line.className='abs';Object.assign(line.style,{left:'0',width:'1080px',height:'6px',background:'linear-gradient(90deg,transparent,#34C759,transparent)',boxShadow:'0 0 24px #34C759'});root.appendChild(line);
+  render=t=>{els.forEach(([d,c])=>pop(d,t,c)); const ph=((t-C.start)%2.2)/2.2; line.style.top=(1120+ph*560)+'px'; line.style.opacity=t<C.end-0.3?.85:0;};
+}
+if(SC==='prop'){
+  const card=document.createElement('div');card.className='card';card.innerHTML=`
+   <div style="display:flex;align-items:center;gap:18px"><div style="width:64px;height:64px;border-radius:14px;background:#3A6FD8;display:flex;align-items:center;justify-content:center"><svg width="36" height="36" viewBox="0 0 24 24"><path d="M3 11L12 3l9 8v10h-6v-6H9v6H3z" fill="#fff"/></svg></div>
+   <div><div style="font:700 34px Inter">142 Maple Drive</div><div style="font:500 22px Inter;color:#8a8f98;letter-spacing:1px">PROPERTY LOOKUP</div></div></div>
+   <div id="chips" style="margin-top:22px"><span class="fchip">165+ filters</span><span class="fchip">Owner-occupied</span><span class="fchip">Equity &gt; 50%</span><span class="fchip">Built 1995-2010</span></div>
+   <div class="row" id="r1"><span>Lived here</span><b>13 years</b></div>
+   <div class="row" id="r2"><span>Mortgage left</span><b>$84,200</b></div>
+   <div class="row" id="r3" style="border:0;justify-content:center"><span style="background:#34C759;color:#fff;font:700 30px Inter;padding:10px 26px;border-radius:999px">GOOD CUSTOMER ✓</span></div>`;
+  root.appendChild(card); const chips=[...card.querySelectorAll('.fchip')], r1=card.querySelector('#r1'), r2=card.querySelector('#r2'), r3=card.querySelector('#r3');
+  render=t=>{const a=ease(prog(t,C.start+0.2,C.start+0.7)); card.style.opacity=a; card.style.transform=`translateY(${(1-a)*80}px)`;
+    chips.forEach((c,i)=>{const p=ease(prog(t,C.filt+i*0.12,C.filt+i*0.12+0.25)); c.style.opacity=p; c.style.transform=`scale(${0.7+0.3*p})`;});
+    [[r1,C.lived],[r2,C.mort],[r3,C.good]].forEach(([r,c])=>{const p=ease(prog(t,c-0.05,c+0.3)); r.style.opacity=p; r.style.transform=`translateX(${(1-p)*40}px)`;});};
+}
+if(SC==='income'){
+  const pal=['#d7f0dd','#a8dfb6','#6fca88','#34b35f','#1b8a42'], cells=[]; let seed=7; const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+  const X0=60,Y0=1090,CW=160,CH=88;
+  for(let r=0;r<6;r++)for(let c=0;c<6;c++){const v=Math.floor(rnd()*5);const d=document.createElement('div');d.className='cell';Object.assign(d.style,{left:X0+c*CW+'px',top:Y0+r*CH+'px',width:CW-8+'px',height:CH-8+'px',background:pal[v]});root.appendChild(d);cells.push([d,r,c,v]);}
+  const hot=cells.find(([d,r,c,v])=>v===4&&r>1)||cells[20]; const tag=document.createElement('div');tag.className='abs';tag.innerHTML='$162k';Object.assign(tag.style,{background:'#fff',color:'#1b8a42',font:'800 34px Inter',padding:'6px 16px',borderRadius:'10px',boxShadow:'0 6px 20px rgba(0,0,0,.3)'});root.appendChild(tag);
+  const leg=document.createElement('div');leg.className='abs';leg.innerHTML=`<div style="font:600 24px Inter;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.6);margin-bottom:8px">MEDIAN HOUSEHOLD INCOME · CENSUS</div><div style="height:18px;border-radius:9px;background:linear-gradient(90deg,${pal.join(',')})"></div><div style="display:flex;justify-content:space-between;font:600 22px Inter;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.6);margin-top:6px"><span>$40k</span><span>$180k+</span></div>`;Object.assign(leg.style,{left:'60px',width:'952px',top:'1630px'});root.appendChild(leg);
+  render=t=>{cells.forEach(([d,r,c])=>{const p=ease(prog(t,C.census+(r+c)*0.06,C.census+(r+c)*0.06+0.35)); d.style.opacity=(0.82*p).toFixed(3);});
+    const lp=ease(prog(t,C.census,C.census+0.4)); leg.style.opacity=lp;
+    const [hd,hr,hc]=hot, hp=prog(t,C.money-0.1,C.money+0.3); hd.style.boxShadow=hp>0?`0 0 0 ${4+4*Math.sin(t*6)}px #fff`:'none';
+    tag.style.left=(X0+hc*CW+CW/2-60)+'px'; tag.style.top=(Y0+hr*CH-56)+'px'; tag.style.opacity=ease(hp); tag.style.transform=`scale(${0.7+0.3*ease(hp)})`;};
+}
+window.renderAt=t=>render(t);
+</script></body></html>
