@@ -1,28 +1,34 @@
-# Knocking more doors is making you less money (Reel script)
+# Knocking more doors is making you less money (Reel script v2)
 
-Target: 30-40 s, Instagram Reel. Film each line as its own clip (5 clips), 2 takes each. Hook: 3 versions.
+Target: ~40 s. Curiosity loops, no numbered list, spoken naturally. Film each chunk as its own clip, 2 takes each.
 
-On-screen hook text: "Knocking more doors is making you less money" + "(the fix isn't working harder)"
+On-screen hook text: "Knocking more doors is making you less money" + "(it took me way too long to see why)"
 
-| Clip | Line |
-|---|---|
-| HOOK | "Knocking more doors is making you less money. Here's why." |
-| 1 | "One. You're knocking the wrong doors. If you spend your best hours on streets that can't afford you, a hundred doors still gets you zero." |
-| 2 | "Two. You're rushing. When you're chasing a door count, you cut every pitch short, and the people who would've bought never hear the part that sells them." |
-| 3 | "Three. You never go back. A lot of your sales are sitting in the not-homes and the come-back-laters you forgot to re-knock." |
-| CLOSE | "Knock fewer doors. The right ones. And track every single one so you actually go back. Follow for more." |
+HOOK: "Knocking more doors is making you less money."
 
-Optional SalesMapper version of the close (pick one when filming):
-"That's why my team logs every knock on SalesMapper. Comment MAP and I'll send you a free lifetime trial."
+LOOP 1: "The reps who knock the most are almost never the ones who sell the most. And it took me way too long to figure out why."
 
-Filming notes
-- Vertical, chest-up, same spot and light. Start talking the moment you hit record.
-- Say the number first on each reason.
-- Reason 3 is the payoff: slow down a touch on "you forgot to re-knock".
+REVEAL 1: "It's when they're knocking. If you're grinding streets at one in the afternoon, most people aren't even home. Your door count looks amazing, and you've talked to like eight people."
+
+LOOP 2: "But that's not even the expensive part."
+
+REVEAL 2: "When you're rushing to hit a number, every door gets half a pitch. And a door you pitch badly is a door you can't knock again. You didn't just lose that sale. You burned it."
+
+PAYOFF: "So stop chasing the count. Save your energy for five to eight when people are actually home, give every door the full pitch, and go back to every 'come back later.' Those are the easiest sales you'll make all week."
+
+CLOSE: "Follow for more."  (optional instead: "I track every one of mine on SalesMapper so none of them slip.")
+
+Why these hold up
+- Money comes from conversations, not knocks. Weekday early-afternoon knocking inflates the door count while most homes are empty; evenings and weekends get more people at the door per hour.
+- Territory is finite. A rushed pitch turns a maybe into a no you can't re-pitch for months, so speed spends doors you only get once.
+- "Come back later", "talk to my spouse" and not-home-at-a-good-time doors already know you or haven't said no; going back costs one knock on a street you're already on.
+
+Swap "eight people" and the 5-8 window for your real numbers if they differ.
 
 Edit plan
-- Hook: grey serif header (Knocking More Doors / Less Money highlighted, bracket line under it).
-- Reason 1: Income Heat Map visual (rich vs poor blocks).
-- Reason 2: stopwatch / door counter ticking up while a pitch gets cut off.
-- Reason 3: SalesMapper map with grey not-home pins flipping to orange "re-knock", then to green sales.
-- Close on face, "Follow for more".
+- Hook on face, grey serif header ("Knocking More Doors" / "Less Money" highlighted) + bracket line.
+- Reveal 1: door counter racing up while a "conversations" counter barely moves; clock showing 1:00 PM.
+- Loop 2: hard cut, push-in on face.
+- Reveal 2: a door with a red X stamped "burned".
+- Payoff: clock 5-8 PM, SalesMapper map with orange re-knock pins turning green.
+- Close on face.
