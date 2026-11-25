@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:TT;src:url(/root/.fonts/TikTokSans-800.ttf);font-weight:800}
+@font-face{font-family:TT;src:url(/root/.fonts/TikTokSans-700.ttf);font-weight:700}
+html,body{margin:0;width:1080px;height:1440px;overflow:hidden;background:#fff}
+.g{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px}
+.c{position:relative;overflow:hidden}.c img{width:100%;height:100%;object-fit:cover;display:block}
+/* TikTok default "Classic" text: TikTok Sans, white fill, black outline, no background */
+.o{color:#fff;font-family:TT;-webkit-text-stroke:var(--s) #000;paint-order:stroke fill;text-align:center}
+.cap{position:absolute;left:14px;right:14px;--s:9px;font-weight:800;font-size:54px;line-height:1.08}
+.c:nth-child(1) .cap,.c:nth-child(2) .cap{top:26px}.c:nth-child(3) .cap,.c:nth-child(4) .cap{bottom:30px}
+#t{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);--s:12px;font-weight:800;font-size:82px;line-height:1.02;letter-spacing:-.5px}
+#cta{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center}
+#cta .r{display:inline-block;background:#FF1430;color:#fff;font:800 116px TT;padding:12px 48px 26px;border-radius:24px}
+#cta .s{--s:10px;font-weight:800;font-size:58px;line-height:1.1;margin-top:20px}
+#fol{position:absolute;left:0;right:0;bottom:46px;--s:10px;font-weight:800;font-size:52px}
+</style></head><body><div class="g" id="g"></div><div id="t" class="o"></div><div id="cta"></div><div id="fol" class="o"></div>
+<script>const Q=new URLSearchParams(location.search), I=Q.getAll('i'), C=Q.getAll('c'), P=Q.getAll('p');
+const g=document.getElementById('g');
+I.forEach((src,k)=>{const d=document.createElement('div');d.className='c';d.innerHTML=`<img src="${src}" style="object-position:${P[k]||'50% 50%'}">`;
+  if(C[k]){const c=document.createElement('div');c.className='cap o';c.textContent=C[k];d.appendChild(c);} g.appendChild(d);});
+if(Q.get('t')) document.getElementById('t').textContent=Q.get('t');
+if(Q.get('cta')){const e=document.getElementById('cta');e.innerHTML='<div class="r"></div><div class="s o"></div>';e.querySelector('.r').textContent=Q.get('cta');e.querySelector('.s').textContent=Q.get('ctas');}
+if(Q.get('fol')) document.getElementById('fol').textContent=Q.get('fol');
+</script></body></html>

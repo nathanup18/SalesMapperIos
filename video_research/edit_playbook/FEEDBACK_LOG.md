@@ -259,6 +259,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Wrong: outlined text over busy visuals was hard to read; the built bank UI looked fake.
 - Rules: carousel text uses TikTok's background style (black TikTok Sans on white rounded boxes, title ~78 px, bullets ~52 px, 2-5 words each). Money shots are realistic AI photos of a phone held in hand with a generic, unbranded bank app. Don't use real bank branding (fake record) or a stranger's real bank screenshot (someone else's private financial info).
 
+
+**F60** (2026-11-25, 4 tools slideshow v2). "Regenerate the PropStream thing. Maintain the quadrant view all the way through. New name for the income map. Captions just TikTok default text, no white background, black text." Pop-ups: 4 shots per tool; 4 rebuilt PropStream screens, intense generation to look real, avoid the built style; name "Income Heat Map"; classic outline, bigger.
+- Rules: carousels keep the 2x2 quadrant layout on every slide (4 pictures of that tool, tool name across the middle, one 1-3 word caption per quadrant on its outer edge). Text is TikTok classic: TikTok Sans 800, white with black outline, title ~82 px, captions ~54 px, no boxes (the cover hook box stays). Software shots look real: AI photos of a laptop/phone showing the UI in a real setting (kitchen table, car seat, sidewalk), unbranded. CTA slide bookends with the cover's 4 pictures.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
