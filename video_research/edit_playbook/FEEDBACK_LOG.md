@@ -311,6 +311,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Built (edits/more_doors/compose.py): Nathan cut out (rembg masks, original HLG pixels) over a photo per section (rep at door, empty 1 PM driveway, closed door, cars home, SalesMapper re-knock map, house), slow push on each photo, person scale alternating 0.80/0.88; hook = 3 photo tiles popping above his head over his blurred room; header + one-word captions in TikTok classic text (white TikTok Sans 800, black outline); red "follow for more".
 - Speed rules (found the hard way): never chain a long job behind a shorter timeout; run masks + render as one background job with the max timeout; kill the frame decoder after the loop (dec.wait() deadlocked when the cut had more frames than the loop read). Generating new photos (Higgsfield credits) needs Nathan's OK; reuse existing slideshow photos first.
 
+**F72** (2026-11-25, "more doors = less money" v2). "Background imagery isn't that great... when we switch to just showing the homes, I don't get why this is a thing. Three houses that don't mean anything. I want other imagery that makes sense... go Higgsfield, ask me questions, generate, slot them in." "Have my face move around in this video corner to corner."
+- Rule: every background photo must show the sentence's action or idea (a rep walking an empty 1 PM street, a door shutting on the clipboard, a busy golden-hour street, a signed contract), never a generic house. Ask one pop-up per shot, then generate with Higgsfield gpt_image_2_6 9:16 (approved for this; ~1 credit each).
+- Rule: in photo-background talking shots, Nathan's cut-out sits in a lower corner (scale .55/.60) and slides corner to corner (0.35 s ease) on each photo change; the corner order is set so he never covers the photo's subject. Captions and the CTA move to mid-screen (y 900), above his head.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -347,6 +351,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - tools_v9_instagram.mp4 (F58): 43.4 s, redundant "very effective" line cut. Decode clean.
 - signs_slides (carousel, "7 signs a house will say YES", F65-F69): 9 slides 1080x1440, grey serif hook + close, 7 photo slides, caption 760 chars, song "November" (Past Day). Approved as the carousel template (H19).
 - more_doors_captions.mp4 + _clean.mp4 (F71): 36.2 s, Instagram, DELIVERY PASS both.
+- more_doors v2 captions + clean (F72): 36.2 s, DELIVERY PASS both.
 
 ## Performance
 (Log 48 h stats per posted video here.)
