@@ -273,6 +273,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Wrong: two flat phone mockups on a cream card looked like a web graphic, not real life.
 - Rules: show our own product in a real-life photo. Generate a hand-held phone with a flat chroma-green screen in a real setting (doorstep), key the green and perspective-warp the real captured UI onto it (exact SalesMapper UI, nothing AI-invented). Add an enlarged pop-up of the key UI (the lock-screen widget) and the real map view with the dropped pin, linked by an arrow, so the slide reads as cause -> effect.
 
+
+**F63** (2026-11-25, 4 tools slideshow). "Caption now, also what song to take. This is a task that I want done by you in the future (songs)."
+- Rule: every delivery (Reel or carousel) ships with a post caption AND a song pick, without being asked. Song pick = run a fresh web search for this week's trending Instagram audio, pick one track that fits the video's mood, say why in one line, give 1-2 backups, the in-app steps (search name, start point on an instrumental part, music 5-10% under voice for talking videos; full volume is fine for silent carousels), and cite the trend sources. Trend lists disagree, so tell him to confirm the trending arrow in the app.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.

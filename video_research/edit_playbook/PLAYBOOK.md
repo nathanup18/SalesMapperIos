@@ -1,6 +1,6 @@
 # Short-form video edit playbook (living)
 
-Version: 18 (2026-11-24)
+Version: 19 (2026-11-25)
 Owner: Nathan. This file is the source of truth for the `short-form-video-edit` skill. The skill loads it at the start of every run and updates it whenever Nathan gives feedback (see "Learning protocol" at the bottom). Never treat it as frozen.
 
 Rule priority, highest first:
@@ -141,6 +141,9 @@ H18. Copying a reference creator's format. [F37-F40]
 - **IQ-format captions:** one word at a time, Instrument Serif 140 px. [F44]
 - **Platform tips he uses:** Creator account (not Business) for the full music library; added music at 5-10% under his voice at 100%.
 
+- **Song pick with every delivery (F63):** search this week's trending Instagram audio, recommend one track that fits the mood plus 1-2 backups, with steps (pick a start point, music 5-10% under his voice; full volume on silent carousels) and sources. Ask him to confirm the trending arrow in the app.
+- **Caption with every delivery:** comment-trigger style, last line "Follow for more...", max 5 hashtags.
+
 ---
 
 ## 3. Research defaults (216-video scrape, 2026-11-20; use when sections 1-2 are silent)
@@ -217,6 +220,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v19 (2026-11-25): song pick + caption with every delivery (F63); carousels: TikTok classic text, real-software look, real UI composited into real photos (F59-F62).
 - v18.4 (2026-11-24): re-transcribe dropped takes in isolation; frame-accurate capture of salesmapper.ca demos; captions may correct a misspoken feature name (F52).
 - v18.3 (2026-11-24): black hook header box; map callouts on large visible blocks with arrows, on the earliest matching word (F51).
 - v18.2 (2026-11-24): no shadow on header boxes; all app/graphic backdrops at 0.88 white, no dimmed blur fills, spotlight dim 15% max (F50).

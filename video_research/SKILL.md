@@ -24,6 +24,7 @@ Say in one line which playbook version you loaded (for example, "Playbook v5 loa
 Follow PLAYBOOK.md: the pipeline (section 5), visual aids (section 4), preferences (section 2), and research defaults only where the playbook is silent.
 - Ask Nathan formatting questions (layout, text style, caption choice, which take, where elements go) with the AskUserQuestion pop-up: 2-4 multiple-choice options, recommended first. Don't ask what the playbook already answers.
 - Never change the brightness, saturation or look of his footage without asking first (H0). Keep his original HDR picture.
+- Every delivery comes with a post caption and a song pick (search this week's trending Instagram audio; one pick + 1-2 backups + how to set it up + sources).
 
 ## Step 2: QA gate (blocks delivery)
 Run `qa_check.py` and `delivery_check.py` on the rendered file and review the boundary contact sheet yourself. Fix every FAIL before sending. Re-transcribe the output to confirm no word was clipped. Tell Nathan the QA result in one line, and list any placeholders or judgment calls.
@@ -51,3 +52,4 @@ When Nathan shares stats (views, 3-second hold, average % watched, follows), log
 - **No flashes or black frames:** a section-opening graphic starts on the cut. Snap boundaries to the frame grid. Pad inserts with their first frame.
 - **Full animations:** graphics play to completion and hold about 0.4 s.
 - **Post captions:** lead with the most concrete story and its outcome, and end with "Follow for more D2D tips".
+- **Song pick every time:** search this week's trending Instagram audio and recommend one track that fits, plus backups and sources.
