@@ -263,6 +263,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 **F60** (2026-11-25, 4 tools slideshow v2). "Regenerate the PropStream thing. Maintain the quadrant view all the way through. New name for the income map. Captions just TikTok default text, no white background, black text." Pop-ups: 4 shots per tool; 4 rebuilt PropStream screens, intense generation to look real, avoid the built style; name "Income Heat Map"; classic outline, bigger.
 - Rules: carousels keep the 2x2 quadrant layout on every slide (4 pictures of that tool, tool name across the middle, one 1-3 word caption per quadrant on its outer edge). Text is TikTok classic: TikTok Sans 800, white with black outline, title ~82 px, captions ~54 px, no boxes (the cover hook box stays). Software shots look real: AI photos of a laptop/phone showing the UI in a real setting (kitchen table, car seat, sidewalk), unbranded. CTA slide bookends with the cover's 4 pictures.
 
+
+**F61** (2026-11-25, 4 tools slideshow v3). "Go back to the one picture. PropStream needs to be better generated, not Claude design: less rounded corners, less of that text font, should look like real software. Income heat map first, then Google Street View, then PropStream, then SalesMapper. Back to the three bullet text at the top, TikTok default font."
+- Wrong: the generated software shots had the rounded-card, big-friendly-type "designer mockup" look.
+- Rules: software screens must look like real enterprise software: square corners, 1px grey borders, small dense Arial/Helvetica text, data tables, a browser chrome with tabs and address bar, photographed on a real monitor on a desk (moire, glare, keyboard). Prompt for this explicitly ("not a designer mockup"). Tool slides: one full-bleed picture, title + 3 bullets at the top in TikTok classic text (white, black outline, ~84/58 px), calm area at the top of the picture for the text.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
