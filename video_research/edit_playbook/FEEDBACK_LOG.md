@@ -268,6 +268,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Wrong: the generated software shots had the rounded-card, big-friendly-type "designer mockup" look.
 - Rules: software screens must look like real enterprise software: square corners, 1px grey borders, small dense Arial/Helvetica text, data tables, a browser chrome with tabs and address bar, photographed on a real monitor on a desk (moire, glare, keyboard). Prompt for this explicitly ("not a designer mockup"). Tool slides: one full-bleed picture, title + 3 bullets at the top in TikTok classic text (white, black outline, ~84/58 px), calm area at the top of the picture for the text.
 
+
+**F62** (2026-11-25, 4 tools slideshow v4). "Make the SalesMapper one look better, this is low-key trash... place markers from your lock screen. Show that UI pop-up from the phone and the screen, and then our marker placing map view."
+- Wrong: two flat phone mockups on a cream card looked like a web graphic, not real life.
+- Rules: show our own product in a real-life photo. Generate a hand-held phone with a flat chroma-green screen in a real setting (doorstep), key the green and perspective-warp the real captured UI onto it (exact SalesMapper UI, nothing AI-invented). Add an enlarged pop-up of the key UI (the lock-screen widget) and the real map view with the dropped pin, linked by an arrow, so the slide reads as cause -> effect.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
