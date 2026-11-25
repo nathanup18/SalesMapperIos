@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:TT;src:url(/root/.fonts/TikTokSans-800.ttf);font-weight:800}
+html,body{margin:0;width:1080px;height:1920px;background:transparent;overflow:hidden}
+/* TikTok default "Classic" text everywhere: white, black outline, no boxes */
+.o{color:#fff;font-family:TT;font-weight:800;-webkit-text-stroke:var(--s) #000;paint-order:stroke fill;text-align:center;position:absolute;left:30px;right:30px}
+#hd{--s:12px;font-size:74px;line-height:1.06;top:52px}
+#hd small{display:block;--s:8px;font-size:44px;margin-top:10px;-webkit-text-stroke:8px #000}
+#cap{--s:11px;font-size:92px}
+.ph{position:absolute;top:360px;width:300px;height:300px;border:8px solid #fff;border-radius:22px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.45)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+</style></head><body><div id="row"></div><div id="hd" class="o"></div><div id="cap" class="o"></div>
+<script>const Q=new URLSearchParams(location.search);
+if(Q.get('h')){const h=document.getElementById('hd'); h.textContent=Q.get('h'); if(Q.get('hs')){const s=document.createElement('small'); s.textContent=Q.get('hs'); h.appendChild(s);} }
+if(Q.get('w')){const c=document.getElementById('cap'); c.textContent=Q.get('w'); c.style.top=(+Q.get('cy'))+'px';}
+if(Q.get('row')){document.getElementById('row').innerHTML=[['h_cel.png',40,-5,'50% 70%'],['h_bank.png',390,0,'50% 30%'],['h_map.png',740,5,'50% 40%']].map(([s,x,r,p])=>`<div class="ph" style="left:${x}px;transform:rotate(${r}deg)"><img src="${s}" style="object-position:${p}"></div>`).join('');}
+</script></body></html>

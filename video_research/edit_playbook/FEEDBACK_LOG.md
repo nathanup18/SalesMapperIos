@@ -307,6 +307,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 **F70** (2026-11-25, script "knocking more doors makes you less money"). "I focus on creating a curiosity loop in my content. The first couple of seconds is great. I don't want the numbered list. The script needs to sound more natural. A lot of this doesn't make sense, find real reasons."
 - Rules for scripts: build curiosity loops (hook -> open a question -> reveal -> "but that's not even the expensive part" -> reveal -> payoff), no numbered lists unless the format is a list, write how he talks (short, casual, "like eight people"), and every reason must be a real mechanism a rep would recognise (timing vs who's home, burned doors in a finite territory, warm come-back-laters), not a generic tip. Mark lines that need his real numbers.
 
+
+**F71** (2026-11-25, 7 signs Reel v1). "Cut out all of the dead space, this is not good. The numbers in the top with the headers need to be moved down. I want the red follow for more at the end." Earlier: "I want me with photos in the background for the main talking bits. For the hook, me with 3 appealing photos above my head (Celsius, bank, SalesMapper). Classic TikTok header, all captions TikTok text." Also very frustrated by render time.
+- Rules: after the first cut, run energy-based tightening passes until no pause >= 0.15 s remains (Whisper word spans swallow pauses, so guard only short words); re-transcribe each pass. Headers start at y ~250 (below the IG top bar). Close with the red "Follow for more" box under the chin from the word "follow". Talking bits: Nathan cut out over the topic photo; hook: cut out over a soft blur of his room with 3 photo cards above his head.
+- Pipeline bug: never call dec.wait() on the frame decoder (it blocks forever when it has extra frames); kill it. Run long renders with nohup and a progress log, and say the ETA once.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -342,6 +347,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - sm_lifetime_v3_captions.mp4 + _clean.mp4 (F57): 21.8 s, map fill + sales count-up, header lower, CTA under chin. Decode clean.
 - tools_v9_instagram.mp4 (F58): 43.4 s, redundant "very effective" line cut. Decode clean.
 - signs_slides (carousel, "7 signs a house will say YES", F65-F69): 9 slides 1080x1440, grey serif hook + close, 7 photo slides, caption 760 chars, song "November" (Past Day). Approved as the carousel template (H19).
+- seven_signs_v2.mp4 (F71): 39.5 s Reel, no pause over ~0.15 s, cut-out over sign photos, TikTok headers at y 250, red Follow for more. Decode clean.
 
 ## Performance
 (Log 48 h stats per posted video here.)
