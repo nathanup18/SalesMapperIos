@@ -331,6 +331,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 **F76** (2026-11-25, 7 signs Reel v2). "Edit all these numbers out. When I say 1, 2, 3, I want it really quick paced. At the start I go '7 signs for door-to-door salesman', then I say it again. Edit that out."
 - Rules: on list videos the on-screen header carries the number, so cut the spoken number and start each item on its first real word. Find false starts/restarts in the hook even when Whisper merges them into one long word (transcribe the first 5 s on its own, look for a repeated phrase) and keep only the clean take. Don't pass initial_prompt to Whisper for caption timing (it dropped the first sentence).
 
+
+**F77** (2026-11-25, 7 signs Reel v3). "The visuals are brutally out of sync with the audio. Quick rework: just the hook, then fresh landscaping, kids' bikes out, two newer cars, contractor sign, doorbell camera, something worn out, garage door, which one did I miss, follow for more."
+- Cause: four chained tightening passes, each re-cut into separate segment files and concatenated with -c copy; frame-rounded video vs padded audio drifted further each pass.
+- Rule: cut in ONE filter graph per pass (trim+atrim on the same frame-rounded bounds, concat filter with v=1:a=1), never segment files + concat copy, and keep passes to two max. Quick list format works: hook, then only the item names.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -372,6 +377,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - more_doors v3 captions + clean (F73): 36.2 s, 15 photos, DELIVERY PASS both.
 - more_doors v4 captions + clean (F75): 35.9 s, DELIVERY PASS both.
 - seven_signs_v3.mp4 (F76): 33.6 s, numbers and false hook start cut. Decode clean.
+- seven_signs_short_v1.mp4 (F77): 15.6 s quick list, single-graph cut, A/V locked.
 
 ## Performance
 (Log 48 h stats per posted video here.)
