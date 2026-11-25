@@ -1,7 +1,7 @@
 """More doors = less money reel: tight splice in original HDR (stereo forced)."""
 import json, wave, subprocess, os, numpy as np, cv2
 W = json.load(open('words.json')); FPS = 30; F = lambda x: round(x * FPS) / FPS
-CLIPS = [("HOOK", "IMG_9995", 31.4, 34.75), ("LOOP", "IMG_9998", 4.6, 99), ("R1", "IMG_9999", 0, 99), ("R2", "IMG_0001", 7.35, 99), ("PAY", "IMG_0002", 15.95, 99), ("CLOSE", "IMG_0003", 0, 99)]
+CLIPS = [("HOOK", "IMG_9995", 31.4, 34.75), ("LOOP", "IMG_9998", 4.6, 99), ("R1", "IMG_9999", 0, 99), ("R2", "IMG_0001", 7.35, 99), ("PAY", "IMG_0002", 15.95, 22.66), ("PAY2", "IMG_0002", 22.94, 99), ("CLOSE", "IMG_0003", 0, 99)]
 FILE = {a: f for a, f, _, _ in CLIPS}
 SECT = []; TITLE_SPAN = {}
 PRE, POST, MAXGAP = 0.02, 0.04, 0.08   # F40: keep it moving

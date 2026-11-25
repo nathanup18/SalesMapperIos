@@ -12,22 +12,23 @@ BUT, GO = wt('R1', 'but'), wt('PAY', 'go')
 # a new photo about every 2 s, each matching its line (F73); times are output seconds of this cut
 PHOTOS = [(2.8, 'rep.png'), (5.8, 'g_tired.png'), (7.63, 'g_sun.png'), (10.25, 'g_1pm.png'), (12.11, 'g_tally.png'), (BUT, 'g_door.png'),
           (15.93, 'g_board.png'), (18.57, 'g_rush.png'), (21.91, 'g_nosolicit.png'), (23.51, 'g_crumpled.png'), (25.1, 'g_clicker.png'),
-          (26.88, 'g_evening.png'), (GO, 'c_fill.png'), (32.48, 'g_handshake.png'), (sec['CLOSE'][0], 'g_contract.png')]
+          (26.88, 'g_evening.png'), (GO, 'c_fill.png'), (wt('PAY2', "it's"), 'g_handshake.png'), (sec['CLOSE'][0], 'g_contract.png')]
 SHOTS = [(0, None, .78, .84)] + [(t - 0.03, p, .8, .8) for t, p in PHOTOS]
 SHOTS = [(F(a), p, s0, s1) for a, p, s0, s1 in SHOTS]
 def shot(t):
     i = max(j for j, s in enumerate(SHOTS) if s[0] <= t + 1e-6); a = SHOTS[i][0]; b = SHOTS[i + 1][0] if i + 1 < len(SHOTS) else T
     u = (t - a) / (b - a); return i, SHOTS[i][1], SHOTS[i][2] + (SHOTS[i][3] - SHOTS[i][2]) * (u * u * (3 - 2 * u)), u
-CORNER = {i: 'LR'[(len(SHOTS) - 1 - i) % 2] for i in range(1, len(SHOTS))}   # alternate, ending on the left (contract stays visible)
-def place(t):                                                       # -> scale, tx, ty for the cut-out (bottom-anchored)
+# hard cuts between corners in an irregular order, slight tilt on some shots, no sliding (F74). (corner, scale, degrees)
+LAY = [('L', .58, 0), ('R', .55, -4), ('L', .60, 0), ('R', .56, 0), ('L', .55, 4), ('R', .60, 0), ('R', .55, -3), ('L', .58, 0),
+       ('R', .56, 4), ('L', .60, 0), ('L', .55, -4), ('R', .58, 0), ('L', .56, 3), ('R', .60, 0), ('L', .58, 0)]
+def place(t):                                                       # -> 2x3 affine for the full-res cut-out
     i, photo, s, u = shot(t)
-    if photo is None: return s, W_ / 2 * (1 - s), H_ * (1 - s)
-    s = .55 if i % 2 else .60; w = W_ * s
-    X = {'R': W_ - w + 40, 'L': -40}
-    x = X[CORNER[i]]; a = SHOTS[i][0]
-    if i > 1 and t - a < 0.35:                                       # slide in from the previous corner
-        v = (t - a) / 0.35; v = v * v * (3 - 2 * v); x = X[CORNER[i - 1]] + (x - X[CORNER[i - 1]]) * v
-    return s, x, H_ * (1 - s) + 40
+    if photo is None: return np.float32([[s, 0, W_ / 2 * (1 - s)], [0, s, H_ * (1 - s)]])
+    cn, s, deg = LAY[(i - 1) % len(LAY)] if i < len(SHOTS) - 1 else ('L', .58, 0)
+    w = W_ * s; x0 = W_ - w + 40 if cn == 'R' else -40; y0 = H_ * (1 - s) + 40 + (50 if deg else 0)
+    r = np.deg2rad(deg); A = s * np.array([[np.cos(r), -np.sin(r)], [np.sin(r), np.cos(r)]])
+    c = np.array([x0 + w / 2, y0 + H_ * s]); tr = c - A @ np.array([W_ / 2, H_])
+    return np.float32(np.hstack([A, tr[:, None]]))
 def sec_of(t): return max((k for k, v in sec.items() if v[0] <= t + 1e-6), key=lambda k: sec[k][0])
 # ---------- overlay states
 def cy(t):                                                          # caption top: under the chin of the cut-out at its scale
@@ -111,7 +112,7 @@ enc = subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_f
 for n in range(NF):
     buf = dec.stdout.read(FB)
     if len(buf) < FB: break
-    t = n / FPS; i, photo, _, u = shot(t); s, TX, TY = place(t); P = planes(buf)
+    t = n / FPS; i, photo, _, u = shot(t); MF = place(t); P = planes(buf)
     if photo: B = [zoomp(pl, 1.0 + 0.05 * u, k) for k, pl in zip((1, 2, 2), PH[photo])]
     else: B = [cv2.resize(cv2.GaussianBlur(cv2.resize(pl, (pl.shape[1] // 8, pl.shape[0] // 8), interpolation=cv2.INTER_AREA), (0, 0), 4), (pl.shape[1], pl.shape[0]), interpolation=cv2.INTER_LINEAR) for pl in P]
     mk = cv2.imread(f'masks/{n:05d}.png', cv2.IMREAD_GRAYSCALE)
@@ -119,7 +120,7 @@ for n in range(NF):
     out = []
     for k, (pl, bg) in enumerate(zip(P, B)):
         kk = 1 if k == 0 else 2; h, w = pl.shape
-        m = np.float32([[s, 0, TX / kk], [0, s, TY / kk]])
+        m = MF.copy(); m[:, 2] /= kk
         pp = cv2.warpAffine(pl, m, (w, h), flags=cv2.INTER_LANCZOS4, borderMode=cv2.BORDER_REPLICATE).astype(np.float32)
         mm = cv2.warpAffine(cv2.resize(mk, (w, h), interpolation=cv2.INTER_AREA), m, (w, h), flags=cv2.INTER_LINEAR)
         out.append(np.clip(bg.astype(np.float32) * (1 - mm) + pp * mm + 0.5, 0, 1023).astype(np.uint16).tobytes())
