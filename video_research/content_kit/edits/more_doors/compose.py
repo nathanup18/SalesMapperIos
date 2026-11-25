@@ -9,13 +9,16 @@ def run(a, **k): return subprocess.run(['ffmpeg', '-v', 'error', '-y'] + a, chec
 wt = lambda k, w: next(x['s'] for x in WD if x['k'] == k and x['w'].lower().startswith(w))
 # ---------- shots: (start, photo or None for blurred room, person scale a->b)
 BUT, GO = wt('R1', 'but'), wt('PAY', 'go')
-SHOTS = [(0, None, .78, .84), (sec['LOOP'][0], 'rep.png', .88, .88), (sec['R1'][0], 'g_1pm.png', .80, .80), (BUT - 0.03, 'g_door.png', .88, .88),
-         (sec['R2'][0], 'g_door.png', .80, .80), (sec['PAY'][0], 'g_evening.png', .88, .88), (GO - 0.03, 'c_fill.png', .80, .80), (sec['CLOSE'][0], 'g_contract.png', .88, .88)]
+# a new photo about every 2 s, each matching its line (F73); times are output seconds of this cut
+PHOTOS = [(2.8, 'rep.png'), (5.8, 'g_tired.png'), (7.63, 'g_sun.png'), (10.25, 'g_1pm.png'), (12.11, 'g_tally.png'), (BUT, 'g_door.png'),
+          (15.93, 'g_board.png'), (18.57, 'g_rush.png'), (21.91, 'g_nosolicit.png'), (23.51, 'g_crumpled.png'), (25.1, 'g_clicker.png'),
+          (26.88, 'g_evening.png'), (GO, 'c_fill.png'), (32.48, 'g_handshake.png'), (sec['CLOSE'][0], 'g_contract.png')]
+SHOTS = [(0, None, .78, .84)] + [(t - 0.03, p, .8, .8) for t, p in PHOTOS]
 SHOTS = [(F(a), p, s0, s1) for a, p, s0, s1 in SHOTS]
 def shot(t):
     i = max(j for j, s in enumerate(SHOTS) if s[0] <= t + 1e-6); a = SHOTS[i][0]; b = SHOTS[i + 1][0] if i + 1 < len(SHOTS) else T
     u = (t - a) / (b - a); return i, SHOTS[i][1], SHOTS[i][2] + (SHOTS[i][3] - SHOTS[i][2]) * (u * u * (3 - 2 * u)), u
-CORNER = {1: 'L', 2: 'R', 3: 'L', 4: 'R', 5: 'L', 6: 'R', 7: 'L'}
+CORNER = {i: 'LR'[(len(SHOTS) - 1 - i) % 2] for i in range(1, len(SHOTS))}   # alternate, ending on the left (contract stays visible)
 def place(t):                                                       # -> scale, tx, ty for the cut-out (bottom-anchored)
     i, photo, s, u = shot(t)
     if photo is None: return s, W_ / 2 * (1 - s), H_ * (1 - s)
@@ -34,7 +37,7 @@ def cy(t):                                                          # caption to
 FOLLOW = wt('CLOSE', 'follow')
 def states(cap):
     S = []; ws = [x for x in WD if x['s'] < FOLLOW - 1e-3]
-    tl = [(0, 1), (F(wt('HOOK', 'doors')), 2), (F(wt('HOOK', 'money')), 3)]
+    tl = [(0, 3)]                                                     # all three hook photos at once (F73)
     for i, x in enumerate(ws):
         a, b = x['s'], (ws[i + 1]['s'] if i + 1 < len(ws) else FOLLOW)
         if x['k'] == 'HOOK': a = 0.0 if i == 0 else a
@@ -124,7 +127,7 @@ for n in range(NF):
 enc.stdin.close(); enc.wait(); dec.kill(); print('frames done')
 # ---------- audio: highpass 70 + loudnorm -14 (section 2) + subtle SFX on the same cues (H15)
 SFX = os.environ.get('SFX', '../../sfx/')
-cues = [('pop', 0.02, .8), ('pop', F(wt('HOOK', 'doors')), .7), ('pop', F(wt('HOOK', 'money')), .7)] + \
+cues = [('pop', 0.02, .8)] + \
        [('whoosh', a - 0.15, .45) for a, p, _, _ in SHOTS[1:]] + [('pop_hi', FOLLOW, .8)]
 inp, fl = ['-i', 'base.mov'], []
 for i, (nm, t, g) in enumerate(cues):
