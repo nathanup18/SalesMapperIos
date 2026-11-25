@@ -52,4 +52,5 @@ When Nathan shares stats (views, 3-second hold, average % watched, follows), log
 - **No flashes or black frames:** a section-opening graphic starts on the cut. Snap boundaries to the frame grid. Pad inserts with their first frame.
 - **Full animations:** graphics play to completion and hold about 0.4 s.
 - **Post captions:** lead with the most concrete story and its outcome, and end with "Follow for more D2D tips".
+- **Carousels:** follow the H19 recipe (grey serif hook with 2 yellow-highlighted key terms and a bracketed lowercase curiosity line, full-bleed photo slides with TikTok outline text, matching close slide; no money images or comment-bait).
 - **Song pick every time:** search this week's trending Instagram audio and recommend one track that fits, plus backups and sources.

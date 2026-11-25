@@ -299,6 +299,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Found: text too small for the canvas (big empty margins), awkward break ("Will Say YES Before" / "You Even Knock"), flat highlight boxes cutting the letter tops, subline misaligned.
 - Rule: hook headline ~118 px filling ~85% of the width, 3-4 balanced short lines broken at phrase boundaries, marker-style highlight (lower ~70% of the letters, slightly past each side), subline left-aligned with the headline. Optional small @handle at the bottom like the reference.
 
+
+**F69** (2026-11-25). "I want you to keep this for future information." (the finished "7 signs a house will say YES" carousel)
+- Saved as hard rule H19 in PLAYBOOK.md (carousel recipe) with templates in content_kit/edits/signs_slides/.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -333,6 +337,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - sm_lifetime_v2_captions.mp4 + _clean.mp4 (F56): 21.8 s, Instagram, DELIVERY PASS both.
 - sm_lifetime_v3_captions.mp4 + _clean.mp4 (F57): 21.8 s, map fill + sales count-up, header lower, CTA under chin. Decode clean.
 - tools_v9_instagram.mp4 (F58): 43.4 s, redundant "very effective" line cut. Decode clean.
+- signs_slides (carousel, "7 signs a house will say YES", F65-F69): 9 slides 1080x1440, grey serif hook + close, 7 photo slides, caption 760 chars, song "November" (Past Day). Approved as the carousel template (H19).
 
 ## Performance
 (Log 48 h stats per posted video here.)

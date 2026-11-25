@@ -1,6 +1,6 @@
 # Short-form video edit playbook (living)
 
-Version: 19 (2026-11-25)
+Version: 20 (2026-11-25)
 Owner: Nathan. This file is the source of truth for the `short-form-video-edit` skill. The skill loads it at the start of every run and updates it whenever Nathan gives feedback (see "Learning protocol" at the bottom). Never treat it as frozen.
 
 Rule priority, highest first:
@@ -121,6 +121,17 @@ H18. Copying a reference creator's format. [F37-F40]
 - Data maps (income, demographics): trace the real blocks of the neighborhood on the screenshot, show the plain map first, then the same blocks over the Google Maps still. Sequential white → dark red (more = darker), legend very small, highest and lowest called out on their words. Numbers are illustrative unless he gives real ones (door_tools/inc.py). [F48]
 - Library: content_kit/edits/d2d_iq/ (spec-sheet term cards: cards.html + terms.json, header/caption/red CTA overlay: overlay.html, *_tt.html TikTok variants, build.py cut + build2.py HDR composite).
 
+H19. Carousel / slideshow recipe (approved 2026-11-25, "7 signs a house will say YES"). [F59-F68]
+- Format: Instagram carousel post (not a Reel), 3:4, 1080x1440 PNGs, 7-9 slides. Reel versions of the same idea go out 3-5 days apart.
+- Slide 1, hook (template edits/signs_slides/hook.html): light grey dotted background (#ececec), Merriweather Black headline in black, Title Case, ~118 px, 3-4 balanced short lines broken at phrase boundaries, filling ~85% of the width. Yellow (#FFEE00) marker highlight on max 2 key terms: the subject ("7 Signs") and the payoff ("Say YES"), sitting on the lower ~70% of the letters. Under it a bracketed lowercase curiosity line in Merriweather Regular grey that points at a specific slide and is true ("(most reps walk right past #6)").
+- Content slides (template edits/signs_slides/tool2.html): one full-bleed realistic photo each, title "N. Short title" (fits one line) + 1-2 short reason lines at the top in TikTok classic text (TikTok Sans 800, white, black outline, ~84/58 px, no boxes). Photos: realistic phone-camera shots, calm sky/wall in the top third for the text, no faces needed, no brand logos, made-up company names and 555 numbers on any signage.
+- Software on slides: real enterprise look (square corners, thin borders, dense small text, browser chrome, photographed on a real monitor). Our own product: real captured UI composited onto a hand-held phone photo (green screen + perspective warp), plus an enlarged pop-up of the key UI and the result (e.g. pin on the map) linked by an arrow.
+- Last slide (template edits/signs_slides/close.html): same grey serif look as the hook. A real question with the yellow highlight ("Which Sign / Did I Miss?"), "(save this for your next shift)", then "Follow for More" plain (no highlight) ~76 px with a small bracket line under it.
+- Avoid on carousels: money/bank-balance images and "comment X and I'll send you..." lines (the 4 tools carousel got 0 views with both). Ask a genuine question instead.
+- Caption: 500-800 characters, the hook in the first ~125 characters (echo the slide-1 bracket line), one line per slide, "Hit these first..." style takeaway, the question, "Save this for your next shift.", "Follow for more door-to-door tips.", max 5 hashtags.
+- Song: per F63 (fresh trending search, one pick + backups). Carousels have no voice, so full volume.
+- Build: edits/signs_slides/build.js renders everything with Playwright; Higgsfield gpt_image_2_6 at 3:4 for photos (~0.75 credits each).
+
 ---
 
 ## 2. Nathan's preferences (soft, but default to these)
@@ -220,6 +231,7 @@ When a video ships, add a "Shipped" entry with the final version and any open is
 ---
 
 ## CHANGELOG
+- v20 (2026-11-25): H19 carousel recipe saved as the standard (hook, content, close, caption, song, what to avoid) (F59-F68).
 - v19 (2026-11-25): song pick + caption with every delivery (F63); carousels: TikTok classic text, real-software look, real UI composited into real photos (F59-F62).
 - v18.4 (2026-11-24): re-transcribe dropped takes in isolation; frame-accurate capture of salesmapper.ca demos; captions may correct a misspoken feature name (F52).
 - v18.3 (2026-11-24): black hook header box; map callouts on large visible blocks with arrows, on the earliest matching word (F51).
