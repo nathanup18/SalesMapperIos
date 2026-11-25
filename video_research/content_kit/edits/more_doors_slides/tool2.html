@@ -12,7 +12,7 @@ img.bg{position:absolute;inset:0;width:1080px;height:1440px;object-fit:cover}
 #fol{position:absolute;left:0;right:0;bottom:60px;text-align:center;color:#fff;font:800 58px TT;-webkit-text-stroke:10px #000;paint-order:stroke fill}
 </style></head><body><img class="bg" id="bg"><div class="tt" id="tt"></div><div id="cta"></div><div id="fol"></div>
 <script>const Q=new URLSearchParams(location.search); document.getElementById('bg').src=Q.get('img');
-const t=document.getElementById('tt'); if(Q.get('h')){ t.innerHTML='<h1></h1>'; t.firstChild.textContent=Q.get('h'); for(const b of Q.getAll('b')){const p=document.createElement('p'); p.textContent=b; t.appendChild(p);}}
+const t=document.getElementById('tt'); if(Q.get('h')){ t.innerHTML='<h1></h1>'; t.firstChild.textContent=Q.get('h'); if(Q.get('em')){const e=Q.get('em'); t.firstChild.innerHTML=t.firstChild.textContent.replace(e,'<span style="color:#FFEE00">'+e.toUpperCase()+'</span>');} for(const b of Q.getAll('b')){const p=document.createElement('p'); p.textContent=b; t.appendChild(p);}}
 if(Q.get('cta')){const e=document.getElementById('cta');e.innerHTML='<div class="r"></div><div class="s"></div>';e.querySelector('.r').textContent=Q.get('cta');e.querySelector('.s').textContent=Q.get('ctas');}
 if(Q.get('fol')) document.getElementById('fol').textContent=Q.get('fol');
 </script></body></html>
