@@ -315,6 +315,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Rule: every background photo must show the sentence's action or idea (a rep walking an empty 1 PM street, a door shutting on the clipboard, a busy golden-hour street, a signed contract), never a generic house. Ask one pop-up per shot, then generate with Higgsfield gpt_image_2_6 9:16 (approved for this; ~1 credit each).
 - Rule: in photo-background talking shots, Nathan's cut-out sits in a lower corner (scale .55/.60) and slides corner to corner (0.35 s ease) on each photo change; the corner order is set so he never covers the photo's subject. Captions and the CTA move to mid-screen (y 900), above his head.
 
+**F73** (2026-11-25, "more doors = less money" v3). "I want to add more photos so it switches every two seconds, also at the start I want all three images to show up at the same time."
+- Rule: photo-background reels switch the photo about every 2 s, cut on the phrase it matches (15 photos in 33 s here). Hook photo tiles appear together on frame 0, not staggered.
+- Higgsfield runs max 4 generations at once: submit in batches of 4.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -352,6 +356,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - signs_slides (carousel, "7 signs a house will say YES", F65-F69): 9 slides 1080x1440, grey serif hook + close, 7 photo slides, caption 760 chars, song "November" (Past Day). Approved as the carousel template (H19).
 - more_doors_captions.mp4 + _clean.mp4 (F71): 36.2 s, Instagram, DELIVERY PASS both.
 - more_doors v2 captions + clean (F72): 36.2 s, DELIVERY PASS both.
+- more_doors v3 captions + clean (F73): 36.2 s, 15 photos, DELIVERY PASS both.
 
 ## Performance
 (Log 48 h stats per posted video here.)
