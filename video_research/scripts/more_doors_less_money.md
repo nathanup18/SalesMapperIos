@@ -9,7 +9,7 @@ On-screen hook text: "Knocking more doors is making you less money" + "(the fix 
 | HOOK | "Knocking more doors is making you less money. Here's why." |
 | 1 | "One. You're knocking the wrong doors. If you spend your best hours on streets that can't afford you, a hundred doors still gets you zero." |
 | 2 | "Two. You're rushing. When you're chasing a door count, you cut every pitch short, and the people who would've bought never hear the part that sells them." |
-| 3 | "Three. You never go back. Half your sales are sitting in the not-homes and the come-back-laters you forgot to re-knock." |
+| 3 | "Three. You never go back. A lot of your sales are sitting in the not-homes and the come-back-laters you forgot to re-knock." |
 | CLOSE | "Knock fewer doors. The right ones. And track every single one so you actually go back. Follow for more." |
 
 Optional SalesMapper version of the close (pick one when filming):
