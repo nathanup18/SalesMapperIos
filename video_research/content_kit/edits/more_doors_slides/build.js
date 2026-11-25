@@ -1,5 +1,5 @@
 const { chromium } = require('playwright'); const path = require('path');
-const S = [['p1.png', "You're knocking at 1 pm", ['Huge door count,', 'almost nobody home']],
+const S = [['p1.png', 'Your door count is lying', ['80 doors at 1 pm.', '8 actual conversations.']],
            ['p2.png', 'Rushing burns doors', ['A maybe turns into a no', 'for months']],
            ['p3.png', 'You never go back', ["The come-back-laters are", 'your easiest sales']],
            ['p4.png', 'Knock 5 to 8 pm', ["That's when people", 'actually answer']]];
