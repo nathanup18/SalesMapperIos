@@ -323,6 +323,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Rule: photo-background reels switch the photo about every 2 s, cut on the phrase it matches (15 photos in 33 s here). Hook photo tiles appear together on frame 0, not staggered.
 - Higgsfield runs max 4 generations at once: submit in batches of 4.
 
+**F75** (2026-11-25, "more doors = less money" v4). "There's a stutter at the end after 'come back to every door that'. Also have my face appear in different corners, sometimes slightly off tilt, stop sliding it."
+- Wrong: a half-started word (0.27 s) between "that" and "tells" in IMG_0002 survived because the gap finder saw it as speech and Whisper folded it into "tells". Re-listen to every long word span (>0.35 s) in the output transcript.
+- Rule: the corner cut-out hard-cuts between corners (no slide), irregular order, slight tilt (3-4 deg) on about a third of the shots. Caption artifacts from section-by-section transcription ("-", a phantom "It" at a section start) get stripped before captions render.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -362,6 +366,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - more_doors_captions.mp4 + _clean.mp4 (F71): 36.2 s, Instagram, DELIVERY PASS both.
 - more_doors v2 captions + clean (F72): 36.2 s, DELIVERY PASS both.
 - more_doors v3 captions + clean (F73): 36.2 s, 15 photos, DELIVERY PASS both.
+- more_doors v4 captions + clean (F75): 35.9 s, DELIVERY PASS both.
 
 ## Performance
 (Log 48 h stats per posted video here.)
