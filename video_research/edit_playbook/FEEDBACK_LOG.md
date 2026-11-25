@@ -282,6 +282,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Research (vendor studies, no platform data): on feed posts/carousels, 126-800 character captions beat very short ones; past ~800 characters reach dropped (PostPlanify, 4,408 posts, 2026). On Reels length barely mattered. Meta lists time spent on a post as a Feed signal.
 - Rule: carousel captions 500-800 characters, hook in the first ~125 characters (what shows before "more"), one useful line per slide, then save line, comment trigger, follow line, max 5 hashtags. Reel captions stay short.
 
+
+**F65** (2026-11-25, signs slideshow hook). Sent a reference (big hook + "(I bet you've used at least one this week!)"): "I want the sub headers in brackets, lower case, semi counter intuitive." Pop-up: "(most reps walk right past #6)"; keep the black text-only look.
+- Rule: carousel hooks get a bracketed, lowercase subline under the headline that opens a curiosity gap pointing to a specific slide or makes it personal ("most reps walk right past #6"). It must be true to the content.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.

@@ -10,7 +10,7 @@ const SIGNS = [
 ];
 (async () => { const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1080, height: 1440 } });
   const go = async (file, q, out) => { await p.goto('file://' + path.resolve(file) + '?' + q); await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(250); await p.screenshot({ path: out }); };
-  await go('textslide.html', new URLSearchParams({ html: '<div class="h">7 signs a house will say <b>YES</b> before you even knock</div>' }), 'slide1.png');
+  await go('textslide.html', new URLSearchParams({ html: '<div class="h">7 signs a house will say <b>YES</b> before you even knock</div><div class="s">(most reps walk right past #6)</div>' }), 'slide1.png');
   for (let i = 0; i < 7; i++) { const q = new URLSearchParams({ img: `p${i + 1}.png`, h: SIGNS[i][0] }); SIGNS[i][1].forEach(x => q.append('b', x)); await go('tool2.html', q, `slide${i + 2}.png`); }
   await go('textslide.html', new URLSearchParams({ html: '<div class="h">Which sign did I miss?</div><div class="s">Save this for your next shift</div><div class="s2">Follow for more door-to-door tips</div>' }), 'slide9.png');
   await b.close(); })();
