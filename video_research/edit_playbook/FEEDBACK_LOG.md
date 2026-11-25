@@ -303,6 +303,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 **F69** (2026-11-25). "I want you to keep this for future information." (the finished "7 signs a house will say YES" carousel)
 - Saved as hard rule H19 in PLAYBOOK.md (carousel recipe) with templates in content_kit/edits/signs_slides/.
 
+
+**F70** (2026-11-25, script "knocking more doors makes you less money"). "I focus on creating a curiosity loop in my content. The first couple of seconds is great. I don't want the numbered list. The script needs to sound more natural. A lot of this doesn't make sense, find real reasons."
+- Rules for scripts: build curiosity loops (hook -> open a question -> reveal -> "but that's not even the expensive part" -> reveal -> payoff), no numbered lists unless the format is a list, write how he talks (short, casual, "like eight people"), and every reason must be a real mechanism a rep would recognise (timing vs who's home, burned doors in a finite territory, warm come-back-laters), not a generic tip. Mark lines that need his real numbers.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
