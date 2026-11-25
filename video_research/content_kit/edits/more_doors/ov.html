@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+/* More doors = less money reel (F71): TikTok classic text for header + captions, hook photo tiles above the head. 100% opaque. */
+html,body{margin:0;width:1080px;height:1920px;background:transparent;overflow:hidden}
+.tt{font-family:"TikTok Sans";font-weight:800;color:#fff;-webkit-text-stroke:10px #000;paint-order:stroke fill;text-align:center;position:absolute;left:40px;right:40px}
+#hd{top:130px;font-size:80px;line-height:1.08;letter-spacing:-1px}
+#cap{font-size:108px;letter-spacing:-1px}
+.tile{position:absolute;top:350px;width:300px;height:400px;border:8px solid #fff;border-radius:16px;overflow:hidden;background:#fff}
+.tile img{width:100%;height:100%;object-fit:cover}
+#cta{position:absolute;left:0;right:0;text-align:center}
+#cta span{display:inline-block;background:#FF1430;color:#fff;font:800 96px "TikTok Sans";padding:10px 40px 20px;border-radius:18px}
+</style></head><body><div id="root"></div>
+<script>
+const Q = new URLSearchParams(location.search), R = document.getElementById('root');
+if (Q.get('hd')) R.innerHTML += `<div class="tt" id="hd"></div>`;
+const n = +(Q.get('tiles') || 0), T = [['celsius.png', 50, -5], ['sm_plate.png', 390, 0], ['bankphoto.png', 730, 5]];
+for (let i = 0; i < n; i++) R.innerHTML += `<div class="tile" style="left:${T[i][1]}px;transform:rotate(${T[i][2]}deg)"><img src="${T[i][0]}"></div>`;
+if (Q.get('w')) R.innerHTML += `<div class="tt" id="cap" style="top:${Q.get('cy')}px"></div>`;
+if (Q.get('cta')) R.innerHTML += `<div id="cta" style="top:${Q.get('ctay')}px"><span></span></div>`;
+if (Q.get('hd')) document.getElementById('hd').textContent = Q.get('hd');
+if (Q.get('w')) document.getElementById('cap').textContent = Q.get('w');
+if (Q.get('cta')) document.querySelector('#cta span').textContent = Q.get('cta');
+</script></body></html>

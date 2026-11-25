@@ -308,9 +308,20 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Rules for scripts: build curiosity loops (hook -> open a question -> reveal -> "but that's not even the expensive part" -> reveal -> payoff), no numbered lists unless the format is a list, write how he talks (short, casual, "like eight people"), and every reason must be a real mechanism a rep would recognise (timing vs who's home, burned doors in a finite territory, warm come-back-laters), not a generic tip. Mark lines that need his real numbers.
 
 
-**F71** (2026-11-25, 7 signs Reel v1). "Cut out all of the dead space, this is not good. The numbers in the top with the headers need to be moved down. I want the red follow for more at the end." Earlier: "I want me with photos in the background for the main talking bits. For the hook, me with 3 appealing photos above my head (Celsius, bank, SalesMapper). Classic TikTok header, all captions TikTok text." Also very frustrated by render time.
+**F74** (2026-11-25, 7 signs Reel v1). "Cut out all of the dead space, this is not good. The numbers in the top with the headers need to be moved down. I want the red follow for more at the end." Earlier: "I want me with photos in the background for the main talking bits. For the hook, me with 3 appealing photos above my head (Celsius, bank, SalesMapper). Classic TikTok header, all captions TikTok text." Also very frustrated by render time.
 - Rules: after the first cut, run energy-based tightening passes until no pause >= 0.15 s remains (Whisper word spans swallow pauses, so guard only short words); re-transcribe each pass. Headers start at y ~250 (below the IG top bar). Close with the red "Follow for more" box under the chin from the word "follow". Talking bits: Nathan cut out over the topic photo; hook: cut out over a soft blur of his room with 3 photo cards above his head.
 - Pipeline bug: never call dec.wait() on the frame decoder (it blocks forever when it has extra frames); kill it. Run long renders with nohup and a progress log, and say the ETA once.
+**F71** (2026-11-25, "more doors = less money" reel v1). "I want me with photos in the background for the main talking bits. For the hook, me with 3 different photos that are appealing (Celsius, bank account, SalesMapper), above my head. Classic header, TikTok text. All captions TikTok text." Also: "let's move faster", "stop stretching this out".
+- Built (edits/more_doors/compose.py): Nathan cut out (rembg masks, original HLG pixels) over a photo per section (rep at door, empty 1 PM driveway, closed door, cars home, SalesMapper re-knock map, house), slow push on each photo, person scale alternating 0.80/0.88; hook = 3 photo tiles popping above his head over his blurred room; header + one-word captions in TikTok classic text (white TikTok Sans 800, black outline); red "follow for more".
+- Speed rules (found the hard way): never chain a long job behind a shorter timeout; run masks + render as one background job with the max timeout; kill the frame decoder after the loop (dec.wait() deadlocked when the cut had more frames than the loop read). Generating new photos (Higgsfield credits) needs Nathan's OK; reuse existing slideshow photos first.
+
+**F72** (2026-11-25, "more doors = less money" v2). "Background imagery isn't that great... when we switch to just showing the homes, I don't get why this is a thing. Three houses that don't mean anything. I want other imagery that makes sense... go Higgsfield, ask me questions, generate, slot them in." "Have my face move around in this video corner to corner."
+- Rule: every background photo must show the sentence's action or idea (a rep walking an empty 1 PM street, a door shutting on the clipboard, a busy golden-hour street, a signed contract), never a generic house. Ask one pop-up per shot, then generate with Higgsfield gpt_image_2_6 9:16 (approved for this; ~1 credit each).
+- Rule: in photo-background talking shots, Nathan's cut-out sits in a lower corner (scale .55/.60) and slides corner to corner (0.35 s ease) on each photo change; the corner order is set so he never covers the photo's subject. Captions and the CTA move to mid-screen (y 900), above his head.
+
+**F73** (2026-11-25, "more doors = less money" v3). "I want to add more photos so it switches every two seconds, also at the start I want all three images to show up at the same time."
+- Rule: photo-background reels switch the photo about every 2 s, cut on the phrase it matches (15 photos in 33 s here). Hook photo tiles appear together on frame 0, not staggered.
+- Higgsfield runs max 4 generations at once: submit in batches of 4.
 
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
@@ -347,7 +358,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - sm_lifetime_v3_captions.mp4 + _clean.mp4 (F57): 21.8 s, map fill + sales count-up, header lower, CTA under chin. Decode clean.
 - tools_v9_instagram.mp4 (F58): 43.4 s, redundant "very effective" line cut. Decode clean.
 - signs_slides (carousel, "7 signs a house will say YES", F65-F69): 9 slides 1080x1440, grey serif hook + close, 7 photo slides, caption 760 chars, song "November" (Past Day). Approved as the carousel template (H19).
-- seven_signs_v2.mp4 (F71): 39.5 s Reel, no pause over ~0.15 s, cut-out over sign photos, TikTok headers at y 250, red Follow for more. Decode clean.
+- seven_signs_v2.mp4 (F74): 39.5 s Reel, no pause over ~0.15 s, cut-out over sign photos, TikTok headers at y 250, red Follow for more. Decode clean.
+- more_doors_captions.mp4 + _clean.mp4 (F71): 36.2 s, Instagram, DELIVERY PASS both.
+- more_doors v2 captions + clean (F72): 36.2 s, DELIVERY PASS both.
+- more_doors v3 captions + clean (F73): 36.2 s, 15 photos, DELIVERY PASS both.
 
 ## Performance
 (Log 48 h stats per posted video here.)
