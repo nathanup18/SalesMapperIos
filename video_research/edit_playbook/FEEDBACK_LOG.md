@@ -327,6 +327,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Wrong: a half-started word (0.27 s) between "that" and "tells" in IMG_0002 survived because the gap finder saw it as speech and Whisper folded it into "tells". Re-listen to every long word span (>0.35 s) in the output transcript.
 - Rule: the corner cut-out hard-cuts between corners (no slide), irregular order, slight tilt (3-4 deg) on about a third of the shots. Caption artifacts from section-by-section transcription ("-", a phantom "It" at a section start) get stripped before captions render.
 
+
+**F76** (2026-11-25, 7 signs Reel v2). "Edit all these numbers out. When I say 1, 2, 3, I want it really quick paced. At the start I go '7 signs for door-to-door salesman', then I say it again. Edit that out."
+- Rules: on list videos the on-screen header carries the number, so cut the spoken number and start each item on its first real word. Find false starts/restarts in the hook even when Whisper merges them into one long word (transcribe the first 5 s on its own, look for a repeated phrase) and keep only the clean take. Don't pass initial_prompt to Whisper for caption timing (it dropped the first sentence).
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
@@ -367,6 +371,7 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - more_doors v2 captions + clean (F72): 36.2 s, DELIVERY PASS both.
 - more_doors v3 captions + clean (F73): 36.2 s, 15 photos, DELIVERY PASS both.
 - more_doors v4 captions + clean (F75): 35.9 s, DELIVERY PASS both.
+- seven_signs_v3.mp4 (F76): 33.6 s, numbers and false hook start cut. Decode clean.
 
 ## Performance
 (Log 48 h stats per posted video here.)
