@@ -109,7 +109,7 @@ for n in range(NF):
         mm = cv2.warpAffine(cv2.resize(mk, (w, h), interpolation=cv2.INTER_AREA), m, (w, h), flags=cv2.INTER_LINEAR)
         out.append(np.clip(bg.astype(np.float32) * (1 - mm) + pp * mm + 0.5, 0, 1023).astype(np.uint16).tobytes())
     enc.stdin.write(b''.join(out))
-enc.stdin.close(); enc.wait(); dec.wait(); print('frames done')
+enc.stdin.close(); enc.wait(); dec.kill(); print('frames done')
 # ---------- audio: highpass 70 + loudnorm -14 (section 2) + subtle SFX on the same cues (H15)
 SFX = os.environ.get('SFX', '../../sfx/')
 cues = [('pop', 0.02, .8), ('pop', F(wt('HOOK', 'doors')), .7), ('pop', F(wt('HOOK', 'money')), .7)] + \
