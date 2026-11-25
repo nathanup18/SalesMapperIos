@@ -286,6 +286,10 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 **F65** (2026-11-25, signs slideshow hook). Sent a reference (big hook + "(I bet you've used at least one this week!)"): "I want the sub headers in brackets, lower case, semi counter intuitive." Pop-up: "(most reps walk right past #6)"; keep the black text-only look.
 - Rule: carousel hooks get a bracketed, lowercase subline under the headline that opens a curiosity gap pointing to a specific slide or makes it personal ("most reps walk right past #6"). It must be true to the content.
 
+
+**F66** (2026-11-25, signs slideshow hook). "I want the grey background, font style similar to the reference, with black text. Similar formatting."
+- Rule (hook style option "reference"): light grey dotted background (#ececec), Merriweather Black headline in black, Title Case, yellow (#FFEE00) highlighter behind lines 1 and 3, bracketed lowercase subline in Merriweather Regular grey underneath. Template: signs_slides/hook.html (fonts from Google Fonts: Merriweather 900 + regular).
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
