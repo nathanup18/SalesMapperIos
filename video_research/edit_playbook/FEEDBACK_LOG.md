@@ -254,6 +254,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 - Rule: cut filler verdict lines ("it's very effective", "it's great") that repeat what the visual already proved; end the section on the payoff word. Callouts move with the cut so each stays on screen at least ~1 s (highest on "who's", lowest on "earning").
 - Fix: tools_v9_instagram.mp4, 43.4 s (E3 ends on "money."), masks and cues shifted 34 frames.
 
+
+**F59** (2026-11-25, 4 tools slideshow v1). "For the title slide, I want 10 out of 10 door-to-door sales tools, then brackets below: (that progressively make you more money)." "The bank image needs to look real... go scrape a screenshot of someone with a lot of money." "For the bullets, make this text readable. That's the main thing."
+- Wrong: outlined text over busy visuals was hard to read; the built bank UI looked fake.
+- Rules: carousel text uses TikTok's background style (black TikTok Sans on white rounded boxes, title ~78 px, bullets ~52 px, 2-5 words each). Money shots are realistic AI photos of a phone held in hand with a generic, unbranded bank app. Don't use real bank branding (fake record) or a stranger's real bank screenshot (someone else's private financial info).
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.

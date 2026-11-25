@@ -5,17 +5,17 @@
 html,body{margin:0;width:1080px;height:1440px;overflow:hidden;background:#000}
 img.bg{position:absolute;inset:0;width:1080px;height:1440px;object-fit:cover}
 /* TikTok default "Classic" text: TikTok Sans, white fill, black outline */
-.tt{position:absolute;left:50px;right:50px;top:64px;text-align:center;color:#fff;font-family:TT;paint-order:stroke fill}
-.tt h1{-webkit-text-stroke:9px #000;paint-order:stroke fill;margin:0 0 6px;font-weight:800;font-size:76px;line-height:1.05;letter-spacing:-.5px}
-.tt p{-webkit-text-stroke:5px #000;paint-order:stroke fill;margin:12px 0 0;font-weight:700;font-size:46px;line-height:1.16}
+.tt{position:absolute;left:40px;right:40px;top:56px;text-align:center;font-family:TT}
+.tt h1{display:inline-block;margin:0 0 18px;background:#fff;color:#000;font-weight:800;font-size:78px;line-height:1.05;padding:10px 30px 16px;border-radius:22px;letter-spacing:-.5px}
+.tt p{display:table;margin:12px auto 0;background:#fff;color:#000;font-weight:700;font-size:52px;line-height:1.12;padding:8px 26px 12px;border-radius:18px;max-width:960px}
 #cta{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center}
 #cta .r{display:inline-block;background:#FF1430;color:#fff;font:800 112px TT;padding:12px 46px 24px;border-radius:22px}
-#cta .s{margin:22px auto 0;color:#fff;font:700 52px TT;-webkit-text-stroke:5px #000;paint-order:stroke fill;max-width:900px;line-height:1.15}
+#cta .s{display:inline-block;margin:22px auto 0;background:#fff;color:#000;font:700 54px TT;padding:8px 26px 12px;border-radius:18px;max-width:900px;line-height:1.15}
 #fol{position:absolute;left:0;right:0;bottom:90px;text-align:center}
 #fol span{display:inline-block;background:#fff;color:#000;font:700 42px TT;padding:16px 34px;border-radius:40px}
 </style></head><body><img class="bg" id="bg"><div class="tt" id="tt"></div><div id="cta"></div><div id="fol"></div>
 <script>const Q=new URLSearchParams(location.search); document.getElementById('bg').src=Q.get('img');
-if(Q.get('h')){const t=document.getElementById('tt'); t.innerHTML='<h1></h1>'; t.firstChild.textContent=Q.get('h'); for(const b of Q.getAll('b')){const p=document.createElement('p'); p.textContent='• '+b; t.appendChild(p);}}
+if(Q.get('h')){const t=document.getElementById('tt'); t.innerHTML='<h1></h1>'; t.firstChild.textContent=Q.get('h'); for(const b of Q.getAll('b')){const p=document.createElement('p'); p.textContent=b; t.appendChild(p);}}
 if(Q.get('cta')){document.getElementById('cta').innerHTML='<div class="r"></div><div class="s"></div>'; document.querySelector('#cta .r').textContent=Q.get('cta'); document.querySelector('#cta .s').textContent=Q.get('ctas');}
 if(Q.get('fol')){document.getElementById('fol').innerHTML='<span></span>'; document.querySelector('#fol span').textContent=Q.get('fol');}
 </script></body></html>

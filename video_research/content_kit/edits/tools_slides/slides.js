@@ -1,9 +1,9 @@
 const { chromium } = require('playwright'); const path = require('path');
 const S = [
- ['slide2', 'c_sv.png', '1. Google Street View', ['Scout the street before you knock', 'Pools, decks + driveways = money', 'Skip the streets that won\'t buy']],
- ['slide3', 'c_ps.png', '2. PropStream', ['165+ filters on every home', 'See who owns it and for how long', 'Know what\'s left on the mortgage']],
- ['slide4', 'c_inc.png', '3. Income Map', ['Census income, block by block', 'Darker red = more money', 'Start where the money is']],
- ['slide5', 'c_lock.png', '4. SalesMapper', ['Log every knock from your lock screen', 'Your whole team on one live map', '43% more doors, 50% more sales']],
+ ['slide2', 'c_sv.png', '1. Google Street View', ['Scout before you knock', 'Pools + decks = money', 'Skip streets that won\'t buy']],
+ ['slide3', 'c_ps.png', '2. PropStream', ['165+ filters per home', 'How long they\'ve owned it', 'What\'s left on the mortgage']],
+ ['slide4', 'c_inc.png', '3. Income Map', ['Income, block by block', 'Darker red = more money', 'Knock the rich blocks first']],
+ ['slide5', 'c_lock.png', '4. SalesMapper', ['Knock from your lock screen', 'Whole team on one map', '43% more doors, 50% more sales']],
 ];
 (async () => { const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1080, height: 1440 } });
   for (const [n, img, h, bs] of S) { const q = new URLSearchParams({ img, h }); bs.forEach(x => q.append('b', x));
