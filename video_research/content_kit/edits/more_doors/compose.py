@@ -1,4 +1,4 @@
-"""More doors = less money reel (F71). Nathan cut out (rembg masks, his original HLG pixels, no colour math) over a photo per section;
+"""More doors = less money reel (F71, F72 corners). Nathan cut out (rembg masks, his original HLG pixels, no colour math) over a photo per section;
 hook: 3 photo tiles above his head over a blurred copy of his own room. Header + one-word captions in TikTok classic text.
 Run in the work dir after cut.py: needs seg/main.mov, seg/sec.json, outwords.json, face.json, masks/, the photos + ov.html, env LUT and SFX."""
 import json, os, subprocess, urllib.parse, numpy as np, cv2
@@ -9,16 +9,28 @@ def run(a, **k): return subprocess.run(['ffmpeg', '-v', 'error', '-y'] + a, chec
 wt = lambda k, w: next(x['s'] for x in WD if x['k'] == k and x['w'].lower().startswith(w))
 # ---------- shots: (start, photo or None for blurred room, person scale a->b)
 BUT, GO = wt('R1', 'but'), wt('PAY', 'go')
-SHOTS = [(0, None, .78, .84), (sec['LOOP'][0], 'rep.png', .88, .88), (sec['R1'][0], 'p6.png', .80, .80), (BUT - 0.03, 'p5.png', .88, .88),
-         (sec['R2'][0], 'p5.png', .80, .80), (sec['PAY'][0], 'p3.png', .88, .88), (GO - 0.03, 'c_fill.png', .80, .80), (sec['CLOSE'][0], 'p1.png', .88, .88)]
+SHOTS = [(0, None, .78, .84), (sec['LOOP'][0], 'rep.png', .88, .88), (sec['R1'][0], 'g_1pm.png', .80, .80), (BUT - 0.03, 'g_door.png', .88, .88),
+         (sec['R2'][0], 'g_door.png', .80, .80), (sec['PAY'][0], 'g_evening.png', .88, .88), (GO - 0.03, 'c_fill.png', .80, .80), (sec['CLOSE'][0], 'g_contract.png', .88, .88)]
 SHOTS = [(F(a), p, s0, s1) for a, p, s0, s1 in SHOTS]
 def shot(t):
     i = max(j for j, s in enumerate(SHOTS) if s[0] <= t + 1e-6); a = SHOTS[i][0]; b = SHOTS[i + 1][0] if i + 1 < len(SHOTS) else T
     u = (t - a) / (b - a); return i, SHOTS[i][1], SHOTS[i][2] + (SHOTS[i][3] - SHOTS[i][2]) * (u * u * (3 - 2 * u)), u
+CORNER = {1: 'L', 2: 'R', 3: 'L', 4: 'R', 5: 'L', 6: 'R', 7: 'L'}
+def place(t):                                                       # -> scale, tx, ty for the cut-out (bottom-anchored)
+    i, photo, s, u = shot(t)
+    if photo is None: return s, W_ / 2 * (1 - s), H_ * (1 - s)
+    s = .55 if i % 2 else .60; w = W_ * s
+    X = {'R': W_ - w + 40, 'L': -40}
+    x = X[CORNER[i]]; a = SHOTS[i][0]
+    if i > 1 and t - a < 0.35:                                       # slide in from the previous corner
+        v = (t - a) / 0.35; v = v * v * (3 - 2 * v); x = X[CORNER[i - 1]] + (x - X[CORNER[i - 1]]) * v
+    return s, x, H_ * (1 - s) + 40
 def sec_of(t): return max((k for k, v in sec.items() if v[0] <= t + 1e-6), key=lambda k: sec[k][0])
 # ---------- overlay states
 def cy(t):                                                          # caption top: under the chin of the cut-out at its scale
-    _, _, s, _ = shot(t); return int(H_ - (H_ - FC[sec_of(t)]['chin']) * s) + 26
+    i, photo, s, _ = shot(t)
+    if photo: return 900                                            # corner shots: captions mid-screen, above his head
+    return int(H_ - (H_ - FC[sec_of(t)]['chin']) * s) + 26
 FOLLOW = wt('CLOSE', 'follow')
 def states(cap):
     S = []; ws = [x for x in WD if x['s'] < FOLLOW - 1e-3]
@@ -31,7 +43,7 @@ def states(cap):
             q.update(hd='Knocking more doors is making you less money', tiles=max(n for t0, n in tl if t0 <= a + 1e-6))
         if cap: q.update(w=x['w'].replace('1pm', '1 PM').replace('three', '3').replace('eight', '8'), cy=cy(a))
         if q: S.append((q, a, b))
-    ctay = max(960, int(H_ - (H_ - FC['CLOSE']['chin']) * .88) + 26)
+    ctay = 900
     S.append((dict(cta='follow for more', ctay=ctay), FOLLOW, T))
     out = []                                                        # split hook states where a tile pops mid-word
     for q, a, b in S:
@@ -96,7 +108,7 @@ enc = subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_f
 for n in range(NF):
     buf = dec.stdout.read(FB)
     if len(buf) < FB: break
-    t = n / FPS; i, photo, s, u = shot(t); P = planes(buf)
+    t = n / FPS; i, photo, _, u = shot(t); s, TX, TY = place(t); P = planes(buf)
     if photo: B = [zoomp(pl, 1.0 + 0.05 * u, k) for k, pl in zip((1, 2, 2), PH[photo])]
     else: B = [cv2.resize(cv2.GaussianBlur(cv2.resize(pl, (pl.shape[1] // 8, pl.shape[0] // 8), interpolation=cv2.INTER_AREA), (0, 0), 4), (pl.shape[1], pl.shape[0]), interpolation=cv2.INTER_LINEAR) for pl in P]
     mk = cv2.imread(f'masks/{n:05d}.png', cv2.IMREAD_GRAYSCALE)
@@ -104,7 +116,7 @@ for n in range(NF):
     out = []
     for k, (pl, bg) in enumerate(zip(P, B)):
         kk = 1 if k == 0 else 2; h, w = pl.shape
-        m = np.float32([[s, 0, w / 2 * (1 - s)], [0, s, h * (1 - s)]])        # bottom-centred scale
+        m = np.float32([[s, 0, TX / kk], [0, s, TY / kk]])
         pp = cv2.warpAffine(pl, m, (w, h), flags=cv2.INTER_LANCZOS4, borderMode=cv2.BORDER_REPLICATE).astype(np.float32)
         mm = cv2.warpAffine(cv2.resize(mk, (w, h), interpolation=cv2.INTER_AREA), m, (w, h), flags=cv2.INTER_LINEAR)
         out.append(np.clip(bg.astype(np.float32) * (1 - mm) + pp * mm + 0.5, 0, 1023).astype(np.uint16).tobytes())
