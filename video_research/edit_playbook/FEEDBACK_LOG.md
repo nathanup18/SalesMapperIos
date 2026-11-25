@@ -294,6 +294,11 @@ Append-only. Newest entries at the bottom. Each entry: ID, date, video/version, 
 **F67** (2026-11-25, signs hook). "Don't know if those are the right highlights, put it on the right terms."
 - Rule: highlight the key terms, not whole lines: the subject ("7 Signs") and the outcome/payoff ("Say YES"), like the reference ("5 Things You Say" / "Sound Less Confident"). Max 2 highlights.
 
+
+**F68** (2026-11-25, signs hook). "What to do to improve this, doesn't look right to me."
+- Found: text too small for the canvas (big empty margins), awkward break ("Will Say YES Before" / "You Even Knock"), flat highlight boxes cutting the letter tops, subline misaligned.
+- Rule: hook headline ~118 px filling ~85% of the width, 3-4 balanced short lines broken at phrase boundaries, marker-style highlight (lower ~70% of the letters, slightly past each side), subline left-aligned with the headline. Optional small @handle at the bottom like the reference.
+
 ## Shipped
 - d2d_3_ways_close_rate_v4b.mp4 (1-2-3 order). Shipped 2026-11-21. Superseded: it had A/V drift (F15).
 - d2d_3_ways_123_order_FINAL.mp4 and d2d_3_ways_giftcard_first_FINAL.mp4. Shipped 2026-11-21, both QA PASS. Open: the qualifying questions and gift card business names are placeholders.
