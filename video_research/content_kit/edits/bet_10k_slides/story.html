@@ -7,7 +7,9 @@ img.bg{position:absolute;inset:0;width:1080px;height:1440px;object-fit:cover}
 #top{position:absolute;left:40px;right:40px;top:150px}
 #top .t{font-size:96px;-webkit-text-stroke:14px #000;line-height:1}
 #top .t small{font-size:52px;-webkit-text-stroke:10px #000}
-#top .s{font-size:58px;-webkit-text-stroke:10px #000;margin-top:16px;line-height:1.1}
+#top .s{font-size:56px;-webkit-text-stroke:10px #000;margin-top:14px;line-height:1.12}
+#top .k{font-size:40px;-webkit-text-stroke:8px #000;margin-top:12px;color:#FFE14D}
+#top .big{font-size:88px;-webkit-text-stroke:13px #000;line-height:1.08}
 /* SalesMapper-style progress card */
 #hud{position:absolute;left:60px;right:60px;bottom:60px;background:#fff;border-radius:34px;padding:28px 36px 32px;box-shadow:0 14px 40px rgba(0,0,0,.45)}
 #hud .row{display:flex;justify-content:space-between;align-items:flex-end}
@@ -38,10 +40,10 @@ img.bg{position:absolute;inset:0;width:1080px;height:1440px;object-fit:cover}
 .lb .r .x{margin-left:auto;font:800 36px Inter}
 .lb .r.me{background:#eef6ff;margin:0 -16px;padding:16px;border-radius:18px;border-top:0}
 .lb .r.me .a{background:#0A84FF;color:#fff}
-.lh .map{height:230px;border-radius:22px;overflow:hidden;position:relative;margin-bottom:12px}
+.lh .map{height:200px;border-radius:22px;overflow:hidden;position:relative;margin-bottom:12px}
 .lh .map img{width:100%;height:100%;object-fit:cover}
 .lh .pin{position:absolute;width:46px;height:46px;border-radius:50%;background:#FF9F0A;border:5px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,.35)}
-.lh .r{display:flex;justify-content:space-between;padding:14px 0;border-top:2px solid #f0f1f3;font:600 32px Inter;color:#111}
+.lh .r{display:flex;justify-content:space-between;padding:10px 0;border-top:2px solid #f0f1f3;font:600 32px Inter;color:#111}
 .lh .r span{font:500 26px Inter;color:#FF9F0A}
 .sum .g{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .sum .c{background:#f6f7f9;border-radius:22px;padding:22px 26px}
@@ -73,7 +75,7 @@ img.bg{position:absolute;inset:0;width:1080px;height:1440px;object-fit:cover}
 <script>
 const Q=new URLSearchParams(location.search), J=JSON.parse(Q.get('j')), fmt=n=>'$'+n.toLocaleString('en-US');
 document.getElementById('bg').src=J.img;
-document.getElementById('top').innerHTML=`<div class="o t">${J.time}${J.tag?` <small>(${J.tag})</small>`:''}</div>`+(J.line?`<div class="o s">${J.line}</div>`:'');
+document.getElementById('top').innerHTML=(J.time?`<div class="o t">${J.time}${J.tag?` <small>(${J.tag})</small>`:''}</div>`:'')+(J.big?`<div class="o big">${J.big}</div>`:'')+(J.stakes?`<div class="o k">${J.stakes}</div>`:'')+(J.line?`<div class="o s">${J.line}</div>`:'');
 if(J.made!=null||J.madeText){const p=J.pct!=null?J.pct:Math.min(100,J.made/100);document.getElementById('hud').innerHTML=`<div class="la-top"><img src="icon.png">SalesMapper · On shift<span class="r">${J.time}</span></div><div class="nums"><div class="amt">${J.madeText||fmt(J.made)}</div><div class="dr">${J.doors} doors</div></div><div class="bar"><i style="width:${p}%"></i></div><div class="sub"><span>Goal $10,000</span><span>${Math.round(p)}%</span></div>`;} else document.getElementById('hud').remove();
 const x=document.getElementById('x');
 const ic=`<svg width="58" height="54" viewBox="0 0 58 54"><path d="M29 3C14 3 3 12.6 3 24.6c0 6.7 3.5 12.7 9 16.7-.4 3.6-2.2 7-5 9.6 5.1.2 10-1.5 13.6-4.5 2.6.7 5.4 1 8.4 1 15 0 26-9.6 26-21.4S44 3 29 3z" fill="#fff"/></svg>`; const nt=(s_,m)=>`<div class="nt"><div class="ic">${ic}</div><div class="bd"><div class="rw"><div class="s">${s_}</div><div class="t">now</div></div><div class="m">${m}</div></div></div>`;
