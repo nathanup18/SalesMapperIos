@@ -1,0 +1,64 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:TT;src:url(/root/.fonts/TikTokSans-800.ttf);font-weight:800}
+@font-face{font-family:TT;src:url(/root/.fonts/TikTokSans-600.ttf);font-weight:600}
+html,body{margin:0;width:1080px;height:1440px;overflow:hidden;background:#000;font-family:Inter}
+img.bg{position:absolute;inset:0;width:1080px;height:1440px;object-fit:cover}
+.o{color:#fff;font-family:TT;font-weight:800;paint-order:stroke fill;text-align:center}
+#top{position:absolute;left:40px;right:40px;top:150px}
+#top .t{font-size:96px;-webkit-text-stroke:14px #000;line-height:1}
+#top .t small{font-size:52px;-webkit-text-stroke:10px #000}
+#top .s{font-size:58px;-webkit-text-stroke:10px #000;margin-top:16px;line-height:1.1}
+/* SalesMapper-style progress card */
+#hud{position:absolute;left:60px;right:60px;bottom:60px;background:#fff;border-radius:34px;padding:28px 36px 32px;box-shadow:0 14px 40px rgba(0,0,0,.45)}
+#hud .row{display:flex;justify-content:space-between;align-items:flex-end}
+#hud .k{font:600 26px Inter;color:#6b7280;letter-spacing:.3px;text-transform:uppercase}
+#hud .v{font:800 64px Inter;color:#111;letter-spacing:-1.5px;line-height:1.05}
+#hud .bar{height:22px;border-radius:11px;background:#e5e7eb;margin-top:20px;overflow:hidden}
+#hud .bar i{display:block;height:100%;border-radius:11px;background:linear-gradient(90deg,#34C759,#16a34a)}
+#hud .goal{display:flex;justify-content:space-between;font:600 24px Inter;color:#6b7280;margin-top:10px}
+/* iMessage-style texts */
+.msgs{position:absolute;left:60px;right:60px;display:flex;flex-direction:column;gap:14px}
+.m{max-width:760px;align-self:flex-start}
+.m .who{font:600 24px Inter;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.7);margin:0 0 6px 18px}
+.m .b{background:#E9E9EB;color:#111;font:500 40px Inter;padding:18px 28px;border-radius:34px;line-height:1.2;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.m.me{align-self:flex-end}.m.me .b{background:#0A84FF;color:#fff}
+.chat{background:rgba(28,28,30,.96);border-radius:30px;padding:22px 24px 26px;box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.chat .h{font:700 28px Inter;color:#fff;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.chat .h span{font:500 22px Inter;color:#9ca3af}
+.chat .m .b{background:#3A3A3C;color:#fff;font-size:36px}
+.chat .m .who{text-shadow:none;color:#9ca3af;font-size:22px}
+/* SalesMapper cards */
+.card{position:absolute;left:60px;right:60px;background:#fff;border-radius:34px;padding:30px 34px;box-shadow:0 14px 40px rgba(0,0,0,.45)}
+.card .hd{display:flex;align-items:center;gap:18px;margin-bottom:18px}
+.card .hd img{width:64px;height:64px;border-radius:16px}
+.card .hd .n{font:800 38px Inter;color:#111}.card .hd .d{font:500 24px Inter;color:#6b7280}
+.lb .r{display:flex;align-items:center;gap:20px;padding:16px 0;border-top:2px solid #f0f1f3;font:600 34px Inter;color:#111}
+.lb .r .p{width:50px;font:800 32px Inter;color:#9ca3af}
+.lb .r .a{width:58px;height:58px;border-radius:50%;background:#e5e7eb;display:flex;align-items:center;justify-content:center;font:800 24px Inter;color:#374151}
+.lb .r .x{margin-left:auto;font:800 36px Inter}
+.lb .r.me{background:#eef6ff;margin:0 -16px;padding:16px;border-radius:18px;border-top:0}
+.lb .r.me .a{background:#0A84FF;color:#fff}
+.lh .map{height:230px;border-radius:22px;overflow:hidden;position:relative;margin-bottom:12px}
+.lh .map img{width:100%;height:100%;object-fit:cover}
+.lh .pin{position:absolute;width:46px;height:46px;border-radius:50%;background:#FF9F0A;border:5px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,.35)}
+.lh .r{display:flex;justify-content:space-between;padding:14px 0;border-top:2px solid #f0f1f3;font:600 32px Inter;color:#111}
+.lh .r span{font:500 26px Inter;color:#FF9F0A}
+.sum .g{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.sum .c{background:#f6f7f9;border-radius:22px;padding:22px 26px}
+.sum .c .k{font:600 24px Inter;color:#6b7280;text-transform:uppercase}
+.sum .c .v{font:800 58px Inter;color:#111;letter-spacing:-1px}
+.sum .c .d{font:600 24px Inter;color:#16a34a;margin-top:4px}
+</style></head><body><img class="bg" id="bg"><div id="top"></div><div id="x"></div><div id="hud"></div>
+<script>
+const Q=new URLSearchParams(location.search), J=JSON.parse(Q.get('j')), fmt=n=>'$'+n.toLocaleString('en-US');
+document.getElementById('bg').src=J.img;
+document.getElementById('top').innerHTML=`<div class="o t">${J.time}${J.tag?` <small>(${J.tag})</small>`:''}</div>`+(J.line?`<div class="o s">${J.line}</div>`:'');
+if(J.made!=null||J.madeText){const p=J.pct!=null?J.pct:Math.min(100,J.made/100);document.getElementById('hud').innerHTML=`<div class="row"><div><div class="k">Made</div><div class="v">${J.madeText||fmt(J.made)}</div></div><div style="text-align:right"><div class="k">Doors</div><div class="v">${J.doors}</div></div></div><div class="bar"><i style="width:${p}%"></i></div><div class="goal"><span>Goal $10,000</span><span>${Math.round(p)}%</span></div>`;} else document.getElementById('hud').remove();
+const x=document.getElementById('x');
+const bub=(m)=>`<div class="m ${m.me?'me':''}">${m.who?`<div class="who">${m.who}</div>`:''}<div class="b">${m.t}</div></div>`;
+if(J.texts) x.innerHTML+=`<div class="msgs" style="top:${J.ty||560}px">${J.texts.map(bub).join('')}</div>`;
+if(J.chat) x.innerHTML+=`<div class="msgs" style="top:${J.cy||560}px"><div class="chat"><div class="h">🏠 Team Chat <span>${J.chat.length} new</span></div><div class="msgs" style="position:static;gap:10px">${J.chat.map(bub).join('')}</div></div></div>`;
+if(J.lb) x.innerHTML+=`<div class="card lb" style="top:${J.ly||540}px"><div class="hd"><img src="icon.png"><div><div class="n">Team · Today</div><div class="d">SalesMapper leaderboard</div></div></div>${J.lb.map((r,i)=>`<div class="r ${r.me?'me':''}"><div class="p">${i+1}</div><div class="a">${r.i}</div>${r.n}<div class="x">${fmt(r.v)}</div></div>`).join('')}</div>`;
+if(J.lh) x.innerHTML+=`<div class="card lh" style="top:${J.hy||470}px"><div class="hd"><img src="icon.png"><div><div class="n">Lead Hunter</div><div class="d">4 new movers within 0.5 km</div></div></div><div class="map"><img src="s_map.png"><div class="pin" style="left:18%;top:30%"></div><div class="pin" style="left:42%;top:58%"></div><div class="pin" style="left:63%;top:22%"></div><div class="pin" style="left:80%;top:62%"></div></div>${J.lh.map(r=>`<div class="r">${r[0]}<span>${r[1]}</span></div>`).join('')}</div>`;
+if(J.sum) x.innerHTML+=`<div class="card sum" style="top:${J.sy||430}px"><div class="hd"><img src="icon.png"><div><div class="n">Day Summary</div><div class="d">Saturday · 10:46 AM to 8:53 PM</div></div></div><div class="g">${J.sum.map(c=>`<div class="c"><div class="k">${c[0]}</div><div class="v">${c[1]}</div><div class="d">${c[2]||''}</div></div>`).join('')}</div></div>`;
+</script></body></html>
