@@ -21,6 +21,6 @@ const S = [
 ];
 (async () => { const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1080, height: 1440 } });
   const go = async (f, q, o) => { await p.goto('file://' + path.resolve(f) + (q ? '?' + q : '')); await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(300); await p.screenshot({ path: o }); };
-  await go('hook.html', '', 'slide01.png');
+  await go('hook_tt.html', '', 'slide01.png');
   for (let i = 0; i < S.length; i++) await go('story.html', 'j=' + encodeURIComponent(JSON.stringify(S[i])), `slide${String(i + 2).padStart(2, '0')}.png`);
   await go('close.html', '', `slide${String(S.length + 2).padStart(2, '0')}.png`); await b.close(); })();
