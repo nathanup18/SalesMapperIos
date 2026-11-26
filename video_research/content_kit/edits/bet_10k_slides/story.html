@@ -40,7 +40,7 @@ img.bg{position:absolute;inset:0;width:1080px;height:1440px;object-fit:cover}
 .lb .r .x{margin-left:auto;font:800 36px Inter}
 .lb .r.me{background:#eef6ff;margin:0 -16px;padding:16px;border-radius:18px;border-top:0}
 .lb .r.me .a{background:#0A84FF;color:#fff}
-.lh .map{height:200px;border-radius:22px;overflow:hidden;position:relative;margin-bottom:12px}
+.lh .map{height:170px;border-radius:22px;overflow:hidden;position:relative;margin-bottom:12px}
 .lh .map img{width:100%;height:100%;object-fit:cover}
 .lh .pin{position:absolute;width:46px;height:46px;border-radius:50%;background:#FF9F0A;border:5px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,.35)}
 .lh .r{display:flex;justify-content:space-between;padding:10px 0;border-top:2px solid #f0f1f3;font:600 32px Inter;color:#111}
@@ -71,11 +71,12 @@ img.bg{position:absolute;inset:0;width:1080px;height:1440px;object-fit:cover}
 .nt .rw{display:flex;justify-content:space-between;align-items:baseline}
 .nt .s{font:600 34px Inter}.nt .t{font:400 28px Inter;opacity:.55}
 .nt .m{font:400 34px Inter;line-height:1.25;margin-top:4px}
+.lh .why{margin-top:12px;background:#FFF4E5;color:#B45309;border-radius:16px;padding:14px 18px;font:600 26px Inter}
 </style></head><body class=""><img class="bg" id="bg"><div id="top"></div><div id="x"></div><div id="hud"></div>
 <script>
 const Q=new URLSearchParams(location.search), J=JSON.parse(Q.get('j')), fmt=n=>'$'+n.toLocaleString('en-US');
 document.getElementById('bg').src=J.img;
-document.getElementById('top').innerHTML=(J.time?`<div class="o t">${J.time}${J.tag?` <small>(${J.tag})</small>`:''}</div>`:'')+(J.big?`<div class="o big">${J.big}</div>`:'')+(J.stakes?`<div class="o k">${J.stakes}</div>`:'')+(J.line?`<div class="o s">${J.line}</div>`:'');
+document.getElementById('top').innerHTML=(J.time?`<div class="o t">${J.time}${J.tag?` <small>(${J.tag})</small>`:''}</div>`:'')+(J.big?`<div class="o big">${J.big}</div>`:'')+(J.stakes?`<div class="o k">${J.stakes}</div>`:'')+(J.line?`<div class="o s">${J.line}</div>`:'')+(J.sub?`<div class="o k" style="color:#fff;font-size:42px">${J.sub}</div>`:'');
 if(J.made!=null||J.madeText){const p=J.pct!=null?J.pct:Math.min(100,J.made/100);document.getElementById('hud').innerHTML=`<div class="la-top"><img src="icon.png">SalesMapper · On shift<span class="r">${J.time}</span></div><div class="nums"><div class="amt">${J.madeText||fmt(J.made)}</div><div class="dr">${J.doors} doors</div></div><div class="bar"><i style="width:${p}%"></i></div><div class="sub"><span>Goal $10,000</span><span>${Math.round(p)}%</span></div>`;} else document.getElementById('hud').remove();
 const x=document.getElementById('x');
 const ic=`<svg width="58" height="54" viewBox="0 0 58 54"><path d="M29 3C14 3 3 12.6 3 24.6c0 6.7 3.5 12.7 9 16.7-.4 3.6-2.2 7-5 9.6 5.1.2 10-1.5 13.6-4.5 2.6.7 5.4 1 8.4 1 15 0 26-9.6 26-21.4S44 3 29 3z" fill="#fff"/></svg>`; const nt=(s_,m)=>`<div class="nt"><div class="ic">${ic}</div><div class="bd"><div class="rw"><div class="s">${s_}</div><div class="t">now</div></div><div class="m">${m}</div></div></div>`;
@@ -84,6 +85,6 @@ if(J.dark) document.body.className='dark';
 if(J.texts) x.innerHTML+=`<div class="nts" style="top:${J.ty||560}px">${J.texts.map(bub).join('')}</div>`;
 if(J.chat) x.innerHTML+=`<div class="nts" style="top:${J.cy||560}px">${J.chat.map(m=>nt('Team 🏠', m.who+': '+m.t)).join('')}</div>`;
 if(J.lb) x.innerHTML+=`<div class="card lb" style="top:${J.ly||540}px"><div class="hd"><img src="icon.png"><div><div class="n">Team · Today</div><div class="d">SalesMapper leaderboard</div></div></div>${J.lb.map((r,i)=>`<div class="r ${r.me?'me':''}"><div class="p">${i+1}</div><div class="a">${r.i}</div>${r.n}<div class="x">${fmt(r.v)}</div></div>`).join('')}</div>`;
-if(J.lh) x.innerHTML+=`<div class="card lh" style="top:${J.hy||470}px"><div class="hd"><img src="icon.png"><div><div class="n">Lead Hunter</div><div class="d">4 new movers within 0.5 km</div></div></div><div class="map"><img src="s_map.png"><div class="pin" style="left:18%;top:30%"></div><div class="pin" style="left:42%;top:58%"></div><div class="pin" style="left:63%;top:22%"></div><div class="pin" style="left:80%;top:62%"></div></div>${J.lh.map(r=>`<div class="r">${r[0]}<span>${r[1]}</span></div>`).join('')}</div>`;
+if(J.lh) x.innerHTML+=`<div class="card lh" style="top:${J.hy||470}px"><div class="hd"><img src="icon.png"><div><div class="n">Lead Hunter</div><div class="d">new movers near you · moving + utility signals</div></div></div><div class="map"><img src="s_map.png"><div class="pin" style="left:18%;top:30%"></div><div class="pin" style="left:42%;top:58%"></div><div class="pin" style="left:63%;top:22%"></div><div class="pin" style="left:80%;top:62%"></div></div>${J.lh.map(r=>`<div class="r">${r[0]}<span>${r[1]}</span></div>`).join('')}<div class="why">just moved in = no provider yet + already spending</div></div>`;
 if(J.sum) x.innerHTML+=`<div class="card sum" style="top:${J.sy||430}px"><div class="hd"><img src="icon.png"><div><div class="n">Day Summary</div><div class="d">Saturday · 10:46 AM to 8:53 PM</div></div></div><div class="g">${J.sum.map(c=>`<div class="c"><div class="k">${c[0]}</div><div class="v">${c[1]}</div><div class="d">${c[2]||''}</div></div>`).join('')}</div></div>`;
 </script></body></html>
